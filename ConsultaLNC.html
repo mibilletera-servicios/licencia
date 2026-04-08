@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Argentina - Licencia Nacional de Conducir</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            color: #333;
+            background-color: #fff;
+        }
+
+        /* Navbar superior */
+        .navbar {
+            background-color: #0072BB;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        /* Contenedor principal */
+        .content {
+            padding: 40px 24px;
+            flex-grow: 1;
+            max-width: 500px;
+            margin: 0 auto;
+            width: 100%;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+        }
+
+        h2 {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 18px;
+            box-sizing: border-box;
+            outline-color: #0072BB;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary {
+            background-color: #0072BB;
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.3s;
+        }
+
+        .btn-primary:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        /* --- ESTILOS DE LA LICENCIA (CARD) --- */
+        #mensaje { 
+            margin: 20px 0; 
+            font-weight: 600; 
+            text-align: center; 
+            font-size: 16px;
+        }
+        .verde { color: #22c55e; font-weight: 700; }
+        .rojo { color: #ef4444; font-weight: 700; }
+
+        .card-container {
+            perspective: 1000px;
+            width: 100%;
+            max-width: 380px; 
+            height: 230px;   
+            margin: 10px auto;
+            display: none;
+        }
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        .is-flipped { transform: rotateY(180deg); }
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+        .card-back { transform: rotateY(180deg); }
+        .card-img { width: 100%; height: 100%; object-fit: cover; }
+
+        .flip-control {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 15px;
+            cursor: pointer;
+        }
+        .flip-btn {
+            background: #f0f0f0;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            border: 1px solid #ddd;
+            margin-bottom: 5px;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid #eee;
+            padding: 30px 20px;
+            text-align: center;
+            background-color: #f9f9f9;
+        }
+
+        .footer-logo {
+            color: #0072BB;
+            font-weight: 900;
+            font-size: 22px;
+            margin-bottom: 15px;
+            display: block;
+            text-decoration: none;
+        }
+
+        .footer-links a {
+            color: #0072BB;
+            text-decoration: underline;
+            margin: 0 10px;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="navbar">
+        <span style="color: white; font-weight: bold; font-size: 20px;">mi<span style="font-weight: normal;">Argentina</span></span>
+    </header>
+
+    <main class="content">
+        <h2>Ingresá tu CUIL</h2>
+        <p class="subtitle">Consulta el estado de tu licencia nacional de conducir.</p>
+
+        <div class="form-group">
+            <label for="cuilInput">CUIL</label>
+            <input type="text" id="cuilInput" placeholder="00-00000000-0" maxlength="13">
+        </div>
+
+        <button id="consultarBtn" class="btn-primary" disabled>Ingresar</button>
+
+        <div id="mensaje"></div>
+
+        <div class="card-container" id="licenciaVisual">
+            <div class="card-inner" id="cardInner">
+                <div class="card-front">
+                    <img src="" id="imgFrente" class="card-img" alt="Frente Licencia">
+                </div>
+                <div class="card-back">
+                    <img src="" id="imgDorso" class="card-img" alt="Dorso Licencia">
+                </div>
+            </div>
+        </div>
+
+        <div class="flip-control" id="flipBtnContainer" onclick="flipCard()">
+            <div class="flip-btn">🔄</div>
+            <span style="font-size: 12px; color: #666; font-weight: bold;">Girar credencial</span>
+        </div>
+    </main>
+
+    <footer>
+        <a href="#" class="footer-logo">miArgentina</a>
+        <div class="footer-links">
+            <a href="#">Preguntas frecuentes</a>
+            <a href="#">Términos y condiciones</a>
+        </div>
+    </footer>
+
+    <script>
+        const cuilInput = document.getElementById("cuilInput");
+        const consultarBtn = document.getElementById("consultarBtn");
+        const mensaje = document.getElementById("mensaje");
+        const licenciaVisual = document.getElementById("licenciaVisual");
+        const flipBtnContainer = document.getElementById("flipBtnContainer");
+        const cardInner = document.getElementById("cardInner");
+        const imgFrente = document.getElementById("imgFrente");
+        const imgDorso = document.getElementById("imgDorso");
+
+        // Base de datos de ejemplo
+        const padron = {
+            "00123456789": {
+                frente: "https://i.postimg.cc/hv0Zm3RS/carnet-(1).jpg",
+                dorso: "https://i.postimg.cc/xT5Tj0hr/reverso-lnc-(2).png",
+                activa: true
+            }
+        };
+
+        // Formateador de CUIL (00-00000000-0)
+        cuilInput.addEventListener("input", (e) => {
+            let value = e.target.value.replace(/\D/g, ""); 
+            let formatted = "";
+
+            if (value.length > 0) {
+                formatted = value.substring(0, 2);
+                if (value.length > 2) {
+                    formatted += "-" + value.substring(2, 10);
+                }
+                if (value.length > 10) {
+                    formatted += "-" + value.substring(10, 11);
+                }
+            }
+            
+            e.target.value = formatted;
+            // El botón se habilita solo si hay 11 dígitos numéricos
+            consultarBtn.disabled = (value.length !== 11);
+        });
+
+        consultarBtn.addEventListener("click", () => {
+            const cuilLimpio = cuilInput.value.replace(/\D/g, ""); 
+            mensaje.innerHTML = "Buscando... 🔍";
+            licenciaVisual.style.display = "none";
+            flipBtnContainer.style.display = "none";
+            cardInner.classList.remove('is-flipped');
+
+            setTimeout(() => {
+                if (padron[cuilLimpio]) {
+                    const user = padron[cuilLimpio];
+                    imgFrente.src = user.frente;
+                    imgDorso.src = user.dorso;
+
+                    mensaje.innerHTML = user.activa ? 
+                        "Estado: <span class='verde'>LICENCIA ACTIVA</span>" : 
+                        "Estado: <span class='rojo'>LICENCIA VENCIDA</span>";
+
+                    licenciaVisual.style.display = "block";
+                    flipBtnContainer.style.display = "flex";
+                } else {
+                    mensaje.innerHTML = "<span class='rojo'>No se encontró una licencia asociada a este CUIL.</span>";
+                }
+            }, 800);
+        });
+
+        function flipCard() {
+            cardInner.classList.toggle('is-flipped');
+        }
+    </script>
+
+</body>
+</html>
