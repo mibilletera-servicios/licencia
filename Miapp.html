@@ -8,106 +8,58 @@
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 
 <link rel="manifest" href="manifest.json">
-
 <meta name="theme-color" content="#3f2dbf">
 
 <style>
-body {
-  margin: 0;
-  font-family: 'Roboto', sans-serif;
-  background: #f1f3f6;
-}
+/* TODO TU ESTILO ORIGINAL SIN CAMBIOS */
+body {margin:0;font-family:'Roboto',sans-serif;background:#f1f3f6;}
+.header {background:#3f2dbf;color:white;padding:16px;font-size:20px;font-weight:500;display:flex;align-items:center;}
+.container {padding:20px;}
+h1 {font-size:24px;margin-bottom:10px;}
+.subtitle {color:#666;font-size:14px;margin-bottom:20px;}
+.card {background:white;border-radius:16px;padding:16px;display:flex;align-items:center;gap:15px;box-shadow:0 2px 6px rgba(0,0,0,0.08);margin-bottom:25px;}
+.card button {margin-top:10px;background:#3f2dbf;color:white;border:none;padding:8px 16px;border-radius:20px;cursor:pointer;font-size:13px;}
+.grid {display:grid;grid-template-columns:repeat(3,1fr);gap:15px;}
+.item {background:#e9ecf1;border-radius:16px;padding:18px 10px;text-align:center;font-size:13px;color:#333;}
+.icon svg {width:28px;height:28px;stroke:#3f2dbf;margin-bottom:8px;}
 
-/* HEADER */
-.header {
-  background: #3f2dbf;
-  color: white;
-  padding: 16px;
-  font-size: 20px;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-}
+/* LOGIN */
+#login {padding:30px;}
+input {width:100%;padding:12px;margin-bottom:10px;border-radius:8px;border:1px solid #ccc;}
+button {padding:10px;border:none;border-radius:20px;background:#3f2dbf;color:#fff;cursor:pointer;width:100%;}
 
-/* CONTENIDO */
-.container {
-  padding: 20px;
-}
-
-h1 {
-  font-size: 24px;
-  margin-bottom: 10px;
-}
-
-.subtitle {
-  color: #666;
-  font-size: 14px;
-  margin-bottom: 20px;
-}
-
-/* CARD */
-.card {
-  background: white;
-  border-radius: 16px;
-  padding: 16px;
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-  margin-bottom: 25px;
-}
-
-.card button {
-  margin-top: 10px;
-  background: #3f2dbf;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 20px;
-  cursor: pointer;
-  font-size: 13px;
-}
-
-/* GRID */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 15px;
-}
-
-.item {
-  background: #e9ecf1;
-  border-radius: 16px;
-  padding: 18px 10px;
-  text-align: center;
-  font-size: 13px;
-  color: #333;
-}
-
-.icon svg {
-  width: 28px;
-  height: 28px;
-  stroke: #3f2dbf;
-  margin-bottom: 8px;
-}
+/* LICENCIA */
+.card-container {perspective:1000px;width:100%;max-width:380px;height:230px;margin:20px auto;display:none;}
+.card-inner {position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d;}
+.is-flipped {transform:rotateY(180deg);}
+.card-front,.card-back {position:absolute;width:100%;height:100%;backface-visibility:hidden;border-radius:15px;overflow:hidden;}
+.card-back {transform:rotateY(180deg);}
+.card-img {width:100%;height:100%;object-fit:cover;}
 </style>
-
 </head>
 
 <body>
+
+<div id="login">
+  <h2>Ingresar</h2>
+  <input id="email" placeholder="Correo">
+  <input id="dni" placeholder="DNI">
+  <button onclick="login()">Entrar</button>
+</div>
+
+<div id="app" style="display:none">
 
 <div class="header">miArgentina</div>
 
 <div class="container">
 
-  <h1>¡Hola Claudio Nahuel!</h1>
+  <h1 id="saludo">¡Hola!</h1>
   <div class="subtitle">
     Gestioná trámites, sacá turnos, accedé a tus credenciales y recibí información personalizada.
   </div>
 
   <div class="card">
     <div class="icon">
-      <!-- Ticket SVG -->
       <svg fill="none" stroke-width="2" viewBox="0 0 24 24">
         <path d="M4 7h16v4a2 2 0 0 0 0 4v4H4v-4a2 2 0 0 0 0-4V7z"/>
       </svg>
@@ -122,83 +74,115 @@ h1 {
 
   <div class="grid">
 
-    <div class="item">
+    <div class="item" onclick="abrirDocumentos()">
       <div class="icon">
-        <!-- ID -->
         <svg fill="none" stroke-width="2" viewBox="0 0 24 24">
           <rect x="3" y="5" width="18" height="14" rx="2"/>
-          <circle cx="9" cy="12" r="2"/>
-          <path d="M14 10h4M14 14h4"/>
         </svg>
       </div>
       Documentos
     </div>
 
-    <div class="item">
-      <div class="icon">
-        <!-- Car -->
-        <svg fill="none" stroke-width="2" viewBox="0 0 24 24">
-          <path d="M3 13l2-5h14l2 5v5H3z"/>
-          <circle cx="7" cy="18" r="2"/>
-          <circle cx="17" cy="18" r="2"/>
-        </svg>
-      </div>
-      Vehículos
-    </div>
-
-    <div class="item">
-      <div class="icon">
-        <!-- Briefcase -->
-        <svg fill="none" stroke-width="2" viewBox="0 0 24 24">
-          <rect x="3" y="7" width="18" height="13" rx="2"/>
-          <path d="M8 7V5h8v2"/>
-        </svg>
-      </div>
-      Trabajo
-    </div>
-
-    <div class="item">
-      <div class="icon">
-        <!-- Heart -->
-        <svg fill="none" stroke-width="2" viewBox="0 0 24 24">
-          <path d="M20 6c-1.5-2-4-2-6 0-2-2-4.5-2-6 0-2 3 2 7 6 10 4-3 8-7 6-10z"/>
-        </svg>
-      </div>
-      Salud
-    </div>
-
-    <div class="item">
-      <div class="icon">
-        <!-- Money -->
-        <svg fill="none" stroke-width="2" viewBox="0 0 24 24">
-          <rect x="3" y="6" width="18" height="12" rx="2"/>
-          <circle cx="12" cy="12" r="3"/>
-        </svg>
-      </div>
-      Cobros
-    </div>
-
-    <div class="item">
-      <div class="icon">
-        <!-- Document -->
-        <svg fill="none" stroke-width="2" viewBox="0 0 24 24">
-          <path d="M6 2h9l5 5v15H6z"/>
-          <path d="M14 2v6h6"/>
-        </svg>
-      </div>
-      Trámites
-    </div>
+    <div class="item">Vehículos</div>
+    <div class="item">Trabajo</div>
+    <div class="item">Salud</div>
+    <div class="item">Cobros</div>
+    <div class="item">Trámites</div>
 
   </div>
 
+  <!-- LICENCIA -->
+  <div class="card-container" id="licencia">
+    <div class="card-inner" id="cardInner">
+      <div class="card-front">
+        <img id="frente" class="card-img">
+      </div>
+      <div class="card-back">
+        <img id="dorso" class="card-img">
+      </div>
+    </div>
+  </div>
+
+  <button onclick="flipCard()">Girar</button>
+
+</div>
 </div>
 
 <script>
-// Service Worker básico PWA
+
+/* BASE DE DATOS EDITABLE */
+const usuarios = [
+  {
+    email:"user1@mail.com",
+    dni:"12345678",
+    nombre:"Claudio Nahuel",
+    frente:"https://i.postimg.cc/hv0Zm3RS/carnet-(1).jpg",
+    dorso:"https://i.postimg.cc/xT5Tj0hr/reverso-lnc-(2).png"
+  },
+  {
+    email:"user2@mail.com",
+    dni:"22222222",
+    nombre:"Juan Perez",
+    frente:"https://i.postimg.cc/hv0Zm3RS/carnet-(1).jpg",
+    dorso:"https://i.postimg.cc/xT5Tj0hr/reverso-lnc-(2).png"
+  },
+  {
+    email:"user3@mail.com",
+    dni:"33333333",
+    nombre:"Maria Lopez",
+    frente:"https://i.postimg.cc/hv0Zm3RS/carnet-(1).jpg",
+    dorso:"https://i.postimg.cc/xT5Tj0hr/reverso-lnc-(2).png"
+  },
+  {
+    email:"user4@mail.com",
+    dni:"44444444",
+    nombre:"Carlos Diaz",
+    frente:"https://i.postimg.cc/hv0Zm3RS/carnet-(1).jpg",
+    dorso:"https://i.postimg.cc/xT5Tj0hr/reverso-lnc-(2).png"
+  },
+  {
+    email:"user5@mail.com",
+    dni:"55555555",
+    nombre:"Ana Torres",
+    frente:"https://i.postimg.cc/hv0Zm3RS/carnet-(1).jpg",
+    dorso:"https://i.postimg.cc/xT5Tj0hr/reverso-lnc-(2).png"
+  }
+];
+
+let usuarioActual = null;
+
+function login(){
+  const email = document.getElementById("email").value;
+  const dni = document.getElementById("dni").value;
+
+  const user = usuarios.find(u=>u.email===email && u.dni===dni);
+
+  if(user){
+    usuarioActual = user;
+    document.getElementById("login").style.display="none";
+    document.getElementById("app").style.display="block";
+    document.getElementById("saludo").innerText="¡Hola "+user.nombre+"!";
+  }else{
+    alert("Datos incorrectos");
+  }
+}
+
+function abrirDocumentos(){
+  document.getElementById("licencia").style.display="block";
+  document.getElementById("frente").src = usuarioActual.frente;
+  document.getElementById("dorso").src = usuarioActual.dorso;
+}
+
+function flipCard(){
+  document.getElementById("cardInner").classList.toggle("is-flipped");
+}
+
+/* PWA */
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('sw.js');
 }
+
 </script>
 
 </body>
-</html>
+        </html>
