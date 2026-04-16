@@ -146,22 +146,21 @@ function mostrarCampos(){
   }
 }
 
-function validarCUIL(cuil){
-  if(!/^\d{2}-\d{8}-\d{1}$/.test(cuil)) return false;
+/* 🔥 FORMATO AUTOMÁTICO CUIL */
+document.getElementById("cuil").addEventListener("input", function(e){
+  let valor = e.target.value.replace(/\D/g, "").substring(0,11);
 
-  let nums = cuil.replace(/-/g,'').split('').map(Number);
-  let mult = [5,4,3,2,7,6,5,4,3,2];
-  let suma = 0;
-
-  for(let i=0;i<10;i++){
-    suma += nums[i]*mult[i];
+  if(valor.length > 2 && valor.length <= 10){
+    valor = valor.slice(0,2) + "-" + valor.slice(2);
+  } else if(valor.length > 10){
+    valor = valor.slice(0,2) + "-" + valor.slice(2,10) + "-" + valor.slice(10);
   }
 
-  let mod = 11 - (suma % 11);
-  if(mod === 11) mod = 0;
-  if(mod === 10) mod = 9;
+  e.target.value = valor;
+});
 
-  return mod === nums[10];
+function validarCUIL(cuil){
+  return /^\d{2}-\d{8}-\d{1}$/.test(cuil);
 }
 
 function validarFormulario(){
