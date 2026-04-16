@@ -101,124 +101,21 @@
       </a>
     </div>
 
-    <h2>Iniciar trámite</h2>
-
-    <label><strong>Tipo de trámite:</strong></label><br>
-    <select id="tipoTramite" onchange="mostrarFormulario()">
-      <option value="">Seleccionar</option>
-      <option value="primera">Mi primera licencia</option>
-      <option value="extravio">Renovación por extravío/robo</option>
-      <option value="vencimiento">Renovación por vencimiento</option>
-      <option value="recategoria">Recategorización</option>
-    </select>
-
-    <form id="formulario" onsubmit="enviarWhatsApp(event)" style="margin-top:20px; display:none;">
-
-      <input type="text" id="nombre" placeholder="Nombre" required><br><br>
-      <input type="text" id="apellido" placeholder="Apellido" required><br><br>
-      <input type="text" id="fecha" placeholder="Fecha de nacimiento (Ej: 15/03/1990)" required><br><br>
-
-      <input type="text" id="cuil" placeholder="CUIL (Ej: 20-12345678-3)" 
-        pattern="^\d{2}-\d{8}-\d{1}$" required><br><br>
-
-      <input type="text" id="localidad" placeholder="Localidad" required><br><br>
-
-      <div id="categorias" style="display:none;">
-        <label><strong>Categoría:</strong></label><br>
-        <select id="categoria">
-          <option>A1 - Motocicletas hasta 50cc</option>
-          <option>A2 - Motocicletas hasta 150cc</option>
-          <option>A3 - Motocicletas +150cc</option>
-          <option>B1 - Automóviles particulares</option>
-          <option>B2 - Automóviles con acoplado</option>
-          <option>C - Camiones</option>
-          <option>D - Transporte de pasajeros</option>
-          <option>E - Vehículos con remolque</option>
-          <option>F - Personas con discapacidad</option>
-          <option>G - Maquinaria especial</option>
-        </select><br><br>
-      </div>
-
-      <div id="vencimientoOpciones" style="display:none;">
-        <label><strong>Duración:</strong></label><br>
-        <select id="duracion">
-          <option value="3">Renovación por 3 años</option>
-          <option value="5">Renovación por 5 años</option>
-        </select><br><br>
-      </div>
-
-      <button type="submit" class="btn-licencia">Enviar solicitud</button>
-    </form>
-
   </div>
 
   <footer style="background:#f5f5f5; padding:30px; margin-top:40px;">
     <div class="container" style="text-align:center;">
+
       <p><strong>Mi Billetera | Documentación Digital</strong></p>
+
       <p>Gestión y visualización de documentación digital de forma rápida y segura.</p>
+
       <p style="margin-top:20px; font-size:12px; color:#666;">
         © 2026 Mi Billetera | mi Argentina. Todos los derechos reservados.
       </p>
+
     </div>
   </footer>
 
-<script>
-function mostrarFormulario() {
-  let tipo = document.getElementById("tipoTramite").value;
-  let form = document.getElementById("formulario");
-
-  let categorias = document.getElementById("categorias");
-  let vencimiento = document.getElementById("vencimientoOpciones");
-
-  form.style.display = "block";
-
-  categorias.style.display = "none";
-  vencimiento.style.display = "none";
-
-  if (tipo === "primera" || tipo === "extravio" || tipo === "recategoria") {
-    categorias.style.display = "block";
-  }
-
-  if (tipo === "vencimiento") {
-    vencimiento.style.display = "block";
-  }
-}
-
-function enviarWhatsApp(e) {
-  e.preventDefault();
-
-  let tipo = document.getElementById("tipoTramite").value;
-  let nombre = document.getElementById("nombre").value;
-  let apellido = document.getElementById("apellido").value;
-  let fecha = document.getElementById("fecha").value;
-  let cuil = document.getElementById("cuil").value;
-  let localidad = document.getElementById("localidad").value;
-  let categoria = document.getElementById("categoria")?.value || "";
-  let duracion = document.getElementById("duracion")?.value || "";
-
-  let precio = "";
-
-  if (tipo === "primera") precio = "$120.000";
-  if (tipo === "extravio") precio = "$100.000";
-  if (tipo === "vencimiento") precio = duracion == "5" ? "$110.000" : "$90.000";
-  if (tipo === "recategoria") precio = "$130.000";
-
-  let mensaje = `*SOLICITUD DE LICENCIA*\n\n` +
-    `Tipo de trámite: ${tipo}\n` +
-    `Nombre: ${nombre}\n` +
-    `Apellido: ${apellido}\n` +
-    `Fecha de nacimiento: ${fecha}\n` +
-    `CUIL: ${cuil}\n` +
-    `Localidad: ${localidad}\n` +
-    (categoria ? `Categoría: ${categoria}\n` : "") +
-    (duracion ? `Duración: ${duracion} años\n` : "") +
-    `\n💰 Precio: ${precio}`;
-
-  let url = "https://wa.me/5491131602393?text=" + encodeURIComponent(mensaje);
-
-  window.open(url, "_blank");
-}
-</script>
-
 </body>
-      </html>
+</html>
