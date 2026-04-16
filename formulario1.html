@@ -13,6 +13,7 @@
     .navbar img { height: 70px; }
     .header { background: #0072bb; color: white; padding: 30px; }
     .container { max-width: 900px; margin: auto; padding: 20px; }
+
     .btn-licencia {
       background-color: #0072bb;
       color: white;
@@ -26,20 +27,25 @@
       border: none;
       cursor: pointer;
     }
-    .btn-whatsapp-inline {
-      background-color: #25d366;
-      color: white;
-      padding: 2px 10px;
-      border-radius: 4px;
-      text-decoration: none;
-      font-weight: bold;
+
+    .btn-licencia:disabled {
+      background-color: #999;
+      cursor: not-allowed;
     }
+
     input, select {
       width: 100%;
       padding: 10px;
-      margin-bottom: 10px;
+      margin-bottom: 5px;
       border-radius: 8px;
       border: 1px solid #ccc;
+    }
+
+    .error {
+      color: red;
+      font-size: 13px;
+      margin-bottom: 10px;
+      display: none;
     }
   </style>
 </head>
@@ -65,23 +71,9 @@
     <a href="#" class="btn-licencia">Ver Licencia Digital</a>
   </div>
 
-  <h2>¿Cómo hago para tenerla?</h2>
-
-  <p><strong>1.</strong> Iniciá el trámite por 
-    <a href="https://wa.me/5491131602393" class="btn-whatsapp-inline">WhatsApp</a>
-  </p>
-
-  <p><strong>2.</strong> Enviá foto de tu DNI.</p>
-  <p><strong>3.</strong> Procesamos tu solicitud.</p>
-  <p><strong>4.</strong> Recibís el acceso.</p>
-
-  <div style="text-align:center;">
-    <a href="#" class="btn-licencia">Iniciar trámite ahora</a>
-  </div>
-
   <h2>Formulario de inicio de trámite</h2>
 
-  <select id="tramite" onchange="mostrarCampos()" required>
+  <select id="tramite" onchange="mostrarCampos(); validarFormulario();" required>
     <option value="">Seleccionar trámite</option>
     <option value="primera">Mi primera licencia - $120.000</option>
     <option value="extravio">Renovación por extravío/robo - $100.000</option>
@@ -89,36 +81,39 @@
     <option value="ampliacion">Ampliación de categoría - $130.000</option>
   </select>
 
-  <form id="formulario" onsubmit="enviarWhatsApp(event)" style="display:none;">
+  <form id="formulario" oninput="validarFormulario()" onsubmit="enviarWhatsApp(event)" style="display:none;">
 
     <input type="text" id="nombre" placeholder="Nombre" required>
     <input type="text" id="apellido" placeholder="Apellido" required>
 
     <input type="text" id="fecha" placeholder="Fecha de nacimiento (Ej: 15/03/1990)" required>
 
-    <input type="text" id="cuil" placeholder="CUIL (Ej: 20-12345678-3)"
-      pattern="^\d{2}-\d{8}-\d{1}$"
-      required>
+    <input type="text" id="cuil" placeholder="CUIL (Ej: 20-12345678-3)" required>
+    <div id="errorCuil" class="error">CUIL inválido</div>
 
     <select id="categoria" style="display:none;">
-      <option>A1 - Motocicleta hasta 50cc</option>
-      <option>A2 - Motocicleta hasta 150cc</option>
-      <option>A3 - Motocicleta +150cc</option>
-      <option>B1 - Automóviles particulares</option>
-      <option>B2 - Automóviles con acoplado</option>
-      <option>C - Camiones</option>
-      <option>D - Transporte de pasajeros</option>
-      <option>E - Vehículos con remolque</option>
+      <option value="">Seleccionar categoría</option>
+      <option>A.1 - Motocicletas hasta 50 cc</option>
+      <option>A.2.1 - Motocicletas hasta 150 cc</option>
+      <option>A.2.2 - Motocicletas hasta 300 cc</option>
+      <option>A.3 - Motocicletas más de 300 cc</option>
+      <option>B.1 - Automóviles particulares hasta 3.500 kg</option>
+      <option>B.2 - Automóviles con acoplado</option>
+      <option>C - Camiones sin acoplado</option>
+      <option>D.1 - Transporte de pasajeros hasta 8 plazas</option>
+      <option>D.2 - Transporte de pasajeros más de 8 plazas</option>
+      <option>E.1 - Vehículos con remolque</option>
       <option>F - Personas con discapacidad</option>
-      <option>G - Maquinaria especial</option>
+      <option>G - Maquinaria especial no agrícola</option>
     </select>
 
     <select id="vencimiento" style="display:none;">
+      <option value="">Seleccionar vencimiento</option>
       <option value="3">Vencimiento 3 años</option>
       <option value="5">Vencimiento 5 años</option>
     </select>
 
-    <button class="btn-licencia">Enviar solicitud</button>
+    <button id="btnEnviar" class="btn-licencia" disabled>Enviar solicitud</button>
 
   </form>
 
@@ -151,6 +146,50 @@ function mostrarCampos(){
   }
 }
 
+function validarCUIL(cuil){
+  if(!/^\d{2}-\d{8}-\d{1}$/.test(cuil)) return false;
+
+  let nums = cuil.replace(/-/g,'').split('').map(Number);
+  let mult = [5,4,3,2,7,6,5,4,3,2];
+  let suma = 0;
+
+  for(let i=0;i<10;i++){
+    suma += nums[i]*mult[i];
+  }
+
+  let mod = 11 - (suma % 11);
+  if(mod === 11) mod = 0;
+  if(mod === 10) mod = 9;
+
+  return mod === nums[10];
+}
+
+function validarFormulario(){
+  let tipo = document.getElementById("tramite").value;
+  let nombre = document.getElementById("nombre").value;
+  let apellido = document.getElementById("apellido").value;
+  let fecha = document.getElementById("fecha").value;
+  let cuil = document.getElementById("cuil").value;
+  let categoria = document.getElementById("categoria").value;
+  let vencimiento = document.getElementById("vencimiento").value;
+
+  let cuilValido = validarCUIL(cuil);
+
+  document.getElementById("errorCuil").style.display = cuil && !cuilValido ? "block" : "none";
+
+  let valido = nombre && apellido && fecha && cuilValido && tipo;
+
+  if(document.getElementById("categoria").style.display === "block"){
+    valido = valido && categoria;
+  }
+
+  if(document.getElementById("vencimiento").style.display === "block"){
+    valido = valido && vencimiento;
+  }
+
+  document.getElementById("btnEnviar").disabled = !valido;
+}
+
 function enviarWhatsApp(e){
   e.preventDefault();
 
@@ -162,24 +201,27 @@ function enviarWhatsApp(e){
   let categoria = document.getElementById("categoria")?.value || "";
   let vencimiento = document.getElementById("vencimiento")?.value || "";
 
+  let tipoTexto = "";
   let precio = "";
-  if(tipo==="primera") precio="$120.000";
-  if(tipo==="extravio") precio="$100.000";
-  if(tipo==="vencimiento") precio=(vencimiento=="5")?"$110.000":"$90.000";
-  if(tipo==="ampliacion") precio="$130.000";
+
+  if(tipo==="primera"){ tipoTexto="Primera licencia"; precio="$120.000"; }
+  if(tipo==="extravio"){ tipoTexto="Renovación por extravío/robo"; precio="$100.000"; }
+  if(tipo==="vencimiento"){ tipoTexto="Renovación por vencimiento"; precio=(vencimiento=="5")?"$110.000":"$90.000"; }
+  if(tipo==="ampliacion"){ tipoTexto="Ampliación de categoría"; precio="$130.000"; }
 
   let mensaje =
-`SOLICITUD DE LICENCIA
+`*SOLICITUD DE LICENCIA*
 
-Tipo de trámite: ${tipo}
-Nombre: ${nombre}
-Apellido: ${apellido}
-Fecha de nacimiento: ${fecha}
-CUIL: ${cuil}
-${categoria ? "Categoría: "+categoria : ""}
-${vencimiento ? "Vencimiento: "+vencimiento+" años" : ""}
+📌 Tipo de trámite: ${tipoTexto}
 
-Precio: ${precio}`;
+👤 Nombre: ${nombre}
+👤 Apellido: ${apellido}
+🎂 Fecha de nacimiento: ${fecha}
+🆔 CUIL: ${cuil}
+${categoria ? "🚗 Categoría: "+categoria : ""}
+${vencimiento ? "📅 Vencimiento: "+vencimiento+" años" : ""}
+
+💰 Precio: ${precio}`;
 
   let url = "https://wa.me/5491131602393?text=" + encodeURIComponent(mensaje);
   window.open(url, "_blank");
@@ -187,4 +229,4 @@ Precio: ${precio}`;
 </script>
 
 </body>
-                                          </html>
+  </html>
