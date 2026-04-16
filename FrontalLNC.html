@@ -32,6 +32,7 @@ body {
     border:none;    
     border-radius:5px;    
     cursor:pointer;    
+    z-index:10;
 }    
 
 .carnet-container {  
@@ -44,10 +45,12 @@ body {
     border:1px solid rgba(0,0,0,0.15);  
     box-shadow:0 8px 25px rgba(0,0,0,0.18);  
     background:#fff;  
+    background-size:cover;
+    background-position:center;
 }  
 
 .header {    
-    background: rgba(255,255,255,0.2);    
+    background: rgba(255,255,255,0.72);    
     backdrop-filter: blur(6px);    
     color:#008c8c;    
     display:flex;    
@@ -56,6 +59,7 @@ body {
     padding:4px 10px;  
     height:38px;    
     position:relative;  
+    flex-shrink:0;
 }    
 
 .header::after{  
@@ -69,31 +73,31 @@ body {
 }  
 
 .header-title {    
-    font-size:15px;    
-    font-weight:600;    
+    font-size:14px;    
+    font-weight:700;    
     text-align:center;    
     flex-grow:1;    
     line-height:1.05;    
     color:#0072bb;    
-    letter-spacing:1px;    
+    letter-spacing:.5px;    
     text-transform: uppercase;  
 }    
 
-.flag-icon { width:28px; }    
-.shield-icon { width:22px; }    
+.flag-icon { width:28px; height:auto;}    
+.shield-icon { width:22px; height:auto;}    
 
 .content {  
     display:grid;  
     grid-template-columns:120px 1fr;  
-    padding:6px;  
-    gap:6px;  
+    padding:8px 8px 4px;  
+    gap:8px;  
     flex:1;  
-    align-content:start;  
+    align-items:start;
 }  
 
 .photo-placeholder {    
-    width:115px;    
-    height:135px;    
+    width:112px;    
+    height:138px;    
     background:#ffffff;    
     padding:4px;    
     border-radius:6px;    
@@ -103,7 +107,7 @@ body {
     justify-content:center;    
     align-items:center;    
     box-sizing:border-box;  
-    transform: translate(8px, 6px);  
+    border:1px solid rgba(0,0,0,.15);
 }    
 
 .photo-placeholder img {    
@@ -115,22 +119,20 @@ body {
 }    
 
 .data {    
-    font-size:10.5px;    
+    font-size:10px;    
     font-weight:400;  
     color:#1a1a1a;  
-    letter-spacing:0.1px;  
-    line-height:1.05;  
+    line-height:1.08;  
 }    
 
 .data b{  
-    font-size:12.5px;    
-    font-weight:600;  
+    font-size:12px;    
+    font-weight:700;  
     color:#000;  
 }    
 
 .item {    
-    margin-bottom:6px;    
-    padding-bottom:0;    
+    margin-bottom:5px;    
     display:flex;  
     justify-content:flex-start;  
     gap:18px;  
@@ -138,9 +140,9 @@ body {
 }    
 
 .label {    
-    font-weight:400;   /* CAMBIO IMPORTANTE: ya no negrita */  
+    font-weight:400;  
     display:block;    
-    font-size:9.5px;    
+    font-size:9px;    
     color:#333;  
 }    
 
@@ -152,20 +154,13 @@ body {
 .item-dates{  
     display:flex;  
     justify-content:flex-start;  
-    gap:60px;  /* CORRIDO UN POCO MÁS A LA DERECHA */  
-    width:100%;  
-    margin-top:-4px;  
-}  
-
-.item-dates > div{  
-    flex:none;  
-}  
-
-.right-align{  
-    display:flex;  
-    justify-content:flex-start;  
-    width:100%;  
     gap:40px;  
+    width:100%;  
+    margin-top:-2px;  
+}  
+
+.clases{  
+    margin-left:auto;  
 }  
 
 .footer {    
@@ -178,6 +173,7 @@ body {
     align-items:center;    
     padding:4px 10px;    
     font-size:9.5px;  
+    flex-shrink:0;
 }    
 
 .seguridad-vial{  
@@ -208,7 +204,6 @@ body {
     display:flex;  
     align-items:center;  
     gap:5px;  
-    transform: translateX(-15px);  
 }  
 
 .footer-country{  
@@ -216,10 +211,6 @@ body {
     font-size:12px;  
     margin-top:1px;  
     font-weight:500;  
-}  
-
-.clases{  
-    margin-left: auto;  
 }  
 
 .footer-text{  
@@ -259,11 +250,11 @@ body {
 
         <div class="item">  
             <div>  
-                <span class="label"><b>5. N° Licencia</b><span class="en">/ License N°</span></span>  
+                <span class="label"><b>5. N° Licencia</b><span class="en"> / License N°</span></span>  
                 <b>12345678</b>  
             </div>  
             <div class="clases">  
-                <span class="label"><b>9. Clases</b> <span class="en">/ Class</span></span>  
+                <span class="label"><b>9. Clases</b><span class="en"> / Class</span></span>  
                 <b>A1 B1</b>  
             </div>  
         </div>  
@@ -295,7 +286,7 @@ body {
                 <b>21/07/1981</b>  
             </div>  
 
-            <div style="text-align:right; margin-top:-12px;">  
+            <div style="text-align:right; margin-top:-6px;">  
                 <b style="display:block; margin-bottom:-2px;">________________</b>  
                 <span class="label"><b>5. Firma</b> / Signature</span>  
             </div>  
@@ -379,11 +370,11 @@ async function generarImagen(){
     });
     const link = document.createElement('a');
     link.download = 'licencia_frontal.jpg';
-    link.href = canvas.toDataURL("image/jpeg", 0.9);
+    link.href = canvas.toDataURL("image/jpeg", 0.95);
     link.click();
 }
 
 </script>    
 
 </body>    
-</html>
+    </html>
