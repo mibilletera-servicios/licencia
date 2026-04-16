@@ -251,7 +251,7 @@ position:absolute;
 width:100%;
 height:100%;
 backface-visibility:hidden;
-border-radius:18px;
+border-radius:8px;
 overflow:hidden;
 }
 
@@ -299,7 +299,7 @@ border-bottom:1px solid #eee;
 }
 
 .qr-box{
-height:260px;
+height:220px;
 display:flex;
 align-items:center;
 justify-content:center;
@@ -310,10 +310,10 @@ font-weight:700;
 }
 
 .qr-box img{
-width:100%;
-height:100%;
+width:85%;
+height:85%;
 object-fit:contain;
-padding:15px;
+padding:10px;
 }
 
 .licencia-datos{
@@ -343,17 +343,6 @@ grid-column:1/3;
 margin:18px;
 width:calc(100% - 36px);
 background:#3b33cc;
-}
-
-.qr-link{
-display:block;
-text-align:center;
-margin-top:-8px;
-margin-bottom:10px;
-font-size:13px;
-color:#3b33cc;
-text-decoration:none;
-font-weight:600;
 }
 
 /* VER LICENCIA FULL */
@@ -523,10 +512,8 @@ Documentos
 <div class="licencia-top">Licencia Nacional de Conducir</div>
 
 <div class="qr-box">
-<img id="qrImg" src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=LicenciaDigital">
+<img id="qrImg">
 </div>
-
-<a class="qr-link" href="#">Cambiar código QR</a>
 
 <div class="licencia-datos">
 <div class="campo">
@@ -570,7 +557,7 @@ Documentos
 <div id="modoLicencia">
 <div class="salir-licencia" onclick="cerrarModoLicencia()"></div>
 
-<div class="card-container" id="licenciaFull" style="display:block;">
+<div class="card-container" style="display:block;">
 <div class="card-inner" id="cardInner">
 <div class="card-front">
 <img id="frente" class="card-img">
@@ -602,7 +589,7 @@ dorso:"https://i.postimg.cc/xT5Tj0hr/reverso-lnc-(2).png",
 dniDigital:"",
 dniFrente:"",
 dniDorso:"",
-qr:"https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=LicenciaDigital"
+qr:"https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=LicenciaDigital"
 }
 ];
 
