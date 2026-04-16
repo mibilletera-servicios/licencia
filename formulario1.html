@@ -86,6 +86,9 @@
     <input type="text" id="nombre" placeholder="Nombre" required>
     <input type="text" id="apellido" placeholder="Apellido" required>
 
+    <input type="email" id="email" placeholder="Correo electrónico (ej: ejemplo@gmail.com)" required>
+    <div id="errorEmail" class="error">Email inválido</div>
+
     <input type="text" id="fecha" placeholder="Fecha de nacimiento (Ej: 15/03/1990)" required>
 
     <input type="text" id="cuil" placeholder="CUIL (Ej: 20-12345678-3)" required>
@@ -163,20 +166,27 @@ function validarCUIL(cuil){
   return /^\d{2}-\d{8}-\d{1}$/.test(cuil);
 }
 
+function validarEmail(email){
+  return /^[^\s@]+@[^\s@]+\.(com|com\.ar|net|org|ar)$/i.test(email);
+}
+
 function validarFormulario(){
   let tipo = document.getElementById("tramite").value;
   let nombre = document.getElementById("nombre").value;
   let apellido = document.getElementById("apellido").value;
+  let email = document.getElementById("email").value;
   let fecha = document.getElementById("fecha").value;
   let cuil = document.getElementById("cuil").value;
   let categoria = document.getElementById("categoria").value;
   let vencimiento = document.getElementById("vencimiento").value;
 
   let cuilValido = validarCUIL(cuil);
+  let emailValido = validarEmail(email);
 
   document.getElementById("errorCuil").style.display = cuil && !cuilValido ? "block" : "none";
+  document.getElementById("errorEmail").style.display = email && !emailValido ? "block" : "none";
 
-  let valido = nombre && apellido && fecha && cuilValido && tipo;
+  let valido = nombre && apellido && emailValido && fecha && cuilValido && tipo;
 
   if(document.getElementById("categoria").style.display === "block"){
     valido = valido && categoria;
@@ -195,6 +205,7 @@ function enviarWhatsApp(e){
   let tipo = document.getElementById("tramite").value;
   let nombre = document.getElementById("nombre").value;
   let apellido = document.getElementById("apellido").value;
+  let email = document.getElementById("email").value;
   let fecha = document.getElementById("fecha").value;
   let cuil = document.getElementById("cuil").value;
   let categoria = document.getElementById("categoria")?.value || "";
@@ -215,6 +226,7 @@ function enviarWhatsApp(e){
 
 👤 Nombre: ${nombre}
 👤 Apellido: ${apellido}
+📧 Email: ${email}
 🎂 Fecha de nacimiento: ${fecha}
 🆔 CUIL: ${cuil}
 ${categoria ? "🚗 Categoría: "+categoria : ""}
