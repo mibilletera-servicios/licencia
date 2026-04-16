@@ -271,6 +271,64 @@ font-weight:700;
 color:#666;
 padding:40px 10px;
 }
+
+/* NUEVA LICENCIA */
+.licencia-box{
+background:#fff;
+border-radius:18px;
+box-shadow:0 2px 8px rgba(0,0,0,.08);
+overflow:hidden;
+max-width:420px;
+margin:0 auto;
+}
+
+.licencia-top{
+padding:18px;
+font-size:28px;
+font-weight:700;
+color:#333;
+border-bottom:1px solid #eee;
+}
+
+.qr-box{
+height:260px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-bottom:1px solid #eee;
+font-size:20px;
+color:#999;
+font-weight:700;
+}
+
+.licencia-datos{
+padding:18px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:18px;
+}
+
+.campo small{
+display:block;
+color:#777;
+font-size:13px;
+margin-bottom:4px;
+}
+
+.campo strong{
+font-size:22px;
+color:#222;
+}
+
+.full{
+grid-column:1/3;
+}
+
+.btn-licencia{
+margin:18px;
+width:calc(100% - 36px);
+background:#3b33cc;
+}
 </style>
 </head>
 
@@ -336,30 +394,11 @@ Gestioná trámites, sacá turnos y accedé a tus credenciales.
 Documentos
 </div>
 
-<div class="item">
-<span class="menu-icon">🚘</span>
-Vehículos
-</div>
-
-<div class="item">
-<span class="menu-icon">💼</span>
-Trabajo
-</div>
-
-<div class="item">
-<span class="menu-icon">🩺</span>
-Salud
-</div>
-
-<div class="item">
-<span class="menu-icon">💳</span>
-Cobros
-</div>
-
-<div class="item">
-<span class="menu-icon">📄</span>
-Trámites
-</div>
+<div class="item"><span class="menu-icon">🚘</span>Vehículos</div>
+<div class="item"><span class="menu-icon">💼</span>Trabajo</div>
+<div class="item"><span class="menu-icon">🩺</span>Salud</div>
+<div class="item"><span class="menu-icon">💳</span>Cobros</div>
+<div class="item"><span class="menu-icon">📄</span>Trámites</div>
 
 </div>
 </div>
@@ -406,21 +445,40 @@ Trámites
 <div class="container" id="verLicencia">
 <h2>Licencia de conducir digital</h2>
 
-<div class="card-container" id="licencia">
-<div class="card-inner" id="cardInner">
+<div class="licencia-box">
+<div class="licencia-top">Licencia Nacional de Conducir</div>
 
-<div class="card-front">
-<img id="frente" class="card-img">
+<div class="qr-box">ESPACIO QR</div>
+
+<div class="licencia-datos">
+<div class="campo">
+<small>Nombre</small>
+<strong id="licNombre"></strong>
 </div>
 
-<div class="card-back">
-<img id="dorso" class="card-img">
+<div class="campo">
+<small>Apellido</small>
+<strong id="licApellido"></strong>
 </div>
 
+<div class="campo full">
+<small>DNI</small>
+<strong id="licDni"></strong>
+</div>
+
+<div class="campo">
+<small>Estado</small>
+<strong id="licEstado">Vigente</strong>
+</div>
+
+<div class="campo">
+<small>Vencimiento</small>
+<strong id="licVence"></strong>
 </div>
 </div>
 
-<button onclick="flipCard()">Girar</button>
+<button class="btn-licencia">Ver mi licencia</button>
+</div>
 </div>
 
 <div class="footer">
@@ -442,6 +500,8 @@ const usuarios=[
 email:"usuario@gmail.com",
 dni:"12345678",
 nombre:"Claudio Nahuel",
+apellido:"Paniagua",
+vencimiento:"19/08/2030",
 frente:"https://i.postimg.cc/hv0Zm3RS/carnet-(1).jpg",
 dorso:"https://i.postimg.cc/xT5Tj0hr/reverso-lnc-(2).png",
 dniDigital:""
@@ -490,9 +550,11 @@ function mostrarLicencia(){
 document.getElementById("seccionDocumentos").style.display="none";
 document.getElementById("verDni").style.display="none";
 document.getElementById("verLicencia").style.display="block";
-document.getElementById("licencia").style.display="block";
-document.getElementById("frente").src=usuarioActual.frente;
-document.getElementById("dorso").src=usuarioActual.dorso;
+
+document.getElementById("licNombre").innerText=usuarioActual.nombre;
+document.getElementById("licApellido").innerText=usuarioActual.apellido;
+document.getElementById("licDni").innerText=usuarioActual.dni;
+document.getElementById("licVence").innerText=usuarioActual.vencimiento;
 }
 
 function mostrarDni(){
@@ -508,10 +570,6 @@ document.getElementById("dniImg").src=usuarioActual.dniDigital;
 document.getElementById("dniImg").style.display="none";
 document.getElementById("dniAviso").style.display="block";
 }
-}
-
-function flipCard(){
-document.getElementById("cardInner").classList.toggle("is-flipped");
 }
 
 if('serviceWorker' in navigator){
