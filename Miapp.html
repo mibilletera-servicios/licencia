@@ -3,32 +3,131 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>miArgentina Clone</title>
+<title>miBilletera | miArgentina</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Encode+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#3f2dbf">
+<meta name="theme-color" content="#0072bb">
 
 <style>
-body {margin:0;font-family:'Roboto',sans-serif;background:#f1f3f6;}
-.header {background:#3f2dbf;color:white;padding:16px;font-size:20px;font-weight:500;display:flex;align-items:center;justify-content:center;}
-.container {padding:20px;}
-h1 {font-size:24px;margin-bottom:10px;}
+
+body {
+  margin:0;
+  font-family:'Encode Sans',sans-serif;
+  background:#f5f5f5;
+}
+
+/* NAVBAR */
+.navbar {
+  background:#fff;
+  border-bottom:3px solid #ffd100;
+  padding:10px 20px;
+  text-align:center;
+}
+.navbar img {
+  height:60px;
+}
+
+/* HEADER */
+.header {
+  background:#0072bb;
+  color:white;
+  padding:20px;
+  text-align:center;
+  font-weight:600;
+}
+
+/* CONTENIDO */
+.container {
+  padding:20px;
+  max-width:900px;
+  margin:auto;
+}
+
+h1 {font-size:22px;margin-bottom:10px;}
 .subtitle {color:#666;font-size:14px;margin-bottom:20px;}
-.card {background:white;border-radius:16px;padding:16px;display:flex;align-items:center;gap:15px;box-shadow:0 2px 6px rgba(0,0,0,0.08);margin-bottom:25px;}
-.card button {margin-top:10px;background:#3f2dbf;color:white;border:none;padding:8px 16px;border-radius:20px;cursor:pointer;font-size:13px;}
-.grid {display:grid;grid-template-columns:repeat(3,1fr);gap:15px;}
-.item {background:#e9ecf1;border-radius:16px;padding:18px 10px;text-align:center;font-size:13px;color:#333;}
-.icon svg {width:28px;height:28px;stroke:#3f2dbf;margin-bottom:8px;display:block;margin-left:auto;margin-right:auto;}
+
+/* CARD */
+.card {
+  background:white;
+  border-radius:16px;
+  padding:16px;
+  display:flex;
+  align-items:center;
+  gap:15px;
+  box-shadow:0 2px 6px rgba(0,0,0,0.08);
+  margin-bottom:25px;
+}
+
+.card button {
+  margin-top:10px;
+  background:#0072bb;
+  color:white;
+  border:none;
+  padding:8px 16px;
+  border-radius:20px;
+  cursor:pointer;
+  font-size:13px;
+}
+
+/* GRID */
+.grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+}
+
+.item {
+  background:#e9ecf1;
+  border-radius:16px;
+  padding:18px 10px;
+  text-align:center;
+  font-size:13px;
+  color:#333;
+}
+
+/* ICONOS */
+.icon svg {
+  width:28px;
+  height:28px;
+  stroke:#0072bb;
+  margin-bottom:8px;
+  display:block;
+  margin-left:auto;
+  margin-right:auto;
+}
 
 /* LOGIN */
 #login {padding:30px;}
-input {width:100%;padding:12px;margin-bottom:10px;border-radius:8px;border:1px solid #ccc;}
-button {padding:10px;border:none;border-radius:20px;background:#3f2dbf;color:#fff;cursor:pointer;width:100%;}
+input {
+  width:100%;
+  padding:12px;
+  margin-bottom:10px;
+  border-radius:8px;
+  border:1px solid #ccc;
+}
+
+button {
+  padding:10px;
+  border:none;
+  border-radius:25px;
+  background:#0072bb;
+  color:#fff;
+  cursor:pointer;
+  width:100%;
+  font-weight:600;
+}
 
 /* FOOTER */
-.footer {text-align:center;padding:20px;font-size:12px;color:#666;}
+.footer {
+  background:#f5f5f5;
+  padding:30px;
+  margin-top:40px;
+  text-align:center;
+  font-size:13px;
+  color:#666;
+}
 
 /* LOADER */
 #loader {
@@ -45,7 +144,7 @@ button {padding:10px;border:none;border-radius:20px;background:#3f2dbf;color:#ff
 .spinner {
  width:40px;height:40px;
  border:4px solid #ccc;
- border-top:4px solid #3f2dbf;
+ border-top:4px solid #0072bb;
  border-radius:50%;
  animation:spin 1s linear infinite;
  margin-top:15px;
@@ -54,44 +153,77 @@ button {padding:10px;border:none;border-radius:20px;background:#3f2dbf;color:#ff
 
 /* LICENCIA */
 #seccionDocumentos {display:none;}
-.card-container {perspective:1000px;width:100%;max-width:380px;height:230px;margin:20px auto;display:none;}
-.card-inner {position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d;}
+.card-container {
+ perspective:1000px;
+ width:100%;
+ max-width:380px;
+ height:230px;
+ margin:20px auto;
+ display:none;
+}
+.card-inner {
+ position:relative;
+ width:100%;
+ height:100%;
+ transition:transform .6s;
+ transform-style:preserve-3d;
+}
 .is-flipped {transform:rotateY(180deg);}
-.card-front,.card-back {position:absolute;width:100%;height:100%;backface-visibility:hidden;border-radius:15px;overflow:hidden;}
+.card-front,.card-back {
+ position:absolute;
+ width:100%;
+ height:100%;
+ backface-visibility:hidden;
+ border-radius:15px;
+ overflow:hidden;
+}
 .card-back {transform:rotateY(180deg);}
-.card-img {width:100%;height:100%;object-fit:cover;}
+.card-img {
+ width:100%;
+ height:100%;
+ object-fit:cover;
+}
+
 </style>
 </head>
 
 <body>
 
+<!-- NAVBAR -->
+<div class="navbar">
+  <img src="https://i.postimg.cc/638qB6NY/1776094869296.png">
+</div>
+
 <!-- LOADER -->
 <div id="loader">
-  <div style="font-size:22px;color:#3f2dbf;font-weight:500;">miArgentina</div>
+  <div style="font-size:22px;color:#0072bb;font-weight:600;">Mi Billetera</div>
   <div class="spinner"></div>
   <div style="margin-top:10px;font-size:14px;">Cargando sistema...</div>
 </div>
 
 <!-- LOGIN -->
 <div id="login" style="display:none;">
-  <div class="header">miBilletera</div>
-  <h2>Ingresar</h2>
+  <div class="header">Ingresar</div>
   <input id="email" placeholder="Correo">
   <input id="dni" placeholder="DNI">
   <button onclick="login()">Entrar</button>
-  <div class="footer">miBilletera ©</div>
+
+  <div class="footer">
+    <p><strong>Mi Billetera</strong></p>
+    <p style="font-size:12px;">© 2026 Todos los derechos reservados</p>
+  </div>
 </div>
 
 <!-- APP -->
 <div id="app" style="display:none">
 
-<div class="header">miArgentina</div>
+<div class="header">Mi Billetera</div>
 
 <div class="container" id="home">
 
   <h1 id="saludo">¡Hola!</h1>
   <div class="subtitle">
-    Gestioná trámites, sacá turnos, accedé a tus credenciales y recibí información personalizada.
+    Gestioná trámites, sacá turnos y accedé a tus credenciales.
   </div>
 
   <div class="card">
@@ -145,6 +277,12 @@ button {padding:10px;border:none;border-radius:20px;background:#3f2dbf;color:#ff
   <button onclick="flipCard()">Girar</button>
 </div>
 
+<div class="footer">
+  <p><strong>Mi Billetera | Documentación Digital</strong></p>
+  <p>Gestión segura y rápida de documentos digitales.</p>
+  <p style="font-size:12px;">© 2026 Todos los derechos reservados</p>
+</div>
+
 </div>
 
 <script>
@@ -157,11 +295,7 @@ setTimeout(()=>{
 
 /* USUARIOS */
 const usuarios = [
-{email:"user1@mail.com",dni:"12345678",nombre:"Claudio Nahuel",frente:"https://i.postimg.cc/hv0Zm3RS/carnet-(1).jpg",dorso:"https://i.postimg.cc/xT5Tj0hr/reverso-lnc-(2).png"},
-{email:"user2@mail.com",dni:"22222222",nombre:"Juan Perez",frente:"https://i.postimg.cc/hv0Zm3RS/carnet-(1).jpg",dorso:"https://i.postimg.cc/xT5Tj0hr/reverso-lnc-(2).png"},
-{email:"user3@mail.com",dni:"33333333",nombre:"Maria Lopez",frente:"https://i.postimg.cc/hv0Zm3RS/carnet-(1).jpg",dorso:"https://i.postimg.cc/xT5Tj0hr/reverso-lnc-(2).png"},
-{email:"user4@mail.com",dni:"44444444",nombre:"Carlos Diaz",frente:"https://i.postimg.cc/hv0Zm3RS/carnet-(1).jpg",dorso:"https://i.postimg.cc/xT5Tj0hr/reverso-lnc-(2).png"},
-{email:"user5@mail.com",dni:"55555555",nombre:"Ana Torres",frente:"https://i.postimg.cc/hv0Zm3RS/carnet-(1).jpg",dorso:"https://i.postimg.cc/xT5Tj0hr/reverso-lnc-(2).png"}
+{email:"user1@mail.com",dni:"12345678",nombre:"Claudio Nahuel",frente:"https://i.postimg.cc/hv0Zm3RS/carnet-(1).jpg",dorso:"https://i.postimg.cc/xT5Tj0hr/reverso-lnc-(2).png"}
 ];
 
 let usuarioActual=null;
@@ -203,4 +337,4 @@ if ('serviceWorker' in navigator) {
 </script>
 
 </body>
-  </html>
+ </html>
