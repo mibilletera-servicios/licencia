@@ -176,22 +176,19 @@ body {
 .barcode {
     width: 100%;
     height: 32px;
-    background:
-      repeating-linear-gradient(
+    background: repeating-linear-gradient(
         90deg,
-        #000 0px,
-        #000 2px,
-        #fff 2px,
-        #fff 3px,
-        #000 3px,
-        #000 5px,
-        #fff 5px,
-        #fff 6px,
-        #000 6px,
-        #000 7px,
-        #fff 7px,
-        #fff 9px
-      );
+        #000 0px, #000 1px,
+        #fff 1px, #fff 2px,
+        #000 2px, #000 4px,
+        #fff 4px, #fff 5px,
+        #000 5px, #000 6px,
+        #fff 6px, #fff 8px,
+        #000 8px, #000 11px,
+        #fff 11px, #fff 12px
+    );
+    background-size: 100% 100%;
+    image-rendering: crisp-edges;
     image-rendering: pixelated;
     transform: translateZ(0);
 }
@@ -302,7 +299,7 @@ body {
     <div class="footer-reverso">    
         <div class="lnc-text">LNC</div>
         <div class="barcode-wrapper">
-            <div class="barcode"></div>
+            <canvas class="barcode" id="barcodeCanvas"></canvas>
             <div class="disclaimer-text">Los datos de la presente licencia son los obrantes en el Registro Nacional de Antecedentes de Tránsito.</div>
         </div>
         <div class="signature-box">
@@ -317,6 +314,24 @@ body {
 <script>
 let iconoSeleccionadoActual = null;
 let recuadroActivo = true;
+
+function dibujarCodigoBarras(){
+    const canvas = document.getElementById("barcodeCanvas");
+    const ctx = canvas.getContext("2d");
+    canvas.width = 260;
+    canvas.height = 32;
+
+    ctx.fillStyle = "#fff";
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+
+    let x = 0;
+    while(x < canvas.width){
+        let ancho = Math.floor(Math.random()*3)+1;
+        ctx.fillStyle = Math.random()>0.35 ? "#000" : "#fff";
+        ctx.fillRect(x,0,ancho,canvas.height);
+        x += ancho;
+    }
+}
 
 function cambiarFondo(input){  
     const carnet = document.getElementById('carnet');  
@@ -376,6 +391,7 @@ function toggleRecuadro(){
 }
 
 async function generarPDF(){    
+    dibujarCodigoBarras();
     const { jsPDF } = window.jspdf;    
     const canvas = await html2canvas(document.getElementById("carnet"), {  
         scale:4,
@@ -389,6 +405,7 @@ async function generarPDF(){
 }    
 
 async function generarImagen(){    
+    dibujarCodigoBarras();
     const canvas = await html2canvas(document.getElementById("carnet"), {  
         scale:6,
         useCORS:true,
@@ -399,7 +416,9 @@ async function generarImagen(){
     link.href = canvas.toDataURL("image/png",1.0);
     link.click();
 }
+
+dibujarCodigoBarras();
 </script>    
 
 </body>    
-    </html>
+            </html>
