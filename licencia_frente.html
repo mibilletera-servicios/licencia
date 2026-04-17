@@ -92,18 +92,19 @@ body {
 }  
 
 .photo-placeholder {    
-    width:115px;    
-    height:135px;    
+    width:112px;    
+    height:134px;    
     background:#ffffff;    
-    padding:4px;    
+    padding:2px;    
     border-radius:6px;    
+    border:1px solid rgba(0,0,0,.25);
     cursor:pointer;    
     overflow:hidden;    
     display:flex;    
     justify-content:center;    
     align-items:center;    
     box-sizing:border-box;  
-    transform: translate(8px, 6px);  
+    transform: translate(8px, 10px);  
 }    
 
 .photo-placeholder img {    
@@ -138,7 +139,7 @@ body {
 }    
 
 .label {    
-    font-weight:400;   /* CAMBIO IMPORTANTE: ya no negrita */  
+    font-weight:400;  
     display:block;    
     font-size:9.5px;    
     color:#333;  
@@ -152,20 +153,9 @@ body {
 .item-dates{  
     display:flex;  
     justify-content:flex-start;  
-    gap:60px;  /* CORRIDO UN POCO MÁS A LA DERECHA */  
+    gap:60px;  
     width:100%;  
     margin-top:-4px;  
-}  
-
-.item-dates > div{  
-    flex:none;  
-}  
-
-.right-align{  
-    display:flex;  
-    justify-content:flex-start;  
-    width:100%;  
-    gap:40px;  
 }  
 
 .footer {    
@@ -219,13 +209,27 @@ body {
 }  
 
 .clases{  
-    margin-left: auto;  
+    margin-left:auto;  
 }  
 
 .footer-text{  
     font-size:11px;  
     line-height:1.1;  
 }  
+
+input.editar, select.editar{
+    border:none;
+    background:transparent;
+    font:inherit;
+    font-weight:600;
+    color:#000;
+    width:auto;
+    min-width:120px;
+    outline:none;
+}
+select.editar{
+    max-width:180px;
+}
 </style>    
 </head>    
 
@@ -239,97 +243,112 @@ body {
 <div class="carnet-container" id="carnet">    
 
 <div class="header">    
-    <img src="https://upload.wikimedia.org/wikipedia/commons/1/1a/Flag_of_Argentina.svg" class="flag-icon">    
-    <div class="header-title">    
-        Licencia Nacional de Conducir<br>    
-        Buenos Aires    
-    </div>    
-    <img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Coat_of_arms_of_Argentina.svg" class="shield-icon">    
+<img src="https://upload.wikimedia.org/wikipedia/commons/1/1a/Flag_of_Argentina.svg" class="flag-icon">    
+<div class="header-title">Licencia Nacional de Conducir<br>Buenos Aires</div>    
+<img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Coat_of_arms_of_Argentina.svg" class="shield-icon">    
 </div>    
 
 <div class="content">    
 
-    <div class="photo-placeholder" onclick="fileInput.click()">    
-        <span id="txtFoto">Subir foto</span>    
-        <img id="preview">    
-    </div>    
-    <input type="file" id="fileInput" hidden onchange="previewImage(this)">    
+<div class="photo-placeholder" onclick="fileInput.click()">    
+<span id="txtFoto">Subir foto</span>    
+<img id="preview">    
+</div>    
+<input type="file" id="fileInput" hidden onchange="previewImage(this)">    
 
-    <div class="data">    
+<div class="data">    
 
-        <div class="item">  
-            <div>  
-                <span class="label"><b>1. N° Licencia</b><span class="en">/ License N°</span></span>  
-                <b>12345678</b>  
-            </div>  
-            <div class="clases">  
-                <span class="label"><b>8. Clases</b> <span class="en">/ Class</span></span>  
-                <b>A1 B1</b>  
-            </div>  
-        </div>  
+<div class="item">  
+<div>  
+<span class="label"><b>1. N° Licencia</b></span>  
+<input class="editar" value="12345678">
+</div>  
+<div class="clases">  
+<span class="label"><b>8. Clases</b></span>  
+<select class="editar" id="claseSelect">
+<option value="A.1.1">A.1.1</option>
+<option value="A.1.2">A.1.2</option>
+<option value="A.1.3">A.1.3</option>
+<option value="A.1.4">A.1.4</option>
+<option value="A.2.1">A.2.1</option>
+<option value="A.2.2">A.2.2</option>
+<option value="B.1" selected>B.1</option>
+<option value="B.2">B.2</option>
+<option value="F">F</option>
+<option value="G.1">G.1</option>
+<option value="G.2">G.2</option>
+<option value="G.3">G.3</option>
+<option value="C">C</option>
+<option value="D.1">D.1</option>
+<option value="D.2">D.2</option>
+<option value="D.3">D.3</option>
+<option value="E.1">E.1</option>
+<option value="E.2">E.2</option>
+<option value="E.3">E.3</option>
+</select>
+</div>  
+</div>  
 
-        <div class="item">  
-            <div>  
-                <span class="label"><b>2. Apellido</b> / Last Name</span>  
-                <b>RODRÍGUEZ</b>  
-            </div>  
-        </div>  
+<div class="item">
+<div>
+<span class="label"><b>2. Apellido</b></span>
+<input class="editar" value="RODRÍGUEZ">
+</div>
+</div>
 
-        <div class="item">  
-            <div>  
-                <span class="label"><b>3. Nombre</b> / First Name</span>  
-                <b>EMILIANO NICOLÁS</b>  
-            </div>  
-        </div>  
+<div class="item">
+<div>
+<span class="label"><b>3. Nombre</b></span>
+<input class="editar" value="EMILIANO NICOLÁS">
+</div>
+</div>
 
-        <div class="item">  
-            <div>  
-                <span class="label"><b>4. Domicilio</b> / Address</span>  
-                <b>SARMIENTO 1234 - BILLINGHURST<br>GRAL SAN MARTÍN</b>  
-            </div>  
-        </div>  
+<div class="item">
+<div>
+<span class="label"><b>4. Domicilio</b></span>
+<input class="editar" value="SARMIENTO 1234">
+</div>
+</div>
 
-        <div class="item" style="display:flex; justify-content:space-between; width:100%; align-items:flex-start;">  
-            <div>  
-                <span class="label"><b>5. Fecha de Nac.</b> / Date of birth</span>  
-                <b>21/07/1981</b>  
-            </div>  
+<div class="item">
+<div>
+<span class="label"><b>5. Fecha de Nac.</b></span>
+<input class="editar" value="21/07/1981">
+</div>
 
-            <div style="text-align:right; margin-top:-12px;">  
-                <b style="display:block; margin-bottom:-2px;">________________</b>  
-                <span class="label"><b>7. Firma</b> / Signature</span>  
-            </div>  
-        </div>  
+<div style="text-align:right; margin-left:auto;">
+<b style="display:block;">________________</b>
+<span class="label"><b>7. Firma</b></span>
+</div>
+</div>
 
-        <div class="item item-dates">  
-            <div>  
-                <span class="label"><b>6a. Otorgamiento</b> / Issue</span>  
-                <b>25/03/2026</b>  
-            </div>  
-            <div>  
-                <span class="label"><b>6b. Vencimiento</b> / Expires</span>  
-                <b>25/03/2031</b>  
-            </div>  
-        </div>  
+<div class="item item-dates">
+<div>
+<span class="label"><b>6a. Otorgamiento</b></span>
+<input class="editar" value="25/03/2026">
+</div>
 
-    </div>    
+<div>
+<span class="label"><b>6b. Vencimiento</b></span>
+<input class="editar" value="25/03/2031">
+</div>
+</div>
+
+</div>    
 </div>    
 
 <div class="footer">    
-    <div class="seguridad-vial">  
-        <div class="linea"></div>  
-        <div class="texto">  
-            <span>SEGURIDAD</span>  
-            <span>VIAL</span>  
-        </div>  
-    </div>  
-    <div class="footer-right">    
-        <img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Coat_of_arms_of_Argentina.svg" class="footer-logo">    
-        <div class="footer-text">  
-            <span>Ministerio de Transporte</span>  
-            <span class="footer-country">República Argentina</span>  
-        </div>  
-    </div>    
+<div class="seguridad-vial">  
+<div class="linea"></div>  
+<div class="texto"><span>SEGURIDAD</span><span>VIAL</span></div>  
+</div>  
+<div class="footer-right">    
+<img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Coat_of_arms_of_Argentina.svg" class="footer-logo">    
+<div class="footer-text">  
+<span>Ministerio de Transporte</span>  
+<span class="footer-country">República Argentina</span>  
+</div>  
+</div>    
 </div>    
 
 </div>    
@@ -337,53 +356,55 @@ body {
 <script>    
 
 function previewImage(input){    
-    const img = document.getElementById('preview');    
-    const txt = document.getElementById('txtFoto');    
-    const reader = new FileReader();    
-    reader.onload = e=>{    
-        img.src = e.target.result;    
-        img.style.display="block";    
-        txt.style.display="none";    
-    }    
-    reader.readAsDataURL(input.files[0]);    
+const img = document.getElementById('preview');    
+const txt = document.getElementById('txtFoto');    
+const reader = new FileReader();    
+reader.onload = e=>{    
+img.src = e.target.result;    
+img.style.display="block";    
+txt.style.display="none";    
+}    
+reader.readAsDataURL(input.files[0]);    
 }  
 
 function cambiarFondo(input){  
-    const carnet = document.getElementById('carnet');  
-    const reader = new FileReader();  
-    reader.onload = e=>{  
-        carnet.style.backgroundImage = `url('${e.target.result}')`;  
-        carnet.style.backgroundSize = "cover";  
-        carnet.style.backgroundPosition = "center";  
-        carnet.style.backgroundRepeat = "no-repeat";  
-    }  
-    reader.readAsDataURL(input.files[0]);  
+const carnet = document.getElementById('carnet');  
+const reader = new FileReader();  
+reader.onload = e=>{  
+carnet.style.backgroundImage = `url('${e.target.result}')`;  
+carnet.style.backgroundSize = "cover";  
+carnet.style.backgroundPosition = "center";  
+carnet.style.backgroundRepeat = "no-repeat";  
+}  
+reader.readAsDataURL(input.files[0]);  
 }  
 
 async function generarPDF(){    
-    const { jsPDF } = window.jspdf;    
-    const canvas = await html2canvas(document.getElementById("carnet"), {  
-        scale:4,  
-        useCORS:true  
-    });    
-    const img = canvas.toDataURL("image/png");    
-    const pdf = new jsPDF({ orientation:"landscape", unit:"mm", format:[85.6,54] });    
-    pdf.addImage(img,"PNG",0,0,85.6,54);    
-    pdf.save("licencia_frente.pdf");    
+const { jsPDF } = window.jspdf;    
+const canvas = await html2canvas(document.getElementById("carnet"), {  
+scale:4,
+useCORS:true,
+backgroundColor:null
+});    
+const img = canvas.toDataURL("image/png");    
+const pdf = new jsPDF({ orientation:"landscape", unit:"mm", format:[85.6,54] });    
+pdf.addImage(img,"PNG",0,0,85.6,54);    
+pdf.save("licencia_frente.pdf");    
 }    
 
 async function generarImagen(){
-    const canvas = await html2canvas(document.getElementById("carnet"), {  
-        scale:4,  
-        useCORS:true  
-    });
-    const link = document.createElement('a');
-    link.download = 'licencia_frente.jpg';
-    link.href = canvas.toDataURL("image/jpeg", 0.9);
-    link.click();
+const canvas = await html2canvas(document.getElementById("carnet"), {  
+scale:4,
+useCORS:true,
+backgroundColor:null
+});
+const link = document.createElement('a');
+link.download = 'licencia_frente.jpg';
+link.href = canvas.toDataURL("image/jpeg",1);
+link.click();
 }
 
 </script>    
 
 </body>    
-</html>
+    </html>
