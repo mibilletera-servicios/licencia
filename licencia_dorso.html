@@ -246,7 +246,11 @@ select{
 <span class="category-icon" onclick="seleccionarIcono(this)">
 <img src="https://cdn-icons-png.flaticon.com/512/3198/3198336.png" class="cat-img">
 </span>
-<span class="category-text editable" contenteditable="true"><b>A1.4</b> Motocicletas de mas de 300cc.</span>
+<span class="category-text">
+<select onchange="cargarCategoria(this)">
+<option value="">Seleccionar categoría</option>
+</select>
+</span>
 </div>
 </div>
 
@@ -303,6 +307,17 @@ const categorias = [
 ["E.2","Maquinaria especial de uso profesional."],
 ["E.3","Vehículos articulados, semi-remolques y bateas."]
 ];
+
+function llenarSelects(){
+document.querySelectorAll("select").forEach(sel=>{
+if(sel.options.length>1)return;
+let opciones=`<option value="">Seleccionar categoría</option>`;
+categorias.forEach(c=>{
+opciones+=`<option value="${c[0]}|${c[1]}">${c[0]} — ${c[1]}</option>`;
+});
+sel.innerHTML=opciones;
+});
+}
 
 function dibujarCodigoBarras(){
 const canvas=document.getElementById("barcodeCanvas");
@@ -414,6 +429,7 @@ link.href=canvas.toDataURL("image/png",1.0);
 link.click();
 }
 
+llenarSelects();
 dibujarCodigoBarras();
 </script>    
 
