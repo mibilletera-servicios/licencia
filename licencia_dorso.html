@@ -64,7 +64,6 @@ body {
 .categories-box {
     margin: 10px 15px 5px 15px; 
     border: 1.5px solid #333;
-    border-radius: 0px; 
     background: rgba(255, 255, 255, 0.7);
     overflow-y: auto; 
     max-height: 185px;
@@ -98,6 +97,8 @@ body {
 
 .category-text b { font-weight: 700; }
 
+.editable{ cursor:text; }
+
 .observations-section {
     padding: 0 15px 5px 15px;
     display: flex;
@@ -108,10 +109,7 @@ body {
     margin-bottom: 2px; 
 }
 
-.escudo-argentino {
-    width: 38px; 
-    height: auto;
-}
+.escudo-argentino { width: 38px; }
 
 .obs-content {
     display: flex;
@@ -123,131 +121,100 @@ body {
     padding-bottom: 2px;
 }
 
-.obs-row {
-    display: flex;
-    gap: 20px;
-}
+.obs-row { display:flex; gap:20px; }
 
 .obs-label {
-    font-weight: 600;
-    font-size: 9px;
-    color: #333;
-    text-transform: uppercase;
+    font-weight:600;
+    font-size:9px;
+    color:#333;
+    text-transform:uppercase;
 }
 
-.lang-en {
-    font-weight: normal !important; 
-}
+.lang-en { font-weight:normal !important; }
 
 .footer-reverso {    
-    background: transparent; 
     width:100%;    
     height:65px;    
     display:flex;    
     align-items:center;    
     padding:0 15px;    
-    box-sizing: border-box;
-    border-top: 2.5px solid #007bff; 
-    position: relative;
+    box-sizing:border-box;
+    border-top:2.5px solid #007bff; 
+    position:relative;
 }    
 
 .lnc-text {
-    font-size: 28px;
-    font-weight: 900;
-    color: #005a8d;
-    margin-right: 10px;
-    -webkit-text-stroke: 0.5px #fff;
-    text-shadow: 
-        2px 2px 0px #fff,
-        -1px -1px 0px #fff,
-        1px -1px 0px #fff,
-        -1px 1px 0px #fff,
-        3px 3px 5px rgba(0,0,0,0.3);
+    font-size:28px;
+    font-weight:900;
+    color:#005a8d;
+    margin-right:10px;
 }
 
 .barcode-wrapper {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 0 15px;
+    flex-grow:1;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    margin:0 15px;
 }
 
 .barcode {
-    width: 100%;
-    height: 32px;
-    background: repeating-linear-gradient(
-        90deg,
-        #000 0px, #000 1px,
-        #fff 1px, #fff 2px,
-        #000 2px, #000 4px,
-        #fff 4px, #fff 5px,
-        #000 5px, #000 6px,
-        #fff 6px, #fff 8px,
-        #000 8px, #000 11px,
-        #fff 11px, #fff 12px
-    );
-    background-size: 100% 100%;
-    image-rendering: crisp-edges;
-    image-rendering: pixelated;
-    transform: translateZ(0);
+    width:100%;
+    height:32px;
 }
 
 .disclaimer-text {
-    font-size: 5.8px;
-    color: #005a8d;
-    font-weight: bold;
-    text-align: center;
-    margin-top: 2px;
-    text-transform: uppercase;
+    font-size:5.8px;
+    color:#005a8d;
+    font-weight:bold;
+    text-align:center;
+    margin-top:2px;
+    text-transform:uppercase;
 }
 
 .signature-box {
-    text-align: center;
-    font-size: 8.5px;
-    color: #000;
-    min-width: 90px;
+    text-align:center;
+    font-size:8.5px;
+    min-width:90px;
 }
 
 .sig-name {
-    display: block;
-    font-weight: bold;
-    border-bottom: 1px solid #000;
-    margin-bottom: 2px;
-    text-transform: uppercase;
+    display:block;
+    font-weight:bold;
+    border-bottom:1px solid #000;
+    margin-bottom:2px;
 }
 
 .watermark {
-    position: absolute;
-    top: 55%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 0;
-    pointer-events: none;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    opacity: 0.1; 
+    position:absolute;
+    top:55%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    z-index:0;
+    opacity:.1;
+    display:flex;
+    gap:10px;
 }
 
 .linea {
-    width: 4px;
-    height: 60px;
-    background-color: #008c8c;
+    width:4px;
+    height:60px;
+    background:#008c8c;
 }
 
 .texto {
-    display: flex;
-    flex-direction: column;
-    font-size: 32px;    
-    font-weight: 900;
-    color: #008c8c;
-    line-height: 0.85;
-    text-align: left;
+    display:flex;
+    flex-direction:column;
+    font-size:32px;
+    font-weight:900;
+    color:#008c8c;
+    line-height:.85;
 }
 
-.editable{
-    cursor:text;
+select{
+    font-size:10px;
+    padding:3px;
+    width:250px;
 }
 </style>    
 </head>    
@@ -266,159 +233,189 @@ body {
 
 <div class="carnet-container" id="carnet">    
     
-    <div class="watermark">
-        <div class="linea"></div>  
-        <div class="texto">  
-            <span>SEGURIDAD</span>  
-            <span>VIAL</span>  
-        </div>
-    </div>
+<div class="watermark">
+<div class="linea"></div>  
+<div class="texto">  
+<span>SEGURIDAD</span>  
+<span>VIAL</span>  
+</div>
+</div>
 
-    <div class="categories-box" id="categoriesBox" style="z-index: 1;">
-        <div class="category-row">
-            <span class="category-icon" onclick="seleccionarIcono(this)">
-                <img src="https://cdn-icons-png.flaticon.com/512/3198/3198336.png" class="cat-img">
-            </span>
-            <span class="category-text editable" contenteditable="true"><b>A1.4</b> Motocicletas de mas de 300cc. o 20 kw</span>
-        </div>
-    </div>
+<div class="categories-box" id="categoriesBox" style="z-index:1;">
+<div class="category-row">
+<span class="category-icon" onclick="seleccionarIcono(this)">
+<img src="https://cdn-icons-png.flaticon.com/512/3198/3198336.png" class="cat-img">
+</span>
+<span class="category-text editable" contenteditable="true"><b>A1.4</b> Motocicletas de mas de 300cc.</span>
+</div>
+</div>
 
-    <div class="observations-section">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Coat_of_arms_of_Argentina.svg" class="escudo-argentino">
-        <div class="obs-content">
-            <div class="obs-row">
-                <span><span class="obs-label">Grupo y Factor:</span> <b class="editable" contenteditable="true">RH+</b></span>
-                <span><span class="obs-label">CUIL:</span> <b class="editable" contenteditable="true">12-34567890-1</b></span>
-            </div>
-            <div class="obs-row">
-                <span><span class="obs-label">Observaciones / <span class="lang-en">Observations:</span></span> <b class="editable" contenteditable="true">NINGUNA</b></span>
-            </div>
-        </div>
-    </div>
+<div class="observations-section">
+<img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Coat_of_arms_of_Argentina.svg" class="escudo-argentino">
+<div class="obs-content">
+<div class="obs-row">
+<span><span class="obs-label">Grupo y Factor:</span> <b class="editable" contenteditable="true">RH+</b></span>
+<span><span class="obs-label">CUIL:</span> <b class="editable" contenteditable="true">12-34567890-1</b></span>
+</div>
+<div class="obs-row">
+<span><span class="obs-label">Observaciones / <span class="lang-en">Observations:</span></span> <b class="editable" contenteditable="true">NINGUNA</b></span>
+</div>
+</div>
+</div>
 
-    <div class="footer-reverso">    
-        <div class="lnc-text">LNC</div>
-        <div class="barcode-wrapper">
-            <canvas class="barcode" id="barcodeCanvas"></canvas>
-            <div class="disclaimer-text">Los datos de la presente licencia son los obrantes en el Registro Nacional de Antecedentes de Tránsito.</div>
-        </div>
-        <div class="signature-box">
-            <span class="sig-name">NICOLAS NAIDICH</span>
-            <b>Responsable</b><br>
-            <span class="lang-en" style="font-size: 7px;">responsible, in charge</span>
-        </div>
-    </div>    
+<div class="footer-reverso">    
+<div class="lnc-text">LNC</div>
+<div class="barcode-wrapper">
+<canvas class="barcode" id="barcodeCanvas"></canvas>
+<div class="disclaimer-text">Los datos de la presente licencia son los obrantes en el Registro Nacional de Antecedentes de Tránsito.</div>
+</div>
+<div class="signature-box">
+<span class="sig-name">NICOLAS NAIDICH</span>
+<b>Responsable</b><br>
+<span class="lang-en" style="font-size:7px;">responsible, in charge</span>
+</div>
+</div>    
 
 </div>    
 
 <script>
-let iconoSeleccionadoActual = null;
-let recuadroActivo = true;
+let iconoSeleccionadoActual=null;
+let recuadroActivo=true;
+
+const categorias = [
+["A.1.1","Ciclomotores hasta 50 cc."],
+["A.1.2","Motocicletas hasta 150 cc."],
+["A.1.3","Motocicletas hasta 300 cc."],
+["A.1.4","Motocicletas de más de 300 cc."],
+["A.2.1","Triciclos y cuatriciclos livianos."],
+["A.2.2","Triciclos y cuatriciclos de mayor potencia."],
+["B.1","Automóviles, camionetas y utilitarios hasta 3.500 kg."],
+["B.2","Automóviles con acoplado, remolque o casa rodante."],
+["F","Vehículos adaptados para personas con discapacidad."],
+["G.1","Tractores agrícolas."],
+["G.2","Maquinaria vial."],
+["G.3","Maquinaria especial."],
+["C","Camiones sin acoplado y vehículos de carga mayores a 3.500 kg."],
+["D.1","Taxi, remise, utilitarios de pasajeros."],
+["D.2","Vehículos de transporte hasta 8 pasajeros."],
+["D.3","Transporte público de pasajeros: colectivos, minibuses, micros."],
+["E.1","Camiones con remolque o acoplado."],
+["E.2","Maquinaria especial de uso profesional."],
+["E.3","Vehículos articulados, semi-remolques y bateas."]
+];
 
 function dibujarCodigoBarras(){
-    const canvas = document.getElementById("barcodeCanvas");
-    const ctx = canvas.getContext("2d");
-    canvas.width = 260;
-    canvas.height = 32;
-
-    ctx.fillStyle = "#fff";
-    ctx.fillRect(0,0,canvas.width,canvas.height);
-
-    let x = 0;
-    while(x < canvas.width){
-        let ancho = Math.floor(Math.random()*3)+1;
-        ctx.fillStyle = Math.random()>0.35 ? "#000" : "#fff";
-        ctx.fillRect(x,0,ancho,canvas.height);
-        x += ancho;
-    }
+const canvas=document.getElementById("barcodeCanvas");
+const ctx=canvas.getContext("2d");
+canvas.width=260;
+canvas.height=32;
+ctx.fillStyle="#fff";
+ctx.fillRect(0,0,canvas.width,canvas.height);
+let x=0;
+while(x<canvas.width){
+let ancho=Math.floor(Math.random()*3)+1;
+ctx.fillStyle=Math.random()>.35?"#000":"#fff";
+ctx.fillRect(x,0,ancho,canvas.height);
+x+=ancho;
+}
 }
 
-function cambiarFondo(input){  
-    const carnet = document.getElementById('carnet');  
-    const reader = new FileReader();  
-    reader.onload = e=>{  
-        carnet.style.backgroundImage = `url('${e.target.result}')`;  
-    }  
-    reader.readAsDataURL(input.files[0]);  
-}  
-
-function seleccionarIcono(elemento) {
-    iconoSeleccionadoActual = elemento.querySelector('img');
-    document.getElementById('individualIconInput').click();
+function cambiarFondo(input){
+const carnet=document.getElementById('carnet');
+const reader=new FileReader();
+reader.onload=e=>carnet.style.backgroundImage=`url('${e.target.result}')`;
+reader.readAsDataURL(input.files[0]);
 }
 
-function procesarNuevoIcono(input) {
-    if (input.files && input.files[0] && iconoSeleccionadoActual) {
-        const reader = new FileReader();
-        reader.onload = e => {
-            iconoSeleccionadoActual.src = e.target.result;
-        }
-        reader.readAsDataURL(input.files[0]);
-    }
+function seleccionarIcono(elemento){
+iconoSeleccionadoActual=elemento.querySelector('img');
+document.getElementById('individualIconInput').click();
+}
+
+function procesarNuevoIcono(input){
+if(input.files && input.files[0] && iconoSeleccionadoActual){
+const reader=new FileReader();
+reader.onload=e=>iconoSeleccionadoActual.src=e.target.result;
+reader.readAsDataURL(input.files[0]);
+}
 }
 
 function agregarCategoria(){
-    const box = document.getElementById("categoriesBox");
-    const fila = document.createElement("div");
-    fila.className = "category-row";
-    fila.innerHTML = `
-        <span class="category-icon" onclick="seleccionarIcono(this)">
-            <img src="https://cdn-icons-png.flaticon.com/512/741/741407.png">
-        </span>
-        <span class="category-text editable" contenteditable="true"><b>NUEVA</b> Editar categoría</span>
-    `;
-    box.appendChild(fila);
+const box=document.getElementById("categoriesBox");
+const fila=document.createElement("div");
+fila.className="category-row";
+
+let opciones=`<option value="">Seleccionar categoría</option>`;
+categorias.forEach(c=>{
+opciones+=`<option value="${c[0]}|${c[1]}">${c[0]} — ${c[1]}</option>`;
+});
+
+fila.innerHTML=`
+<span class="category-icon" onclick="seleccionarIcono(this)">
+<img src="https://cdn-icons-png.flaticon.com/512/741/741407.png">
+</span>
+<span class="category-text">
+<select onchange="cargarCategoria(this)">
+${opciones}
+</select>
+</span>
+`;
+box.appendChild(fila);
+}
+
+function cargarCategoria(sel){
+if(!sel.value)return;
+let datos=sel.value.split("|");
+sel.parentElement.innerHTML=`<b>${datos[0]}</b> ${datos[1]}`;
+sel.parentElement.contentEditable="true";
+sel.parentElement.classList.add("editable");
 }
 
 function quitarCategoria(){
-    const box = document.getElementById("categoriesBox");
-    if(box.children.length > 1){
-        box.removeChild(box.lastElementChild);
-    }
+const box=document.getElementById("categoriesBox");
+if(box.children.length>1){
+box.removeChild(box.lastElementChild);
+}
 }
 
 function toggleRecuadro(){
-    const box = document.getElementById("categoriesBox");
-    recuadroActivo = !recuadroActivo;
+const box=document.getElementById("categoriesBox");
+recuadroActivo=!recuadroActivo;
 
-    if(recuadroActivo){
-        box.style.border = "1.5px solid #333";
-        [...box.children].forEach(el=>el.style.borderBottom="1.5px solid #333");
-    }else{
-        box.style.border = "none";
-        [...box.children].forEach(el=>el.style.borderBottom="none");
-    }
+if(recuadroActivo){
+box.style.border="1.5px solid #333";
+[...box.children].forEach(el=>el.style.borderBottom="1.5px solid #333");
+}else{
+box.style.border="none";
+[...box.children].forEach(el=>el.style.borderBottom="none");
+}
 }
 
-async function generarPDF(){    
-    dibujarCodigoBarras();
-    const { jsPDF } = window.jspdf;    
-    const canvas = await html2canvas(document.getElementById("carnet"), {  
-        scale:4,
-        useCORS:true,
-        backgroundColor:null
-    });    
-    const img = canvas.toDataURL("image/png");    
-    const pdf = new jsPDF({ orientation:"landscape", unit:"mm", format:[85.6,54] });    
-    pdf.addImage(img,"PNG",0,0,85.6,54);    
-    pdf.save("licencia_dorso.pdf");    
-}    
+async function generarPDF(){
+dibujarCodigoBarras();
+const { jsPDF } = window.jspdf;
+const canvas=await html2canvas(document.getElementById("carnet"),{
+scale:4,useCORS:true,backgroundColor:null
+});
+const img=canvas.toDataURL("image/png");
+const pdf=new jsPDF({orientation:"landscape",unit:"mm",format:[85.6,54]});
+pdf.addImage(img,"PNG",0,0,85.6,54);
+pdf.save("licencia_dorso.pdf");
+}
 
-async function generarImagen(){    
-    dibujarCodigoBarras();
-    const canvas = await html2canvas(document.getElementById("carnet"), {  
-        scale:6,
-        useCORS:true,
-        backgroundColor:null
-    });    
-    const link = document.createElement('a');
-    link.download = 'licencia_dorso.png';
-    link.href = canvas.toDataURL("image/png",1.0);
-    link.click();
+async function generarImagen(){
+dibujarCodigoBarras();
+const canvas=await html2canvas(document.getElementById("carnet"),{
+scale:6,useCORS:true,backgroundColor:null
+});
+const link=document.createElement("a");
+link.download="licencia_dorso.png";
+link.href=canvas.toDataURL("image/png",1.0);
+link.click();
 }
 
 dibujarCodigoBarras();
 </script>    
 
 </body>    
-            </html>
+    </html>
