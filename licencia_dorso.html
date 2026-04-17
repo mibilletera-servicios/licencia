@@ -249,6 +249,9 @@ body {
     text-align: left;
 }
 
+.editable{
+    cursor:text;
+}
 </style>    
 </head>    
 
@@ -257,6 +260,9 @@ body {
 <button class="btn-pdf" onclick="generarPDF()">Descargar PDF</button>    
 <button class="btn-img" onclick="generarImagen()">Descargar Imagen</button>
 <button class="btn-pdf" style="top:45px;" onclick="bgInput.click()">Fondo</button>  
+<button class="btn-pdf" style="top:80px;" onclick="agregarCategoria()">+ Categoría</button>  
+<button class="btn-pdf" style="top:115px;" onclick="quitarCategoria()">- Categoría</button>  
+<button class="btn-pdf" style="top:150px;" onclick="toggleRecuadro()">Recuadro</button>  
 
 <input type="file" id="bgInput" hidden onchange="cambiarFondo(this)">  
 <input type="file" id="individualIconInput" hidden onchange="procesarNuevoIcono(this)">
@@ -271,40 +277,12 @@ body {
         </div>
     </div>
 
-    <div class="categories-box" style="z-index: 1;">
+    <div class="categories-box" id="categoriesBox" style="z-index: 1;">
         <div class="category-row">
             <span class="category-icon" onclick="seleccionarIcono(this)">
                 <img src="https://cdn-icons-png.flaticon.com/512/3198/3198336.png" class="cat-img">
             </span>
-            <span class="category-text"><b>A1.4</b> Motocicletas de mas de 300cc. o 20 kw</span>
-        </div>
-
-        <div class="category-row">
-            <span class="category-icon" onclick="seleccionarIcono(this)">
-                <img src="https://cdn-icons-png.flaticon.com/512/741/741407.png" class="cat-img">
-            </span>
-            <span class="category-text"><b>B1-B2.</b> Automóviles, utilitarios, camionetas de uso privado hasta 3.500kg</span>
-        </div>
-
-        <div class="category-row">
-            <span class="category-icon" onclick="seleccionarIcono(this)">
-                <img src="https://cdn-icons-png.flaticon.com/512/2151/2151326.png" class="cat-img">
-            </span>
-            <span class="category-text"><b>C1.</b> Camiones sin acoplado o casa rodante motorizada de más de 12.000kg.</span>
-        </div>
-
-        <div class="category-row">
-            <span class="category-icon" onclick="seleccionarIcono(this)">
-                <img src="https://cdn-icons-png.flaticon.com/512/3063/3063822.png" class="cat-img">
-            </span>
-            <span class="category-text"><b>D1.</b> Transporte de pasajeros de 8 hasta 12 plazas.</span>
-        </div>
-
-        <div class="category-row">
-            <span class="category-icon" onclick="seleccionarIcono(this)">
-                <img src="https://cdn-icons-png.flaticon.com/512/564/564440.png" class="cat-img">
-            </span>
-            <span class="category-text"><b>D4.</b> Servicio de urgencia, emergencia y similares.</span>
+            <span class="category-text editable" contenteditable="true"><b>A1.4</b> Motocicletas de mas de 300cc. o 20 kw</span>
         </div>
     </div>
 
@@ -312,11 +290,11 @@ body {
         <img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Coat_of_arms_of_Argentina.svg" class="escudo-argentino">
         <div class="obs-content">
             <div class="obs-row">
-                <span><span class="obs-label">Grupo y Factor:</span> <b>RH+</b></span>
-                <span><span class="obs-label">CUIL:</span> <b>12-34567890-1</b></span>
+                <span><span class="obs-label">Grupo y Factor:</span> <b class="editable" contenteditable="true">RH+</b></span>
+                <span><span class="obs-label">CUIL:</span> <b class="editable" contenteditable="true">12-34567890-1</b></span>
             </div>
             <div class="obs-row">
-                <span><span class="obs-label">Observaciones / <span class="lang-en">Observations:</span></span> <b>NINGUNA</b></span>
+                <span><span class="obs-label">Observaciones / <span class="lang-en">Observations:</span></span> <b class="editable" contenteditable="true">NINGUNA</b></span>
             </div>
         </div>
     </div>
@@ -338,6 +316,7 @@ body {
 
 <script>
 let iconoSeleccionadoActual = null;
+let recuadroActivo = true;
 
 function cambiarFondo(input){  
     const carnet = document.getElementById('carnet');  
@@ -360,6 +339,39 @@ function procesarNuevoIcono(input) {
             iconoSeleccionadoActual.src = e.target.result;
         }
         reader.readAsDataURL(input.files[0]);
+    }
+}
+
+function agregarCategoria(){
+    const box = document.getElementById("categoriesBox");
+    const fila = document.createElement("div");
+    fila.className = "category-row";
+    fila.innerHTML = `
+        <span class="category-icon" onclick="seleccionarIcono(this)">
+            <img src="https://cdn-icons-png.flaticon.com/512/741/741407.png">
+        </span>
+        <span class="category-text editable" contenteditable="true"><b>NUEVA</b> Editar categoría</span>
+    `;
+    box.appendChild(fila);
+}
+
+function quitarCategoria(){
+    const box = document.getElementById("categoriesBox");
+    if(box.children.length > 1){
+        box.removeChild(box.lastElementChild);
+    }
+}
+
+function toggleRecuadro(){
+    const box = document.getElementById("categoriesBox");
+    recuadroActivo = !recuadroActivo;
+
+    if(recuadroActivo){
+        box.style.border = "1.5px solid #333";
+        [...box.children].forEach(el=>el.style.borderBottom="1.5px solid #333");
+    }else{
+        box.style.border = "none";
+        [...box.children].forEach(el=>el.style.borderBottom="none");
     }
 }
 
