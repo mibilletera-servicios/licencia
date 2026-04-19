@@ -67,6 +67,9 @@
 
   <img src="https://i.postimg.cc/2ydqP5HM/IMG-20260419-WA0003.jpg" width="100%">
 
+  <!-- NUEVA LICENCIA AGREGADA ABAJO -->
+  <img src="https://i.postimg.cc/2ydqP5HM/IMG-20260419-WA0003.jpg" width="100%" style="margin-top:20px;">
+
   <div style="text-align:center;">
     <a href="https://mibilletera-servicios.github.io/licencia/login.html" class="btn-licencia">Ver Licencia Digital</a>
   </div>
@@ -149,95 +152,10 @@ function mostrarCampos(){
   }
 }
 
-/* 🔥 FORMATO AUTOMÁTICO CUIL */
 document.getElementById("cuil").addEventListener("input", function(e){
   let valor = e.target.value.replace(/\D/g, "").substring(0,11);
 
   if(valor.length > 2 && valor.length <= 10){
     valor = valor.slice(0,2) + "-" + valor.slice(2);
   } else if(valor.length > 10){
-    valor = valor.slice(0,2) + "-" + valor.slice(2,10) + "-" + valor.slice(10);
-  }
-
-  e.target.value = valor;
-});
-
-function validarCUIL(cuil){
-  return /^\d{2}-\d{8}-\d{1}$/.test(cuil);
-}
-
-function validarEmail(email){
-  return /^[^\s@]+@[^\s@]+\.(com|com\.ar|net|org|ar)$/i.test(email);
-}
-
-function validarFormulario(){
-  let tipo = document.getElementById("tramite").value;
-  let nombre = document.getElementById("nombre").value;
-  let apellido = document.getElementById("apellido").value;
-  let email = document.getElementById("email").value;
-  let fecha = document.getElementById("fecha").value;
-  let cuil = document.getElementById("cuil").value;
-  let categoria = document.getElementById("categoria").value;
-  let vencimiento = document.getElementById("vencimiento").value;
-
-  let cuilValido = validarCUIL(cuil);
-  let emailValido = validarEmail(email);
-
-  document.getElementById("errorCuil").style.display = cuil && !cuilValido ? "block" : "none";
-  document.getElementById("errorEmail").style.display = email && !emailValido ? "block" : "none";
-
-  let valido = nombre && apellido && emailValido && fecha && cuilValido && tipo;
-
-  if(document.getElementById("categoria").style.display === "block"){
-    valido = valido && categoria;
-  }
-
-  if(document.getElementById("vencimiento").style.display === "block"){
-    valido = valido && vencimiento;
-  }
-
-  document.getElementById("btnEnviar").disabled = !valido;
-}
-
-function enviarWhatsApp(e){
-  e.preventDefault();
-
-  let tipo = document.getElementById("tramite").value;
-  let nombre = document.getElementById("nombre").value;
-  let apellido = document.getElementById("apellido").value;
-  let email = document.getElementById("email").value;
-  let fecha = document.getElementById("fecha").value;
-  let cuil = document.getElementById("cuil").value;
-  let categoria = document.getElementById("categoria")?.value || "";
-  let vencimiento = document.getElementById("vencimiento")?.value || "";
-
-  let tipoTexto = "";
-  let precio = "";
-
-  if(tipo==="primera"){ tipoTexto="Primera licencia"; precio="$120.000"; }
-  if(tipo==="extravio"){ tipoTexto="Renovación por extravío/robo"; precio="$100.000"; }
-  if(tipo==="vencimiento"){ tipoTexto="Renovación por vencimiento"; precio=(vencimiento=="5")?"$110.000":"$90.000"; }
-  if(tipo==="ampliacion"){ tipoTexto="Ampliación de categoría"; precio="$130.000"; }
-
-  let mensaje =
-`*SOLICITUD DE LICENCIA*
-
-📌 Tipo de trámite: ${tipoTexto}
-
-👤 Nombre: ${nombre}
-👤 Apellido: ${apellido}
-📧 Email: ${email}
-🎂 Fecha de nacimiento: ${fecha}
-🆔 CUIL: ${cuil}
-${categoria ? "🚗 Categoría: "+categoria : ""}
-${vencimiento ? "📅 Vencimiento: "+vencimiento+" años" : ""}
-
-💰 Precio: ${precio}`;
-
-  let url = "https://wa.me/5491131602393?text=" + encodeURIComponent(mensaje);
-  window.open(url, "_blank");
-}
-</script>
-
-</body>
-      </html>
+    valor = valor.slice(0,2) + "-" + valor.slice(2,10) + "-"
