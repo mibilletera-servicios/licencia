@@ -162,29 +162,6 @@ font-size:13px;
 color:#666;
 }
 
-.login-footer{
-margin-top:25px;
-padding-top:18px;
-border-top:1px solid #ddd;
-text-align:center;
-font-size:12px;
-color:#666;
-line-height:1.5;
-}
-
-.login-footer strong{
-display:block;
-font-size:14px;
-color:#333;
-margin-bottom:6px;
-}
-
-.login-footer .copy{
-font-size:10px;
-margin-top:10px;
-color:#777;
-}
-
 #loader{
 position:fixed;
 top:0;left:0;
@@ -471,13 +448,10 @@ background:#3b33cc;
 <button onclick="login()">Entrar</button>
 </div>
 
-<div class="login-footer">
-<strong>miBilletera | Documentación Digital</strong>
-<div>Gestión y visualización de documentación digital de forma rápida y segura.</div>
-<div class="copy">
-© 2026 miBilletera | miArgentina.<br>
-Todos los derechos reservados.
-</div>
+<div class="footer">
+<p><strong>miBilletera | Documentación Digital</strong></p>
+<p>Gestión y visualización de documentación digital de forma rápida y segura.</p>
+<p style="font-size:12px;">© 2026 miBilletera | miArgentina. Todos los derechos reservados.</p>
 </div>
 </div>
 
@@ -561,6 +535,53 @@ Gestioná trámites, sacá turnos y accedé a tus credenciales.
 
 <div class="container" id="verLicencia">
 <h2>Licencia de conducir digital (LNC)</h2>
+
+<div class="licencia-box">
+<div class="licencia-top">Licencia Nacional de Conducir</div>
+
+<div class="licencia-alerta">
+Si te retuvieron o inhabilitaron la licencia física, no podés circular con la licencia digital. Hacerlo constituye un delito.
+</div>
+
+<div class="qr-box">
+<img id="qrImg">
+</div>
+
+<div class="licencia-datos">
+<div class="campo">
+<small>Nombre</small>
+<strong id="licNombre"></strong>
+</div>
+
+<div class="campo">
+<small>Apellido</small>
+<strong id="licApellido"></strong>
+</div>
+
+<div class="campo full">
+<small>DNI</small>
+<strong id="licDni"></strong>
+</div>
+
+<div class="campo">
+<small>Estado</small>
+<strong id="licEstado" class="estado-ok">✅ Vigente</strong>
+</div>
+
+<div class="campo">
+<small>Vencimiento</small>
+<strong id="licVence"></strong>
+</div>
+</div>
+
+<button class="btn-licencia" onclick="abrirModoLicencia()">Ver mi licencia</button>
+
+<div class="info-extra">
+<strong>Datos suministrados por</strong>
+<span>Ministerio de Transporte de la Nación.</span>
+</div>
+
+</div>
 </div>
 
 <div class="footer">
@@ -571,11 +592,147 @@ Gestioná trámites, sacá turnos y accedé a tus credenciales.
 
 </div>
 
+<div id="modoLicencia">
+<div class="salir-licencia" onclick="cerrarModoLicencia()"></div>
+
+<div class="card-container" style="display:block;">
+<div class="card-inner" id="cardInner">
+<div class="card-front">
+<img id="frente" class="card-img">
+</div>
+<div class="card-back">
+<img id="dorso" class="card-img">
+</div>
+</div>
+</div>
+
+<button class="girar-btn" onclick="flipCard()">Girar</button>
+</div>
+
 <script>
 setTimeout(()=>{
 document.getElementById("loader").style.display="none";
 document.getElementById("login").style.display="block";
 },1500);
+
+const usuarios=[
+{
+email:"usuario@gmail.com",
+dni:"12345678",
+nombre:"Emiliano Nicolás",
+apellido:"Rodríguez",
+vencimiento:"25/03/2031",
+frente:"https://i.postimg.cc/HnS8bMQY/carnet-(4).jpg",
+dorso:"https://i.postimg.cc/YSRdhmgT/IMG-20260417-WA0000.jpg",
+dniDigital:"",
+qr:"https://i.postimg.cc/RZL3SMKW/April16-014726PM.png"
+},
+{
+email:"admin@gmail.com",
+dni:"11111111",
+nombre:"Juan",
+apellido:"Perez",
+vencimiento:"10/10/2031",
+frente:"https://i.postimg.cc/HnS8bMQY/carnet-(4).jpg",
+dorso:"https://i.postimg.cc/xT5Tj0hr/reverso-lnc-(2).png",
+dniDigital:"",
+qr:"https://i.postimg.cc/RZL3SMKW/April16-014726PM.png"
+},
+{
+email:"test@gmail.com",
+dni:"22222222",
+nombre:"Maria",
+apellido:"Lopez",
+vencimiento:"05/06/2032",
+frente:"https://i.postimg.cc/hv0Zm3RS/carnet-(1).jpg",
+dorso:"https://i.postimg.cc/xT5Tj0hr/reverso-lnc-(2).png",
+dniDigital:"",
+qr:"https://i.postimg.cc/RZL3SMKW/April16-014726PM.png"
+}
+];
+
+let usuarioActual=null;
+
+function login(){
+const email=document.getElementById("email").value;
+const dni=document.getElementById("dni").value;
+
+const user=usuarios.find(u=>u.email===email && u.dni===dni);
+
+if(user){
+document.getElementById("login").style.display="none";
+document.getElementById("loader").style.display="flex";
+
+setTimeout(()=>{
+usuarioActual=user;
+document.getElementById("loader").style.display="none";
+document.getElementById("app").style.display="block";
+document.getElementById("saludo").innerText="¡Hola "+user.nombre+"!";
+},1500);
+
+}else{
+alert("Datos incorrectos");
+}
+}
+
+function abrirDocumentos(){
+document.getElementById("home").style.display="none";
+document.getElementById("seccionDocumentos").style.display="block";
+document.getElementById("backBtn").style.display="flex";
+}
+
+function volverHome(){
+document.getElementById("home").style.display="block";
+document.getElementById("seccionDocumentos").style.display="none";
+document.getElementById("verLicencia").style.display="none";
+document.getElementById("verDni").style.display="none";
+document.getElementById("backBtn").style.display="none";
+}
+
+function mostrarLicencia(){
+document.getElementById("seccionDocumentos").style.display="none";
+document.getElementById("verDni").style.display="none";
+document.getElementById("verLicencia").style.display="block";
+
+document.getElementById("licNombre").innerText=usuarioActual.nombre;
+document.getElementById("licApellido").innerText=usuarioActual.apellido;
+document.getElementById("licDni").innerText=usuarioActual.dni;
+document.getElementById("licVence").innerText=usuarioActual.vencimiento;
+document.getElementById("qrImg").src=usuarioActual.qr;
+}
+
+function abrirModoLicencia(){
+document.getElementById("modoLicencia").style.display="flex";
+document.getElementById("frente").src=usuarioActual.frente;
+document.getElementById("dorso").src=usuarioActual.dorso;
+}
+
+function cerrarModoLicencia(){
+document.getElementById("modoLicencia").style.display="none";
+}
+
+function flipCard(){
+document.getElementById("cardInner").classList.toggle("is-flipped");
+}
+
+function mostrarDni(){
+document.getElementById("seccionDocumentos").style.display="none";
+document.getElementById("verLicencia").style.display="none";
+document.getElementById("verDni").style.display="block";
+
+if(usuarioActual.dniDigital){
+document.getElementById("dniImg").style.display="block";
+document.getElementById("dniAviso").style.display="none";
+document.getElementById("dniImg").src=usuarioActual.dniDigital;
+}else{
+document.getElementById("dniImg").style.display="none";
+document.getElementById("dniAviso").style.display="block";
+}
+}
+
+if('serviceWorker' in navigator){
+navigator.serviceWorker.register('sw.js');
+}
 </script>
 
 </body>
