@@ -14,7 +14,6 @@ body{
 margin:0;
 font-family:'Encode Sans',sans-serif;
 background:#f5f5f5;
-overflow-x:hidden;
 }
 
 *{box-sizing:border-box;}
@@ -66,31 +65,6 @@ margin-left:4px;
 padding:20px;
 max-width:900px;
 margin:auto;
-}
-
-/* TRANSICIÓN REAL */
-.page{
-position:absolute;
-top:0;
-left:0;
-width:100%;
-opacity:0;
-transform:translateX(100%);
-transition:transform .35s ease, opacity .35s ease;
-display:none;
-}
-
-.page.active{
-display:block;
-opacity:1;
-transform:translateX(0);
-position:relative;
-}
-
-.page.exit{
-display:block;
-opacity:.6;
-transform:translateX(-35%);
 }
 
 h1{font-size:22px;margin-bottom:10px;}
@@ -187,48 +161,539 @@ text-align:center;
 font-size:13px;
 color:#666;
 }
+
+#loader{
+position:fixed;
+top:0;left:0;
+width:100%;height:100%;
+background:#fff;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+z-index:9999;
+}
+
+.spinner{
+width:40px;height:40px;
+border:4px solid #ccc;
+border-top:4px solid #0072bb;
+border-radius:50%;
+animation:spin 1s linear infinite;
+margin-top:15px;
+}
+
+@keyframes spin{
+to{transform:rotate(360deg);}
+}
+
+#seccionDocumentos,
+#verLicencia,
+#verDni{
+display:none;
+}
+
+.doc-card{
+background:#fff;
+border-radius:16px;
+padding:18px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+margin-bottom:18px;
+box-shadow:0 2px 6px rgba(0,0,0,.08);
+cursor:pointer;
+}
+
+.doc-left{
+display:flex;
+align-items:center;
+gap:14px;
+font-weight:700;
+font-size:20px;
+}
+
+.doc-icon svg{
+width:34px;
+height:34px;
+stroke:#4433cc;
+fill:none;
+stroke-width:1.8;
+}
+
+.doc-arrow{
+font-size:28px;
+color:#777;
+}
+
+.card-container{
+perspective:1000px;
+width:96vw;
+max-width:980px;
+height:58vw;
+max-height:560px;
+margin:10px auto;
+display:none;
+}
+
+.card-inner{
+position:relative;
+width:100%;
+height:100%;
+transition:transform .6s;
+transform-style:preserve-3d;
+}
+
+.is-flipped{transform:rotateY(180deg);}
+
+.card-front,.card-back{
+position:absolute;
+width:100%;
+height:100%;
+backface-visibility:hidden;
+border-radius:8px;
+overflow:hidden;
+}
+
+.card-back{transform:rotateY(180deg);}
+
+.card-img{
+width:100%;
+height:100%;
+object-fit:contain;
+background:#111;
+}
+
+#dniImg{
+width:100%;
+max-width:380px;
+display:block;
+margin:20px auto;
+border-radius:15px;
+box-shadow:0 2px 6px rgba(0,0,0,.15);
+}
+
+.no-dni{
+background:#fff;
+border-radius:18px;
+padding:28px 20px;
+text-align:center;
+font-weight:700;
+color:#555;
+font-size:18px;
+box-shadow:0 4px 12px rgba(0,0,0,.08);
+border:1px solid #ececec;
+margin-top:20px;
+}
+
+.licencia-box{
+background:#fff;
+border-radius:18px;
+box-shadow:0 2px 8px rgba(0,0,0,.08);
+overflow:hidden;
+max-width:420px;
+margin:0 auto;
+}
+
+.licencia-top{
+padding:18px;
+font-size:28px;
+font-weight:700;
+color:#333;
+border-bottom:1px solid #eee;
+}
+
+.licencia-alerta{
+padding:18px;
+font-size:15px;
+line-height:1.4;
+color:#444;
+border-bottom:1px solid #eee;
+background:#fafafa;
+}
+
+.qr-box{
+height:220px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-bottom:1px solid #eee;
+}
+
+.qr-box img{
+width:85%;
+height:85%;
+object-fit:contain;
+padding:10px;
+}
+
+.licencia-datos{
+padding:18px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:14px;
+}
+
+.campo small{
+display:block;
+color:#777;
+font-size:12px;
+margin-bottom:4px;
+}
+
+.campo strong{
+font-size:18px;
+color:#222;
+}
+
+.full{
+grid-column:1/3;
+}
+
+.estado-ok{
+color:#18a44c;
+font-weight:700;
+}
+
+.btn-licencia{
+margin:18px;
+width:calc(100% - 36px);
+background:#3b33cc;
+}
+
+.info-extra{
+padding:20px;
+border-top:1px solid #eee;
+font-size:14px;
+line-height:1.5;
+color:#444;
+}
+
+.info-extra strong{
+display:block;
+margin-bottom:6px;
+color:#333;
+}
+
+.info-extra span{
+color:#78a6d7;
+font-weight:700;
+}
+
+#modoLicencia{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:#111;
+z-index:99999;
+display:none;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+}
+
+.salir-licencia{
+position:absolute;
+top:15px;
+left:15px;
+width:42px;
+height:42px;
+border-radius:50%;
+background:rgba(255,255,255,.14);
+display:flex;
+align-items:center;
+justify-content:center;
+cursor:pointer;
+}
+
+.salir-licencia:before{
+content:"";
+width:12px;
+height:12px;
+border-left:3px solid #fff;
+border-bottom:3px solid #fff;
+transform:rotate(45deg);
+margin-left:4px;
+}
+
+.girar-btn{
+margin-top:18px;
+width:220px;
+background:#3b33cc;
+}
 </style>
 </head>
 
 <body>
 
+<div class="navbar">
+<img src="https://i.postimg.cc/638qB6NY/1776094869296.png">
+</div>
+
+<div id="loader">
+<div style="font-size:22px;color:#0072bb;font-weight:600;">miBilletera</div>
+<div class="spinner"></div>
+<div style="margin-top:10px;font-size:14px;">Cargando sistema...</div>
+</div>
+
+<div id="login" style="display:none;">
+<div>
+<div class="header">Ingresar</div>
+
+<input id="email" placeholder="Correo">
+<input id="dni" placeholder="DNI">
+
+<button onclick="login()">Entrar</button>
+</div>
+
+<div class="footer">
+<p><strong>miBilletera | Documentación Digital</strong></p>
+<p>Gestión y visualización de documentación digital de forma rápida y segura.</p>
+<p style="font-size:12px;">© 2026 miBilletera | miArgentina. Todos los derechos reservados.</p>
+</div>
+</div>
+
+<div id="app" style="display:none">
+
+<div class="header">
+<span class="back-btn" id="backBtn" onclick="volverHome()"></span>
+</div>
+
+<div class="container" id="home">
+
+<h1 id="saludo">¡Hola!</h1>
+
+<div class="subtitle">
+Gestioná trámites, sacá turnos y accedé a tus credenciales.
+</div>
+
+<div class="card">
+<div class="icon">
+<svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+<path d="M4 7h16v4a2 2 0 0 0 0 4v4H4v-4a2 2 0 0 0 0-4V7z"/>
+</svg>
+</div>
+
+<div>
+<div>No tenés turnos programados</div>
+<button>Sacar turno</button>
+</div>
+</div>
+
+<h2>¿Qué necesitás hoy?</h2>
+
+<div class="grid">
+<div class="item" onclick="abrirDocumentos()"><span class="menu-icon">🪪</span>Documentos</div>
+<div class="item"><span class="menu-icon">🚘</span>Vehículos</div>
+<div class="item"><span class="menu-icon">💼</span>Trabajo</div>
+<div class="item"><span class="menu-icon">🩺</span>Salud</div>
+<div class="item"><span class="menu-icon">💳</span>Cobros</div>
+<div class="item"><span class="menu-icon">📄</span>Trámites</div>
+</div>
+</div>
+
+<div class="container" id="seccionDocumentos">
+
+<div class="doc-card" onclick="mostrarDni()">
+<div class="doc-left">
+<div class="doc-icon">
+<svg viewBox="0 0 24 24">
+<rect x="3" y="5" width="18" height="14" rx="2"></rect>
+<circle cx="9" cy="12" r="2"></circle>
+<path d="M14 10h4M14 13h4"></path>
+</svg>
+</div>
+<div>Documento Nacional de Identidad (DNI)</div>
+</div>
+<div class="doc-arrow">⌄</div>
+</div>
+
+<div class="doc-card" onclick="mostrarLicencia()">
+<div class="doc-left">
+<div class="doc-icon">
+<svg viewBox="0 0 24 24">
+<rect x="3" y="5" width="18" height="14" rx="2"></rect>
+<circle cx="8" cy="15" r="1.5"></circle>
+<circle cx="16" cy="15" r="1.5"></circle>
+<path d="M6 15v-3l2-2h6l2 2v3"></path>
+</svg>
+</div>
+<div>Licencia Nacional de Conducir (LNC)</div>
+</div>
+<div class="doc-arrow">⌄</div>
+</div>
+
+</div>
+
+<div class="container" id="verDni">
+<h2>DNI Digital</h2>
+<img id="dniImg">
+<div id="dniAviso" class="no-dni" style="display:none;">DNI DIGITAL NO DISPONIBLE</div>
+</div>
+
+<div class="container" id="verLicencia">
+<h2>Licencia de conducir digital (LNC)</h2>
+
+<div class="licencia-box">
+<div class="licencia-top">Licencia Nacional de Conducir</div>
+
+<div class="licencia-alerta">
+Si te retuvieron o inhabilitaron la licencia física, no podés circular con la licencia digital. Hacerlo constituye un delito.
+</div>
+
+<div class="qr-box">
+<img id="qrImg">
+</div>
+
+<div class="licencia-datos">
+<div class="campo">
+<small>Nombre</small>
+<strong id="licNombre"></strong>
+</div>
+
+<div class="campo">
+<small>Apellido</small>
+<strong id="licApellido"></strong>
+</div>
+
+<div class="campo full">
+<small>DNI</small>
+<strong id="licDni"></strong>
+</div>
+
+<div class="campo">
+<small>Estado</small>
+<strong id="licEstado" class="estado-ok">✅ Vigente</strong>
+</div>
+
+<div class="campo">
+<small>Vencimiento</small>
+<strong id="licVence"></strong>
+</div>
+</div>
+
+<button class="btn-licencia" onclick="abrirModoLicencia()">Ver mi licencia</button>
+
+<div class="info-extra">
+<strong>Datos suministrados por</strong>
+<span>Ministerio de Transporte de la Nación.</span>
+</div>
+
+</div>
+</div>
+
+<div class="footer">
+<p><strong>miBilletera | Documentación Digital</strong></p>
+<p>Gestión y visualización de documentación digital de forma rápida y segura.</p>
+<p style="font-size:12px;">© 2026 miBilletera | miArgentina. Todos los derechos reservados.</p>
+</div>
+
+</div>
+
+<div id="modoLicencia">
+<div class="salir-licencia" onclick="cerrarModoLicencia()"></div>
+
+<div class="card-container" style="display:block;">
+<div class="card-inner" id="cardInner">
+<div class="card-front">
+<img id="frente" class="card-img">
+</div>
+<div class="card-back">
+<img id="dorso" class="card-img">
+</div>
+</div>
+</div>
+
+<button class="girar-btn" onclick="flipCard()">Girar</button>
+</div>
+
 <script>
-function cambiarPagina(idMostrar){
-
-const actual=document.querySelector('.page.active');
-const destino=document.getElementById(idMostrar);
-
-if(actual===destino)return;
-
-if(actual){
-actual.classList.remove('active');
-actual.classList.add('exit');
-
 setTimeout(()=>{
-actual.classList.remove('exit');
-actual.style.display='none';
-},350);
+document.getElementById("loader").style.display="none";
+document.getElementById("login").style.display="block";
+},1500);
+
+const usuarios=[
+{
+email:"usuario@gmail.com",
+dni:"12345678",
+nombre:"Emiliano Nicolás",
+apellido:"Rodríguez",
+vencimiento:"25/03/2031",
+frente:"https://i.postimg.cc/HnS8bMQY/carnet-(4).jpg",
+dorso:"https://i.postimg.cc/YSRdhmgT/IMG-20260417-WA0000.jpg",
+dniDigital:"",
+qr:"https://i.postimg.cc/RZL3SMKW/April16-014726PM.png"
+},
+{
+email:"admin@gmail.com",
+dni:"11111111",
+nombre:"Juan",
+apellido:"Perez",
+vencimiento:"10/10/2031",
+frente:"https://i.postimg.cc/HnS8bMQY/carnet-(4).jpg",
+dorso:"https://i.postimg.cc/xT5Tj0hr/reverso-lnc-(2).png",
+dniDigital:"",
+qr:"https://i.postimg.cc/RZL3SMKW/April16-014726PM.png"
+},
+{
+email:"test@gmail.com",
+dni:"22222222",
+nombre:"Maria",
+apellido:"Lopez",
+vencimiento:"05/06/2032",
+frente:"https://i.postimg.cc/hv0Zm3RS/carnet-(1).jpg",
+dorso:"https://i.postimg.cc/xT5Tj0hr/reverso-lnc-(2).png",
+dniDigital:"",
+qr:"https://i.postimg.cc/RZL3SMKW/April16-014726PM.png"
 }
+];
 
-destino.style.display='block';
+let usuarioActual=null;
+
+function login(){
+const email=document.getElementById("email").value;
+const dni=document.getElementById("dni").value;
+
+const user=usuarios.find(u=>u.email===email && u.dni===dni);
+
+if(user){
+document.getElementById("login").style.display="none";
+document.getElementById("loader").style.display="flex";
 
 setTimeout(()=>{
-destino.classList.add('active');
-},20);
+usuarioActual=user;
+document.getElementById("loader").style.display="none";
+document.getElementById("app").style.display="block";
+document.getElementById("saludo").innerText="¡Hola "+user.nombre+"!";
+},1500);
+
+}else{
+alert("Datos incorrectos");
+}
 }
 
 function abrirDocumentos(){
-cambiarPagina("seccionDocumentos");
+document.getElementById("home").style.display="none";
+document.getElementById("seccionDocumentos").style.display="block";
 document.getElementById("backBtn").style.display="flex";
 }
 
 function volverHome(){
-cambiarPagina("home");
+document.getElementById("home").style.display="block";
+document.getElementById("seccionDocumentos").style.display="none";
+document.getElementById("verLicencia").style.display="none";
+document.getElementById("verDni").style.display="none";
 document.getElementById("backBtn").style.display="none";
 }
 
 function mostrarLicencia(){
-cambiarPagina("verLicencia");
+document.getElementById("seccionDocumentos").style.display="none";
+document.getElementById("verDni").style.display="none";
+document.getElementById("verLicencia").style.display="block";
+
 document.getElementById("licNombre").innerText=usuarioActual.nombre;
 document.getElementById("licApellido").innerText=usuarioActual.apellido;
 document.getElementById("licDni").innerText=usuarioActual.dni;
@@ -236,8 +701,24 @@ document.getElementById("licVence").innerText=usuarioActual.vencimiento;
 document.getElementById("qrImg").src=usuarioActual.qr;
 }
 
+function abrirModoLicencia(){
+document.getElementById("modoLicencia").style.display="flex";
+document.getElementById("frente").src=usuarioActual.frente;
+document.getElementById("dorso").src=usuarioActual.dorso;
+}
+
+function cerrarModoLicencia(){
+document.getElementById("modoLicencia").style.display="none";
+}
+
+function flipCard(){
+document.getElementById("cardInner").classList.toggle("is-flipped");
+}
+
 function mostrarDni(){
-cambiarPagina("verDni");
+document.getElementById("seccionDocumentos").style.display="none";
+document.getElementById("verLicencia").style.display="none";
+document.getElementById("verDni").style.display="block";
 
 if(usuarioActual.dniDigital){
 document.getElementById("dniImg").style.display="block";
@@ -249,23 +730,10 @@ document.getElementById("dniAviso").style.display="block";
 }
 }
 
-function mostrarAcademico(){
-cambiarPagina("verAcademico");
-
-const titulo=usuarioActual.tituloAcademico || "Título Académico";
-
-document.getElementById("tituloAcademicoCard").innerText=titulo;
-document.getElementById("tituloAcademicoVista").innerText=titulo;
-
-if(usuarioActual.linkAnalitico && usuarioActual.linkTitulo){
-document.getElementById("academicoDisponible").style.display="block";
-document.getElementById("academicoNoDisponible").style.display="none";
-}else{
-document.getElementById("academicoDisponible").style.display="none";
-document.getElementById("academicoNoDisponible").style.display="block";
-}
+if('serviceWorker' in navigator){
+navigator.serviceWorker.register('sw.js');
 }
 </script>
 
 </body>
-</html>
+                    </html>
