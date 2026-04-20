@@ -155,11 +155,17 @@ font-weight:600;
 
 .footer{
 background:#f5f5f5;
-padding:30px;
+padding:30px 20px;
 margin-top:40px;
 text-align:center;
 font-size:13px;
 color:#666;
+line-height:1.6;
+width:100%;
+}
+
+.footer p{
+margin:4px 0;
 }
 
 #loader{
@@ -251,7 +257,7 @@ position:absolute;
 width:100%;
 height:100%;
 backface-visibility:hidden;
-border-radius:8px;
+border-radius:18px;
 overflow:hidden;
 }
 
@@ -262,6 +268,7 @@ width:100%;
 height:100%;
 object-fit:contain;
 background:#111;
+border-radius:18px;
 }
 
 #dniImg{
@@ -451,7 +458,8 @@ background:#3b33cc;
 <div class="footer">
 <p><strong>miBilletera | Documentación Digital</strong></p>
 <p>Gestión y visualización de documentación digital de forma rápida y segura.</p>
-<p style="font-size:12px;">© 2026 miBilletera | miArgentina. Todos los derechos reservados.</p>
+<p style="font-size:12px;">© 2026 miBilletera | miArgentina.</p>
+<p style="font-size:12px;">Todos los derechos reservados.</p>
 </div>
 </div>
 
@@ -587,7 +595,8 @@ Si te retuvieron o inhabilitaron la licencia física, no podés circular con la 
 <div class="footer">
 <p><strong>miBilletera | Documentación Digital</strong></p>
 <p>Gestión y visualización de documentación digital de forma rápida y segura.</p>
-<p style="font-size:12px;">© 2026 miBilletera | miArgentina. Todos los derechos reservados.</p>
+<p style="font-size:12px;">© 2026 miBilletera | miArgentina.</p>
+<p style="font-size:12px;">Todos los derechos reservados.</p>
 </div>
 
 </div>
@@ -624,28 +633,6 @@ apellido:"Rodríguez",
 vencimiento:"25/03/2031",
 frente:"https://i.postimg.cc/HnS8bMQY/carnet-(4).jpg",
 dorso:"https://i.postimg.cc/YSRdhmgT/IMG-20260417-WA0000.jpg",
-dniDigital:"",
-qr:"https://i.postimg.cc/RZL3SMKW/April16-014726PM.png"
-},
-{
-email:"admin@gmail.com",
-dni:"11111111",
-nombre:"Juan",
-apellido:"Perez",
-vencimiento:"10/10/2031",
-frente:"https://i.postimg.cc/HnS8bMQY/carnet-(4).jpg",
-dorso:"https://i.postimg.cc/xT5Tj0hr/reverso-lnc-(2).png",
-dniDigital:"",
-qr:"https://i.postimg.cc/RZL3SMKW/April16-014726PM.png"
-},
-{
-email:"test@gmail.com",
-dni:"22222222",
-nombre:"Maria",
-apellido:"Lopez",
-vencimiento:"05/06/2032",
-frente:"https://i.postimg.cc/hv0Zm3RS/carnet-(1).jpg",
-dorso:"https://i.postimg.cc/xT5Tj0hr/reverso-lnc-(2).png",
 dniDigital:"",
 qr:"https://i.postimg.cc/RZL3SMKW/April16-014726PM.png"
 }
@@ -691,7 +678,6 @@ document.getElementById("backBtn").style.display="none";
 
 function mostrarLicencia(){
 document.getElementById("seccionDocumentos").style.display="none";
-document.getElementById("verDni").style.display="none";
 document.getElementById("verLicencia").style.display="block";
 
 document.getElementById("licNombre").innerText=usuarioActual.nombre;
@@ -717,17 +703,7 @@ document.getElementById("cardInner").classList.toggle("is-flipped");
 
 function mostrarDni(){
 document.getElementById("seccionDocumentos").style.display="none";
-document.getElementById("verLicencia").style.display="none";
 document.getElementById("verDni").style.display="block";
-
-if(usuarioActual.dniDigital){
-document.getElementById("dniImg").style.display="block";
-document.getElementById("dniAviso").style.display="none";
-document.getElementById("dniImg").src=usuarioActual.dniDigital;
-}else{
-document.getElementById("dniImg").style.display="none";
-document.getElementById("dniAviso").style.display="block";
-}
 }
 
 if('serviceWorker' in navigator){
@@ -736,4 +712,4 @@ navigator.serviceWorker.register('sw.js');
 </script>
 
 </body>
-                    </html>
+  </html>
