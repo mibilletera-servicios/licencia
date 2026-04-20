@@ -95,10 +95,8 @@
 
   <select id="tramite" onchange="mostrarCampos(); validarFormulario();" required>
     <option value="">Seleccionar trámite</option>
-    <option value="primera">Mi primera licencia - $120.000</option>
-    <option value="extravio">Renovación por extravío/robo - $100.000</option>
-    <option value="vencimiento">Renovación por vencimiento - $90.000 / $110.000</option>
-    <option value="ampliacion">Ampliación de categoría - $130.000</option>
+    <option value="particular">Obtener licencia particular $280.000</option>
+    <option value="profesional">Obtener licencia profesional $380.000</option>
   </select>
 
   <form id="formulario" oninput="validarFormulario()" onsubmit="enviarWhatsApp(event)" style="display:none;">
@@ -116,24 +114,6 @@
 
     <select id="categoria" style="display:none;">
       <option value="">Seleccionar categoría</option>
-      <option>A.1 - Motocicletas hasta 50 cc</option>
-      <option>A.2.1 - Motocicletas hasta 150 cc</option>
-      <option>A.2.2 - Motocicletas hasta 300 cc</option>
-      <option>A.3 - Motocicletas más de 300 cc</option>
-      <option>B.1 - Automóviles particulares hasta 3.500 kg</option>
-      <option>B.2 - Automóviles con acoplado</option>
-      <option>C - Camiones sin acoplado</option>
-      <option>D.1 - Transporte de pasajeros hasta 8 plazas</option>
-      <option>D.2 - Transporte de pasajeros más de 8 plazas</option>
-      <option>E.1 - Vehículos con remolque</option>
-      <option>F - Personas con discapacidad</option>
-      <option>G - Maquinaria especial no agrícola</option>
-    </select>
-
-    <select id="vencimiento" style="display:none;">
-      <option value="">Seleccionar vencimiento</option>
-      <option value="3">Vencimiento 3 años</option>
-      <option value="5">Vencimiento 5 años</option>
     </select>
 
     <button id="btnEnviar" class="btn-licencia" disabled>Enviar solicitud</button>
@@ -147,7 +127,8 @@
     <p><strong>miBilletera | Documentación Digital</strong></p>
     <p>Gestión y visualización de documentación digital de forma rápida y segura.</p>
     <p style="margin-top:20px; font-size:12px; color:#666;">
-      © 2026 miBilletera | miArgentina. Todos los derechos reservados.
+      © 2026 miBilletera | miArgentina.<br>
+      Todos los derechos reservados.
     </p>
   </div>
 </footer>
@@ -155,17 +136,34 @@
 <script>
 function mostrarCampos(){
   let tipo = document.getElementById("tramite").value;
+  let categoria = document.getElementById("categoria");
+
   document.getElementById("formulario").style.display = "block";
+  categoria.style.display = "none";
+  categoria.innerHTML = '<option value="">Seleccionar categoría</option>';
 
-  document.getElementById("categoria").style.display = "none";
-  document.getElementById("vencimiento").style.display = "none";
-
-  if(tipo === "primera" || tipo === "extravio" || tipo === "ampliacion"){
-    document.getElementById("categoria").style.display = "block";
+  if(tipo === "particular"){
+    categoria.style.display = "block";
+    categoria.innerHTML += `
+      <option>A.1 - Motocicletas hasta 50 cc</option>
+      <option>A.2.1 - Motocicletas hasta 150 cc</option>
+      <option>A.2.2 - Motocicletas hasta 300 cc</option>
+      <option>A.3 - Motocicletas más de 300 cc</option>
+      <option>B.1 - Automóviles particulares hasta 3.500 kg</option>
+      <option>B.2 - Automóviles con acoplado</option>
+      <option>F - Personas con discapacidad</option>
+      <option>G - Maquinaria especial no agrícola</option>
+    `;
   }
 
-  if(tipo === "vencimiento"){
-    document.getElementById("vencimiento").style.display = "block";
+  if(tipo === "profesional"){
+    categoria.style.display = "block";
+    categoria.innerHTML += `
+      <option>C - Camiones sin acoplado</option>
+      <option>D.1 - Transporte de pasajeros hasta 8 plazas</option>
+      <option>D.2 - Transporte de pasajeros más de 8 plazas</option>
+      <option>E.1 - Vehículos con remolque</option>
+    `;
   }
 }
 
@@ -197,7 +195,6 @@ function validarFormulario(){
   let fecha = document.getElementById("fecha").value;
   let cuil = document.getElementById("cuil").value;
   let categoria = document.getElementById("categoria").value;
-  let vencimiento = document.getElementById("vencimiento").value;
 
   let cuilValido = validarCUIL(cuil);
   let emailValido = validarEmail(email);
@@ -209,10 +206,6 @@ function validarFormulario(){
 
   if(document.getElementById("categoria").style.display === "block"){
     valido = valido && categoria;
-  }
-
-  if(document.getElementById("vencimiento").style.display === "block"){
-    valido = valido && vencimiento;
   }
 
   document.getElementById("btnEnviar").disabled = !valido;
@@ -227,16 +220,13 @@ function enviarWhatsApp(e){
   let email = document.getElementById("email").value;
   let fecha = document.getElementById("fecha").value;
   let cuil = document.getElementById("cuil").value;
-  let categoria = document.getElementById("categoria")?.value || "";
-  let vencimiento = document.getElementById("vencimiento")?.value || "";
+  let categoria = document.getElementById("categoria").value;
 
   let tipoTexto = "";
   let precio = "";
 
-  if(tipo==="primera"){ tipoTexto="Primera licencia"; precio="$120.000"; }
-  if(tipo==="extravio"){ tipoTexto="Renovación por extravío/robo"; precio="$100.000"; }
-  if(tipo==="vencimiento"){ tipoTexto="Renovación por vencimiento"; precio=(vencimiento=="5")?"$110.000":"$90.000"; }
-  if(tipo==="ampliacion"){ tipoTexto="Ampliación de categoría"; precio="$130.000"; }
+  if(tipo==="particular"){ tipoTexto="Obtener licencia particular"; precio="$280.000"; }
+  if(tipo==="profesional"){ tipoTexto="Obtener licencia profesional"; precio="$380.000"; }
 
   let mensaje =
 `*SOLICITUD DE LICENCIA*
@@ -248,8 +238,7 @@ function enviarWhatsApp(e){
 📧 Email: ${email}
 🎂 Fecha de nacimiento: ${fecha}
 🆔 CUIL: ${cuil}
-${categoria ? "🚗 Categoría: "+categoria : ""}
-${vencimiento ? "📅 Vencimiento: "+vencimiento+" años" : ""}
+🚗 Categoría: ${categoria}
 
 💰 Precio: ${precio}`;
 
@@ -259,4 +248,4 @@ ${vencimiento ? "📅 Vencimiento: "+vencimiento+" años" : ""}
 </script>
 
 </body>
-                                                </html>
+      </html>
