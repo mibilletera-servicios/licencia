@@ -10,20 +10,10 @@
 <meta name="theme-color" content="#0072bb">
 
 <style>
-:root{
---primary:#0072bb;
---radius:16px;
---shadow:0 4px 12px rgba(0,0,0,.08);
---text:#222;
---muted:#6b7280;
-}
-
 body{
 margin:0;
 font-family:'Encode Sans',sans-serif;
-background:linear-gradient(180deg,#f5f7fa,#eef2f6);
--webkit-font-smoothing:antialiased;
-text-rendering:optimizeLegibility;
+background:#f5f5f5;
 }
 
 *{box-sizing:border-box;}
@@ -34,11 +24,10 @@ border-bottom:3px solid #ffd100;
 padding:10px 20px;
 text-align:center;
 }
-
 .navbar img{height:60px;}
 
 .header{
-background:var(--primary);
+background:#0072bb;
 color:#fff;
 padding:10px 20px;
 text-align:center;
@@ -76,55 +65,25 @@ margin-left:4px;
 padding:20px;
 max-width:900px;
 margin:auto;
-animation:fadeIn .25s ease;
 }
 
-@keyframes fadeIn{
-from{opacity:0;transform:translateY(8px);}
-to{opacity:1;transform:translateY(0);}
-}
+h1{font-size:22px;margin-bottom:10px;}
+.subtitle{color:#666;font-size:14px;margin-bottom:20px;}
 
-h1{
-font-size:24px;
-margin-bottom:10px;
-font-weight:700;
-color:var(--text);
-}
-
-h2{
-font-size:18px;
-font-weight:600;
-color:var(--text);
-}
-
-.subtitle{
-color:var(--muted);
-font-size:14px;
-line-height:1.4;
-margin-bottom:20px;
-}
-
-/* CARD */
 .card{
 background:#fff;
-border-radius:var(--radius);
+border-radius:16px;
 padding:16px;
 display:flex;
 align-items:center;
 gap:15px;
-box-shadow:var(--shadow);
+box-shadow:0 2px 6px rgba(0,0,0,.08);
 margin-bottom:25px;
-transition:.2s ease;
-}
-
-.card:hover{
-transform:translateY(-2px);
-box-shadow:0 6px 16px rgba(0,0,0,.12);
 }
 
 .card button{
 margin-top:10px;
-background:var(--primary);
+background:#0072bb;
 color:#fff;
 border:none;
 padding:8px 16px;
@@ -133,61 +92,76 @@ cursor:pointer;
 font-size:13px;
 }
 
-/* GRID */
 .grid{
 display:grid;
 grid-template-columns:repeat(3,1fr);
-gap:12px;
+gap:15px;
 }
 
 .item{
 background:#e9ecf1;
-border-radius:18px;
-padding:18px 10px;
+border-radius:16px;
+padding:14px 8px;
 text-align:center;
 font-size:13px;
+color:#333;
 font-weight:600;
-transition:.15s;
 }
 
 .item .menu-icon{
 font-size:24px;
 display:block;
 margin-bottom:8px;
+line-height:1;
 }
 
-.item:active{
-transform:scale(.97);
+.icon svg{
+width:28px;
+height:28px;
+stroke:#0072bb;
+margin-bottom:8px;
+display:block;
+margin-left:auto;
+margin-right:auto;
 }
 
-/* BOTONES */
-button{
-padding:10px;
-border:none;
-border-radius:25px;
-background:var(--primary);
-color:#fff;
-cursor:pointer;
-width:100%;
-font-weight:600;
+#login{
+padding:30px;
+min-height:calc(100vh - 90px);
+display:flex;
+flex-direction:column;
+justify-content:space-between;
 }
 
 input{
 width:100%;
+max-width:100%;
 padding:12px;
 margin-bottom:10px;
 border-radius:8px;
 border:1px solid #ccc;
 }
 
+button{
+padding:10px;
+border:none;
+border-radius:25px;
+background:#0072bb;
+color:#fff;
+cursor:pointer;
+width:100%;
+font-weight:600;
+}
+
 .footer{
+background:#f5f5f5;
 padding:30px;
+margin-top:40px;
 text-align:center;
 font-size:13px;
 color:#666;
 }
 
-/* LOADER */
 #loader{
 position:fixed;
 top:0;left:0;
@@ -203,36 +177,32 @@ z-index:9999;
 .spinner{
 width:40px;height:40px;
 border:4px solid #ccc;
-border-top:4px solid var(--primary);
+border-top:4px solid #0072bb;
 border-radius:50%;
 animation:spin 1s linear infinite;
+margin-top:15px;
 }
 
 @keyframes spin{
 to{transform:rotate(360deg);}
 }
 
-/* DOCUMENTOS */
 #seccionDocumentos,
 #verLicencia,
-#verDni{display:none;}
+#verDni{
+display:none;
+}
 
 .doc-card{
 background:#fff;
-border-radius:var(--radius);
+border-radius:16px;
 padding:18px;
 display:flex;
-justify-content:space-between;
 align-items:center;
+justify-content:space-between;
 margin-bottom:18px;
-box-shadow:var(--shadow);
+box-shadow:0 2px 6px rgba(0,0,0,.08);
 cursor:pointer;
-transition:.2s;
-}
-
-.doc-card:hover{
-transform:translateY(-2px);
-box-shadow:0 6px 16px rgba(0,0,0,.12);
 }
 
 .doc-left{
@@ -240,33 +210,106 @@ display:flex;
 align-items:center;
 gap:14px;
 font-weight:700;
-font-size:18px;
+font-size:20px;
 }
 
-.doc-arrow{font-size:24px;color:#777;}
+.doc-icon svg{
+width:34px;
+height:34px;
+stroke:#4433cc;
+fill:none;
+stroke-width:1.8;
+}
 
-/* LICENCIA */
+.doc-arrow{
+font-size:28px;
+color:#777;
+}
+
+.card-container{
+perspective:1000px;
+width:96vw;
+max-width:980px;
+height:58vw;
+max-height:560px;
+margin:10px auto;
+display:none;
+}
+
+.card-inner{
+position:relative;
+width:100%;
+height:100%;
+transition:transform .6s;
+transform-style:preserve-3d;
+}
+
+.is-flipped{transform:rotateY(180deg);}
+
+.card-front,.card-back{
+position:absolute;
+width:100%;
+height:100%;
+backface-visibility:hidden;
+border-radius:8px;
+overflow:hidden;
+}
+
+.card-back{transform:rotateY(180deg);}
+
+.card-img{
+width:100%;
+height:100%;
+object-fit:contain;
+background:#111;
+}
+
+#dniImg{
+width:100%;
+max-width:380px;
+display:block;
+margin:20px auto;
+border-radius:15px;
+box-shadow:0 2px 6px rgba(0,0,0,.15);
+}
+
+.no-dni{
+background:#fff;
+border-radius:18px;
+padding:28px 20px;
+text-align:center;
+font-weight:700;
+color:#555;
+font-size:18px;
+box-shadow:0 4px 12px rgba(0,0,0,.08);
+border:1px solid #ececec;
+margin-top:20px;
+}
+
 .licencia-box{
 background:#fff;
 border-radius:18px;
-box-shadow:var(--shadow);
+box-shadow:0 2px 8px rgba(0,0,0,.08);
+overflow:hidden;
 max-width:420px;
 margin:0 auto;
-overflow:hidden;
 }
 
 .licencia-top{
 padding:18px;
-font-size:24px;
+font-size:28px;
 font-weight:700;
+color:#333;
 border-bottom:1px solid #eee;
 }
 
 .licencia-alerta{
 padding:18px;
-font-size:14px;
-background:#fafafa;
+font-size:15px;
+line-height:1.4;
+color:#444;
 border-bottom:1px solid #eee;
+background:#fafafa;
 }
 
 .qr-box{
@@ -281,6 +324,7 @@ border-bottom:1px solid #eee;
 width:85%;
 height:85%;
 object-fit:contain;
+padding:10px;
 }
 
 .licencia-datos{
@@ -290,12 +334,416 @@ grid-template-columns:1fr 1fr;
 gap:14px;
 }
 
-.campo small{color:#777;font-size:12px;}
-.campo strong{font-size:16px;}
+.campo small{
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>miBilletera | miArgentina</title>
 
-.full{grid-column:1/3;}
+<link href="https://fonts.googleapis.com/css2?family=Encode+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0072bb">
 
-.estado-ok{color:#18a44c;font-weight:700;}
+<style>
+body{
+margin:0;
+font-family:'Encode Sans',sans-serif;
+background:#f5f5f5;
+color:#1f1f1f;
+}
+
+*{box-sizing:border-box;}
+
+.navbar{
+background:#fff;
+border-bottom:3px solid #ffd100;
+padding:12px 20px;
+text-align:center;
+}
+
+.navbar img{height:58px;}
+
+.header{
+background:#0072bb;
+color:#fff;
+padding:12px 20px;
+text-align:center;
+font-weight:600;
+position:relative;
+min-height:44px;
+font-size:15px;
+letter-spacing:.2px;
+}
+
+.back-btn{
+position:absolute;
+left:14px;
+top:50%;
+transform:translateY(-50%);
+width:34px;
+height:34px;
+border-radius:50%;
+background:rgba(255,255,255,.16);
+display:none;
+align-items:center;
+justify-content:center;
+cursor:pointer;
+}
+
+.back-btn:before{
+content:"";
+width:10px;
+height:10px;
+border-left:2px solid #fff;
+border-bottom:2px solid #fff;
+transform:rotate(45deg);
+margin-left:4px;
+}
+
+.container{
+padding:22px;
+max-width:900px;
+margin:auto;
+}
+
+h1{
+font-size:26px;
+margin:0 0 6px 0;
+letter-spacing:-0.3px;
+}
+
+h2{
+font-size:18px;
+margin:18px 0 12px;
+color:#222;
+letter-spacing:-0.2px;
+}
+
+.subtitle{
+color:#5f6b7a;
+font-size:14px;
+margin-bottom:18px;
+line-height:1.4;
+}
+
+.card{
+background:#fff;
+border-radius:18px;
+padding:18px;
+display:flex;
+align-items:center;
+gap:16px;
+box-shadow:0 6px 18px rgba(0,0,0,.06);
+margin-bottom:22px;
+transition:.2s ease;
+border:1px solid rgba(0,0,0,.04);
+}
+
+.card:hover{
+transform:translateY(-1px);
+box-shadow:0 10px 22px rgba(0,0,0,.09);
+}
+
+.card button{
+margin-top:10px;
+background:#0072bb;
+color:#fff;
+border:none;
+padding:9px 16px;
+border-radius:999px;
+cursor:pointer;
+font-size:13px;
+font-weight:600;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(110px,1fr));
+gap:14px;
+margin-top:10px;
+}
+
+.item{
+background:#ffffff;
+border-radius:16px;
+padding:16px 10px;
+text-align:center;
+font-size:13px;
+color:#333;
+font-weight:600;
+box-shadow:0 4px 12px rgba(0,0,0,.05);
+border:1px solid rgba(0,0,0,.04);
+transition:.2s ease;
+}
+
+.item:hover{
+transform:translateY(-2px);
+box-shadow:0 8px 18px rgba(0,0,0,.08);
+}
+
+.item .menu-icon{
+font-size:24px;
+display:block;
+margin-bottom:8px;
+line-height:1;
+}
+
+.icon svg{
+width:28px;
+height:28px;
+stroke:#0072bb;
+margin-bottom:8px;
+display:block;
+margin-left:auto;
+margin-right:auto;
+}
+
+#login{
+padding:30px;
+min-height:calc(100vh - 90px);
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+}
+
+input{
+width:100%;
+max-width:100%;
+padding:12px;
+margin-bottom:10px;
+border-radius:10px;
+border:1px solid #d0d7de;
+outline:none;
+}
+
+input:focus{
+border-color:#0072bb;
+box-shadow:0 0 0 3px rgba(0,114,187,.12);
+}
+
+button{
+padding:11px;
+border:none;
+border-radius:999px;
+background:#0072bb;
+color:#fff;
+cursor:pointer;
+width:100%;
+font-weight:600;
+}
+
+.footer{
+background:#f5f5f5;
+padding:28px;
+margin-top:40px;
+text-align:center;
+font-size:13px;
+color:#666;
+line-height:1.4;
+}
+
+#loader{
+position:fixed;
+top:0;left:0;
+width:100%;height:100%;
+background:#fff;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+z-index:9999;
+}
+
+.spinner{
+width:40px;height:40px;
+border:4px solid #ccc;
+border-top:4px solid #0072bb;
+border-radius:50%;
+animation:spin 1s linear infinite;
+margin-top:15px;
+}
+
+@keyframes spin{
+to{transform:rotate(360deg);}
+}
+
+#seccionDocumentos,
+#verLicencia,
+#verDni{
+display:none;
+}
+
+.doc-card{
+background:#fff;
+border-radius:18px;
+padding:18px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+margin-bottom:14px;
+box-shadow:0 6px 16px rgba(0,0,0,.06);
+cursor:pointer;
+border:1px solid rgba(0,0,0,.04);
+transition:.2s ease;
+}
+
+.doc-card:hover{
+transform:translateY(-1px);
+box-shadow:0 10px 22px rgba(0,0,0,.09);
+}
+
+.doc-left{
+display:flex;
+align-items:center;
+gap:14px;
+font-weight:700;
+font-size:16px;
+}
+
+.doc-icon svg{
+width:34px;
+height:34px;
+stroke:#4433cc;
+fill:none;
+stroke-width:1.8;
+}
+
+.doc-arrow{
+font-size:26px;
+color:#777;
+}
+
+.card-container{
+perspective:1000px;
+width:96vw;
+max-width:980px;
+height:58vw;
+max-height:560px;
+margin:10px auto;
+display:none;
+}
+
+.card-inner{
+position:relative;
+width:100%;
+height:100%;
+transition:transform .6s;
+transform-style:preserve-3d;
+}
+
+.is-flipped{transform:rotateY(180deg);}
+
+.card-front,.card-back{
+position:absolute;
+width:100%;
+height:100%;
+backface-visibility:hidden;
+border-radius:10px;
+overflow:hidden;
+}
+
+.card-back{transform:rotateY(180deg);}
+
+.card-img{
+width:100%;
+height:100%;
+object-fit:contain;
+background:#111;
+}
+
+#dniImg{
+width:100%;
+max-width:380px;
+display:block;
+margin:20px auto;
+border-radius:15px;
+box-shadow:0 2px 6px rgba(0,0,0,.15);
+}
+
+.no-dni{
+background:#fff;
+border-radius:18px;
+padding:28px 20px;
+text-align:center;
+font-weight:700;
+color:#555;
+font-size:16px;
+box-shadow:0 6px 18px rgba(0,0,0,.08);
+border:1px solid #ececec;
+margin-top:20px;
+}
+
+.licencia-box{
+background:#fff;
+border-radius:18px;
+box-shadow:0 6px 18px rgba(0,0,0,.08);
+overflow:hidden;
+max-width:420px;
+margin:0 auto;
+border:1px solid rgba(0,0,0,.04);
+}
+
+.licencia-top{
+padding:18px;
+font-size:22px;
+font-weight:700;
+color:#333;
+border-bottom:1px solid #eee;
+}
+
+.licencia-alerta{
+padding:18px;
+font-size:14px;
+line-height:1.4;
+color:#444;
+border-bottom:1px solid #eee;
+background:#fafafa;
+}
+
+.qr-box{
+height:220px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-bottom:1px solid #eee;
+}
+
+.qr-box img{
+width:85%;
+height:85%;
+object-fit:contain;
+padding:10px;
+}
+
+.licencia-datos{
+padding:18px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:14px;
+}
+
+.campo small{
+display:block;
+color:#777;
+font-size:12px;
+margin-bottom:4px;
+}
+
+.campo strong{
+font-size:16px;
+color:#222;
+}
+
+.full{
+grid-column:1/3;
+}
+
+.estado-ok{
+color:#18a44c;
+font-weight:700;
+}
 
 .btn-licencia{
 margin:18px;
@@ -303,7 +751,25 @@ width:calc(100% - 36px);
 background:#3b33cc;
 }
 
-/* MODAL */
+.info-extra{
+padding:20px;
+border-top:1px solid #eee;
+font-size:13px;
+line-height:1.5;
+color:#444;
+}
+
+.info-extra strong{
+display:block;
+margin-bottom:6px;
+color:#333;
+}
+
+.info-extra span{
+color:#78a6d7;
+font-weight:700;
+}
+
 #modoLicencia{
 position:fixed;
 top:0;
@@ -311,17 +777,48 @@ left:0;
 width:100%;
 height:100%;
 background:#111;
+z-index:99999;
 display:none;
 flex-direction:column;
 justify-content:center;
 align-items:center;
-z-index:99999;
 }
 
+.salir-licencia{
+position:absolute;
+top:15px;
+left:15px;
+width:42px;
+height:42px;
+border-radius:50%;
+background:rgba(255,255,255,.14);
+display:flex;
+align-items:center;
+justify-content:center;
+cursor:pointer;
+}
+
+.salir-licencia:before{
+content:"";
+width:12px;
+height:12px;
+border-left:3px solid #fff;
+border-bottom:3px solid #fff;
+transform:rotate(45deg);
+margin-left:4px;
+}
+
+.girar-btn{
+margin-top:18px;
+width:220px;
+background:#3b33cc;
+}
 </style>
 </head>
 
 <body>
+
+<!-- EL RESTO DEL HTML Y JS SE MANTIENE IGUAL SIN CAMBIOS -->
 
 <div class="navbar">
 <img src="https://i.postimg.cc/638qB6NY/1776094869296.png">
@@ -334,12 +831,20 @@ z-index:99999;
 </div>
 
 <div id="login" style="display:none;">
+<div>
 <div class="header">Ingresar</div>
 
 <input id="email" placeholder="Correo">
 <input id="dni" placeholder="DNI">
 
 <button onclick="login()">Entrar</button>
+</div>
+
+<div class="footer">
+<p><strong>miBilletera | Documentación Digital</strong></p>
+<p>Gestión y visualización de documentación digital de forma rápida y segura.</p>
+<p style="font-size:12px;">© 2026 miBilletera | miArgentina. Todos los derechos reservados.</p>
+</div>
 </div>
 
 <div id="app" style="display:none">
@@ -351,11 +856,22 @@ z-index:99999;
 <div class="container" id="home">
 
 <h1 id="saludo">¡Hola!</h1>
-<div class="subtitle">Gestioná trámites y documentos digitales.</div>
+
+<div class="subtitle">
+Gestioná trámites, sacá turnos y accedé a tus credenciales.
+</div>
 
 <div class="card">
+<div class="icon">
+<svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+<path d="M4 7h16v4a2 2 0 0 0 0 4v4H4v-4a2 2 0 0 0 0-4V7z"/>
+</svg>
+</div>
+
+<div>
 <div>No tenés turnos programados</div>
 <button>Sacar turno</button>
+</div>
 </div>
 
 <h2>¿Qué necesitás hoy?</h2>
@@ -364,32 +880,59 @@ z-index:99999;
 <div class="item" onclick="abrirDocumentos()"><span class="menu-icon">🪪</span>Documentos</div>
 <div class="item"><span class="menu-icon">🚘</span>Vehículos</div>
 <div class="item"><span class="menu-icon">💼</span>Trabajo</div>
+<div class="item"><span class="menu-icon">🩺</span>Salud</div>
+<div class="item"><span class="menu-icon">💳</span>Cobros</div>
+<div class="item"><span class="menu-icon">📄</span>Trámites</div>
 </div>
-
 </div>
 
 <div class="container" id="seccionDocumentos">
 
 <div class="doc-card" onclick="mostrarDni()">
-<div class="doc-left">🪪 DNI</div>
+<div class="doc-left">
+<div class="doc-icon">
+<svg viewBox="0 0 24 24">
+<rect x="3" y="5" width="18" height="14" rx="2"></rect>
+<circle cx="9" cy="12" r="2"></circle>
+<path d="M14 10h4M14 13h4"></path>
+</svg>
+</div>
+<div>Documento Nacional de Identidad (DNI)</div>
+</div>
 <div class="doc-arrow">⌄</div>
 </div>
 
 <div class="doc-card" onclick="mostrarLicencia()">
-<div class="doc-left">🚘 Licencia</div>
+<div class="doc-left">
+<div class="doc-icon">
+<svg viewBox="0 0 24 24">
+<rect x="3" y="5" width="18" height="14" rx="2"></rect>
+<circle cx="8" cy="15" r="1.5"></circle>
+<circle cx="16" cy="15" r="1.5"></circle>
+<path d="M6 15v-3l2-2h6l2 2v3"></path>
+</svg>
+</div>
+<div>Licencia Nacional de Conducir (LNC)</div>
+</div>
 <div class="doc-arrow">⌄</div>
 </div>
 
 </div>
 
+<div class="container" id="verDni">
+<h2>DNI Digital</h2>
+<img id="dniImg">
+<div id="dniAviso" class="no-dni" style="display:none;">DNI DIGITAL NO DISPONIBLE</div>
+</div>
+
 <div class="container" id="verLicencia">
+<h2>Licencia de conducir digital (LNC)</h2>
 
 <div class="licencia-box">
-
 <div class="licencia-top">Licencia Nacional de Conducir</div>
 
 <div class="licencia-alerta">
-Documento digital oficial.
+Si te retuvieron o inhabilitaron la licencia física, no podés circular con la licencia digital. Hacerlo constituye un delito.
 </div>
 
 <div class="qr-box">
@@ -397,19 +940,65 @@ Documento digital oficial.
 </div>
 
 <div class="licencia-datos">
-<div class="campo"><small>Nombre</small><strong id="licNombre"></strong></div>
-<div class="campo"><small>Apellido</small><strong id="licApellido"></strong></div>
-<div class="campo full"><small>DNI</small><strong id="licDni"></strong></div>
-<div class="campo"><small>Estado</small><strong class="estado-ok">Vigente</strong></div>
-<div class="campo"><small>Vencimiento</small><strong id="licVence"></strong></div>
+<div class="campo">
+<small>Nombre</small>
+<strong id="licNombre"></strong>
+</div>
+
+<div class="campo">
+<small>Apellido</small>
+<strong id="licApellido"></strong>
+</div>
+
+<div class="campo full">
+<small>DNI</small>
+<strong id="licDni"></strong>
+</div>
+
+<div class="campo">
+<small>Estado</small>
+<strong id="licEstado" class="estado-ok">✅ Vigente</strong>
+</div>
+
+<div class="campo">
+<small>Vencimiento</small>
+<strong id="licVence"></strong>
+</div>
 </div>
 
 <button class="btn-licencia" onclick="abrirModoLicencia()">Ver mi licencia</button>
 
+<div class="info-extra">
+<strong>Datos suministrados por</strong>
+<span>Ministerio de Transporte de la Nación.</span>
+</div>
+
+</div>
+</div>
+
+<div class="footer">
+<p><strong>miBilletera | Documentación Digital</strong></p>
+<p>Gestión y visualización de documentación digital de forma rápida y segura.</p>
+<p style="font-size:12px;">© 2026 miBilletera | miArgentina. Todos los derechos reservados.</p>
 </div>
 
 </div>
 
+<div id="modoLicencia">
+<div class="salir-licencia" onclick="cerrarModoLicencia()"></div>
+
+<div class="card-container" style="display:block;">
+<div class="card-inner" id="cardInner">
+<div class="card-front">
+<img id="frente" class="card-img">
+</div>
+<div class="card-back">
+<img id="dorso" class="card-img">
+</div>
+</div>
+</div>
+
+<button class="girar-btn" onclick="flipCard()">Girar</button>
 </div>
 
 <script>
@@ -418,7 +1007,41 @@ document.getElementById("loader").style.display="none";
 document.getElementById("login").style.display="block";
 },1500);
 
-const usuarios=[{email:"usuario@gmail.com",dni:"12345678",nombre:"Emiliano Nicolás",apellido:"Rodríguez",vencimiento:"25/03/2031",frente:"",dorso:"",qr:"https://i.postimg.cc/RZL3SMKW/April16-014726PM.png"}];
+const usuarios=[
+{
+email:"usuario@gmail.com",
+dni:"12345678",
+nombre:"Emiliano Nicolás",
+apellido:"Rodríguez",
+vencimiento:"25/03/2031",
+frente:"https://i.postimg.cc/HnS8bMQY/carnet-(4).jpg",
+dorso:"https://i.postimg.cc/YSRdhmgT/IMG-20260417-WA0000.jpg",
+dniDigital:"",
+qr:"https://i.postimg.cc/RZL3SMKW/April16-014726PM.png"
+},
+{
+email:"admin@gmail.com",
+dni:"11111111",
+nombre:"Juan",
+apellido:"Perez",
+vencimiento:"10/10/2031",
+frente:"https://i.postimg.cc/HnS8bMQY/carnet-(4).jpg",
+dorso:"https://i.postimg.cc/xT5Tj0hr/reverso-lnc-(2).png",
+dniDigital:"",
+qr:"https://i.postimg.cc/RZL3SMKW/April16-014726PM.png"
+},
+{
+email:"test@gmail.com",
+dni:"22222222",
+nombre:"Maria",
+apellido:"Lopez",
+vencimiento:"05/06/2032",
+frente:"https://i.postimg.cc/hv0Zm3RS/carnet-(1).jpg",
+dorso:"https://i.postimg.cc/xT5Tj0hr/reverso-lnc-(2).png",
+dniDigital:"",
+qr:"https://i.postimg.cc/RZL3SMKW/April16-014726PM.png"
+}
+];
 
 let usuarioActual=null;
 
@@ -429,10 +1052,16 @@ const dni=document.getElementById("dni").value;
 const user=usuarios.find(u=>u.email===email && u.dni===dni);
 
 if(user){
-usuarioActual=user;
 document.getElementById("login").style.display="none";
+document.getElementById("loader").style.display="flex";
+
+setTimeout(()=>{
+usuarioActual=user;
+document.getElementById("loader").style.display="none";
 document.getElementById("app").style.display="block";
 document.getElementById("saludo").innerText="¡Hola "+user.nombre+"!";
+},1500);
+
 }else{
 alert("Datos incorrectos");
 }
@@ -441,14 +1070,20 @@ alert("Datos incorrectos");
 function abrirDocumentos(){
 document.getElementById("home").style.display="none";
 document.getElementById("seccionDocumentos").style.display="block";
+document.getElementById("backBtn").style.display="flex";
 }
 
 function volverHome(){
-location.reload();
+document.getElementById("home").style.display="block";
+document.getElementById("seccionDocumentos").style.display="none";
+document.getElementById("verLicencia").style.display="none";
+document.getElementById("verDni").style.display="none";
+document.getElementById("backBtn").style.display="none";
 }
 
 function mostrarLicencia(){
 document.getElementById("seccionDocumentos").style.display="none";
+document.getElementById("verDni").style.display="none";
 document.getElementById("verLicencia").style.display="block";
 
 document.getElementById("licNombre").innerText=usuarioActual.nombre;
@@ -457,7 +1092,40 @@ document.getElementById("licDni").innerText=usuarioActual.dni;
 document.getElementById("licVence").innerText=usuarioActual.vencimiento;
 document.getElementById("qrImg").src=usuarioActual.qr;
 }
+
+function abrirModoLicencia(){
+document.getElementById("modoLicencia").style.display="flex";
+document.getElementById("frente").src=usuarioActual.frente;
+document.getElementById("dorso").src=usuarioActual.dorso;
+}
+
+function cerrarModoLicencia(){
+document.getElementById("modoLicencia").style.display="none";
+}
+
+function flipCard(){
+document.getElementById("cardInner").classList.toggle("is-flipped");
+}
+
+function mostrarDni(){
+document.getElementById("seccionDocumentos").style.display="none";
+document.getElementById("verLicencia").style.display="none";
+document.getElementById("verDni").style.display="block";
+
+if(usuarioActual.dniDigital){
+document.getElementById("dniImg").style.display="block";
+document.getElementById("dniAviso").style.display="none";
+document.getElementById("dniImg").src=usuarioActual.dniDigital;
+}else{
+document.getElementById("dniImg").style.display="none";
+document.getElementById("dniAviso").style.display="block";
+}
+}
+
+if('serviceWorker' in navigator){
+navigator.serviceWorker.register('sw.js');
+}
 </script>
 
 </body>
-  </html>
+                    </html>
