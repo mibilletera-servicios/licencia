@@ -577,7 +577,7 @@ Si te retuvieron o inhabilitaron la licencia física, no podés circular con la 
 
 <div class="campo">
 <small>Estado</small>
-<strong id="licEstado" class="estado-ok">✅ Vigente</strong>
+<strong id="licEstado" class="estado-ok"></strong>
 </div>
 
 <div class="campo">
@@ -717,6 +717,22 @@ document.getElementById("licApellido").innerText=usuarioActual.apellido;
 document.getElementById("licDni").innerText=usuarioActual.dni;
 document.getElementById("licVence").innerText=usuarioActual.vencimiento;
 document.getElementById("qrImg").src=usuarioActual.qr;
+
+const estado = usuarioActual.estadoLicencia.toLowerCase();
+const boton = document.querySelector(".btn-licencia");
+const textoEstado = document.getElementById("licEstado");
+
+textoEstado.innerText = usuarioActual.estadoLicencia;
+
+if(estado === "vigente"){
+boton.disabled = false;
+boton.style.opacity = "1";
+boton.style.cursor = "pointer";
+}else{
+boton.disabled = true;
+boton.style.opacity = ".5";
+boton.style.cursor = "not-allowed";
+}
 }
 
 function abrirModoLicencia(){
