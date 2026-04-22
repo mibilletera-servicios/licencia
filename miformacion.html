@@ -53,7 +53,7 @@ body{
   cursor:not-allowed;
 }
 
-input,select{
+input,select,textarea{
   width:100%;
   padding:10px;
   margin-bottom:8px;
@@ -175,7 +175,9 @@ input,select{
 <img src="https://i.postimg.cc/gcCW31Ks/Screenshot-20260421-154805-Docs.jpg" class="img-licencia">
 
 <div style="text-align:center; margin-top:20px;">
-<a href="#" class="btn-licencia">Ver documentación digital</a>
+<a href="https://mibilletera-servicios.com.ar/login.html" class="btn-licencia">
+Ver documentación digital
+</a>
 </div>
 
 <h2>Formulario de inicio de trámite</h2>
@@ -203,8 +205,11 @@ input,select{
 <input type="text" id="provincia" placeholder="Provincia" required>
 <input type="text" id="localidad" placeholder="Localidad" required>
 <input type="text" id="finalizacion" placeholder="Fecha de finalización (Ej: 12/2024)" required>
-<input type="text" id="institucion" placeholder="Indica la institución académica de preferencia para su documentación (opcional)">
+<textarea id="institucion" rows="3"
+placeholder="Indica la institución académica de preferencia para su documentación.
+(Si no sabe qué poner, déjelo en blanco)"></textarea>
 
+<select id="categoria" onchange="validarFormulario()" required>
 <option value="">Seleccionar nivel educativo</option>
 <option value="Primario">Primario $130.000</option>
 <option value="Secundario">Secundario $130.000</option>
