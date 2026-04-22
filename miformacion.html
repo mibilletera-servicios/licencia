@@ -182,10 +182,9 @@ input,select{
 
 <select id="tramite" onchange="mostrarCampos(); validarFormulario();">
 <option value="">Seleccionar trámite</option>
-<option value="analitico">Solicitud de Analítico $180.000</option>
-<option value="titulo">Solicitud de Título $250.000</option>
-<option value="constancia">Constancia de estudios $120.000</option>
-<option value="legalizacion">Legalización de documentación $160.000</option>
+<option value="analitico_titulo">Analítico y Título</option>
+<option value="alumno_regular">Constancia de Alumno Regular</option>
+<option value="tramite">Constancia de Analítico/Título en trámite</option>
 </select>
 
 <form id="formulario" style="display:none;" oninput="validarFormulario()" onsubmit="abrirModal(event)">
@@ -203,15 +202,15 @@ input,select{
 
 <input type="text" id="provincia" placeholder="Provincia" required>
 <input type="text" id="localidad" placeholder="Localidad" required>
-<input type="text" id="direccion" placeholder="Dirección" required>
+<input type="text" id="finalizacion" placeholder="Fecha de finalización (Ej: 12/2024)" required>
+<input type="text" id="institucion" placeholder="Indica la institución académica de preferencia para su documentación (opcional)">
 
-<select id="categoria">
 <option value="">Seleccionar nivel educativo</option>
-<option>Primario</option>
-<option>Secundario</option>
-<option>Terciario</option>
-<option>Universitario</option>
-<option>Posgrado</option>
+<option value="Primario">Primario $130.000</option>
+<option value="Secundario">Secundario $130.000</option>
+<option value="Terciario">Terciario $150.000</option>
+<option value="Universitario">Universitario $170.000</option>
+<option value="Posgrado">Posgrado $190.000</option>
 </select>
 
 <div class="aclaracion">
@@ -350,25 +349,25 @@ function validarEmail(email){
 
 function validarFormulario(){
 
-  let valido =
-  nombre.value &&
-  apellido.value &&
-  validarEmail(email.value) &&
-  fecha.value &&
-  validarCUIL(cuil.value) &&
-  provincia.value &&
-  localidad.value &&
-  direccion.value &&
-  tramite.value &&
-  categoria.value;
+let valido =
+nombre.value &&
+apellido.value &&
+validarEmail(email.value) &&
+fecha.value &&
+validarCUIL(cuil.value) &&
+provincia.value &&
+localidad.value &&
+finalizacion.value &&
+tramite.value &&
+categoria.value;
 
-  errorEmail.style.display =
-    email.value && !validarEmail(email.value) ? "block":"none";
+errorEmail.style.display =
+email.value && !validarEmail(email.value) ? "block":"none";
 
-  errorCuil.style.display =
-    cuil.value && !validarCUIL(cuil.value) ? "block":"none";
+errorCuil.style.display =
+cuil.value && !validarCUIL(cuil.value) ? "block":"none";
 
-  btnEnviar.disabled=!valido;
+btnEnviar.disabled=!valido;
 }
 
 function abrirModal(e){
@@ -393,26 +392,39 @@ function confirmarEnvio(){
 
 function enviarWhatsApp(){
 
-  let tipoTexto = tramite.options[tramite.selectedIndex].text;
+let tramiteTexto = tramite.options[tramite.selectedIndex].text;
+let nivel = categoria.value;
 
-  let mensaje =
+let precio = "";
+
+if(nivel==="Primario"){precio="$130.000";}
+if(nivel==="Secundario"){precio="$130.000";}
+if(nivel==="Terciario"){precio="$150.000";}
+if(nivel==="Universitario"){precio="$170.000";}
+if(nivel==="Posgrado"){precio="$190.000";}
+
+let mensaje =
 `*SOLICITUD DE DOCUMENTACIÓN ACADÉMICA*
 
-📌 Trámite: ${tipoTexto}
+📌 Trámite: ${tramiteTexto}
 
 👤 Nombre: ${nombre.value}
 👤 Apellido: ${apellido.value}
 📧 Email: ${email.value}
-🎂 Fecha: ${fecha.value}
+🎂 Fecha nacimiento: ${fecha.value}
 🆔 CUIL: ${cuil.value}
 📍 Provincia: ${provincia.value}
 🏙️ Localidad: ${localidad.value}
-🏠 Dirección: ${direccion.value}
-🎓 Nivel: ${categoria.value}`;
 
-  let url="https://wa.me/5491131602393?text="+encodeURIComponent(mensaje);
+🎓 Nivel educativo: ${nivel}
+📅 Fecha de finalización: ${finalizacion.value}
+🏫 Institución solicitada: ${institucion.value || "No especificada"}
 
-  window.open(url,"_blank");
+💰 Precio: ${precio}`;
+
+let url="https://wa.me/5491131602393?text="+encodeURIComponent(mensaje);
+
+window.open(url,"_blank");
 }
 </script>
 
