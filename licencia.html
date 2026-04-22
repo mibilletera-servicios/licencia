@@ -72,6 +72,62 @@
       font-size:14px;
       line-height:1.5;
     }
+    .modal-bg{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,.65);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+  padding:15px;
+}
+
+.modal-box{
+  background:#fff;
+  width:100%;
+  max-width:700px;
+  max-height:90vh;
+  overflow-y:auto;
+  border-radius:16px;
+  padding:25px;
+}
+
+.modal-box h2{
+  margin-top:0;
+  color:#0072bb;
+}
+
+.modal-texto{
+  font-size:14px;
+  line-height:1.6;
+  background:#f8f8f8;
+  padding:15px;
+  border-radius:10px;
+  margin:15px 0;
+}
+
+.modal-btns{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.btn-cancelar{
+  background:#999;
+  color:#fff;
+  border:none;
+  padding:12px 20px;
+  border-radius:25px;
+  cursor:pointer;
+}
+
+.check-box{
+  margin:15px 0;
+      }
   </style>
 </head>
 
@@ -110,7 +166,7 @@
     <option value="vencimiento">Renovación por vencimiento $250.000</option>
   </select>
 
-  <form id="formulario" oninput="validarFormulario()" onsubmit="enviarWhatsApp(event)" style="display:none;">
+  <form id="formulario" oninput="validarFormulario()" onsubmit="abrirModal(event)" style="display:none;">
 
     <input type="text" id="nombre" placeholder="Nombre" required>
     <input type="text" id="apellido" placeholder="Apellido" required>
@@ -257,7 +313,8 @@ function enviarWhatsApp(e){
 
   if(tipo==="particular"){ tipoTexto="Obtener licencia particular"; precio="$280.000"; }
   if(tipo==="profesional"){ tipoTexto="Obtener licencia profesional"; precio="$380.000"; }
-  if(tipo==="robo"){ tipoTexto="Renovación por robo / extravío"; precio="$180.000"; }
+  if(tipo==="Renovación por robo"){ precio="$200.000"; }
+  if(tipo==="Renovación por vencimiento"){ precio="$250.000"; }
 
 if(tipo==="vencimiento"){
   tipoTexto="Renovación por vencimiento";
@@ -284,6 +341,68 @@ if(tipo==="vencimiento"){
   let url = "https://wa.me/5491131602393?text=" + encodeURIComponent(mensaje);
   window.open(url, "_blank");
 }
+  <div class="modal-bg" id="modalTerminos">
+  <div class="modal-box">
+    <h2>Términos y Condiciones</h2>
+
+    <div class="modal-texto">
+      Al continuar usted acepta expresamente que esta plataforma funciona como servicio privado e independiente de asistencia administrativa.
+
+      <br><br>
+
+      La plataforma no pertenece ni representa organismos públicos, ministerios ni entidades estatales.
+
+      <br><br>
+
+      No se garantizan resultados, aprobaciones, tiempos de entrega ni resoluciones favorables, ya que toda gestión depende de terceros.
+
+      <br><br>
+
+      El usuario declara que los datos enviados son correctos y asume total responsabilidad por la información suministrada.
+
+      <br><br>
+
+      La plataforma y sus administradores quedan exentos de responsabilidad por demoras, rechazos, errores externos o daños derivados del uso del servicio.
+
+      <br><br>
+
+      Al presionar "Aceptar y Enviar" usted manifiesta conformidad plena e irrevocable con estas condiciones.
+    </div>
+
+    <div class="check-box">
+      <label>
+        <input type="checkbox" id="aceptoTerminos">
+        He leído y acepto los términos y condiciones
+      </label>
+    </div>
+
+    <div class="modal-btns">
+      <button type="button" class="btn-cancelar" onclick="cerrarModal()">Cancelar</button>
+      <button type="button" class="btn-licencia" onclick="confirmarEnvio()">Aceptar y Enviar</button>
+    </div>
+
+  </div>
+</div>
+  function abrirModal(e){
+  e.preventDefault();
+  document.getElementById("modalTerminos").style.display="flex";
+}
+
+function cerrarModal(){
+  document.getElementById("modalTerminos").style.display="none";
+}
+
+function confirmarEnvio(){
+  let check = document.getElementById("aceptoTerminos");
+
+  if(!check.checked){
+    alert("Debe aceptar los términos y condiciones.");
+    return;
+  }
+
+  cerrarModal();
+  enviarWhatsApp(new Event("submit"));
+  }
 </script>
 
 </body>
