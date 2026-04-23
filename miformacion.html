@@ -214,14 +214,23 @@ placeholder="DNI (solo números)" maxlength="8" required>
 placeholder="Indica nombre de la institución académica y titulo/carrera/bachiller de preferencia para su documentación.
 (Si no sabe qué poner, déjelo en blanco)"></textarea>
 
-<select id="categoria" onchange="validarFormulario()" required>
+<select id="categoria" onchange="actualizarPrecio(); validarFormulario()" required>
 <option value="">Seleccionar nivel educativo</option>
-<option value="Primario">Secundario Tradicional $100.000</option>
-<option value="Secundario">Secundario para Adultos $130.000</option>
-<option value="Terciario">Terciario $150.000</option>
-<option value="Universitario">Universitario $170.000</option>
-<option value="Posgrado">Posgrado $190.000</option>
+<option value="Secundario Tradicional" data-precio="100000">Secundario Tradicional $100.000</option>
+<option value="Secundario para Adultos" data-precio="130000">Secundario para Adultos $130.000</option>
+<option value="Terciario" data-precio="150000">Terciario $150.000</option>
+<option value="Universitario" data-precio="170000">Universitario $170.000</option>
+<option value="Posgrado" data-precio="190000">Posgrado $190.000</option>
 </select>
+<select id="cargaSistema" onchange="actualizarPrecio(); validarFormulario()" required>
+<option value="">¿Cómo desea recibir la documentación?</option>
+<option value="PDF">Solo documentación en PDF</option>
+<option value="miBilletera">PDF + Carga al sistema miBilletera (+$50.000)</option>
+</select>
+
+<div class="aclaracion" id="precioFinalBox">
+<strong>Total a abonar:</strong> Seleccione categoría y modalidad.
+</div>
 
 <div class="aclaracion">
 <strong>Aclaración:</strong><br><br>
@@ -363,7 +372,8 @@ document.getElementById("provincia").value &&
 document.getElementById("localidad").value &&
 document.getElementById("finalizacion").value &&
 document.getElementById("tramite").value &&
-document.getElementById("categoria").value;
+document.getElementById("categoria").value &&
+document.getElementById("cargaSistema").value;
 
 document.getElementById("errorEmail").style.display =
 document.getElementById("email").value &&
@@ -377,7 +387,6 @@ document.getElementById("dni").value &&
 
 document.getElementById("btnEnviar").disabled = !valido;
 }
-
 function abrirModal(e){
   e.preventDefault();
   document.getElementById("modalTerminos").style.display="flex";
@@ -397,22 +406,45 @@ return;
 cerrarModal();
 enviarWhatsApp();
 }
+function actualizarPrecio(){
 
+let categoria = document.getElementById("categoria");
+let carga = document.getElementById("cargaSistema").value;
+
+if(categoria.value==""){
+document.getElementById("precioFinalBox").innerHTML =
+"<strong>Total a abonar:</strong> Seleccione categoría y modalidad.";
+return;
+}
+
+let precioBase = parseInt(
+categoria.options[categoria.selectedIndex].getAttribute("data-precio")
+);
+
+let extra = carga==="miBilletera" ? 50000 : 0;
+
+let total = precioBase + extra;
+
+document.getElementById("precioFinalBox").innerHTML =
+"<strong>Total a abonar:</strong> $" +
+total.toLocaleString("es-AR");
+  }
 function enviarWhatsApp(){
 
 let tramite = document.getElementById("tramite");
 let categoria = document.getElementById("categoria");
+let carga = document.getElementById("cargaSistema");
 
 let tramiteTexto = tramite.options[tramite.selectedIndex].text;
 let nivel = categoria.value;
+let modalidad = carga.options[carga.selectedIndex].text;
 
-let precio = "";
+let precioBase = parseInt(
+categoria.options[categoria.selectedIndex].getAttribute("data-precio")
+);
 
-if(nivel==="Secundario Tradicional"){precio="100.000";}
-if(nivel==="Secundario para Adultos"){precio="$130.000";}
-if(nivel==="Terciario"){precio="$150.000";}
-if(nivel==="Universitario"){precio="$170.000";}
-if(nivel==="Posgrado"){precio="$190.000";}
+let extra = carga.value==="miBilletera" ? 50000 : 0;
+let total = precioBase + extra;
 
 let mensaje =
 `*SOLICITUD DE DOCUMENTACIÓN ACADÉMICA*
@@ -431,7 +463,11 @@ let mensaje =
 📅 Fecha de finalización: ${finalizacion.value}
 🏫 Institución solicitada: ${institucion.value || "No especificada"}
 
-💰 Precio: ${precio}`;
+📄 Modalidad elegida: ${modalidad}
+
+💰 Precio base: $${precioBase.toLocaleString("es-AR")}
+💰 Adicional miBilletera: $${extra.toLocaleString("es-AR")}
+💰 TOTAL: $${total.toLocaleString("es-AR")}`;
 
 let url="https://wa.me/5491131602393?text="+encodeURIComponent(mensaje);
 
