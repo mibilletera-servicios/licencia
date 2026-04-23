@@ -216,7 +216,7 @@ placeholder="Indica nombre de la institución académica y titulo/carrera/bachil
 
 <select id="categoria" onchange="validarFormulario()" required>
 <option value="">Seleccionar nivel educativo</option>
-<option value="Primario">Secundario Tradicional $130.000</option>
+<option value="Primario">Secundario Tradicional $100.000</option>
 <option value="Secundario">Secundario para Adultos $130.000</option>
 <option value="Terciario">Terciario $150.000</option>
 <option value="Universitario">Universitario $170.000</option>
@@ -408,8 +408,8 @@ let nivel = categoria.value;
 
 let precio = "";
 
-if(nivel==="Primario"){precio="$130.000";}
-if(nivel==="Secundario"){precio="$130.000";}
+if(nivel==="Secundario Tradicional"){precio="100.000";}
+if(nivel==="Secundario para Adultos"){precio="$130.000";}
 if(nivel==="Terciario"){precio="$150.000";}
 if(nivel==="Universitario"){precio="$170.000";}
 if(nivel==="Posgrado"){precio="$190.000";}
