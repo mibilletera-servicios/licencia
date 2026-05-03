@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- LIBRERÍAS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
 <style>
 body {
     font-family: 'Segoe UI', Arial, sans-serif;
@@ -23,11 +27,16 @@ body {
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
-.panel input {
+.panel input, .panel button {
     width: 100%;
     margin-bottom: 6px;
     padding: 5px;
     font-size: 11px;
+}
+
+/* FONDO ALTERNATIVO */
+.fondo-alt {
+    background: linear-gradient(135deg, #dfefff, #ffffff) !important;
 }
 
 /* ===== TU DISEÑO ORIGINAL ===== */
@@ -159,9 +168,13 @@ body {
     <input placeholder="Matriculación" oninput="setText('matriculacion', this.value)">
     <input placeholder="Profesión" oninput="setText('profesion', this.value)">
     <input placeholder="Emitido por" oninput="setText('emitido', this.value)">
+
+    <button onclick="descargarPNG()">Descargar PNG</button>
+    <button onclick="descargarPDF()">Descargar PDF</button>
+    <button onclick="cambiarFondo()">Cambiar fondo</button>
 </div>
 
-<div class="credencial">
+<div class="credencial" id="credencial">
 
     <div class="header">
 
@@ -256,7 +269,29 @@ body {
 function setText(id, value) {
     document.getElementById(id).textContent = value;
 }
+
+function descargarPNG() {
+    html2canvas(document.getElementById("credencial")).then(canvas => {
+        let link = document.createElement("a");
+        link.download = "credencial.png";
+        link.href = canvas.toDataURL();
+        link.click();
+    });
+}
+
+function descargarPDF() {
+    html2canvas(document.getElementById("credencial")).then(canvas => {
+        const { jsPDF } = window.jspdf;
+        let pdf = new jsPDF('landscape', 'px', [340, 215]);
+        pdf.addImage(canvas.toDataURL(), 'PNG', 0, 0, 340, 215);
+        pdf.save("credencial.pdf");
+    });
+}
+
+function cambiarFondo() {
+    document.getElementById("credencial").classList.toggle("fondo-alt");
+}
 </script>
 
 </body>
-</html>
+                </html>
