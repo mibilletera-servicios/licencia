@@ -304,12 +304,14 @@ function cargarFondo(event) {
 function cambiarFondo() {
     const cred = document.getElementById("credencial");
 
-    if (cred.style.background.includes("url")) {
+    // Si hay imagen → volver a fondo original
+    if (cred.style.backgroundImage && cred.style.backgroundImage !== "none") {
+        cred.style.backgroundImage = "";
         cred.style.background = "linear-gradient(135deg, #ffffff, #f8f8f8)";
     } else {
         cred.classList.toggle("fondo-alt");
     }
-}
+                            }
 </script>
 
 </body>
