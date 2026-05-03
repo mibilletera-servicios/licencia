@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Helvetica', Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        /* Contenedor principal del carnet */
+        .credencial {
+            width: 450px;
+            height: 280px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            overflow: hidden;
+            position: relative;
+            border: 1px solid #ccc;
+        }
+
+        /* Franja superior azul */
+        .header-azul {
+            background-color: #0072bb;
+            height: 40px;
+            width: 100%;
+        }
+
+        /* Contenido interno */
+        .contenido {
+            padding: 15px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Logo y título superior */
+        .top-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .logo-red {
+            width: 35px;
+            height: 35px;
+            margin-right: 10px;
+        }
+
+        .titulo-principal {
+            color: #333;
+            font-size: 14px;
+            font-weight: bold;
+            line-height: 1.2;
+        }
+
+        /* Datos del profesional */
+        .datos {
+            margin-top: 10px;
+        }
+
+        .campo {
+            margin-bottom: 8px;
+        }
+
+        .etiqueta {
+            font-size: 10px;
+            color: #666;
+            display: block;
+            margin-bottom: 1px;
+        }
+
+        .valor {
+            font-size: 13px;
+            font-weight: bold;
+            color: #000;
+            text-transform: uppercase;
+        }
+
+        /* Grilla para datos secundarios */
+        .grid-datos {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 5px;
+        }
+
+        /* Marca de agua (Escudo Nacional) */
+        .marca-agua {
+            position: absolute;
+            right: -20px;
+            bottom: 20px;
+            width: 180px;
+            opacity: 0.1;
+            z-index: 1;
+        }
+
+        /* Pie de página con logo Ministerio */
+        .footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 35px;
+            background: linear-gradient(to right, #ffffff, #00adef);
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 15px;
+            box-sizing: border-box;
+        }
+
+        .logo-ministerio {
+            height: 20px;
+        }
+
+        .estado-activa {
+            color: #2e7d32;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="credencial">
+    <div class="header-azul"></div>
+    
+    <img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Escudo_de_la_Rep%C3%BAblica_Argentina.svg" class="marca-agua" alt="Escudo">
+
+    <div class="contenido">
+        <div class="top-row">
+            <div style="background-color: #d32f2f; border-radius: 50%; padding: 5px;">
+                <svg width="20" height="20" fill="white" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+            </div>
+            <div class="titulo-principal">
+                <span style="font-size: 9px; font-weight: normal;">Red Federal de Registros de Profesionales de la Salud</span><br>
+                Credencial de profesional de la salud
+            </div>
+        </div>
+
+        <div class="datos">
+            <div class="campo">
+                <span class="etiqueta">Nombre y apellido</span>
+                <span class="valor">JUAN PÉREZ GARCÍA</span>
+            </div>
+
+            <div class="grid-datos">
+                <div class="campo">
+                    <span class="etiqueta">Documento</span>
+                    <span class="valor">DNI XX.XXX.XXX</span>
+                </div>
+                <div class="campo">
+                    <span class="etiqueta">Clave Profesional</span>
+                    <span class="valor">XXXXX 34427</span>
+                </div>
+                <div class="campo">
+                    <span class="etiqueta">Licencia Sanitaria Federal</span>
+                    <span class="valor estado-activa">Activa</span>
+                </div>
+                <div class="campo">
+                    <span class="etiqueta">Número de matrícula</span>
+                    <span class="valor">XXXX</span>
+                </div>
+            </div>
+
+            <div class="campo" style="margin-top: 5px;">
+                <span class="etiqueta">Profesión de Referencia</span>
+                <span class="valor">Licenciado en nutrición</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <span style="font-size: 8px; color: #444; margin-right: 5px; font-weight: bold;">Ministerio de Salud de la Nación</span>
+    </div>
+</div>
+
+</body>
+</html>
