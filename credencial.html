@@ -172,6 +172,7 @@ body {
     <button onclick="descargarPNG()">Descargar PNG</button>
     <button onclick="descargarPDF()">Descargar PDF</button>
     <button onclick="cambiarFondo()">Cambiar fondo</button>
+    <input type="file" accept="image/*" onchange="cargarFondo(event)">
 </div>
 
 <div class="credencial" id="credencial">
@@ -288,8 +289,26 @@ function descargarPDF() {
     });
 }
 
+function cargarFondo(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        const cred = document.getElementById("credencial");
+        cred.style.background = `url(${e.target.result}) center/cover no-repeat`;
+    };
+    reader.readAsDataURL(file);
+}
+
 function cambiarFondo() {
-    document.getElementById("credencial").classList.toggle("fondo-alt");
+    const cred = document.getElementById("credencial");
+
+    if (cred.style.background.includes("url")) {
+        cred.style.background = "linear-gradient(135deg, #ffffff, #f8f8f8)";
+    } else {
+        cred.classList.toggle("fondo-alt");
+    }
 }
 </script>
 
