@@ -13,10 +13,10 @@ body {
     padding: 30px;
 }
 
-/* Credencial */
+/* Credencial (tamaño DNI real) */
 .credencial {
-    width: 450px;
-    height: 320px;
+    width: 340px;
+    height: 215px;
     background: linear-gradient(135deg, #ffffff, #f8f8f8);
     border-radius: 12px;
     box-shadow: 0 8px 25px rgba(0,0,0,0.25);
@@ -28,94 +28,96 @@ body {
 /* Header */
 .header {
     background: #00adef;
-    height: 60px;
+    height: 55px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 12px;
+}
+
+.header-texto {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    padding-left: 16px;
 }
 
 .header .subtitulo {
-    font-size: 10px;
+    font-size: 8px;
     color: white;
 }
 
 .header .titulo {
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 700;
     color: white;
 }
 
+.icono-header {
+    background-color: #d32f2f;
+    border-radius: 50%;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Marca de agua TEXTO */
+.marca-agua {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-25deg);
+    font-size: 18px;
+    font-weight: 700;
+    color: #000;
+    opacity: 0.05;
+    white-space: nowrap;
+    z-index: 1;
+    pointer-events: none;
+}
+
 /* Contenido */
 .contenido {
-    padding: 16px;
+    padding: 10px 12px;
     position: relative;
     z-index: 2;
 }
 
-/* Top */
-.top-row {
-    display: flex;
-    align-items: center;
-    margin-bottom: 12px;
-}
-
-.icono {
-    background-color: #d32f2f;
-    border-radius: 50%;
-    padding: 6px;
-    margin-right: 10px;
-}
-
-/* Datos */
 .datos {
-    margin-top: 8px;
+    margin-top: 4px;
 }
 
 .campo {
-    margin-bottom: 7px;
+    margin-bottom: 5px;
 }
 
 .etiqueta {
-    font-size: 10px;
+    font-size: 8px;
     color: #777;
     display: block;
 }
 
 .valor {
-    font-size: 13px;
+    font-size: 11px;
     font-weight: 700;
     color: #111;
-    letter-spacing: 0.3px;
+    letter-spacing: 0.2px;
 }
 
 .grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 10px;
+    gap: 6px;
 }
 
-/* Línea separadora */
 .linea {
     height: 1px;
     background: #ccc;
-    margin: 8px 10px;
+    margin: 6px 8px;
 }
 
-/* Estado */
 .estado-activa {
     color: #1b8f3a;
     font-weight: 700;
-}
-
-/* Marca de agua */
-.marca-agua {
-    position: absolute;
-    right: -10px;
-    bottom: 10px;
-    width: 160px;
-    opacity: 0.08;
-    z-index: 1;
 }
 
 /* Footer */
@@ -123,23 +125,23 @@ body {
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 38px;
+    height: 30px;
     background: linear-gradient(90deg, #ffffff, #00adef);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 12px;
+    padding: 0 10px;
     box-sizing: border-box;
 }
 
 .footer-text {
-    font-size: 9px;
+    font-size: 7px;
     color: #333;
     font-weight: 600;
 }
 
 .codigo {
-    font-size: 9px;
+    font-size: 7px;
     color: #666;
 }
 </style>
@@ -150,30 +152,33 @@ body {
 <div class="credencial">
 
     <div class="header">
-        <div class="subtitulo">
-            Red Federal de Registros de Profesionales de la Salud
-        </div>
-        <div class="titulo">
-            Credencial Profesional
-        </div>
-    </div>
-
-    <img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Escudo_de_la_Rep%C3%BAblica_Argentina.svg" class="marca-agua">
-
-    <div class="contenido">
-
-        <div class="top-row">
-            <div class="icono">
-                <svg width="20" height="20" fill="white" viewBox="0 0 24 24">
-                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 
-                    2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 
-                    4.5 2.09C13.09 3.81 14.76 3 
-                    16.5 3 19.58 3 22 5.42 
-                    22 8.5c0 3.78-3.4 6.86-8.55 
-                    11.54L12 21.35z"/>
-                </svg>
+        
+        <div class="header-texto">
+            <div class="subtitulo">
+                Red Federal de Registros de Profesionales de la Salud
+            </div>
+            <div class="titulo">
+                Credencial Profesional
             </div>
         </div>
+
+        <div class="icono-header">
+            <svg width="14" height="14" fill="white" viewBox="0 0 24 24">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 
+                2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 
+                4.5 2.09C13.09 3.81 14.76 3 
+                16.5 3 19.58 3 22 5.42 
+                22 8.5c0 3.78-3.4 6.86-8.55 
+                11.54L12 21.35z"/>
+            </svg>
+        </div>
+
+    </div>
+
+    <!-- Marca de agua -->
+    <div class="marca-agua">Ministerio de Salud de la Nación</div>
+
+    <div class="contenido">
 
         <div class="datos">
 
@@ -222,7 +227,7 @@ body {
                 </div>
             </div>
 
-            <div class="campo" style="margin-top:6px;">
+            <div class="campo" style="margin-top:4px;">
                 <span class="etiqueta">Emitido por</span>
                 <span class="valor">MINISTERIO DE SALUD</span>
             </div>
