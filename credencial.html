@@ -13,7 +13,7 @@ body {
     padding: 30px;
 }
 
-/* Credencial (tamaño DNI real) */
+/* Credencial */
 .credencial {
     width: 340px;
     height: 215px;
@@ -28,11 +28,20 @@ body {
 /* Header */
 .header {
     background: #00adef;
-    height: 55px;
+    height: 48px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 0 12px;
+    padding: 0 10px;
+    gap: 8px;
+}
+
+.icono-header {
+    background-color: #d32f2f;
+    border-radius: 50%;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .header-texto {
@@ -41,32 +50,25 @@ body {
 }
 
 .header .subtitulo {
-    font-size: 8px;
+    font-size: 7px;
     color: white;
+    line-height: 1;
 }
 
 .header .titulo {
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 700;
     color: white;
+    line-height: 1.1;
 }
 
-.icono-header {
-    background-color: #d32f2f;
-    border-radius: 50%;
-    padding: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Marca de agua TEXTO */
+/* Marca de agua */
 .marca-agua {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) rotate(-25deg);
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 700;
     color: #000;
     opacity: 0.05;
@@ -77,42 +79,36 @@ body {
 
 /* Contenido */
 .contenido {
-    padding: 10px 12px;
+    padding: 8px 10px;
     position: relative;
     z-index: 2;
 }
 
-.datos {
-    margin-top: 4px;
-}
-
 .campo {
-    margin-bottom: 5px;
+    margin-bottom: 3px;
 }
 
 .etiqueta {
-    font-size: 8px;
+    font-size: 7px;
     color: #777;
-    display: block;
 }
 
 .valor {
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 700;
     color: #111;
-    letter-spacing: 0.2px;
 }
 
 .grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 6px;
+    gap: 4px;
 }
 
 .linea {
     height: 1px;
     background: #ccc;
-    margin: 6px 8px;
+    margin: 4px 6px;
 }
 
 .estado-activa {
@@ -125,24 +121,17 @@ body {
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 30px;
+    height: 26px;
     background: linear-gradient(90deg, #ffffff, #00adef);
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 0 10px;
-    box-sizing: border-box;
+    justify-content: center;
 }
 
 .footer-text {
     font-size: 7px;
     color: #333;
     font-weight: 600;
-}
-
-.codigo {
-    font-size: 7px;
-    color: #666;
 }
 </style>
 </head>
@@ -152,18 +141,9 @@ body {
 <div class="credencial">
 
     <div class="header">
-        
-        <div class="header-texto">
-            <div class="subtitulo">
-                Red Federal de Registros de Profesionales de la Salud
-            </div>
-            <div class="titulo">
-                Credencial Profesional
-            </div>
-        </div>
 
         <div class="icono-header">
-            <svg width="14" height="14" fill="white" viewBox="0 0 24 24">
+            <svg width="12" height="12" fill="white" viewBox="0 0 24 24">
                 <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 
                 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 
                 4.5 2.09C13.09 3.81 14.76 3 
@@ -173,72 +153,75 @@ body {
             </svg>
         </div>
 
+        <div class="header-texto">
+            <div class="subtitulo">
+                Red Federal de Registros de Profesionales de la Salud
+            </div>
+            <div class="titulo">
+                Credencial Profesional
+            </div>
+        </div>
+
     </div>
 
-    <!-- Marca de agua -->
     <div class="marca-agua">Ministerio de Salud de la Nación</div>
 
     <div class="contenido">
 
-        <div class="datos">
+        <div class="campo">
+            <span class="etiqueta">Nombre y Apellido</span>
+            <span class="valor">JUAN PÉREZ GARCÍA</span>
+        </div>
+
+        <div class="grid">
+            <div class="campo">
+                <span class="etiqueta">Documento</span>
+                <span class="valor">DNI XX.XXX.XXX</span>
+            </div>
 
             <div class="campo">
-                <span class="etiqueta">Nombre y Apellido</span>
-                <span class="valor">JUAN PÉREZ GARCÍA</span>
+                <span class="etiqueta">Clave Profesional</span>
+                <span class="valor">XXXXX 34427</span>
+            </div>
+        </div>
+
+        <div class="linea"></div>
+
+        <div class="grid">
+            <div class="campo">
+                <span class="etiqueta">Profesión de referencia</span>
+                <span class="valor estado-activa">ACTIVA</span>
             </div>
 
-            <div class="grid">
-                <div class="campo">
-                    <span class="etiqueta">Documento</span>
-                    <span class="valor">DNI XX.XXX.XXX</span>
-                </div>
+            <div class="campo">
+                <span class="etiqueta">Número de matrícula</span>
+                <span class="valor">XXXX</span>
+            </div>
+        </div>
 
-                <div class="campo">
-                    <span class="etiqueta">Clave Profesional</span>
-                    <span class="valor">XXXXX 34427</span>
-                </div>
+        <div class="linea"></div>
+
+        <div class="grid">
+            <div class="campo">
+                <span class="etiqueta">Fecha de matriculación</span>
+                <span class="valor">01/01/2020</span>
             </div>
 
-            <div class="linea"></div>
-
-            <div class="grid">
-                <div class="campo">
-                    <span class="etiqueta">Profesión de referencia</span>
-                    <span class="valor estado-activa">ACTIVA</span>
-                </div>
-
-                <div class="campo">
-                    <span class="etiqueta">Número de matrícula</span>
-                    <span class="valor">XXXX</span>
-                </div>
+            <div class="campo">
+                <span class="etiqueta">Fecha de vencimiento</span>
+                <span class="valor">01/01/2025</span>
             </div>
+        </div>
 
-            <div class="linea"></div>
-
-            <div class="grid">
-                <div class="campo">
-                    <span class="etiqueta">Fecha de matriculación</span>
-                    <span class="valor">01/01/2020</span>
-                </div>
-
-                <div class="campo">
-                    <span class="etiqueta">Fecha de vencimiento</span>
-                    <span class="valor">01/01/2025</span>
-                </div>
-            </div>
-
-            <div class="campo" style="margin-top:4px;">
-                <span class="etiqueta">Emitido por</span>
-                <span class="valor">MINISTERIO DE SALUD</span>
-            </div>
-
+        <div class="campo">
+            <span class="etiqueta">Emitido por</span>
+            <span class="valor">MINISTERIO DE SALUD</span>
         </div>
 
     </div>
 
     <div class="footer">
         <span class="footer-text">Ministerio de Salud de la Nación</span>
-        <span class="codigo">ID: AR-00045821</span>
     </div>
 
 </div>
