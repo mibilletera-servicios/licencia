@@ -4,36 +4,34 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- LIBRERÍAS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
 <style>
 body {
     font-family: 'Segoe UI', Arial, sans-serif;
     background-color: #e6e6e6;
     display: flex;
+    justify-content: center;
+    padding: 30px;
     gap: 20px;
-    padding: 20px;
 }
 
-/* PANEL */
+/* PANEL EDITOR */
 .panel {
-    width: 260px;
-    background: white;
-    padding: 12px;
+    width: 220px;
+    background: #fff;
+    padding: 10px;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
-.panel input, .panel button {
+.panel input {
     width: 100%;
     margin-bottom: 6px;
-    padding: 6px;
-    font-size: 12px;
+    padding: 5px;
+    font-size: 11px;
 }
 
-/* CREDENCIAL */
+/* ===== TU DISEÑO ORIGINAL ===== */
+
 .credencial {
     width: 340px;
     height: 215px;
@@ -43,11 +41,6 @@ body {
     overflow: hidden;
     position: relative;
     border: 1px solid #d0d0d0;
-}
-
-/* Fondo alternativo */
-.fondo-alt {
-    background: linear-gradient(135deg, #dfefff, #ffffff);
 }
 
 .header {
@@ -63,10 +56,28 @@ body {
     background-color: #d32f2f;
     border-radius: 50%;
     padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.subtitulo { font-size: 7px; color: white; }
-.titulo { font-size: 11px; font-weight: 700; color: white; }
+.header-texto {
+    display: flex;
+    flex-direction: column;
+}
+
+.header .subtitulo {
+    font-size: 7px;
+    color: white;
+    line-height: 1;
+}
+
+.header .titulo {
+    font-size: 11px;
+    font-weight: 700;
+    color: white;
+    line-height: 1.1;
+}
 
 .marca-agua {
     position: absolute;
@@ -74,14 +85,56 @@ body {
     left: 50%;
     transform: translate(-50%, -50%) rotate(-25deg);
     font-size: 16px;
+    font-weight: 700;
+    color: #000;
     opacity: 0.05;
+    white-space: nowrap;
+    z-index: 1;
+    pointer-events: none;
 }
 
-.contenido { padding: 8px 10px; }
-.etiqueta { font-size: 7px; color: #777; }
-.valor { font-size: 10px; font-weight: 700; }
-.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
-.linea { height: 1px; background: #ccc; margin: 4px 6px; }
+.contenido {
+    padding: 8px 10px;
+    position: relative;
+    z-index: 2;
+}
+
+.campo {
+    margin-bottom: 3px;
+}
+
+.campo-emitido {
+    margin-top: 6px;
+    margin-left: 8px;
+}
+
+.etiqueta {
+    font-size: 7px;
+    color: #777;
+}
+
+.valor {
+    font-size: 10px;
+    font-weight: 700;
+    color: #111;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+}
+
+.linea {
+    height: 1px;
+    background: #ccc;
+    margin: 4px 6px;
+}
+
+.estado-activa {
+    color: #1b8f3a;
+    font-weight: 700;
+}
 
 .footer {
     position: absolute;
@@ -95,6 +148,7 @@ body {
 
 <body>
 
+<!-- PANEL -->
 <div class="panel">
     <input placeholder="Nombre" oninput="setText('nombre', this.value)">
     <input placeholder="DNI" oninput="setText('dni', this.value)">
@@ -105,76 +159,91 @@ body {
     <input placeholder="Matriculación" oninput="setText('matriculacion', this.value)">
     <input placeholder="Profesión" oninput="setText('profesion', this.value)">
     <input placeholder="Emitido por" oninput="setText('emitido', this.value)">
-
-    <button onclick="descargarImagen()">Descargar PNG</button>
-    <button onclick="descargarPDF()">Descargar PDF</button>
-    <button onclick="cambiarFondo()">Cambiar fondo</button>
 </div>
 
-<div class="credencial" id="credencial">
+<div class="credencial">
 
     <div class="header">
-        <div class="icono-header">❤</div>
-        <div>
-            <div class="subtitulo">Red Federal...</div>
-            <div class="titulo">Credencial Profesional</div>
+
+        <div class="icono-header">
+            <svg width="12" height="12" fill="white" viewBox="0 0 24 24">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 
+                2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 
+                4.5 2.09C13.09 3.81 14.76 3 
+                16.5 3 19.58 3 22 5.42 
+                22 8.5c0 3.78-3.4 6.86-8.55 
+                11.54L12 21.35z"/>
+            </svg>
         </div>
+
+        <div class="header-texto">
+            <div class="subtitulo">
+                Red Federal de Registros de Profesionales de la Salud
+            </div>
+            <div class="titulo">
+                Credencial Profesional
+            </div>
+        </div>
+
     </div>
 
-    <div class="marca-agua">Ministerio de Salud</div>
+    <div class="marca-agua">Ministerio de Salud de la Nación</div>
 
     <div class="contenido">
 
-        <div>
-            <div class="etiqueta">Nombre</div>
-            <div class="valor" id="nombre">JUAN PÉREZ</div>
+        <div class="campo">
+            <span class="etiqueta">Nombre y Apellido</span>
+            <span class="valor" id="nombre">JUAN PÉREZ GARCÍA</span>
         </div>
 
         <div class="grid">
-            <div>
-                <div class="etiqueta">DNI</div>
-                <div class="valor" id="dni">XX</div>
+            <div class="campo">
+                <span class="etiqueta">Documento</span>
+                <span class="valor" id="dni">DNI XX.XXX.XXX</span>
             </div>
-            <div>
-                <div class="etiqueta">Clave</div>
-                <div class="valor" id="clave">XXX</div>
+
+            <div class="campo">
+                <span class="etiqueta">Clave Profesional</span>
+                <span class="valor" id="clave">XXXXX 34427</span>
             </div>
         </div>
 
         <div class="linea"></div>
 
         <div class="grid">
-            <div>
-                <div class="etiqueta">Estado</div>
-                <div class="valor" id="estado">ACTIVA</div>
+            <div class="campo">
+                <span class="etiqueta">Estado</span>
+                <span class="valor estado-activa" id="estado">ACTIVA</span>
             </div>
-            <div>
-                <div class="etiqueta">Matrícula</div>
-                <div class="valor" id="matricula">XXX</div>
+
+            <div class="campo">
+                <span class="etiqueta">Número de matrícula</span>
+                <span class="valor" id="matricula">XXXX</span>
             </div>
         </div>
 
         <div class="linea"></div>
 
         <div class="grid">
-            <div>
-                <div class="etiqueta">Vencimiento</div>
-                <div class="valor" id="vencimiento">2025</div>
+            <div class="campo">
+                <span class="etiqueta">Fecha de vencimiento</span>
+                <span class="valor" id="vencimiento">01/01/2025</span>
             </div>
-            <div>
-                <div class="etiqueta">Matriculación</div>
-                <div class="valor" id="matriculacion">2020</div>
+
+            <div class="campo">
+                <span class="etiqueta">Fecha de matriculación</span>
+                <span class="valor" id="matriculacion">01/01/2020</span>
             </div>
         </div>
 
-        <div>
-            <div class="etiqueta">Profesión</div>
-            <div class="valor" id="profesion">AUXILIAR</div>
+        <div class="campo">
+            <span class="etiqueta">Profesión de referencia</span>
+            <span class="valor" id="profesion">AUXILIAR</span>
         </div>
 
-        <div>
-            <div class="etiqueta">Emitido por</div>
-            <div class="valor" id="emitido">Ministerio</div>
+        <div class="campo campo-emitido">
+            <span class="etiqueta">Emitido por</span>
+            <span class="valor" id="emitido">Ministerio de Salud de la Nación</span>
         </div>
 
     </div>
@@ -187,32 +256,7 @@ body {
 function setText(id, value) {
     document.getElementById(id).textContent = value;
 }
-
-/* Descargar imagen */
-function descargarImagen() {
-    html2canvas(document.getElementById("credencial")).then(canvas => {
-        let link = document.createElement("a");
-        link.download = "credencial.png";
-        link.href = canvas.toDataURL();
-        link.click();
-    });
-}
-
-/* Descargar PDF */
-function descargarPDF() {
-    html2canvas(document.getElementById("credencial")).then(canvas => {
-        const { jsPDF } = window.jspdf;
-        let pdf = new jsPDF('landscape', 'px', [340, 215]);
-        pdf.addImage(canvas.toDataURL(), 'PNG', 0, 0, 340, 215);
-        pdf.save("credencial.pdf");
-    });
-}
-
-/* Cambiar fondo */
-function cambiarFondo() {
-    document.getElementById("credencial").classList.toggle("fondo-alt");
-}
 </script>
 
 </body>
-    </html>
+</html>
