@@ -4,13 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simulador de Comprobante de Seguro</title>
+
+    <!-- Librería para PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
     <style>
         body {
             font-family: Arial, Helvetica, sans-serif;
             background-color: #f0f0f0;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            align-items: center;
             padding: 20px;
+        }
+
+        .pdf-button {
+            margin-bottom: 15px;
+            padding: 10px 20px;
+            background-color: #002855;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .pdf-button:hover {
+            opacity: 0.9;
         }
 
         .document-container {
@@ -125,12 +145,15 @@
         @media print {
             body { background: white; }
             .document-container { box-shadow: none; border: 1px solid black; }
+            .pdf-button { display: none; }
         }
     </style>
 </head>
 <body>
 
-<div class="document-container">
+<button class="pdf-button" onclick="descargarPDF()">Descargar PDF</button>
+
+<div class="document-container" id="documento">
     
     <!-- Columna Izquierda (Datos) -->
     <div class="column">
@@ -192,6 +215,21 @@
 
 </div>
 
+<script>
+function descargarPDF() {
+    const elemento = document.getElementById('documento');
+
+    const opciones = {
+        margin: 0.3,
+        filename: 'comprobante_seguro.pdf',
+        image: { type: 'jpeg', quality: 1 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'in', format: 'a4', orientation: 'landscape' }
+    };
+
+    html2pdf().set(opciones).from(elemento).save();
+}
+</script>
+
 </body>
-          </html>
-          
+                </html>
