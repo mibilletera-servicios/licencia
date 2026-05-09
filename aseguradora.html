@@ -1,0 +1,237 @@
+<!DOCTYPE html><html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Editor de Póliza Vehicular</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f2f5;
+      margin: 0;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 20px;
+    }.panel {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  height: fit-content;
+}
+
+.panel h2 {
+  margin-top: 0;
+  font-size: 20px;
+}
+
+label {
+  display: block;
+  margin-top: 12px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 4px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.documento {
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  position: relative;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #222;
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: bold;
+  color: #1f4fa3;
+}
+
+.sub {
+  color: #666;
+  font-size: 13px;
+}
+
+.titulo {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin: 25px 0;
+}
+
+.tabla {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.tabla td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  font-size: 14px;
+}
+
+.tabla td:first-child {
+  width: 220px;
+  font-weight: bold;
+  background: #f7f7f7;
+}
+
+.footer {
+  margin-top: 40px;
+  font-size: 12px;
+  color: #666;
+  text-align: center;
+}
+
+.watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-25deg);
+  font-size: 70px;
+  color: rgba(0,0,0,0.05);
+  font-weight: bold;
+  pointer-events: none;
+  user-select: none;
+}
+
+@media print {
+  body {
+    background: white;
+    display: block;
+  }
+
+  .panel {
+    display: none;
+  }
+
+  .documento {
+    box-shadow: none;
+  }
+}
+
+  </style>
+</head>
+<body>  <div class="panel">
+    <h2>Editor en Vivo</h2><label>Titular</label>
+<input type="text" id="titular" value="Juan Carlos Pérez">
+
+<label>DNI</label>
+<input type="text" id="dni" value="32.456.789">
+
+<label>Vehículo</label>
+<input type="text" id="vehiculo" value="Volkswagen Gol Trend">
+
+<label>Patente</label>
+<input type="text" id="patente" value="AB123CD">
+
+<label>Póliza</label>
+<input type="text" id="poliza" value="458796321">
+
+<label>Vigencia Desde</label>
+<input type="text" id="desde" value="01/05/2026">
+
+<label>Vigencia Hasta</label>
+<input type="text" id="hasta" value="01/05/2027">
+
+<label>Cobertura</label>
+<input type="text" id="cobertura" value="Todo Riesgo">
+
+  </div>  <div class="documento">
+    <div class="watermark">EJEMPLO</div><div class="header">
+  <div>
+    <div class="logo">SEGURO VEHICULAR</div>
+    <div class="sub">Modelo demostrativo ficticio</div>
+  </div>
+  <div>
+    <strong>Certificado de Cobertura</strong>
+  </div>
+</div>
+
+<div class="titulo">Póliza Automotor</div>
+
+<table class="tabla">
+  <tr>
+    <td>Titular</td>
+    <td id="v_titular">Juan Carlos Pérez</td>
+  </tr>
+
+  <tr>
+    <td>DNI</td>
+    <td id="v_dni">32.456.789</td>
+  </tr>
+
+  <tr>
+    <td>Vehículo</td>
+    <td id="v_vehiculo">Volkswagen Gol Trend</td>
+  </tr>
+
+  <tr>
+    <td>Patente</td>
+    <td id="v_patente">AB123CD</td>
+  </tr>
+
+  <tr>
+    <td>Número de póliza</td>
+    <td id="v_poliza">458796321</td>
+  </tr>
+
+  <tr>
+    <td>Vigencia</td>
+    <td>
+      Desde <span id="v_desde">01/05/2026</span>
+      hasta
+      <span id="v_hasta">01/05/2027</span>
+    </td>
+  </tr>
+
+  <tr>
+    <td>Tipo de cobertura</td>
+    <td id="v_cobertura">Todo Riesgo</td>
+  </tr>
+</table>
+
+<div class="footer">
+  Documento de ejemplo generado únicamente con fines educativos y de diseño.
+</div>
+
+  </div>  <script>
+    const campos = [
+      'titular',
+      'dni',
+      'vehiculo',
+      'patente',
+      'poliza',
+      'desde',
+      'hasta',
+      'cobertura'
+    ];
+
+    campos.forEach(id => {
+      document.getElementById(id).addEventListener('input', e => {
+        const destino = document.getElementById('v_' + id);
+        if(destino){
+          destino.textContent = e.target.value;
+        }
+      });
+    });
+  </script></body>
+  </html>
