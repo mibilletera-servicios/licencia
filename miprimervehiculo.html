@@ -21,7 +21,6 @@
             overflow-x: hidden;
         }
 
-        /* HEADER ESTILO INFANTIL */
         header {
             background: var(--celeste);
             background: radial-gradient(circle, #87CEEB 0%, #4682B4 100%);
@@ -49,7 +48,6 @@
 
         .container { max-width: 1200px; margin: auto; padding: 40px 20px; }
 
-        /* GRILLA DE PRODUCTOS */
         .catalog {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -92,7 +90,6 @@
             display: block;
         }
 
-        /* MODAL (LA VENTANA DE DETALLES) */
         .modal {
             display: none;
             position: fixed;
@@ -107,14 +104,14 @@
 
         .modal-content {
             background-color: var(--blanco);
-            margin: 5% auto;
+            margin: 2% auto;
             padding: 30px;
             border: 6px solid var(--amarillo);
-            width: 80%;
+            width: 90%;
             max-width: 800px;
             border-radius: 40px;
             position: relative;
-            max-height: 80vh;
+            max-height: 90vh;
             overflow-y: auto;
         }
 
@@ -127,18 +124,21 @@
             color: var(--naranja);
         }
 
-        .modal-header-info { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 20px; }
-        
-        .badge-15 { background: var(--naranja); color: white; padding: 5px 15px; border-radius: 50px; font-weight: bold; }
-
         .specs-list {
             background: #fff8e1;
             padding: 20px;
             border-radius: 20px;
             border: 2px dashed var(--amarillo);
+            margin-bottom: 15px;
         }
 
-        /* CARRITO */
+        .option-group {
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #f0faff;
+            border-radius: 15px;
+        }
+
         .cart-box {
             background: var(--azul);
             color: white;
@@ -158,6 +158,8 @@
             font-family: 'Bungee';
             cursor: pointer;
             box-shadow: 0 5px 0 #b8860b;
+            text-decoration: none;
+            display: inline-block;
         }
 
         .btn-action:active { transform: translateY(5px); box-shadow: none; }
@@ -180,152 +182,186 @@
 
 <div class="container">
     <div class="catalog">
-        
-        <!-- PRODUCTO 1 -->
         <div class="product-card" onclick="openModal('mercedes')">
-            <div class="img-placeholder" style="background: #FFF9C4;">MERCEDES AMG GT<br>1/10 FOTOS</div>
+            <div class="img-placeholder" style="background: #FFF9C4;">MERCEDES AMG GT</div>
             <h3>Mercedes Benz AMG GT 12V</h3>
             <span class="price-main">$255.482,80</span>
-            <p><i>Haz clic para ver detalles</i></p>
         </div>
 
-        <!-- PRODUCTO 2 -->
         <div class="product-card" onclick="openModal('jeep')">
-            <div class="img-placeholder" style="background: #E0E0E0;">JEEP 4X4 GRIS<br>DOBLE MOTOR</div>
+            <div class="img-placeholder" style="background: #E0E0E0;">JEEP 4X4 GRIS</div>
             <h3>Jeep Batería 12V 4x4</h3>
             <span class="price-main">$586.395,00</span>
-            <p><i>Haz clic para ver detalles</i></p>
         </div>
 
-        <!-- PRODUCTO 3 -->
         <div class="product-card" onclick="openModal('audi')">
-            <div class="img-placeholder" style="background: #CFD8DC;">AUDI R8 SPORT<br>LICENCIA OFICIAL</div>
+            <div class="img-placeholder" style="background: #CFD8DC;">AUDI R8 SPORT</div>
             <h3>Audi R8 Sport 2022</h3>
             <span class="price-main">$413.280,00</span>
-            <p><i>Haz clic para ver detalles</i></p>
         </div>
-
     </div>
 
-    <!-- SECCIÓN CARRITO -->
     <div class="cart-box">
-        <h2 style="font-family: 'Bungee';">🛒 Mi Carrito de Compras</h2>
-        <div id="cart-items">
-            <p>No hay productos aún.</p>
+        <h2 style="font-family: 'Bungee';">🛒 Mi Carrito</h2>
+        <div id="cart-display">
+            <p>Tu carrito está vacío.</p>
         </div>
         <hr>
-        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
             <div>
-                <p>Provincia de Envío: 
-                    <select id="provincia" style="padding: 10px; border-radius: 10px;">
-                        <option value="0">Seleccionar...</option>
-                        <option value="8500">Buenos Aires (+$8.500)</option>
-                        <option value="15000">Misiones (+$15.000)</option>
-                    </select>
-                </p>
+                <p><strong>Calcula tu envío:</strong></p>
+                <select id="provincia" onchange="updateTotal()" style="padding: 10px; border-radius: 10px; width: 250px;">
+                    <option value="0" data-price="0">Seleccionar Provincia...</option>
+                    <option value="Buenos Aires" data-price="8500">Buenos Aires (+$8.500)</option>
+                    <option value="CABA" data-price="5000">CABA (+$5.000)</option>
+                    <option value="Catamarca" data-price="12000">Catamarca (+$12.000)</option>
+                    <option value="Chaco" data-price="13500">Chaco (+$13.500)</option>
+                    <option value="Chubut" data-price="18000">Chubut (+$18.000)</option>
+                    <option value="Córdoba" data-price="11000">Córdoba (+$11.000)</option>
+                    <option value="Corrientes" data-price="12500">Corrientes (+$12.500)</option>
+                    <option value="Entre Ríos" data-price="11000">Entre Ríos (+$11.000)</option>
+                    <option value="Formosa" data-price="14000">Formosa (+$14.000)</option>
+                    <option value="Jujuy" data-price="14500">Jujuy (+$14.500)</option>
+                    <option value="La Pampa" data-price="12000">La Pampa (+$12.000)</option>
+                    <option value="La Rioja" data-price="12500">La Rioja (+$12.500)</option>
+                    <option value="Mendoza" data-price="13000">Mendoza (+$13.000)</option>
+                    <option value="Misiones" data-price="15000">Misiones (+$15.000)</option>
+                    <option value="Neuquén" data-price="16000">Neuquén (+$16.000)</option>
+                    <option value="Río Negro" data-price="16500">Río Negro (+$16.500)</option>
+                    <option value="Salta" data-price="14500">Salta (+$14.500)</option>
+                    <option value="San Juan" data-price="13000">San Juan (+$13.000)</option>
+                    <option value="San Luis" data-price="12500">San Luis (+$12.500)</option>
+                    <option value="Santa Cruz" data-price="20000">Santa Cruz (+$20.000)</option>
+                    <option value="Santa Fe" data-price="10500">Santa Fe (+$10.500)</option>
+                    <option value="Santiago del Estero" data-price="13000">Santiago del Estero (+$13.000)</option>
+                    <option value="Tierra del Fuego" data-price="25000">Tierra del Fuego (+$25.000)</option>
+                    <option value="Tucumán" data-price="13500">Tucumán (+$13.500)</option>
+                </select>
             </div>
             <div style="text-align: right;">
-                <h3>Total: <span id="total-precio">$0,00</span></h3>
-                <button class="btn-action">📄 DESCARGAR TICKET PDF</button>
+                <h3 style="margin: 0;">Total Final: <span id="total-final">$0,00</span></h3>
+                <p id="whatsapp-container" style="margin-top: 15px;"></p>
             </div>
         </div>
     </div>
 </div>
 
-<!-- MODAL MERCEDES -->
+<!-- MODALES -->
+<!-- MERCEDES -->
 <div id="modal-mercedes" class="modal">
     <div class="modal-content">
         <span class="close-modal" onclick="closeModal('mercedes')">&times;</span>
-        <h2 style="color:var(--azul)">Auto A Batería Mercedes Benz Amg Gt 12v</h2>
-        <div class="modal-header-info">
-            <span class="badge-15">15% OFF</span>
-            <span style="font-size: 1.5rem; color: #d32f2f;"><b>Mejor Precio: $255.482,80</b></span>
-        </div>
+        <h2>Mercedes Benz AMG GT 12V</h2>
         <div class="specs-list">
-            <p><b>Descripción Detallada:</b></p>
-            <ul>
-                <li><i>Control remoto para seguridad (3 a 6 años).</i></li>
-                <li><i>Batería de 12V (1-2 horas de juego).</i></li>
-                <li><i>Luces LED frontales y música Bluetooth.</i></li>
-                <li><i>Soporta hasta 30 kg, puertas abatibles.</i></li>
-                <li><b>Velocidad máxima:</b> 5 km/h.</li>
-            </ul>
-            <p><b>Colores Disponibles:</b> Amarillo / Blanco / Rojo</p>
+            <p><strong>Descripción:</strong> Control remoto parental, batería 12V, música Bluetooth, luces LED. Soporta 30kg.</p>
         </div>
-        <p style="margin-top:20px"><button class="btn-action" style="width:100%">AGREGAR AL CARRITO</button></p>
+        <div class="option-group">
+            <label>Color: <select id="color-mercedes"><option>Amarillo</option><option>Rojo</option><option>Blanco</option></select></label><br><br>
+            <label>Pago: <select id="pago-mercedes"><option>1 Pago (Efectivo/Transferencia)</option><option>Cuotas con Tarjeta</option></select></label><br><br>
+            <label>Entrega: <select id="armado-mercedes"><option value="0">En caja (Listo para armar)</option><option value="65000">Armado (+$65.000)</option></select></label>
+        </div>
+        <button class="btn-action" onclick="addToCart('Mercedes AMG GT', 255482.80, 'mercedes')">AGREGAR AL CARRITO</button>
     </div>
 </div>
 
-<!-- MODAL JEEP -->
+<!-- JEEP -->
 <div id="modal-jeep" class="modal">
     <div class="modal-content">
         <span class="close-modal" onclick="closeModal('jeep')">&times;</span>
-        <h2 style="color:var(--azul)">Auto Jeep Bateria 12v 2 Motores</h2>
-        <div class="modal-header-info">
-            <span class="badge-15">10% OFF</span>
-            <span style="font-size: 1.5rem; color: #d32f2f;"><b>$586.395,00</b></span>
-        </div>
+        <h2>Jeep Batería 12V 4x4</h2>
         <div class="specs-list">
-            <p><b>Lo que tenés que saber:</b></p>
-            <p><i>Sistema de doble motor con batería de 12V. Velocidad de hasta 7 km/h. Capacidad de carga de 35 kg. Estructura de metal y plástico reforzado.</i></p>
-            <p><b>Especificaciones Técnicas:</b></p>
-            <ul>
-                <li><b>Medidas:</b> 120cm x 70cm x 70cm.</li>
-                <li><b>Extras:</b> Suspensión, apertura de capot, USB y auxiliar.</li>
-                <li><b>Autonomía:</b> 30 min a 2 horas.</li>
-            </ul>
-            <p><b>Aviso legal:</b> La duración de la batería depende del uso.</p>
+            <p><strong>Descripción:</strong> 2 Motores, suspension, USB, Control Remoto. Soporta 35kg.</p>
         </div>
-        <p style="margin-top:20px"><button class="btn-action" style="width:100%">AGREGAR AL CARRITO</button></p>
+        <div class="option-group">
+            <label>Color: <select id="color-jeep"><option>Gris</option></select></label><br><br>
+            <label>Pago: <select id="pago-jeep"><option>1 Pago (Efectivo/Transferencia)</option><option>Cuotas con Tarjeta</option></select></label><br><br>
+            <label>Entrega: <select id="armado-jeep"><option value="0">En caja (Listo para armar)</option><option value="65000">Armado (+$65.000)</option></select></label>
+        </div>
+        <button class="btn-action" onclick="addToCart('Jeep 4x4 Gris', 586395.00, 'jeep')">AGREGAR AL CARRITO</button>
     </div>
 </div>
 
-<!-- MODAL AUDI -->
+<!-- AUDI -->
 <div id="modal-audi" class="modal">
     <div class="modal-content">
         <span class="close-modal" onclick="closeModal('audi')">&times;</span>
-        <h2 style="color:var(--azul)">Auto A Bateria Audi R8 Sport 2022</h2>
-        <div class="modal-header-info">
-            <span class="badge-15">10% OFF</span>
-            <span style="font-size: 1.5rem; color: #d32f2f;"><b>$413.280,00</b></span>
-        </div>
+        <h2>Audi R8 Sport 2022</h2>
         <div class="specs-list">
-            <p><b>Descripción:</b></p>
-            <ul>
-                <li><b>Motor:</b> 12v, 45w.</li>
-                <li><b>Control remoto:</b> Señal Bluetooth anti-interferencias.</li>
-                <li><b>Velocidad:</b> 3 a 5 km/h (3 velocidades).</li>
-                <li><b>Seguridad:</b> Cinturón de seguridad y puertas con traba.</li>
-            </ul>
-            <p><b>Medidas:</b> Largo 100cm, Ancho 59cm, Alto 30cm.</p>
+            <p><strong>Ficha Técnica Audi R8:</strong><br>
+            Motor: 12v, 45w. Batería: 12v, 4,5 Ah. Ruedas: Plástico resistente. Velocidad: 3-5 km/h. Control: Bluetooth con freno y reversa. Edad: 1-4 años. Peso: 30kg. Autonomía: 30min-2hs. Carga: 6-8hs. Incluye: Luces LED, apertura puertas, USB y melodías.</p>
+            <p><strong>Medidas:</strong> 100x59x30 cm.</p>
         </div>
-        <p style="margin-top:20px"><button class="btn-action" style="width:100%">AGREGAR AL CARRITO</button></p>
+        <div class="option-group">
+            <label>Color: <select id="color-audi"><option>Blanco</option><option>Rojo</option><option>Negro</option></select></label><br><br>
+            <label>Pago: <select id="pago-audi"><option>1 Pago (Efectivo/Transferencia)</option><option>Cuotas con Tarjeta</option></select></label><br><br>
+            <label>Entrega: <select id="armado-audi"><option value="0">En caja (Listo para armar)</option><option value="65000">Armado (+$65.000)</option></select></label>
+        </div>
+        <button class="btn-action" onclick="addToCart('Audi R8 Sport', 413280.00, 'audi')">AGREGAR AL CARRITO</button>
     </div>
 </div>
 
 <footer>
-    <h2 style="font-family: 'Bungee'; margin: 0;">MI PRIMER VEHÍCULO</h2>
-    <p>Especialistas en diversión sobre ruedas. Buenos Aires, Argentina.</p>
-    <p><i>"Haciendo realidad el sueño de conducir."</i></p>
+    <h2>MI PRIMER VEHÍCULO</h2>
+    <p>Garantía de alegría y motores. Buenos Aires, Argentina.</p>
 </footer>
 
 <script>
-    function openModal(id) {
-        document.getElementById('modal-' + id).style.display = "block";
+    let cart = null;
+
+    function openModal(id) { document.getElementById('modal-' + id).style.display = "block"; }
+    function closeModal(id) { document.getElementById('modal-' + id).style.display = "none"; }
+
+    function addToCart(name, price, id) {
+        const color = document.getElementById('color-' + id).value;
+        const pago = document.getElementById('pago-' + id).value;
+        const armadoPrice = parseFloat(document.getElementById('armado-' + id).value);
+        const armadoTexto = armadoPrice > 0 ? "Armado" : "En caja";
+
+        cart = { name, basePrice: price, color, pago, armadoPrice, armadoTexto };
+        
+        closeModal(id);
+        updateTotal();
     }
 
-    function closeModal(id) {
-        document.getElementById('modal-' + id).style.display = "none";
-    }
+    function updateTotal() {
+        if (!cart) return;
 
-    // Cerrar si hace clic fuera del modal
-    window.onclick = function(event) {
-        if (event.target.className === 'modal') {
-            event.target.style.display = "none";
+        const provinciaSelect = document.getElementById('provincia');
+        const shippingPrice = parseFloat(provinciaSelect.options[provinciaSelect.selectedIndex].getAttribute('data-price')) || 0;
+        const provinciaNombre = provinciaSelect.value;
+        
+        const subtotal = cart.basePrice + cart.armadoPrice;
+        const total = subtotal + shippingPrice;
+
+        document.getElementById('cart-display').innerHTML = `
+            <p><strong>Producto:</strong> ${cart.name} (${cart.color})</p>
+            <p><strong>Entrega:</strong> ${cart.armadoTexto} ($${cart.armadoPrice.toLocaleString('es-AR')})</p>
+            <p><strong>Subtotal:</strong> $${subtotal.toLocaleString('es-AR')}</p>
+        `;
+
+        document.getElementById('total-final').innerText = `$${total.toLocaleString('es-AR')}`;
+
+        if (provinciaNombre !== "0") {
+            const phoneNumber = "5491112345678"; // <--- CAMBIA ESTO POR TU NÚMERO (Sin el +)
+            const message = encodeURIComponent(
+                `¡Hola Mi Primer Vehículo! Quiero comprar:\n\n` +
+                `🚗 Vehículo: ${cart.name}\n` +
+                `🎨 Color: ${cart.color}\n` +
+                `📦 Modo: ${cart.armadoTexto}\n` +
+                `📍 Provincia: ${provinciaNombre}\n` +
+                `💳 Pago: ${cart.pago}\n` +
+                `💰 TOTAL: $${total.toLocaleString('es-AR')}`
+            );
+            document.getElementById('whatsapp-container').innerHTML = 
+                `<a href="https://wa.me/${phoneNumber}?text=${message}" class="btn-action" target="_blank">PAGAR</a>`;
+        } else {
+            document.getElementById('whatsapp-container').innerHTML = "Selecciona una provincia para pagar";
         }
     }
+
+    window.onclick = function(event) { if (event.target.className === 'modal') event.target.style.display = "none"; }
 </script>
 
 </body>
-    </html>
-                                              
+            </html>
+        
