@@ -1,237 +1,197 @@
-<!DOCTYPE html><html lang="es">
+<!DOCTYPE html>
+<html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Editor de Póliza Vehicular</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f0f2f5;
-      margin: 0;
-      padding: 20px;
-      display: grid;
-      grid-template-columns: 320px 1fr;
-      gap: 20px;
-    }.panel {
-  background: white;
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  height: fit-content;
-}
-
-.panel h2 {
-  margin-top: 0;
-  font-size: 20px;
-}
-
-label {
-  display: block;
-  margin-top: 12px;
-  font-size: 14px;
-  font-weight: bold;
-}
-
-input {
-  width: 100%;
-  padding: 10px;
-  margin-top: 4px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  box-sizing: border-box;
-}
-
-.documento {
-  background: white;
-  padding: 40px;
-  border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  position: relative;
-}
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 2px solid #222;
-  padding-bottom: 15px;
-  margin-bottom: 20px;
-}
-
-.logo {
-  font-size: 28px;
-  font-weight: bold;
-  color: #1f4fa3;
-}
-
-.sub {
-  color: #666;
-  font-size: 13px;
-}
-
-.titulo {
-  text-align: center;
-  font-size: 24px;
-  font-weight: bold;
-  margin: 25px 0;
-}
-
-.tabla {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-}
-
-.tabla td {
-  border: 1px solid #ccc;
-  padding: 10px;
-  font-size: 14px;
-}
-
-.tabla td:first-child {
-  width: 220px;
-  font-weight: bold;
-  background: #f7f7f7;
-}
-
-.footer {
-  margin-top: 40px;
-  font-size: 12px;
-  color: #666;
-  text-align: center;
-}
-
-.watermark {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) rotate(-25deg);
-  font-size: 70px;
-  color: rgba(0,0,0,0.05);
-  font-weight: bold;
-  pointer-events: none;
-  user-select: none;
-}
-
-@media print {
-  body {
-    background: white;
-    display: block;
-  }
-
-  .panel {
-    display: none;
-  }
-
-  .documento {
-    box-shadow: none;
-  }
-}
-
-  </style>
-</head>
-<body>  <div class="panel">
-    <h2>Editor en Vivo</h2><label>Titular</label>
-<input type="text" id="titular" value="Juan Carlos Pérez">
-
-<label>DNI</label>
-<input type="text" id="dni" value="32.456.789">
-
-<label>Vehículo</label>
-<input type="text" id="vehiculo" value="Volkswagen Gol Trend">
-
-<label>Patente</label>
-<input type="text" id="patente" value="AB123CD">
-
-<label>Póliza</label>
-<input type="text" id="poliza" value="458796321">
-
-<label>Vigencia Desde</label>
-<input type="text" id="desde" value="01/05/2026">
-
-<label>Vigencia Hasta</label>
-<input type="text" id="hasta" value="01/05/2027">
-
-<label>Cobertura</label>
-<input type="text" id="cobertura" value="Todo Riesgo">
-
-  </div>  <div class="documento">
-    <div class="watermark">EJEMPLO</div><div class="header">
-  <div>
-    <div class="logo">SEGURO VEHICULAR</div>
-    <div class="sub">Modelo demostrativo ficticio</div>
-  </div>
-  <div>
-    <strong>Certificado de Cobertura</strong>
-  </div>
-</div>
-
-<div class="titulo">Póliza Automotor</div>
-
-<table class="tabla">
-  <tr>
-    <td>Titular</td>
-    <td id="v_titular">Juan Carlos Pérez</td>
-  </tr>
-
-  <tr>
-    <td>DNI</td>
-    <td id="v_dni">32.456.789</td>
-  </tr>
-
-  <tr>
-    <td>Vehículo</td>
-    <td id="v_vehiculo">Volkswagen Gol Trend</td>
-  </tr>
-
-  <tr>
-    <td>Patente</td>
-    <td id="v_patente">AB123CD</td>
-  </tr>
-
-  <tr>
-    <td>Número de póliza</td>
-    <td id="v_poliza">458796321</td>
-  </tr>
-
-  <tr>
-    <td>Vigencia</td>
-    <td>
-      Desde <span id="v_desde">01/05/2026</span>
-      hasta
-      <span id="v_hasta">01/05/2027</span>
-    </td>
-  </tr>
-
-  <tr>
-    <td>Tipo de cobertura</td>
-    <td id="v_cobertura">Todo Riesgo</td>
-  </tr>
-</table>
-
-<div class="footer">
-  Documento de ejemplo generado únicamente con fines educativos y de diseño.
-</div>
-
-  </div>  <script>
-    const campos = [
-      'titular',
-      'dni',
-      'vehiculo',
-      'patente',
-      'poliza',
-      'desde',
-      'hasta',
-      'cobertura'
-    ];
-
-    campos.forEach(id => {
-      document.getElementById(id).addEventListener('input', e => {
-        const destino = document.getElementById('v_' + id);
-        if(destino){
-          destino.textContent = e.target.value;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Comprobante de Seguro</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
         }
-      });
-    });
-  </script></body>
-  </html>
+
+        .document-container {
+            width: 900px;
+            background-color: white;
+            border: 1px solid #ccc;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .column {
+            padding: 15px;
+            border: 1px solid #eee;
+            position: relative;
+        }
+
+        /* Encabezado Azul Oscuro */
+        .header {
+            background-color: #002855; /* Azul institucional */
+            color: white;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .poliza-box {
+            background-color: white;
+            color: black;
+            padding: 2px 8px;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        .logo-placeholder {
+            font-weight: bold;
+            text-align: right;
+            line-height: 1.1;
+            font-size: 0.8em;
+        }
+
+        /* Secciones de Datos */
+        .data-row {
+            margin-bottom: 5px;
+            font-size: 0.75em;
+            display: flex;
+        }
+
+        .label {
+            font-weight: bold;
+            width: 80px;
+            color: #333;
+        }
+
+        .value {
+            flex: 1;
+            outline: none; /* Quita el borde al editar */
+        }
+
+        .client-name {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #002855;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+        }
+
+        .vigencia-box {
+            background-color: #e9ecef;
+            padding: 5px;
+            border: 1px solid #ccc;
+            margin-top: 10px;
+        }
+
+        /* Texto Legal (Derecha) */
+        .legal-text {
+            font-size: 0.65em;
+            text-align: justify;
+            line-height: 1.2;
+            color: #444;
+        }
+
+        .legal-title {
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.8em;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .signature-area {
+            margin-top: 20px;
+            text-align: right;
+            font-size: 0.7em;
+        }
+
+        .signature-line {
+            width: 120px;
+            border-top: 1px solid #000;
+            display: inline-block;
+            margin-top: 30px;
+        }
+
+        [contenteditable="true"]:hover {
+            background-color: #fff9c4;
+            cursor: text;
+        }
+
+        @media print {
+            body { background: white; }
+            .document-container { box-shadow: none; border: 1px solid black; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="document-container">
+    
+    <!-- Columna Izquierda (Datos) -->
+    <div class="column">
+        <div class="header">
+            <div class="poliza-box">Póliza: <span contenteditable="true">24014312 / 0</span></div>
+            <div class="logo-placeholder">ASEGURADORA<br>ARGENTINA S.A.</div>
+        </div>
+
+        <div class="client-name" contenteditable="true">CLIENTE: 476254 BONINO HECTOR EDGARDO</div>
+        <div class="data-row"><span class="label">Domicilio:</span> <span class="value" contenteditable="true">CALLE 7 N° 1234, LA PLATA, CP 1900</span></div>
+        
+        <div style="display: flex; margin-top: 10px;">
+            <div style="flex: 1;">
+                <div class="data-row"><span class="label">Modelo:</span> <span class="value" contenteditable="true">PEUGEOT 405 SRDT</span></div>
+                <div class="data-row"><span class="label">T. Vehículo:</span> <span class="value" contenteditable="true">AUTOMOVIL PARTICULAR</span></div>
+                <div class="data-row"><span class="label">Motor:</span> <span class="value" contenteditable="true">10DUT4J003535</span></div>
+                <div class="data-row"><span class="label">Chasis:</span> <span class="value" contenteditable="true">VF34B08A271228582</span></div>
+                <div class="data-row"><span class="label">Año:</span> <span class="value" contenteditable="true">1994</span></div>
+                <div class="data-row"><span class="label">Patente:</span> <span class="value" contenteditable="true">RQK277</span></div>
+            </div>
+            
+            <div class="vigencia-box" style="width: 140px;">
+                <div style="font-weight: bold; font-size: 0.7em;">Vigencia desde</div>
+                <div contenteditable="true" style="font-size: 0.8em; margin-bottom: 5px;">14-05-2025 12:00 Hs.</div>
+                <div style="font-weight: bold; font-size: 0.7em;">Vigencia hasta</div>
+                <div contenteditable="true" style="font-size: 0.8em;">14-05-2026 12:00 Hs.</div>
+            </div>
+        </div>
+
+        <div class="data-row" style="margin-top: 15px;">
+            <span class="label">Asistencia:</span> <span class="value" contenteditable="true">0800-222-0022 / 0800-888-8888</span>
+        </div>
+    </div>
+
+    <!-- Columna Derecha (Legal) -->
+    <div class="column">
+        <div class="header">
+            <div class="poliza-box">Póliza: <span contenteditable="true">24014312 - 0 - 2</span></div>
+            <div class="logo-placeholder">ASEGURADORA<br>ARGENTINA S.A.</div>
+        </div>
+
+        <div class="legal-text">
+            <span class="legal-title">Seguro Obligatorio del Automotor conforme Decreto 1716/08</span>
+            <p contenteditable="true">
+                La posesión de este comprobante obligatorio será prueba suficiente de la vigencia del seguro obligatorio de automotores exigido por el art. 68 de la Ley N° 24449. Conforme al art. 2° de la Disp. N° 70/2009 de la AGENCIA NACIONAL DE SEGURIDAD VIAL, la falta de portación del recibo de pago de la prima del seguro obligatorio por parte del conductor del vehículo, no podrá ser aducida por la Autoridad de Constatación para determinar el incumplimiento de los requisitos.
+            </p>
+            <span class="legal-title">En caso de siniestro:</span>
+            <p contenteditable="true">
+                Obtenga los siguientes datos: Nombre, dirección, teléfono y registro del conductor. Marca, patente, propietario y seguro de tercero. Nombre y dirección de testigos.
+            </p>
+        </div>
+
+        <div class="signature-area">
+            <span contenteditable="true">LA PLATA, BS. AS., ARGENTINA</span><br>
+            <div class="signature-line"></div><br>
+            <strong>Gerente General</strong>
+        </div>
+    </div>
+
+</div>
+
+</body>
+          </html>
+          
