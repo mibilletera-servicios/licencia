@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulador de Comprobante de Seguro</title>
+    <title>Comprobante de Seguro</title>
 
     <!-- Librería para PDF -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
@@ -159,7 +159,7 @@
     <div class="column">
         <div class="header">
             <div class="poliza-box">Póliza: <span contenteditable="true">24014312 / 0</span></div>
-            <div class="logo-placeholder">ASEGURADORA<br>ARGENTINA S.A.</div>
+            <div class="logo-placeholder">FEDERACIÓN PATRONAL<br>SEGUROS S.A.</div>
         </div>
 
         <div class="client-name" contenteditable="true">CLIENTE: 476254 BONINO HECTOR EDGARDO</div>
@@ -192,7 +192,7 @@
     <div class="column">
         <div class="header">
             <div class="poliza-box">Póliza: <span contenteditable="true">24014312 - 0 - 2</span></div>
-            <div class="logo-placeholder">ASEGURADORA<br>ARGENTINA S.A.</div>
+            <div class="logo-placeholder">FEDERACIÓN PATRONAL<br>ASEGURADORA S.A.</div>
         </div>
 
         <div class="legal-text">
@@ -221,7 +221,7 @@ function descargarPDF() {
 
     const opciones = {
         margin: 0.3,
-        filename: 'comprobante_seguro.pdf',
+        filename: 'comprobante_seguro_federacionpatronal.pdf',
         image: { type: 'jpeg', quality: 1 },
         html2canvas: { scale: 2 },
         jsPDF: { unit: 'in', format: 'a4', orientation: 'landscape' }
