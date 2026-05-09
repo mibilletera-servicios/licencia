@@ -70,17 +70,13 @@
             border-color: var(--naranja);
         }
 
-        .img-placeholder {
+        .product-img {
             width: 100%;
             height: 200px;
-            background: #f9f9f9;
+            object-fit: contain;
             border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            color: #bbb;
             margin-bottom: 15px;
+            background: #f9f9f9;
         }
 
         .price-main {
@@ -183,19 +179,19 @@
 <div class="container">
     <div class="catalog">
         <div class="product-card" onclick="openModal('mercedes')">
-            <div class="img-placeholder" style="background: #FFF9C4;">MERCEDES AMG GT</div>
+            <img src="TU_IMAGEN_MERCEDES.jpg" alt="Mercedes AMG" class="product-img">
             <h3>Mercedes Benz AMG GT 12V</h3>
             <span class="price-main">$255.482,80</span>
         </div>
 
         <div class="product-card" onclick="openModal('jeep')">
-            <div class="img-placeholder" style="background: #E0E0E0;">JEEP 4X4 GRIS</div>
+            <img src="TU_IMAGEN_JEEP.jpg" alt="Jeep 4x4" class="product-img">
             <h3>Jeep Batería 12V 4x4</h3>
             <span class="price-main">$586.395,00</span>
         </div>
 
         <div class="product-card" onclick="openModal('audi')">
-            <div class="img-placeholder" style="background: #CFD8DC;">AUDI R8 SPORT</div>
+            <img src="https://http2.mlstatic.com/D_Q_NP_672802-MLA49397879308_032022-F.webp" alt="Audi R8" class="product-img">
             <h3>Audi R8 Sport 2022</h3>
             <span class="price-main">$413.280,00</span>
         </div>
@@ -363,5 +359,5 @@
 </script>
 
 </body>
-            </html>
-        
+    </html>
+            
