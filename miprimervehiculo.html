@@ -79,6 +79,52 @@
             background: #f9f9f9;
         }
 
+        /* --- ESTILOS DEL CARRUSEL --- */
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            margin-bottom: 20px;
+            border-radius: 20px;
+            overflow: hidden;
+            background: #f9f9f9;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.4s ease-in-out;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .carousel-slide img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 74, 173, 0.7);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 50%;
+            font-family: 'Bungee';
+            z-index: 5;
+        }
+
+        .prev-btn { left: 10px; }
+        .next-btn { right: 10px; }
+
         .price-main {
             font-size: 1.8rem;
             font-weight: bold;
@@ -118,6 +164,7 @@
             font-size: 40px;
             cursor: pointer;
             color: var(--naranja);
+            z-index: 10;
         }
 
         .specs-list {
@@ -191,7 +238,7 @@
         </div>
 
         <div class="product-card" onclick="openModal('audi')">
-            <img src="https://http2.mlstatic.com/D_Q_NP_672802-MLA49397879308_032022-F.webp" alt="Audi R8" class="product-img">
+            <img src="TU_IMAGEN_AUDI.jpg" alt="Audi R8" class="product-img">
             <h3>Audi R8 Sport 2022</h3>
             <span class="price-main">$413.280,00</span>
         </div>
@@ -248,6 +295,20 @@
     <div class="modal-content">
         <span class="close-modal" onclick="closeModal('mercedes')">&times;</span>
         <h2>Mercedes Benz AMG GT 12V</h2>
+        
+        <!-- Carrusel -->
+        <div class="carousel-container">
+            <button class="carousel-btn prev-btn" onclick="moveCarousel('mercedes', -1)">❮</button>
+            <div class="carousel-track" id="track-mercedes">
+                <div class="carousel-slide"><img src="MERCEDES_IMAGEN_1.jpg"></div>
+                <div class="carousel-slide"><img src="MERCEDES_IMAGEN_2.jpg"></div>
+                <div class="carousel-slide"><img src="MERCEDES_IMAGEN_3.jpg"></div>
+                <div class="carousel-slide"><img src="MERCEDES_IMAGEN_4.jpg"></div>
+                <div class="carousel-slide"><img src="MERCEDES_IMAGEN_5.jpg"></div>
+            </div>
+            <button class="carousel-btn next-btn" onclick="moveCarousel('mercedes', 1)">❯</button>
+        </div>
+
         <div class="specs-list">
             <p><strong>Descripción:</strong> Control remoto parental, batería 12V, música Bluetooth, luces LED. Soporta 30kg.</p>
         </div>
@@ -265,6 +326,20 @@
     <div class="modal-content">
         <span class="close-modal" onclick="closeModal('jeep')">&times;</span>
         <h2>Jeep Batería 12V 4x4</h2>
+
+        <!-- Carrusel -->
+        <div class="carousel-container">
+            <button class="carousel-btn prev-btn" onclick="moveCarousel('jeep', -1)">❮</button>
+            <div class="carousel-track" id="track-jeep">
+                <div class="carousel-slide"><img src="JEEP_IMAGEN_1.jpg"></div>
+                <div class="carousel-slide"><img src="JEEP_IMAGEN_2.jpg"></div>
+                <div class="carousel-slide"><img src="JEEP_IMAGEN_3.jpg"></div>
+                <div class="carousel-slide"><img src="JEEP_IMAGEN_4.jpg"></div>
+                <div class="carousel-slide"><img src="JEEP_IMAGEN_5.jpg"></div>
+            </div>
+            <button class="carousel-btn next-btn" onclick="moveCarousel('jeep', 1)">❯</button>
+        </div>
+
         <div class="specs-list">
             <p><strong>Descripción:</strong> 2 Motores, suspension, USB, Control Remoto. Soporta 35kg.</p>
         </div>
@@ -282,6 +357,20 @@
     <div class="modal-content">
         <span class="close-modal" onclick="closeModal('audi')">&times;</span>
         <h2>Audi R8 Sport 2022</h2>
+
+        <!-- Carrusel -->
+        <div class="carousel-container">
+            <button class="carousel-btn prev-btn" onclick="moveCarousel('audi', -1)">❮</button>
+            <div class="carousel-track" id="track-audi">
+                <div class="carousel-slide"><img src="https://http2.mlstatic.com/D_Q_NP_900283-MLA47900284575_102021-F.webp"></div>
+                <div class="carousel-slide"><img src="https://http2.mlstatic.com/D_Q_NP_730940-MLA47900295305_102021-F.webp"></div>
+                <div class="carousel-slide"><img src="https://http2.mlstatic.com/D_Q_NP_672802-MLA49397879308_032022-F.webp"></div>
+                <div class="carousel-slide"><img src="https://http2.mlstatic.com/D_Q_NP_800019-MLA49397911128_032022-F.webp"></div>
+                <div class="carousel-slide"><img src="https://http2.mlstatic.com/D_Q_NP_606599-MLA86896878406_072025-F.webp"></div>
+            </div>
+            <button class="carousel-btn next-btn" onclick="moveCarousel('audi', 1)">❯</button>
+        </div>
+
         <div class="specs-list">
             <p><strong>Ficha Técnica Audi R8:</strong><br>
             Motor: 12v, 45w. Batería: 12v, 4,5 Ah. Ruedas: Plástico resistente. Velocidad: 3-5 km/h. Control: Bluetooth con freno y reversa. Edad: 1-4 años. Peso: 30kg. Autonomía: 30min-2hs. Carga: 6-8hs. Incluye: Luces LED, apertura puertas, USB y melodías.</p>
@@ -303,8 +392,22 @@
 
 <script>
     let cart = null;
+    let carouselIndices = { mercedes: 0, jeep: 0, audi: 0 };
 
-    function openModal(id) { document.getElementById('modal-' + id).style.display = "block"; }
+    function moveCarousel(id, direction) {
+        const track = document.getElementById('track-' + id);
+        const slides = track.children;
+        carouselIndices[id] = (carouselIndices[id] + direction + slides.length) % slides.length;
+        track.style.transform = `translateX(-${carouselIndices[id] * 100}%)`;
+    }
+
+    function openModal(id) { 
+        document.getElementById('modal-' + id).style.display = "block"; 
+        // Reset carrusel al abrir
+        carouselIndices[id] = 0;
+        document.getElementById('track-' + id).style.transform = `translateX(0%)`;
+    }
+    
     function closeModal(id) { document.getElementById('modal-' + id).style.display = "none"; }
 
     function addToCart(name, price, id) {
@@ -360,4 +463,4 @@
 
 </body>
     </html>
-            
+                
