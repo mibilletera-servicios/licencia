@@ -214,6 +214,79 @@
             padding: 50px 20px;
             border-top: 10px solid var(--naranja);
         }
+            footer {
+        background: var(--azul);
+        color: white;
+        padding: 60px 20px 30px 20px;
+        border-top: 10px solid var(--naranja);
+        font-family: 'Roboto', sans-serif;
+    }
+
+    .footer-container {
+        max-width: 1200px;
+        margin: auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 40px;
+    }
+
+    .footer-section h3 {
+        font-family: 'Bungee', cursive;
+        color: var(--amarillo);
+        margin-bottom: 20px;
+        font-size: 1.2rem;
+    }
+
+    .footer-section p, .footer-section li {
+        font-size: 0.9rem;
+        line-height: 1.6;
+        color: #e0f0ff;
+    }
+
+    .footer-section ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .footer-section ul li {
+        margin-bottom: 10px;
+    }
+
+    .footer-section a {
+        color: white;
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+
+    .footer-section a:hover {
+        color: var(--amarillo);
+    }
+
+    .payment-methods {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 15px;
+    }
+
+    .payment-badge {
+        background: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        color: var(--azul);
+        font-weight: bold;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+    }
+
+    .footer-bottom {
+        text-align: center;
+        margin-top: 50px;
+        padding-top: 20px;
+        border-top: 1px solid rgba(255,255,255,0.1);
+        font-size: 0.8rem;
+        color: #87CEEB;
+            }
     </style>
 </head>
 <body>
@@ -413,9 +486,47 @@
 </div>
 
 <footer>
-    <h2>MI PRIMER VEHÍCULO</h2>
-    <p>Garantía de alegría y motores. Buenos Aires, Argentina.</p>
+    <div class="footer-container">
+        <!-- Columna 1: Marca -->
+        <div class="footer-section">
+            <h3>MI PRIMER VEHÍCULO</h3>
+            <p>Especialistas en vehículos eléctricos para niños. Brindamos seguridad, calidad y la mayor diversión en cada motor.</p>
+            <div class="payment-methods">
+                <span class="payment-badge">Visa</span>
+                <span class="payment-badge">Mastercard</span>
+                <span class="payment-badge">Transferencia</span>
+                <span class="payment-badge">Efectivo</span>
+            </div>
+        </div>
+
+        <!-- Columna 2: Enlaces Rápidos -->
+        <div class="footer-section">
+            <h3>Navegación</h3>
+            <ul>
+                <li><a href="#">Catálogo Completo</a></li>
+                <li><a href="#">Preguntas Frecuentes</a></li>
+                <li><a href="#">Garantía Oficial</a></li>
+                <li><a href="#">Seguimiento de Envío</a></li>
+            </ul>
+        </div>
+
+        <!-- Columna 3: Contacto -->
+        <div class="footer-section">
+            <h3>Contacto</h3>
+            <ul>
+                <li>📍 Buenos Aires, Argentina</li>
+                <li>📞 +54 9 11 1234-5678</li>
+                <li>✉️ ventas@miprimervehiculo.com</li>
+                <li>⏰ Lun a Vie: 09:00 a 18:00hs</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; 2026 Mi Primer Vehículo - Todos los derechos reservados.</p>
+    </div>
 </footer>
+
 
 <script>
     let cart = null;
