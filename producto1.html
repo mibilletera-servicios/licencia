@@ -327,6 +327,103 @@ select{
     .product-info h1{
         font-size:3rem;
     }
+    /* CAROUSEL */
+
+.main-image{
+    width:100%;
+    height:500px;
+    object-fit:cover;
+}
+
+.thumbnail-container{
+    display:flex;
+    gap:10px;
+    padding:15px;
+    overflow-x:auto;
+    background:#f5f5f5;
+}
+
+.thumbnail{
+    width:80px;
+    height:80px;
+    object-fit:cover;
+    border-radius:10px;
+    cursor:pointer;
+    border:3px solid transparent;
+    transition:.3s;
+}
+
+.thumbnail:hover{
+    border-color:var(--nitro-orange);
+    transform:scale(1.05);
+}
+
+/* COMMENTS */
+
+.comments-section{
+    max-width:1300px;
+    margin:60px auto;
+    padding:0 20px;
+}
+
+.comments-box{
+    background:white;
+    border-radius:20px;
+    padding:35px;
+    border:3px solid #111;
+    box-shadow:10px 10px 0px var(--nitro-orange);
+}
+
+.comments-title{
+    font-family:'Bangers',cursive;
+    font-size:3rem;
+    margin-bottom:30px;
+}
+
+.comment{
+    display:flex;
+    gap:15px;
+    padding:20px 0;
+    border-bottom:1px solid #ddd;
+}
+
+.comment:last-child{
+    border-bottom:none;
+}
+
+.avatar{
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    background:#1877f2;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:900;
+    font-size:1.2rem;
+}
+
+.comment-content{
+    flex:1;
+}
+
+.comment-name{
+    font-weight:900;
+    margin-bottom:5px;
+}
+
+.comment-text{
+    line-height:1.6;
+}
+
+.comment-actions{
+    margin-top:10px;
+    display:flex;
+    gap:15px;
+    font-size:.9rem;
+    color:#666;
+        }
 
 }
 
@@ -357,11 +454,45 @@ select{
 
     <div class="product-gallery">
 
-        <img
+    <img
+    id="mainProductImage"
+    class="main-image"
+    src="https://http2.mlstatic.com/D_Q_NP_900283-MLA47900284575_102021-F.webp"
+    alt="Ford Mustang GT">
+
+    <div class="thumbnail-container">
+
+        <img class="thumbnail"
         src="https://http2.mlstatic.com/D_Q_NP_900283-MLA47900284575_102021-F.webp"
-        alt="Ford Mustang GT">
+        onclick="changeImage(this.src)">
+
+        <img class="thumbnail"
+        src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=1200"
+        onclick="changeImage(this.src)">
+
+        <img class="thumbnail"
+        src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1200"
+        onclick="changeImage(this.src)">
+
+        <img class="thumbnail"
+        src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?q=80&w=1200"
+        onclick="changeImage(this.src)">
+
+        <img class="thumbnail"
+        src="https://images.unsplash.com/photo-1553440569-bcc63803a83d?q=80&w=1200"
+        onclick="changeImage(this.src)">
+
+        <img class="thumbnail"
+        src="https://images.unsplash.com/photo-1511919884226-fd3cad34687c?q=80&w=1200"
+        onclick="changeImage(this.src)">
+
+        <img class="thumbnail"
+        src="https://images.unsplash.com/photo-1502877338535-766e1452684a?q=80&w=1200"
+        onclick="changeImage(this.src)">
 
     </div>
+
+</div>
 
     <!-- INFO -->
 
@@ -409,21 +540,21 @@ select{
                 Elegir color
             </label>
 
-            <select id="color">
+            <select id="color" onchange="changeColorImages()">
 
-                <option value="Rojo">
-                    Rojo
-                </option>
+    <option value="rojo">
+        Rojo
+    </option>
 
-                <option value="Azul">
-                    Azul
-                </option>
+    <option value="azul">
+        Azul
+    </option>
 
-                <option value="Blanco">
-                    Blanco
-                </option>
+    <option value="blanco">
+        Blanco
+    </option>
 
-            </select>
+</select>
 
         </div>
 
@@ -463,30 +594,30 @@ select{
                     Seleccionar provincia
                 </option>
 
-                <option value="12000">Buenos Aires</option>
-                <option value="15000">CABA</option>
-                <option value="17000">Catamarca</option>
-                <option value="16000">Chaco</option>
-                <option value="18000">Chubut</option>
-                <option value="16000">Córdoba</option>
-                <option value="17000">Corrientes</option>
-                <option value="19000">Entre Ríos</option>
-                <option value="25000">Formosa</option>
-                <option value="26000">Jujuy</option>
-                <option value="21000">La Pampa</option>
-                <option value="24000">La Rioja</option>
-                <option value="19000">Mendoza</option>
-                <option value="17000">Misiones</option>
-                <option value="23000">Neuquén</option>
-                <option value="26000">Río Negro</option>
-                <option value="28000">Salta</option>
-                <option value="25000">San Juan</option>
-                <option value="25000">San Luis</option>
-                <option value="32000">Santa Cruz</option>
-                <option value="18000">Santa Fe</option>
-                <option value="26000">Santiago del Estero</option>
-                <option value="35000">Tierra del Fuego</option>
-                <option value="24000">Tucumán</option>
+                <option value="12000">Buenos Aires - Envío $12.000</option>
+<option value="15000">CABA - Envío $15.000</option>
+<option value="17000">Catamarca - Envío $17.000</option>
+<option value="16000">Chaco - Envío $16.000</option>
+<option value="18000">Chubut - Envío $18.000</option>
+<option value="16000">Córdoba - Envío $16.000</option>
+<option value="17000">Corrientes - Envío $17.000</option>
+<option value="19000">Entre Ríos - Envío $19.000</option>
+<option value="25000">Formosa - Envío $25.000</option>
+<option value="26000">Jujuy - Envío $26.000</option>
+<option value="21000">La Pampa - Envío $21.000</option>
+<option value="24000">La Rioja - Envío $24.000</option>
+<option value="19000">Mendoza - Envío $19.000</option>
+<option value="17000">Misiones - Envío $17.000</option>
+<option value="23000">Neuquén - Envío $23.000</option>
+<option value="26000">Río Negro - Envío $26.000</option>
+<option value="28000">Salta - Envío $28.000</option>
+<option value="25000">San Juan - Envío $25.000</option>
+<option value="25000">San Luis - Envío $25.000</option>
+<option value="32000">Santa Cruz - Envío $32.000</option>
+<option value="18000">Santa Fe - Envío $18.000</option>
+<option value="26000">Santiago del Estero - Envío $26.000</option>
+<option value="35000">Tierra del Fuego - Envío $35.000</option>
+<option value="24000">Tucumán - Envío $24.000</option>
 
             </select>
 
@@ -798,6 +929,99 @@ select{
     </div>
 
 </section>
+    <!-- COMENTARIOS -->
+
+<section class="comments-section">
+
+    <div class="comments-box">
+
+        <h2 class="comments-title">
+            Opiniones de clientes
+        </h2>
+
+        <div class="comment">
+
+            <div class="avatar">
+                M
+            </div>
+
+            <div class="comment-content">
+
+                <div class="comment-name">
+                    Mariana López
+                </div>
+
+                <div class="comment-text">
+                    Hermoso el Mustang 😍 Mi hijo quedó fascinado.
+                    La batería dura muchísimo y llegó rapidísimo.
+                </div>
+
+                <div class="comment-actions">
+                    <span>👍 Me gusta</span>
+                    <span>💬 Responder</span>
+                    <span>Hace 2 días</span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="comment">
+
+            <div class="avatar">
+                F
+            </div>
+
+            <div class="comment-content">
+
+                <div class="comment-name">
+                    Fernando Ruiz
+                </div>
+
+                <div class="comment-text">
+                    Excelente calidad. Muy fácil de armar y el control remoto funciona perfecto.
+                </div>
+
+                <div class="comment-actions">
+                    <span>👍 Me gusta</span>
+                    <span>💬 Responder</span>
+                    <span>Hace 5 días</span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="comment">
+
+            <div class="avatar">
+                C
+            </div>
+
+            <div class="comment-content">
+
+                <div class="comment-name">
+                    Carla Medina
+                </div>
+
+                <div class="comment-text">
+                    Compramos el blanco y es muchísimo más lindo en persona.
+                    Muy recomendable ❤️
+                </div>
+
+                <div class="comment-actions">
+                    <span>👍 Me gusta</span>
+                    <span>💬 Responder</span>
+                    <span>Hace 1 semana</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    </section>
 
 <script>
 
@@ -837,6 +1061,44 @@ function updateTotal(){
 province.addEventListener("change", updateTotal);
 payment.addEventListener("change", updateTotal);
 
+    function changeImage(src){
+
+    document.getElementById(
+    "mainProductImage"
+    ).src = src;
+
+}
+
+function changeColorImages(){
+
+    const color =
+    document.getElementById("color").value;
+
+    const mainImage =
+    document.getElementById("mainProductImage");
+
+    if(color === "rojo"){
+
+        mainImage.src =
+        "https://http2.mlstatic.com/D_Q_NP_900283-MLA47900284575_102021-F.webp";
+
+    }
+
+    if(color === "azul"){
+
+        mainImage.src =
+        "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1200";
+
+    }
+
+    if(color === "blanco"){
+
+        mainImage.src =
+        "https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=1200";
+
+    }
+
+    }
 function addCart(){
 
     alert("Producto agregado al carrito 🛒");
