@@ -227,19 +227,19 @@
     <div class="catalog">
         <div class="product-card" onclick="openModal('mercedes')">
             <img src="https://http2.mlstatic.com/D_Q_NP_669121-MLA109216618600_042026-F.webp" alt="Mercedes AMG" class="product-img">
-            <h3>Mercedes Benz AMG GT 12V</h3>
+            <h3>Mercedes Benz AMG GT Batería 12V</h3>
             <span class="price-main">$255.482,80</span>
         </div>
 
         <div class="product-card" onclick="openModal('jeep')">
             <img src="https://http2.mlstatic.com/D_NQ_NP_806917-MLA101078834189_122025-O.webp" alt="Jeep 4x4" class="product-img">
-            <h3>Jeep Batería 12V 4x4</h3>
+            <h3>Jeep Everbright 4x4 Batería 12V</h3>
             <span class="price-main">$586.395,00</span>
         </div>
 
         <div class="product-card" onclick="openModal('audi')">
             <img src="https://http2.mlstatic.com/D_Q_NP_900283-MLA47900284575_102021-F.webp" alt="Audi R8" class="product-img">
-            <h3>Audi R8 Sport 2022</h3>
+            <h3>Audi R8 Sport Batería 12V </h3>
             <span class="price-main">$413.280,00</span>
         </div>
     </div>
@@ -282,7 +282,7 @@
                 </select>
             </div>
             <div style="text-align: right;">
-                <h3 style="margin: 0;">Total Final: <span id="total-final">$0,00</span></h3>
+                <h3 style="margin: 0;">TOTAL: <span id="total-final">$0,00</span></h3>
                 <p id="whatsapp-container" style="margin-top: 15px;"></p>
             </div>
         </div>
@@ -294,7 +294,7 @@
 <div id="modal-mercedes" class="modal">
     <div class="modal-content">
         <span class="close-modal" onclick="closeModal('mercedes')">&times;</span>
-        <h2>Mercedes Benz AMG GT 12V</h2>
+        <h2>Mercedes Benz AMG GT Batería 12V</h2>
         
         <!-- Carrusel -->
         <div class="carousel-container">
@@ -310,13 +310,21 @@
         </div>
 
         <div class="specs-list">
-            <p><strong>Descripción:</strong> Control remoto parental, batería 12V, música Bluetooth, luces LED. Soporta 30kg.</p>
-        </div>
-        <div class="option-group">
-            <label>Color: <select id="color-mercedes"><option>Amarillo</option><option>Rojo</option><option>Blanco</option></select></label><br><br>
-            <label>Pago: <select id="pago-mercedes"><option>1 Pago (Efectivo/Transferencia)</option><option>Cuotas con Tarjeta</option></select></label><br><br>
-            <label>Entrega: <select id="armado-mercedes"><option value="0">En caja (Listo para armar)</option><option value="65000">Armado (+$65.000)</option></select></label>
-        </div>
+    <p><strong>Ficha Técnica Mercedes Benz AMG R-2:</strong></p>
+    <ul style="list-style: none; padding: 0; margin: 0;">
+        <li><strong>Voltaje:</strong> 12V (Incluye batería y cargador)</li>
+        <li><strong>Motores:</strong> 1 motor</li>
+        <li><strong>Velocidad máxima:</strong> 5 km/h</li>
+        <li><strong>Modo de manejo:</strong> Pedal de aceleración y reversa</li>
+        <li><strong>Control remoto:</strong> Sí, incluido</li>
+        <li><strong>Asientos:</strong> 1 asiento</li>
+        <li><strong>Peso máximo soportado:</strong> 30 kg</li>
+        <li><strong>Edad mínima recomendada:</strong> 3 años</li>
+        <li><strong>Seguridad y extras:</strong> Luces frontales y 4 ruedas</li>
+    </ul>
+    <p><strong>Franquicia:</strong> Mercedes Benz Oficial</p>
+</div>
+
         <button class="btn-action" onclick="addToCart('Mercedes AMG GT', 255482.80, 'mercedes')">AGREGAR AL CARRITO</button>
     </div>
 </div>
@@ -325,7 +333,7 @@
 <div id="modal-jeep" class="modal">
     <div class="modal-content">
         <span class="close-modal" onclick="closeModal('jeep')">&times;</span>
-        <h2>Jeep Batería 12V 4x4</h2>
+        <h2>Jeep Everbright 4x4 Batería 12V</h2>
 
         <!-- Carrusel -->
         <div class="carousel-container">
@@ -341,7 +349,7 @@
         </div>
 
         <div class="specs-list">
-    <p><strong>Ficha Técnica Jeep Everbright BH918G:</strong></p>
+    <p><strong>Ficha Técnica Jeep Everbright 4x4:</strong></p>
     <ul style="list-style: none; padding: 0; margin: 0;">
         <li><strong>Modelo:</strong> Everbright Jeep BH918G</li>
         <li><strong>Batería:</strong> Doble 6V (2 unidades de 6V4AH)</li>
@@ -363,7 +371,7 @@
 <div id="modal-audi" class="modal">
     <div class="modal-content">
         <span class="close-modal" onclick="closeModal('audi')">&times;</span>
-        <h2>Audi R8 Sport 2022</h2>
+        <h2>Audi R8 Sport 2026</h2>
 
         <!-- Carrusel -->
         <div class="carousel-container">
@@ -392,7 +400,7 @@
         <li><strong>Carga:</strong> 6-8hs</li>
         <li><strong>Incluye:</strong> Luces LED, apertura puertas, USB y melodías</li>
     </ul>
-    <p><strong>Medidas:</strong> 100x59x30 cm.</p>
+    <p><strong>Medidas:</strong> 100 x 59 x 30 cm.</p>
 </div>
 
         <div class="option-group">
