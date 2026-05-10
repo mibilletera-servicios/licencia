@@ -21,29 +21,69 @@
             overflow-x: hidden;
         }
 
-        header {
-            background: var(--celeste);
-            background: radial-gradient(circle, #87CEEB 0%, #4682B4 100%);
-            padding: 40px 20px;
+                header {
+            background: var(--azul);
+            background: linear-gradient(180deg, var(--azul) 0%, var(--celeste) 100%);
+            padding: 80px 20px;
             text-align: center;
-            border-bottom: 8px solid var(--amarillo);
+            border-bottom: 10px solid var(--amarillo);
             position: relative;
+            overflow: hidden;
+        }
+
+        /* Efecto de nubes decorativas */
+        header::after {
+            content: "";
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg"><path fill="%23f0faff" d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,250.7C960,235,1056,181,1152,165.3C1248,149,1344,171,1392,181.3L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+            display: inline-block;
+            padding: 30px 60px;
+            border-radius: 50px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
         }
 
         header h1 {
             font-family: 'Bungee', cursive;
             color: var(--amarillo);
-            font-size: 3.5rem;
+            font-size: clamp(2rem, 8vw, 4.5rem); /* Tamaño fluido */
             margin: 0;
-            text-shadow: 4px 4px var(--azul);
-            letter-spacing: 2px;
+            text-shadow: 6px 6px 0px var(--azul);
+            letter-spacing: 3px;
+            line-height: 1;
         }
 
         header p {
             font-family: 'Lucky Guy', cursive;
             color: var(--blanco);
-            font-size: 1.5rem;
-            margin-top: 10px;
+            font-size: clamp(1rem, 4vw, 1.8rem);
+            margin-top: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* Animación del Cohete */
+        .rocket-emoji {
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(10deg); }
+            100% { transform: translateY(0) rotate(0deg); }
         }
 
         .container { max-width: 1200px; margin: auto; padding: 40px 20px; }
@@ -292,9 +332,12 @@
 <body>
 
 <header>
-    <h1>MI PRIMER VEHÍCULO</h1>
-    <p>🚀 ¡Donde los sueños tienen ruedas! 🏎️</p>
+    <div class="header-content">
+        <h1>MI PRIMER VEHÍCULO</h1>
+        <p><span class="rocket-emoji">🚀</span> ¡Donde los sueños tienen ruedas! 🏎️</p>
+    </div>
 </header>
+
 
 <div class="container">
     <div class="catalog">
