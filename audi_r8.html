@@ -356,6 +356,18 @@ select{
     cursor:not-allowed;
     transform:none;
                     }
+    .main-image{
+    width:100%;
+    height:520px;
+
+    object-fit:contain;
+
+    background:white;
+
+    padding:20px;
+
+    display:block;
+    }
 
 /* MOBILE */
 
@@ -386,22 +398,25 @@ select{
     background:#f5f5f5;
 
     align-items:center;
-}
-    @media(max-width:900px){
-
-    .product-gallery{
-        height:520px;
-    }
 
     }
 
 .thumbnail{
-    width:80px;
-    height:80px;
-    object-fit:cover;
+    width:90px;
+    height:90px;
+
+    object-fit:contain;
+
+    background:white;
+
+    padding:4px;
+
     border-radius:10px;
+
     cursor:pointer;
+
     border:3px solid transparent;
+
     transition:.3s;
 }
 
@@ -1249,15 +1264,293 @@ Hola, me gustaría realizar la compra del siguiente vehículo:
 📍 Provincia de envío: ${provinceText}
 
 💰 Total final: ${formatPrice(total)}
+<script>
 
-Quedo a la espera de información adicional para continuar con la compra y ver seguimiento en tiempo real.
+let cart = 0;
+
+const transferPrice = 371952;
+const cashPrice = 334756.8;
+
+const province =
+document.getElementById("province");
+
+const payment =
+document.getElementById("payment");
+
+const totalPrice =
+document.getElementById("totalPrice");
+
+/* =========================
+   FOTOS POR COLOR
+========================= */
+
+const images = {
+
+    rojo:[
+
+        "https://http2.mlstatic.com/D_Q_NP_881266-MLA94586516329_102025-F.webp",
+        "https://http2.mlstatic.com/D_Q_NP_628027-MLA83710190908_042025-F.webp",
+        "https://http2.mlstatic.com/D_Q_NP_687790-MLA84003660231_042025-F.webp"
+
+    ],
+
+    azul:[
+
+        "https://http2.mlstatic.com/D_Q_NP_650436-MLA94971573927_102025-F.webp",
+        "https://http2.mlstatic.com/D_Q_NP_900283-MLA47900284575_102021-F.webp",
+        "https://http2.mlstatic.com/D_Q_NP_847169-MLA86896111212_072025-F.webp"
+
+    ],
+
+    blanco:[
+
+        "https://http2.mlstatic.com/D_Q_NP_672802-MLA49397879308_032022-F.webp",
+        "https://http2.mlstatic.com/D_Q_NP_800019-MLA49397911128_032022-F.webp",
+        "https://http2.mlstatic.com/D_Q_NP_606599-MLA86896878406_072025-F.webp"
+
+    ]
+
+};
+
+let currentColor = "rojo";
+let currentIndex = 0;
+
+/* =========================
+   FORMATO PRECIO
+========================= */
+
+function formatPrice(price){
+
+    return price.toLocaleString("es-AR",{
+        style:"currency",
+        currency:"ARS"
+    });
+
+}
+
+/* =========================
+   TOTAL
+========================= */
+
+function updateTotal(){
+
+    let shipping =
+    Number(province.value);
+
+    let basePrice =
+    payment.value === "efectivo"
+    ? cashPrice
+    : transferPrice;
+
+    let total =
+    basePrice + shipping;
+
+    totalPrice.innerText =
+    formatPrice(total);
+
+    const buyBtn =
+    document.getElementById("buyBtn");
+
+    if(province.value !== "0"){
+
+        buyBtn.disabled = false;
+
+    }else{
+
+        buyBtn.disabled = true;
+
+    }
+
+}
+
+province.addEventListener(
+"change",
+updateTotal
+);
+
+payment.addEventListener(
+"change",
+updateTotal
+);
+
+/* =========================
+   MINIATURAS
+========================= */
+
+function loadThumbnails(){
+
+    const container =
+    document.getElementById(
+    "thumbnailContainer"
+    );
+
+    container.innerHTML = "";
+
+    images[currentColor]
+    .forEach((img,index)=>{
+
+        container.innerHTML += `
+        <img
+        class="thumbnail"
+        src="${img}"
+        onclick="setImage(${index})">
+        `;
+
+    });
+
+}
+
+/* =========================
+   CAMBIAR IMAGEN
+========================= */
+
+function setImage(index){
+
+    currentIndex = index;
+
+    document.getElementById(
+    "mainProductImage"
+    ).src =
+    images[currentColor][currentIndex];
+
+}
+
+/* =========================
+   SIGUIENTE
+========================= */
+
+function nextImage(){
+
+    currentIndex++;
+
+    if(
+        currentIndex >=
+        images[currentColor].length
+    ){
+
+        currentIndex = 0;
+
+    }
+
+    setImage(currentIndex);
+
+}
+
+/* =========================
+   ANTERIOR
+========================= */
+
+function prevImage(){
+
+    currentIndex--;
+
+    if(currentIndex < 0){
+
+        currentIndex =
+        images[currentColor].length - 1;
+
+    }
+
+    setImage(currentIndex);
+
+}
+
+/* =========================
+   CAMBIO COLOR
+========================= */
+
+function changeColorImages(){
+
+    currentColor =
+    document.getElementById(
+    "color"
+    ).value;
+
+    currentIndex = 0;
+
+    document.getElementById(
+    "mainProductImage"
+    ).src =
+    images[currentColor][0];
+
+    loadThumbnails();
+
+}
+
+/* =========================
+   CARRITO
+========================= */
+
+function addCart(){
+
+    alert(
+    "Producto agregado al carrito 🛒"
+    );
+
+}
+
+/* =========================
+   WHATSAPP
+========================= */
+
+function buyNow(){
+
+    let color =
+    document.getElementById(
+    "color"
+    ).value;
+
+    let provinceText =
+    province.options[
+    province.selectedIndex
+    ].text;
+
+    let paymentText =
+    payment.options[
+    payment.selectedIndex
+    ].text;
+
+    let shipping =
+    Number(province.value);
+
+    let basePrice =
+    payment.value === "efectivo"
+    ? cashPrice
+    : transferPrice;
+
+    let total =
+    basePrice + shipping;
+
+    let discount =
+    payment.value === "efectivo"
+    ? "10% OFF aplicado"
+    : "Sin descuento";
+
+    let msg = `
+Hola, me gustaría realizar la compra del siguiente vehículo:
+
+━━━━━━━━━━━━━━━
+🚗 Audi R8 Sport 2026
+━━━━━━━━━━━━━━━
+
+📌 Color seleccionado: ${color}
+
+💳 Método de pago: ${paymentText}
+
+🏷️ Promoción: ${discount}
+
+📍 Provincia de envío: ${provinceText}
+
+💰 Total final: ${formatPrice(total)}
+
+Quedo a la espera de información adicional para continuar con la compra.
 Muchas gracias.
 `;
 
     let url =
-    `https://wa.me/5491178866725?text=${encodeURIComponent(msg)}`;
+`https://wa.me/5491178866725?text=${encodeURIComponent(msg)}`;
 
-    window.open(url, "_blank");
+    window.open(url,"_blank");
 
 }
 
