@@ -3,122 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NitroPeques | Dominando el Jardín</title>
-    <!-- Fuentes con onda -->
+    <title>NitroPeques | Full Gas!</title>
+    <!-- Fuentes con impacto -->
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
-    <!-- Iconos para el footer -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
         :root {
-            --neon-blue: #00d2ff;
-            --nitro-orange: #ff9d00;
-            --fire-red: #ff4b2b;
-            --dark-road: #232526;
-            --grass-green: #a8e063;
+            --nitro-yellow: #ffcc00;
+            --nitro-orange: #ff8800;
+            --danger-black: #1a1a1a;
+            --road-grey: #2d2d2d;
+            --fire: #ff4500;
+            --white: #ffffff;
         }
 
         body {
             font-family: 'Montserrat', sans-serif;
             margin: 0;
-            background-color: #f4f7f6;
-            color: var(--dark-road);
+            background-color: #ededed;
+            color: var(--danger-black);
         }
 
-        /* --- Header con mucha onda --- */
+        /* --- Header Refaccionado --- */
         header {
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
-                        url('https://img.freepik.com/free-photo/kids-playing-with-rc-cars_23-2149352261.jpg') center/cover;
-            padding: 4rem 1rem;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), 
+                        url('https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&q=80&w=1200') center/cover;
+            padding: 6rem 1rem;
             text-align: center;
-            border-bottom: 10px solid var(--nitro-orange);
-            clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%);
+            position: relative;
+            border-bottom: 8px solid var(--nitro-yellow);
+            overflow: hidden;
+        }
+
+        /* Líneas de carrera en el header */
+        header::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 15px;
+            background: repeating-linear-gradient(-45deg, var(--nitro-yellow), var(--nitro-yellow) 10px, #000 10px, #000 20px);
         }
 
         header h1 {
             font-family: 'Bangers', cursive;
-            color: var(--nitro-orange);
-            font-size: 5rem;
-            letter-spacing: 4px;
+            color: var(--nitro-yellow);
+            font-size: 6rem;
             margin: 0;
-            text-shadow: 4px 4px 0px #000;
-            transform: rotate(-2deg);
+            text-shadow: 6px 6px 0px var(--danger-black);
+            transform: skew(-5deg);
+            filter: drop-shadow(0 0 10px rgba(255, 204, 0, 0.5));
         }
 
         header p {
-            color: white;
+            color: var(--white);
             font-weight: 900;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             margin-top: 10px;
+            background: rgba(0,0,0,0.4);
+            display: inline-block;
+            padding: 5px 20px;
         }
 
         /* --- Barra de Confianza --- */
         .trust-bar {
-            background: var(--dark-road);
-            color: white;
+            background: var(--danger-black);
+            color: var(--white);
             display: flex;
             justify-content: center;
-            gap: 30px;
-            padding: 15px;
-            flex-wrap: wrap;
+            gap: 40px;
+            padding: 20px;
+            border-bottom: 4px solid var(--nitro-orange);
         }
 
         .trust-item {
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 0.85rem;
-            font-weight: bold;
+            gap: 10px;
+            font-size: 0.9rem;
+            font-weight: 700;
         }
 
-        .trust-item i { color: var(--nitro-orange); font-size: 1.2rem; }
+        .trust-item i { color: var(--nitro-yellow); font-size: 1.4rem; }
 
         /* --- Grid de Productos --- */
         .container {
             max-width: 1200px;
             margin: 4rem auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
             padding: 0 20px;
         }
 
         .card {
-            background: white;
-            border-radius: 25px;
+            background: var(--white);
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
+            box-shadow: 8px 8px 0px var(--nitro-yellow);
+            border: 3px solid var(--danger-black);
+            transition: 0.3s;
         }
 
         .card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            transform: translate(-5px, -5px);
+            box-shadow: 15px 15px 0px var(--nitro-orange);
         }
-
-        .badge-stock {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            padding: 5px 15px;
-            border-radius: 50px;
-            font-weight: 900;
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            z-index: 10;
-        }
-
-        .in-stock { background: var(--grass-green); color: #1e4d00; }
-        .no-stock { background: var(--fire-red); color: white; }
 
         .card img {
             width: 100%;
             height: 250px;
             object-fit: cover;
-            border-bottom: 5px solid var(--nitro-orange);
+            border-bottom: 3px solid var(--danger-black);
         }
 
         .card-body {
@@ -128,190 +128,184 @@
 
         .card-body h3 {
             font-family: 'Bangers', cursive;
-            font-size: 1.8rem;
+            font-size: 2rem;
             margin: 0;
-            color: var(--dark-road);
+            color: var(--danger-black);
         }
 
         .price-tag {
-            font-size: 2rem;
+            font-size: 2.2rem;
             font-weight: 900;
-            color: var(--fire-red);
+            color: var(--fire);
+            margin: 15px 0;
             display: block;
-            margin: 10px 0;
         }
 
         .btn-nitro {
             display: block;
-            background: var(--dark-road);
-            color: var(--nitro-orange);
-            padding: 12px;
+            background: var(--danger-black);
+            color: var(--nitro-yellow);
+            padding: 15px;
             text-decoration: none;
-            border-radius: 12px;
-            font-weight: bold;
-            transition: 0.3s;
+            border-radius: 8px;
+            font-weight: 900;
             text-transform: uppercase;
+            transition: 0.3s;
         }
 
         .btn-nitro:hover {
             background: var(--nitro-orange);
-            color: white;
+            color: var(--white);
         }
 
-        /* --- Footer Re-Copado --- */
+        /* --- Footer Refaccionado --- */
         footer {
-            background: var(--dark-road);
-            color: #d1d1d1;
-            padding: 5rem 1rem 2rem;
-            margin-top: 5rem;
+            background: var(--danger-black);
+            color: #ccc;
+            padding: 4rem 1rem 2rem;
+            margin-top: 6rem;
             position: relative;
         }
 
-        footer::before {
-            content: "";
+        /* Línea Amarilla y Negra arriba del Footer */
+        .hazard-line {
             position: absolute;
             top: -20px;
             left: 0;
             width: 100%;
-            height: 25px;
-            background: repeating-linear-gradient(45deg, var(--nitro-orange), var(--nitro-orange) 20px, #000 20px, #000 40px);
+            height: 20px;
+            background: repeating-linear-gradient(45deg, var(--nitro-yellow), var(--nitro-yellow) 20px, #000 20px, #000 40px);
+            border-top: 3px solid var(--danger-black);
+            border-bottom: 3px solid var(--danger-black);
         }
 
         .footer-grid {
             max-width: 1200px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 50px;
         }
 
         .footer-box h4 {
-            color: white;
+            color: var(--nitro-yellow);
             font-family: 'Bangers', cursive;
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            letter-spacing: 1px;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
         }
 
-        .contact-link {
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            width: 45px;
+            height: 45px;
+            background: var(--road-grey);
             display: flex;
             align-items: center;
-            gap: 12px;
-            margin-bottom: 15px;
-            color: #bbb;
-            text-decoration: none;
+            justify-content: center;
+            border-radius: 50%;
+            color: var(--nitro-yellow);
+            font-size: 1.2rem;
             transition: 0.3s;
+            text-decoration: none;
         }
 
-        .contact-link:hover { color: var(--nitro-orange); }
-
-        .payment-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-top: 1rem;
-        }
-
-        .payment-item {
-            background: rgba(255,255,255,0.05);
-            padding: 10px;
-            border-radius: 8px;
-            text-align: center;
-            font-size: 0.7rem;
-            font-weight: bold;
-            border: 1px solid #444;
-        }
-
-        .payment-item i {
-            display: block;
-            font-size: 1.5rem;
-            margin-bottom: 5px;
-            color: var(--nitro-orange);
+        .social-icons a:hover {
+            background: var(--nitro-orange);
+            color: white;
+            transform: translateY(-5px);
         }
 
         .copyright {
             text-align: center;
             margin-top: 4rem;
-            padding-top: 2rem;
-            border-top: 1px solid #444;
+            padding: 20px;
             font-size: 0.8rem;
-            font-weight: bold;
+            border-top: 1px solid var(--road-grey);
+            letter-spacing: 1px;
         }
+
+        .copyright b { color: var(--nitro-yellow); }
     </style>
 </head>
 <body>
 
 <header>
     <h1>NitroPeques</h1>
-    <p>⚡ Máxima potencia, mínima estatura ⚡</p>
+    <p>¡El patio es nuestra pista!</p>
 </header>
 
 <div class="trust-bar">
-    <div class="trust-item"><i class="fas fa-shield-halved"></i> MATERIALES CERTIFICADOS</div>
-    <div class="trust-item"><i class="fas fa-truck-fast"></i> ENVÍOS EN EL DÍA</div>
-    <div class="trust-item"><i class="fas fa-face-grin-stars"></i> +5000 PADRES FELICES</div>
+    <div class="trust-item"><i class="fas fa-check-double"></i> CALIDAD NITRO PRO</div>
+    <div class="trust-item"><i class="fas fa-bolt"></i> DESPACHO FLASH</div>
+    <div class="trust-item"><i class="fas fa-trophy"></i> EL REGALO GANADOR</div>
 </div>
 
 <main class="container">
-    <!-- Producto 1 -->
     <article class="card">
-        <span class="badge-stock in-stock">Hay Equipo</span>
-        <img src="TU_LINK_IMAGEN_1" alt="RC Monster">
+        <img src="https://images.unsplash.com/photo-1594787318286-3d835c1d207f?auto=format&fit=crop&q=80&w=500" alt="RC Monster">
         <div class="card-body">
-            <h3>Bestia del Barro 4x4</h3>
-            <p>Tracción total y luces LED para misiones nocturnas en el patio.</p>
-            <span class="price-tag">$24.999</span>
-            <a href="producto1.html" class="btn-nitro">Ver Cohete</a>
+            <h3>Monster Truck Extreme</h3>
+            <p>Suspensión real para saltar todos los obstáculos del jardín.</p>
+            <span class="price-tag">$28.400</span>
+            <a href="#" class="btn-nitro">¡Lo quiero ya!</a>
         </div>
     </article>
 
-    <!-- Producto 2 -->
     <article class="card">
-        <span class="badge-stock no-stock">Agotado</span>
-        <img src="TU_LINK_IMAGEN_2" alt="RC Racing">
+        <img src="https://images.unsplash.com/photo-1532330393533-443990a51d10?auto=format&fit=crop&q=80&w=500" alt="RC Racing">
         <div class="card-body">
-            <h3>Rayo McQueen Pro</h3>
-            <p>Velocidad de pista real con llantas de goma antideslizante.</p>
-            <span class="price-tag">$18.500</span>
-            <a href="producto2.html" class="btn-nitro">Ver Ficha</a>
+            <h3>Super Veloz GT</h3>
+            <p>Aerodinámico y furioso. Alcanza velocidades de competencia.</p>
+            <span class="price-tag">$21.900</span>
+            <a href="#" class="btn-nitro">Ver Detalles</a>
         </div>
     </article>
-
-    <!-- (Acá seguirían los otros 7 productos con la misma estructura) -->
-
+    
+    <!-- Agrega más tarjetas aquí -->
 </main>
 
 <footer>
+    <div class="hazard-line"></div>
     <div class="footer-grid">
         <div class="footer-box">
             <h4>NitroPeques</h4>
-            <p>Somos apasionados por el juego seguro y la aventura. No vendemos juguetes, vendemos los primeros recuerdos de velocidad de tus hijos.</p>
-        </div>
-
-        <div class="footer-box">
-            <h4>Hablemos</h4>
-            <a href="#" class="contact-link"><i class="fab fa-whatsapp"></i> +54 9 221 123-4567</a>
-            <a href="#" class="contact-link"><i class="far fa-envelope"></i> carreras@nitropeques.com</a>
-            <a href="#" class="contact-link"><i class="fas fa-location-dot"></i> La Plata, Buenos Aires</a>
-        </div>
-
-        <div class="footer-box">
-            <h4>Pagos Seguros</h4>
-            <div class="payment-grid">
-                <div class="payment-item"><i class="fas fa-university"></i> Transf.</div>
-                <div class="payment-item"><i class="fas fa-money-bill-wave"></i> Efectivo</div>
-                <div class="payment-item"><i class="fas fa-credit-card"></i> Tarjetas</div>
+            <p>Especialistas en vehículos a control remoto para los más aventureros de la casa. Seguridad, potencia y mucha diversión garantizada.</p>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
             </div>
-            <p style="font-size: 0.75rem; margin-top: 15px; color: var(--nitro-orange);">* 15% OFF pagando con Transferencia</p>
+        </div>
+
+        <div class="footer-box">
+            <h4>Boxes (Contacto)</h4>
+            <p><i class="fas fa-phone" style="color: var(--nitro-yellow)"></i> +54 9 221 000-0000</p>
+            <p><i class="fas fa-envelope" style="color: var(--nitro-yellow)"></i> hola@nitropeques.com</p>
+            <p><i class="fas fa-map-marker-alt" style="color: var(--nitro-yellow)"></i> La Plata, Argentina</p>
+        </div>
+
+        <div class="footer-box">
+            <h4>Metodos de Pago</h4>
+            <p>Aceptamos todas las tarjetas, transferencias y efectivo con descuento.</p>
+            <div style="font-size: 2rem; display: flex; gap: 15px;">
+                <i class="fab fa-cc-visa"></i>
+                <i class="fab fa-cc-mastercard"></i>
+                <i class="fas fa-wallet"></i>
+            </div>
         </div>
     </div>
 
     <div class="copyright">
-        &copy; 2026 NITROPEQUES ARGENTINA - Todos los derechos reservados. <br>
-        Hecho con ❤️ para mini pilotos.
+        &copy; 2026 <b>NITROPEQUES</b> - ACELERANDO LA DIVERSIÓN.
     </div>
 </footer>
 
 </body>
-            </html>
+    </html>
             
