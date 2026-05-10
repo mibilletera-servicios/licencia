@@ -424,6 +424,39 @@ select{
     font-size:.9rem;
     color:#666;
         }
+    /* CAROUSEL BUTTONS */
+
+.product-gallery{
+    position:relative;
+}
+
+.carousel-btn{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    width:55px;
+    height:55px;
+    border:none;
+    border-radius:50%;
+    background:rgba(0,0,0,.7);
+    color:white;
+    font-size:2rem;
+    cursor:pointer;
+    z-index:10;
+    transition:.3s;
+}
+
+.carousel-btn:hover{
+    background:var(--nitro-orange);
+}
+
+.carousel-btn.left{
+    left:15px;
+}
+
+.carousel-btn.right{
+    right:15px;
+    }
 
 }
 
@@ -454,43 +487,34 @@ select{
 
     <div class="product-gallery">
 
+    <!-- FLECHA IZQUIERDA -->
+
+    <button class="carousel-btn left"
+    onclick="prevImage()">
+        ❮
+    </button>
+
+    <!-- IMAGEN PRINCIPAL -->
+
     <img
     id="mainProductImage"
     class="main-image"
-    src="https://http2.mlstatic.com/D_Q_NP_900283-MLA47900284575_102021-F.webp"
+    src="IMG-ROJO-1.jpg"
     alt="Ford Mustang GT">
 
-    <div class="thumbnail-container">
+    <!-- FLECHA DERECHA -->
 
-        <img class="thumbnail"
-        src="https://http2.mlstatic.com/D_Q_NP_900283-MLA47900284575_102021-F.webp"
-        onclick="changeImage(this.src)">
+    <button class="carousel-btn right"
+    onclick="nextImage()">
+        ❯
+    </button>
 
-        <img class="thumbnail"
-        src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=1200"
-        onclick="changeImage(this.src)">
+    <!-- MINIATURAS -->
 
-        <img class="thumbnail"
-        src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1200"
-        onclick="changeImage(this.src)">
-
-        <img class="thumbnail"
-        src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?q=80&w=1200"
-        onclick="changeImage(this.src)">
-
-        <img class="thumbnail"
-        src="https://images.unsplash.com/photo-1553440569-bcc63803a83d?q=80&w=1200"
-        onclick="changeImage(this.src)">
-
-        <img class="thumbnail"
-        src="https://images.unsplash.com/photo-1511919884226-fd3cad34687c?q=80&w=1200"
-        onclick="changeImage(this.src)">
-
-        <img class="thumbnail"
-        src="https://images.unsplash.com/photo-1502877338535-766e1452684a?q=80&w=1200"
-        onclick="changeImage(this.src)">
-
+    <div class="thumbnail-container" id="thumbnailContainer">
     </div>
+
+</div>
 
 </div>
 
@@ -1034,6 +1058,66 @@ const province = document.getElementById("province");
 const payment = document.getElementById("payment");
 const totalPrice = document.getElementById("totalPrice");
 
+/* =========================
+   FOTOS POR COLOR
+========================= */
+
+/*
+ACÁ CAMBIÁS LAS FOTOS
+
+SOLO reemplazá:
+"IMG-ROJO-1.jpg"
+
+por tus links reales.
+*/
+
+const images = {
+
+    rojo:[
+
+        "IMG-ROJO-1.jpg",
+        "IMG-ROJO-2.jpg",
+        "IMG-ROJO-3.jpg",
+        "IMG-ROJO-4.jpg",
+        "IMG-ROJO-5.jpg",
+        "IMG-ROJO-6.jpg",
+        "IMG-ROJO-7.jpg"
+
+    ],
+
+    azul:[
+
+        "IMG-AZUL-1.jpg",
+        "IMG-AZUL-2.jpg",
+        "IMG-AZUL-3.jpg",
+        "IMG-AZUL-4.jpg",
+        "IMG-AZUL-5.jpg",
+        "IMG-AZUL-6.jpg",
+        "IMG-AZUL-7.jpg"
+
+    ],
+
+    blanco:[
+
+        "IMG-BLANCO-1.jpg",
+        "IMG-BLANCO-2.jpg",
+        "IMG-BLANCO-3.jpg",
+        "IMG-BLANCO-4.jpg",
+        "IMG-BLANCO-5.jpg",
+        "IMG-BLANCO-6.jpg",
+        "IMG-BLANCO-7.jpg"
+
+    ]
+
+};
+
+let currentColor = "rojo";
+let currentIndex = 0;
+
+/* =========================
+   FORMATO PRECIO
+========================= */
+
 function formatPrice(price){
 
     return price.toLocaleString("es-AR",{
@@ -1042,6 +1126,10 @@ function formatPrice(price){
     });
 
 }
+
+/* =========================
+   TOTAL
+========================= */
 
 function updateTotal(){
 
@@ -1061,49 +1149,114 @@ function updateTotal(){
 province.addEventListener("change", updateTotal);
 payment.addEventListener("change", updateTotal);
 
-    function changeImage(src){
+/* =========================
+   CARGAR MINIATURAS
+========================= */
 
-    document.getElementById(
-    "mainProductImage"
-    ).src = src;
+function loadThumbnails(){
+
+    const container =
+    document.getElementById("thumbnailContainer");
+
+    container.innerHTML = "";
+
+    images[currentColor].forEach((img,index)=>{
+
+        container.innerHTML += `
+        <img class="thumbnail"
+        src="${img}"
+        onclick="setImage(${index})">
+        `;
+
+    });
 
 }
 
+/* =========================
+   CAMBIAR IMAGEN
+========================= */
+
+function setImage(index){
+
+    currentIndex = index;
+
+    document.getElementById(
+    "mainProductImage"
+    ).src = images[currentColor][currentIndex];
+
+}
+
+/* =========================
+   FLECHA DERECHA
+========================= */
+
+function nextImage(){
+
+    currentIndex++;
+
+    if(
+        currentIndex >=
+        images[currentColor].length
+    ){
+        currentIndex = 0;
+    }
+
+    setImage(currentIndex);
+
+}
+
+/* =========================
+   FLECHA IZQUIERDA
+========================= */
+
+function prevImage(){
+
+    currentIndex--;
+
+    if(currentIndex < 0){
+
+        currentIndex =
+        images[currentColor].length - 1;
+
+    }
+
+    setImage(currentIndex);
+
+}
+
+/* =========================
+   CAMBIO DE COLOR
+========================= */
+
 function changeColorImages(){
 
-    const color =
+    currentColor =
     document.getElementById("color").value;
 
-    const mainImage =
-    document.getElementById("mainProductImage");
+    currentIndex = 0;
 
-    if(color === "rojo"){
+    document.getElementById(
+    "mainProductImage"
+    ).src =
+    images[currentColor][0];
 
-        mainImage.src =
-        "https://http2.mlstatic.com/D_Q_NP_900283-MLA47900284575_102021-F.webp";
+    loadThumbnails();
 
-    }
+}
 
-    if(color === "azul"){
+/* =========================
+   CARRITO
+========================= */
 
-        mainImage.src =
-        "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1200";
-
-    }
-
-    if(color === "blanco"){
-
-        mainImage.src =
-        "https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=1200";
-
-    }
-
-    }
 function addCart(){
 
     alert("Producto agregado al carrito 🛒");
 
 }
+
+/* =========================
+   WHATSAPP
+========================= */
 
 function buyNow(){
 
@@ -1156,6 +1309,13 @@ ${formatPrice(total)}
     window.open(url, "_blank");
 
 }
+
+/* =========================
+   INICIO
+========================= */
+
+loadThumbnails();
+updateTotal();
 
 </script>
 
