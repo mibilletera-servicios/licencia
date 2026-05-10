@@ -1270,26 +1270,33 @@ function buyNow(){
 
     let discount =
     payment.value === "efectivo"
-    ? "Sí, 10% OFF aplicado"
-    : "No";
+    ? "10% OFF aplicado"
+    : "Sin descuento";
 
     let msg = `
-🚗 Ford Mustang GT
+Hola, quiero realizar la compra del siguiente vehículo:
 
-Color:
+━━━━━━━━━━━━━━━
+🚗 Ford Mustang GT
+━━━━━━━━━━━━━━━
+
+📌 Color seleccionado:
 ${color}
 
-Método de pago:
+💳 Método de pago:
 ${paymentText}
 
-Descuento aplicado:
+🏷️ Promoción:
 ${discount}
 
-Provincia:
+📍 Provincia de envío:
 ${provinceText}
 
-Total final:
+💰 Total final:
 ${formatPrice(total)}
+
+Quedo a la espera de información para continuar con la compra.
+Muchas gracias.
 `;
 
     let url =
