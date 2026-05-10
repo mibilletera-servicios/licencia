@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mundo RC Kids - ¡Diversión bajo control!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primario: #FF6B6B;
+            --secundario: #4ECDC4;
+            --acento: #FFE66D;
+            --texto: #2F2F2F;
+            --blanco: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            margin: 0;
+            background-color: #f0faff;
+            color: var(--texto);
+        }
+
+        /* --- Header --- */
+        header {
+            background: linear-gradient(135deg, var(--primario), #ff8787);
+            padding: 2rem;
+            text-align: center;
+            border-bottom: 8px solid var(--acento);
+        }
+
+        header h1 {
+            font-family: 'Fredoka One', cursive;
+            color: white;
+            font-size: 3rem;
+            margin: 0;
+            text-shadow: 3px 3px 0px var(--secundario);
+        }
+
+        header p {
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* --- Sección Seguridad --- */
+        .trust-bar {
+            background: var(--secundario);
+            color: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 1rem;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        /* --- Grid de Productos --- */
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 0 1rem;
+        }
+
+        .card {
+            background: var(--blanco);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+            border: 3px solid transparent;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--secundario);
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background-color: #eee;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .card-body h3 {
+            margin: 0 0 10px;
+            font-family: 'Fredoka One', cursive;
+            color: var(--primario);
+        }
+
+        .stock {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .in-stock { background: #d4edda; color: #155724; }
+        .no-stock { background: #f8d7da; color: #721c24; }
+
+        .price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: block;
+            margin: 10px 0;
+        }
+
+        .btn-ver {
+            display: inline-block;
+            background: var(--secundario);
+            color: white;
+            padding: 10px 25px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .btn-ver:hover { background: #3bb3ab; }
+
+        /* --- Footer --- */
+        footer {
+            background: #2f2f2f;
+            color: white;
+            padding: 3rem 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            color: var(--acento);
+            font-family: 'Fredoka One', cursive;
+            margin-bottom: 1rem;
+        }
+
+        .payment-icons img {
+            width: 50px;
+            margin-right: 10px;
+            filter: grayscale(1);
+            transition: 0.3s;
+        }
+        
+        .payment-icons img:hover { filter: grayscale(0); }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Mundo RC Kids</h1>
+    <p>🚀 ¡Donde la aventura comienza con un botón!</p>
+</header>
+
+<div class="trust-bar">
+    <span>🛡️ Compra 100% Segura</span>
+    <span>🚚 Envíos a todo el país</span>
+    <span>⭐ Garantía de Calidad</span>
+    <span>🧸 Materiales No Tóxicos</span>
+</div>
+
+<main class="container">
+    <!-- Repetir este bloque por cada producto (9 veces) -->
+    <!-- Producto 1 -->
+    <article class="card">
+        <img src="URL_DE_TU_IMAGEN_1" alt="Vehículo RC">
+        <div class="card-body">
+            <span class="stock in-stock">Disponible</span>
+            <h3>Super Monster Truck</h3>
+            <p>Perfecto para todo terreno y saltos increíbles.</p>
+            <span class="price">$15.500</span>
+            <a href="producto1.html" class="btn-ver">Ver Detalles</a>
+        </div>
+    </article>
+
+    <!-- Producto 2 (Ejemplo de sin stock) -->
+    <article class="card">
+        <img src="URL_DE_TU_IMAGEN_2" alt="Vehículo RC">
+        <div class="card-body">
+            <span class="stock no-stock">Sin Stock</span>
+            <h3>Rayo Veloz GT</h3>
+            <p>Velocidad pura para carreras en asfalto.</p>
+            <span class="price">$12.900</span>
+            <a href="producto2.html" class="btn-ver">Ver Detalles</a>
+        </div>
+    </article>
+
+    <!-- Para completar los 9, solo copia y pega el bloque <article> cambiando datos -->
+</main>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-section">
+            <h4>Contacto</h4>
+            <p>📞 WhatsApp: +123 456 789</p>
+            <p>📧 Email: hola@mundorckids.com</p>
+            <p>📍 Ciudad, Argentina</p>
+        </div>
+        <div class="footer-section">
+            <h4>Métodos de Pago</h4>
+            <p>Aceptamos todas las opciones para tu comodidad:</p>
+            <ul>
+                <li>Efectivo / Transferencia (10% OFF)</li>
+                <li>Tarjeta de Crédito y Débito</li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h4>Seguridad</h4>
+            <p>Sitio protegido con encriptación SSL para que tu compra sea segura de principio a fin.</p>
+        </div>
+    </div>
+</footer>
+
+</body>
+  </html>
+  
