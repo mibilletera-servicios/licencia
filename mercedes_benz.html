@@ -1,0 +1,1388 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Mercedes Benz AMG | NitroPeques</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+
+<style>
+
+:root{
+    --nitro-yellow:#ffcc00;
+    --nitro-orange:#ff8800;
+    --danger-black:#1a1a1a;
+    --road-grey:#2d2d2d;
+    --fire:#ff4500;
+    --white:#ffffff;
+    --green:#25D366;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Montserrat',sans-serif;
+
+    background:
+    linear-gradient(rgba(255,255,255,.95), rgba(255,255,255,.95)),
+    url('https://www.transparenttextures.com/patterns/asfalt-dark.png');
+
+    color:#111;
+}
+
+/* NAV */
+
+.navbar{
+    background:#111;
+
+    padding:18px 25px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    border-bottom:4px solid var(--nitro-yellow);
+}
+
+.logo{
+    font-family:'Bangers',cursive;
+    color:var(--nitro-yellow);
+    font-size:2rem;
+    letter-spacing:2px;
+}
+
+.back-btn{
+    color:white;
+    text-decoration:none;
+    font-weight:700;
+}
+
+/* PRODUCT PAGE */
+
+.product-page{
+    max-width:1300px;
+
+    margin:50px auto;
+
+    display:grid;
+    grid-template-columns:1fr 1fr;
+
+    gap:40px;
+
+    padding:0 20px;
+}
+
+.product-gallery{
+    position:relative;
+
+    background:white;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    border:3px solid #111;
+
+    box-shadow:10px 10px 0px var(--nitro-yellow);
+}
+
+.product-gallery img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    display:block;
+}
+
+.product-info{
+    background:white;
+
+    border-radius:20px;
+
+    padding:30px;
+
+    border:3px solid #111;
+
+    box-shadow:10px 10px 0px var(--nitro-orange);
+}
+
+.badge{
+    background:var(--fire);
+    color:white;
+
+    display:inline-block;
+
+    padding:10px 18px;
+
+    border-radius:50px;
+
+    font-weight:900;
+
+    margin-bottom:20px;
+}
+
+.product-info h1{
+    font-family:'Bangers',cursive;
+    font-size:4rem;
+
+    line-height:1;
+
+    margin-bottom:15px;
+}
+
+.description{
+    font-size:1.1rem;
+    line-height:1.7;
+
+    margin-bottom:25px;
+}
+
+.price-box{
+    background:#f7f7f7;
+
+    padding:20px;
+
+    border-radius:15px;
+
+    margin-bottom:25px;
+}
+
+.price-transfer{
+    font-size:2rem;
+    font-weight:900;
+
+    color:var(--fire);
+
+    margin-bottom:10px;
+}
+
+.price-cash{
+    font-size:1.3rem;
+    font-weight:700;
+
+    color:#1c8f3b;
+}
+
+.discount{
+    font-size:.95rem;
+    margin-top:8px;
+}
+
+/* SELECTS */
+
+.select-group{
+    margin-bottom:20px;
+}
+
+.select-group label{
+    display:block;
+
+    margin-bottom:8px;
+
+    font-weight:700;
+}
+
+select{
+    width:100%;
+
+    padding:15px;
+
+    border-radius:10px;
+
+    border:2px solid #ddd;
+
+    font-size:1rem;
+}
+
+/* TOTAL */
+
+.total-box{
+    background:#111;
+    color:white;
+
+    padding:20px;
+
+    border-radius:15px;
+
+    margin-top:20px;
+}
+
+.total-box h3{
+    margin-bottom:10px;
+}
+
+.total-price{
+    font-size:2rem;
+    font-weight:900;
+
+    color:var(--nitro-yellow);
+}
+
+/* BUTTONS */
+
+.buttons{
+    display:flex;
+    flex-direction:column;
+
+    gap:15px;
+
+    margin-top:25px;
+}
+
+.btn{
+    border:none;
+
+    padding:18px;
+
+    border-radius:12px;
+
+    font-weight:900;
+
+    font-size:1rem;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.btn-cart{
+    background:#111;
+    color:var(--nitro-yellow);
+}
+
+.btn-buy{
+    background:var(--green);
+    color:white;
+}
+
+.btn:hover{
+    transform:translateY(-3px);
+}
+
+/* SPECS */
+
+.specs{
+    max-width:1300px;
+
+    margin:60px auto;
+
+    padding:0 20px;
+}
+
+.specs-card{
+    background:white;
+
+    border-radius:20px;
+
+    padding:35px;
+
+    border:3px solid #111;
+
+    box-shadow:10px 10px 0px var(--nitro-yellow);
+}
+
+.specs-title{
+    font-family:'Bangers',cursive;
+    font-size:3rem;
+
+    margin-bottom:30px;
+}
+
+.spec-category{
+    margin-bottom:30px;
+}
+
+.spec-category h3{
+    color:var(--fire);
+
+    margin-bottom:15px;
+}
+
+.spec-item{
+    display:flex;
+    justify-content:space-between;
+
+    padding:12px 0;
+
+    border-bottom:1px solid #ddd;
+}
+
+.spec-item span:first-child{
+    font-weight:700;
+}
+    /* CAROUSEL BUTTONS */
+
+.product-gallery{
+    position:relative;
+}
+
+.carousel-btn{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    width:55px;
+    height:55px;
+    border:none;
+    border-radius:50%;
+    background:rgba(0,0,0,.7);
+    color:white;
+    font-size:2rem;
+    cursor:pointer;
+    z-index:10;
+    transition:.3s;
+}
+
+.carousel-btn:hover{
+    background:var(--nitro-orange);
+}
+
+.carousel-btn.left{
+    left:15px;
+}
+
+.carousel-btn.right{
+    right:15px;
+    }
+    .btn:disabled{
+    opacity:.5;
+    cursor:not-allowed;
+    transform:none;
+                    }
+    .main-image{
+    width:100%;
+    height:520px;
+
+    object-fit:contain;
+
+    background:white;
+
+    padding:20px;
+
+    display:block;
+    }
+.thumbnail.active{
+    border-color:var(--fire);
+    }
+/* MOBILE */
+
+@media(max-width:900px){
+
+    .product-page{
+        grid-template-columns:1fr;
+    }
+
+    .product-info h1{
+        font-size:3rem;
+    }
+    /* CAROUSEL */
+
+.main-image{
+        height:360px;
+    }
+
+.thumbnail-container{
+    display:flex;
+
+    gap:10px;
+
+    padding:15px;
+
+    overflow-x:auto;
+
+    background:#f5f5f5;
+
+    align-items:center;
+
+    }
+
+.thumbnail{
+    width:90px;
+    height:90px;
+
+    object-fit:contain;
+
+    background:white;
+
+    padding:4px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    border:3px solid transparent;
+
+    transition:.3s;
+}
+
+.thumbnail:hover{
+    border-color:var(--nitro-orange);
+    transform:scale(1.05);
+}
+
+}
+
+/* COMMENTS */
+
+.comments-section{
+    max-width:1300px;
+    margin:60px auto;
+    padding:0 20px;
+}
+
+.comments-box{
+    background:white;
+    border-radius:20px;
+    padding:35px;
+    border:3px solid #111;
+    box-shadow:10px 10px 0px var(--nitro-orange);
+}
+
+.comments-title{
+    font-family:'Bangers',cursive;
+    font-size:3rem;
+    margin-bottom:30px;
+}
+
+.comment{
+    display:flex;
+    gap:18px;
+
+    padding:22px;
+
+    margin-bottom:20px;
+
+    border-radius:18px;
+
+    background:#f8f8f8;
+
+    border:2px solid #e5e5e5;
+
+    transition:.3s;
+}
+
+.comment:hover{
+    transform:translateY(-4px);
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.comment:last-child{
+    margin-bottom:0;
+}
+
+.avatar{
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    background:#1877f2;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:900;
+    font-size:1.2rem;
+}
+
+.comment-content{
+    flex:1;
+}
+    .comment-content{
+    flex:1;
+}
+
+.comment-name{
+    font-size:1rem;
+    font-weight:900;
+    margin-bottom:8px;
+}
+
+.comment-text{
+    line-height:1.7;
+    color:#333;
+    font-size:1rem;
+    }
+
+.comment-name{
+    font-weight:900;
+    margin-bottom:5px;
+}
+
+.comment-text{
+    line-height:1.6;
+}
+
+.comment-actions{
+    margin-top:14px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:18px;
+    font-size:.9rem;
+    color:#777;
+}
+
+}
+
+@media(max-width:700px){
+
+    .comment{
+        flex-direction:column;
+    }
+
+    .avatar{
+        margin-bottom:5px;
+    }
+
+    }
+
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        NitroPeques
+    </div>
+
+    <a href="miprimer.html" class="back-btn">
+        ⬅ Volver a la tienda
+    </a>
+
+</nav>
+
+<!-- PRODUCTO -->
+
+<main class="product-page">
+
+    <!-- IMAGEN -->
+
+    <div class="product-gallery">
+
+    <!-- FLECHA IZQUIERDA -->
+
+    <button class="carousel-btn left"
+    onclick="prevImage()">
+        ❮
+    </button>
+
+    <!-- IMAGEN PRINCIPAL -->
+
+    <img
+    id="mainProductImage"
+    class="main-image"
+    src="https://http2.mlstatic.com/D_Q_NP_672802-MLA49397879308_032022-F.webp"
+    alt="Mercedes Benz AMG">
+
+    <!-- FLECHA DERECHA -->
+
+    <button class="carousel-btn right"
+    onclick="nextImage()">
+        ❯
+    </button>
+
+    <!-- MINIATURAS -->
+
+    <div class="thumbnail-container" id="thumbnailContainer">
+    </div>
+
+</div>
+
+    <!-- INFO -->
+
+    <div class="product-info">
+
+        <div class="badge">
+            HOT SALE 🔥
+        </div>
+
+        <h1>
+            Mercedes Benz AMG
+        </h1>
+
+        <p class="description">
+    Superdeportivo eléctrico infantil inspirado en el icónico Audi R8.
+    Diseño elegante, luces LED, música integrada y manejo suave
+    para pequeños conductores con estilo.
+</p>
+
+        <!-- PRECIOS -->
+
+        <div class="price-box">
+
+            <div class="price-transfer">
+                Transferencia:
+                $269.933,80
+            </div>
+
+            <div class="price-cash">
+                Pago Fácil / Efectivo:
+                $242.940,42
+            </div>
+
+            <div class="discount">
+                ✔ 10% OFF pagando en efectivo
+            </div>
+
+        </div>
+
+        <!-- COLOR -->
+
+        <div class="select-group">
+
+            <label>
+                Elegir color
+            </label>
+
+            <select id="color" onchange="changeColorImages()">
+
+    <option value="rojo">
+        Negro
+    </option>
+
+</select>
+
+        </div>
+
+        <!-- PAGO -->
+
+        <div class="select-group">
+
+            <label>
+                Método de pago
+            </label>
+
+            <select id="payment">
+
+                <option value="transferencia">
+                    Transferencia Bancaria
+                </option>
+
+                <option value="efectivo">
+                    Depósito / Pago Fácil (10% OFF)
+                </option>
+
+            </select>
+
+        </div>
+
+        <!-- PROVINCIA -->
+
+        <div class="select-group">
+
+            <label>
+                Provincia de envío
+            </label>
+
+            <select id="province">
+
+                <option value="0">
+                    Seleccionar provincia
+                </option>
+
+                <option value="12000">Buenos Aires - Envío $12.000</option>
+<option value="15000">CABA - Envío $15.000</option>
+<option value="17000">Catamarca - Envío $17.000</option>
+<option value="16000">Chaco - Envío $16.000</option>
+<option value="18000">Chubut - Envío $18.000</option>
+<option value="16000">Córdoba - Envío $16.000</option>
+<option value="17000">Corrientes - Envío $17.000</option>
+<option value="19000">Entre Ríos - Envío $19.000</option>
+<option value="25000">Formosa - Envío $25.000</option>
+<option value="26000">Jujuy - Envío $26.000</option>
+<option value="21000">La Pampa - Envío $21.000</option>
+<option value="24000">La Rioja - Envío $24.000</option>
+<option value="19000">Mendoza - Envío $19.000</option>
+<option value="17000">Misiones - Envío $17.000</option>
+<option value="23000">Neuquén - Envío $23.000</option>
+<option value="26000">Río Negro - Envío $26.000</option>
+<option value="28000">Salta - Envío $28.000</option>
+<option value="25000">San Juan - Envío $25.000</option>
+<option value="25000">San Luis - Envío $25.000</option>
+<option value="32000">Santa Cruz - Envío $32.000</option>
+<option value="18000">Santa Fe - Envío $18.000</option>
+<option value="26000">Santiago del Estero - Envío $26.000</option>
+<option value="35000">Tierra del Fuego - Envío $35.000</option>
+<option value="24000">Tucumán - Envío $24.000</option>
+
+            </select>
+
+        </div>
+
+        <!-- TOTAL -->
+
+        <div class="total-box">
+
+            <h3>
+                Total con envío
+            </h3>
+
+            <div class="total-price" id="totalPrice">
+                $0
+            </div>
+
+        </div>
+
+        <!-- BOTONES -->
+
+        <div class="buttons">
+
+            <button class="btn btn-cart"
+            onclick="addCart()">
+
+                🛒 Agregar al carrito
+
+            </button>
+
+            <button
+class="btn btn-buy"
+id="buyBtn"
+onclick="buyNow()"
+disabled>
+
+    📲 Comprar ahora
+
+</button>
+
+        </div>
+
+    </div>
+
+</main>
+
+<!-- DETALLE TÉCNICO -->
+
+<section class="specs">
+
+    <div class="specs-card">
+
+        <h2 class="specs-title">
+            Características del producto
+        </h2>
+
+        <!-- PRINCIPALES -->
+
+        <div class="spec-category">
+
+            <h3>
+                Características principales
+            </h3>
+
+            <div class="spec-item">
+                <span>Tipo de alimentación</span>
+                <span>Batería</span>
+            </div>
+
+        </div>
+
+        <!-- GENERALES -->
+
+        <div class="spec-category">
+
+            <h3>
+                Características generales
+            </h3>
+
+            <div class="spec-item">
+                <span>Marca</span>
+                <span>ImportComers</span>
+            </div>
+
+            <div class="spec-item">
+                <span>Franquicia</span>
+                <span>Mercedes Benz</span>
+            </div>
+
+            <div class="spec-item">
+                <span>Modelo</span>
+                <span>AMG</span>
+            </div>
+
+        </div>
+
+        <!-- BATERÍA -->
+
+        <div class="spec-category">
+
+            <h3>
+                Batería
+            </h3>
+
+            <div class="spec-item">
+                <span>Voltaje</span>
+                <span>12V</span>
+            </div>
+
+            <div class="spec-item">
+                <span>Incluye batería</span>
+                <span>Sí</span>
+            </div>
+
+            <div class="spec-item">
+                <span>Cantidad</span>
+                <span>2</span>
+            </div>
+
+            <div class="spec-item">
+                <span>Incluye cargador</span>
+                <span>Sí</span>
+            </div>
+
+        </div>
+
+        <!-- FUNCIONAMIENTO -->
+
+        <div class="spec-category">
+
+            <h3>
+                Funcionamiento
+            </h3>
+
+            <div class="spec-item">
+                <span>Velocidad máxima</span>
+                <span>5 km/h</span>
+            </div>
+
+            <div class="spec-item">
+                <span>Modo de aceleración</span>
+                <span>Pedal</span>
+            </div>
+
+            <div class="spec-item">
+                <span>Con reversa</span>
+                <span>Sí</span>
+            </div>
+
+        </div>
+
+        <!-- ESPECIFICACIONES -->
+
+        <div class="spec-category">
+
+            <h3>
+                Especificaciones
+            </h3>
+
+            <div class="spec-item">
+                <span>Peso máximo soportado</span>
+                <span>30 kg</span>
+            </div>
+
+            <div class="spec-item">
+                <span>Tipos de control</span>
+                <span>Control remoto / Manual</span>
+            </div>
+
+            <div class="spec-item">
+                <span>Conexión música</span>
+                <span>USB</span>
+            </div>
+
+        </div>
+
+        <!-- ESTRUCTURA -->
+
+        <div class="spec-category">
+
+            <h3>
+                Estructura
+            </h3>
+
+            <div class="spec-item">
+                <span>Asientos</span>
+                <span>1</span>
+            </div>
+
+            <div class="spec-item">
+                <span>Luces frontales</span>
+                <span>Sí</span>
+            </div>
+
+            <div class="spec-item">
+                <span>Bocina</span>
+                <span>Sí</span>
+            </div>
+
+            <div class="spec-item">
+                <span>Motores</span>
+                <span>1</span>
+            </div>
+
+            <div class="spec-item">
+                <span>Ruedas</span>
+                <span>4</span>
+            </div>
+
+        </div>
+
+        <!-- EDAD -->
+
+        <div class="spec-category">
+
+            <h3>
+                Edad
+            </h3>
+
+            <div class="spec-item">
+                <span>Edad mínima</span>
+                <span>1 año</span>
+            </div>
+
+        </div>
+
+        <!-- ENSAMBLADO -->
+
+        <div class="spec-category">
+
+            <h3>
+                Ensamblado
+            </h3>
+
+            <div class="spec-item">
+                <span>Incluye manual</span>
+                <span>Sí</span>
+            </div>
+
+            <div class="spec-item">
+                <span>Requiere ensamblado</span>
+                <span>Sí</span>
+            </div>
+
+        </div>
+
+        <!-- MATERIALES -->
+
+        <div class="spec-category">
+
+            <h3>
+                Materiales
+            </h3>
+
+            <div class="spec-item">
+                <span>Vehículo</span>
+                <span>Plástico / Metal</span>
+            </div>
+
+            <div class="spec-item">
+                <span>Ruedas</span>
+                <span>Plástico</span>
+            </div>
+
+        </div>
+
+        <!-- MEDIDAS -->
+
+        <div class="spec-category">
+
+            <h3>
+                Medidas
+            </h3>
+
+            <div class="spec-item">
+                <span>Largo x Ancho x Alto</span>
+                <span>100 x 59 x 30 cm</span>
+            </div>
+
+        </div>
+
+        <!-- SEGURIDAD -->
+
+        <div class="spec-category">
+
+            <h3>
+                Seguridad y confort
+            </h3>
+
+            <div class="spec-item">
+                <span>Con luces</span>
+                <span>Sí</span>
+            </div>
+
+            <div class="spec-item">
+                <span>Con sonidos</span>
+                <span>Sí</span>
+            </div>
+
+            <div class="spec-item">
+                <span>Con bocina</span>
+                <span>Sí</span>
+            </div>
+
+            <div class="spec-item">
+                <span>Cinturón de seguridad</span>
+                <span>No</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+    <!-- COMENTARIOS -->
+
+<section class="comments-section">
+
+    <div class="comments-box">
+
+        <h2 class="comments-title">
+            Opiniones de clientes
+        </h2>
+
+        <div class="comment">
+
+            <div class="avatar">
+                C
+            </div>
+
+            <div class="comment-content">
+
+                <div class="comment-name">
+                    Cristián Allende 
+                </div>
+
+                <div class="comment-text">
+                    Para ser económico es muy muy bueno, los felicito.
+                    gracias ! los recomiendo !
+                </div>
+
+                <div class="comment-actions">
+                    <span>👍 Me gusta</span>
+                    <span>💬 Responder</span>
+                    <span>Hace 2 días</span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="comment">
+
+            <div class="avatar">
+                M
+            </div>
+
+            <div class="comment-content">
+
+                <div class="comment-name">
+                    Monica Arreyes
+                </div>
+
+                <div class="comment-text">
+                    el envío tardo 3 dias... pero llego ! super contenta.
+                </div>
+
+                <div class="comment-actions">
+                    <span>👍 Me gusta</span>
+                    <span>💬 Responder</span>
+                    <span>Hace 5 día</span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="comment">
+
+            <div class="avatar">
+                J
+            </div>
+
+            <div class="comment-content">
+
+                <div class="comment-name">
+                    Julián Acosta 
+                </div>
+
+                <div class="comment-text">
+                    excelente cochesito. saludos.
+                    recomiendo👍
+                </div>
+
+                <div class="comment-actions">
+                    <span>👍 Me gusta</span>
+                    <span>💬 Responder</span>
+                    <span>Hace 1 semana</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    </section>
+
+<script>
+
+let cart = 0;
+
+const transferPrice = 229933;
+const cashPrice = 242940;
+
+const province = document.getElementById("province");
+const payment = document.getElementById("payment");
+const totalPrice = document.getElementById("totalPrice");
+
+/* =========================
+   FOTOS POR COLOR
+========================= */
+
+/*
+ACÁ CAMBIÁS LAS FOTOS
+
+SOLO reemplazá:
+"IMG-ROJO-1.jpg"
+
+por tus links reales.
+*/
+
+const images = {
+
+    rojo:[
+
+        "https://http2.mlstatic.com/D_Q_NP_921105-MLA108867198703_032026-F.webp",
+        "https://http2.mlstatic.com/D_Q_NP_783186-MLA108867817161_032026-F.webp",
+        "https://http2.mlstatic.com/D_Q_NP_812394-MLA108869277507_032026-F.webp",
+        "https://http2.mlstatic.com/D_Q_NP_812394-MLA108869277507_032026-F.webp",
+        "https://http2.mlstatic.com/D_Q_NP_785750-MLA108091444730_032026-F.webp",
+        "https://http2.mlstatic.com/D_Q_NP_789668-MLA108092129560_032026-F.webp"
+
+    ]
+
+};
+
+let currentColor = "rojo";
+let currentIndex = 0;
+
+/* =========================
+   FORMATO PRECIO
+========================= */
+
+function formatPrice(price){
+
+    return price.toLocaleString("es-AR",{
+        style:"currency",
+        currency:"ARS"
+    });
+
+}
+
+/* =========================
+   TOTAL
+========================= */
+
+function updateTotal(){
+
+    let shipping = Number(province.value);
+
+    let basePrice =
+    payment.value === "efectivo"
+    ? cashPrice
+    : transferPrice;
+
+    let total = basePrice + shipping;
+
+    totalPrice.innerText = formatPrice(total);
+
+    /* BOTÓN COMPRAR */
+
+    const buyBtn =
+    document.getElementById("buyBtn");
+
+    if(province.value !== "0"){
+
+        buyBtn.disabled = false;
+
+    }else{
+
+        buyBtn.disabled = true;
+
+    }
+
+}
+
+province.addEventListener("change", updateTotal);
+payment.addEventListener("change", updateTotal);
+
+/* =========================
+   CARGAR MINIATURAS
+========================= */
+  function loadThumbnails(){
+
+    const container =
+    document.getElementById("thumbnailContainer");
+
+    container.innerHTML = "";
+
+    images[currentColor].forEach((img,index)=>{
+
+        container.innerHTML += `
+        <img
+        class="thumbnail ${index === currentIndex ? "active" : ""}"
+        src="${img}"
+        onclick="setImage(${index})">
+        `;
+
+    });
+
+    }
+
+/* =========================
+   CAMBIAR IMAGEN
+========================= */
+
+function setImage(index){
+
+    currentIndex = index;
+
+    document.getElementById(
+    "mainProductImage"
+    ).src = images[currentColor][currentIndex];
+loadThumbnails();
+}
+
+/* =========================
+   FLECHA DERECHA
+========================= */
+
+function nextImage(){
+
+    currentIndex++;
+
+    if(
+        currentIndex >=
+        images[currentColor].length
+    ){
+        currentIndex = 0;
+    }
+
+    setImage(currentIndex);
+
+}
+
+/* =========================
+   FLECHA IZQUIERDA
+========================= */
+
+function prevImage(){
+
+    currentIndex--;
+
+    if(currentIndex < 0){
+
+        currentIndex =
+        images[currentColor].length - 1;
+
+    }
+
+    setImage(currentIndex);
+
+}
+
+/* =========================
+   CAMBIO DE COLOR
+========================= */
+
+function changeColorImages(){
+
+    currentColor =
+    document.getElementById("color").value;
+
+    currentIndex = 0;
+
+    document.getElementById(
+    "mainProductImage"
+    ).src =
+    images[currentColor][0];
+
+    loadThumbnails();
+
+}
+
+/* =========================
+   CARRITO
+========================= */
+
+function addCart(){
+
+    alert("Producto agregado al carrito 🛒");
+
+}
+
+/* =========================
+   WHATSAPP
+========================= */
+
+function buyNow(){
+
+    let color =
+    document.getElementById("color").value;
+
+    let provinceText =
+    province.options[province.selectedIndex].text;
+
+    let paymentText =
+    payment.options[payment.selectedIndex].text;
+
+    let shipping =
+    Number(province.value);
+    let basePrice =
+    payment.value === "efectivo"
+    ? cashPrice
+    : transferPrice;
+
+    let total = basePrice + shipping;
+
+    let discount =
+    payment.value === "efectivo"
+    ? "10% OFF aplicado"
+    : "Sin descuento";
+
+    let msg = `
+Hola, me gustaría realizar la compra del siguiente vehículo:
+
+━━━━━━━━━━━━━━━━━
+🚗 Mercedes Benz AMG
+━━━━━━━━━━━━━━━━━
+
+📌 Color seleccionado: ${color}
+
+💳 Método de pago: ${paymentText}
+
+🏷️ Promoción: ${discount}
+
+📍 Provincia de envío: ${provinceText}
+
+💰 Total final: ${formatPrice(total)}
+
+Quedo a la espera de información adicional para continuar con la compra y ver seguimiento en tiempo real.
+Muchas gracias.
+`;
+
+    let url =
+    `https://wa.me/5491178866725?text=${encodeURIComponent(msg)}`;
+
+    window.open(url, "_blank");
+
+}
+
+/* =========================
+   INICIO
+========================= */
+
+loadThumbnails();
+updateTotal();
+
+</script>
+
+</body>
+                    </html>
