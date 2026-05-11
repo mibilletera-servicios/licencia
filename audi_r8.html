@@ -1200,37 +1200,10 @@ function formatPrice(price){
 /* =========================
    TOTAL
 ========================= */
-  
-    loadThumbnails();
 
-}
+function updateTotal(){
 
-/* =========================
-   CARRITO
-========================= */
-
-function addCart(){
-
-    alert("Producto agregado al carrito 🛒");
-
-}
-
-/* =========================
-   WHATSAPP
-========================= */
-  function buyNow(){
-
-    let color =
-    document.getElementById("color").value;
-
-    let provinceText =
-    province.options[province.selectedIndex].text;
-
-    let paymentText =
-    payment.options[payment.selectedIndex].text;
-
-    let shipping =
-    Number(province.value);
+    let shipping = Number(province.value);
 
     let basePrice =
     payment.value === "efectivo"
@@ -1239,113 +1212,9 @@ function addCart(){
 
     let total = basePrice + shipping;
 
-    let discount =
-    payment.value === "efectivo"
-    ? "10% OFF aplicado"
-    : "Sin descuento";
+    totalPrice.innerText = formatPrice(total);
 
-    let msg = `
-Hola, me gustaría realizar la compra del siguiente vehículo:
-
-━━━━━━━━━━━━━━━
-🚗 Audi R8 GT
-━━━━━━━━━━━━━━━
-
-📌 Color seleccionado: ${color}
-
-💳 Método de pago: ${paymentText}
-
-🏷️ Promoción: ${discount}
-
-📍 Provincia de envío: ${provinceText}
-
-💰 Total final: ${formatPrice(total)}
-<script>
-
-let cart = 0;
-
-const transferPrice = 371952;
-const cashPrice = 334756.8;
-
-const province =
-document.getElementById("province");
-
-const payment =
-document.getElementById("payment");
-
-const totalPrice =
-document.getElementById("totalPrice");
-
-/* =========================
-   FOTOS POR COLOR
-========================= */
-
-const images = {
-
-    rojo:[
-rojo:[
-
-        "https://http2.mlstatic.com/D_Q_NP_730940-MLA47900295305_102021-F.webp",
-        "https://http2.mlstatic.com/D_Q_NP_687658-MLA47900269602_102021-F.webp",
-        "https://http2.mlstatic.com/D_Q_NP_603292-MLA86896817126_072025-F.webp"
-
-    ],
-
-    azul:[
-
-        "https://http2.mlstatic.com/D_Q_NP_650436-MLA94971573927_102025-F.webp",
-        "https://http2.mlstatic.com/D_Q_NP_900283-MLA47900284575_102021-F.webp",
-        "https://http2.mlstatic.com/D_Q_NP_847169-MLA86896111212_072025-F.webp",
-        "https://http2.mlstatic.com/D_Q_NP_952652-MLA86895892898_072025-F.webp",
-        "https://http2.mlstatic.com/D_Q_NP_821412-MLA87220408159_072025-F.webp"
-
-    ],
-
-    blanco:[
-
-        "https://http2.mlstatic.com/D_Q_NP_672802-MLA49397879308_032022-F.webp",
-        "https://http2.mlstatic.com/D_Q_NP_800019-MLA49397911128_032022-F.webp",
-        "https://http2.mlstatic.com/D_Q_NP_606599-MLA86896878406_072025-F.webp"
-
-    ]
-
-};
-
-let currentColor = "rojo";
-let currentIndex = 0;
-
-/* =========================
-   FORMATO PRECIO
-========================= */
-
-function formatPrice(price){
-
-    return price.toLocaleString("es-AR",{
-        style:"currency",
-        currency:"ARS"
-    });
-
-}
-
-/* =========================
-   TOTAL
-========================= */
-
-function updateTotal(){
-
-    let shipping =
-    Number(province.value);
-
-    let basePrice =
-    payment.value === "efectivo"
-    ? cashPrice
-    : transferPrice;
-
-    let total =
-    basePrice + shipping;
-
-    totalPrice.innerText =
-    formatPrice(total);
+    /* BOTÓN COMPRAR */
 
     const buyBtn =
     document.getElementById("buyBtn");
@@ -1362,35 +1231,24 @@ function updateTotal(){
 
 }
 
-province.addEventListener(
-"change",
-updateTotal
-);
-
-payment.addEventListener(
-"change",
-updateTotal
-);
+province.addEventListener("change", updateTotal);
+payment.addEventListener("change", updateTotal);
 
 /* =========================
-   MINIATURAS
+   CARGAR MINIATURAS
 ========================= */
 
 function loadThumbnails(){
 
     const container =
-    document.getElementById(
-    "thumbnailContainer"
-    );
+    document.getElementById("thumbnailContainer");
 
     container.innerHTML = "";
 
-    images[currentColor]
-    .forEach((img,index)=>{
+    images[currentColor].forEach((img,index)=>{
 
         container.innerHTML += `
-        <img
-        class="thumbnail"
+        <img class="thumbnail"
         src="${img}"
         onclick="setImage(${index})">
         `;
@@ -1409,13 +1267,12 @@ function setImage(index){
 
     document.getElementById(
     "mainProductImage"
-    ).src =
-    images[currentColor][currentIndex];
+    ).src = images[currentColor][currentIndex];
 
 }
 
 /* =========================
-   SIGUIENTE
+   FLECHA DERECHA
 ========================= */
 
 function nextImage(){
@@ -1426,9 +1283,7 @@ function nextImage(){
         currentIndex >=
         images[currentColor].length
     ){
-
         currentIndex = 0;
-
     }
 
     setImage(currentIndex);
@@ -1436,7 +1291,7 @@ function nextImage(){
 }
 
 /* =========================
-   ANTERIOR
+   FLECHA IZQUIERDA
 ========================= */
 
 function prevImage(){
@@ -1455,15 +1310,13 @@ function prevImage(){
 }
 
 /* =========================
-   CAMBIO COLOR
+   CAMBIO DE COLOR
 ========================= */
 
 function changeColorImages(){
 
     currentColor =
-    document.getElementById(
-    "color"
-    ).value;
+    document.getElementById("color").value;
 
     currentIndex = 0;
 
@@ -1482,9 +1335,7 @@ function changeColorImages(){
 
 function addCart(){
 
-    alert(
-    "Producto agregado al carrito 🛒"
-    );
+    alert("Producto agregado al carrito 🛒");
 
 }
 
@@ -1495,30 +1346,22 @@ function addCart(){
 function buyNow(){
 
     let color =
-    document.getElementById(
-    "color"
-    ).value;
+    document.getElementById("color").value;
 
     let provinceText =
-    province.options[
-    province.selectedIndex
-    ].text;
+    province.options[province.selectedIndex].text;
 
     let paymentText =
-    payment.options[
-    payment.selectedIndex
-    ].text;
+    payment.options[payment.selectedIndex].text;
 
     let shipping =
     Number(province.value);
-
     let basePrice =
     payment.value === "efectivo"
     ? cashPrice
     : transferPrice;
 
-    let total =
-    basePrice + shipping;
+    let total = basePrice + shipping;
 
     let discount =
     payment.value === "efectivo"
@@ -1529,7 +1372,7 @@ function buyNow(){
 Hola, me gustaría realizar la compra del siguiente vehículo:
 
 ━━━━━━━━━━━━━━━
-🚗 Audi R8 Sport 2026
+🚗 Audi R8
 ━━━━━━━━━━━━━━━
 
 📌 Color seleccionado: ${color}
@@ -1542,14 +1385,14 @@ Hola, me gustaría realizar la compra del siguiente vehículo:
 
 💰 Total final: ${formatPrice(total)}
 
-Quedo a la espera de información adicional para continuar con la compra.
+Quedo a la espera de información adicional para continuar con la compra y ver seguimiento en tiempo real.
 Muchas gracias.
 `;
 
     let url =
-`https://wa.me/5491178866725?text=${encodeURIComponent(msg)}`;
+    `https://wa.me/5491178866725?text=${encodeURIComponent(msg)}`;
 
-    window.open(url,"_blank");
+    window.open(url, "_blank");
 
 }
 
