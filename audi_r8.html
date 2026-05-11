@@ -368,7 +368,9 @@ select{
 
     display:block;
     }
-
+.thumbnail.active{
+    border-color:var(--fire);
+    }
 /* MOBILE */
 
 @media(max-width:900px){
@@ -516,17 +518,16 @@ select{
 
 .comment-actions{
     margin-top:14px;
-
     display:flex;
     flex-wrap:wrap;
-
     gap:18px;
-
     font-size:.9rem;
-
     color:#777;
 }
-    @media(max-width:700px){
+
+}
+
+@media(max-width:700px){
 
     .comment{
         flex-direction:column;
@@ -535,7 +536,8 @@ select{
     .avatar{
         margin-bottom:5px;
     }
-}
+
+    }
 
 </style>
 </head>
@@ -593,8 +595,6 @@ select{
 
 </div>
 
-</div>
-
     <!-- INFO -->
 
     <div class="product-info">
@@ -608,10 +608,10 @@ select{
         </h1>
 
         <p class="description">
-            El muscle car definitivo con espíritu de competición.
-            Potencia americana, luces LED y diseño deportivo
-            para pequeños pilotos aventureros.
-        </p>
+    Superdeportivo eléctrico infantil inspirado en el icónico Audi R8.
+    Diseño elegante, luces LED, música integrada y manejo suave
+    para pequeños conductores con estilo.
+</p>
 
         <!-- PRECIOS -->
 
@@ -1248,14 +1248,15 @@ function loadThumbnails(){
     images[currentColor].forEach((img,index)=>{
 
         container.innerHTML += `
-        <img class="thumbnail"
+        <img
+        class="thumbnail ${index === currentIndex ? "active" : ""}"
         src="${img}"
         onclick="setImage(${index})">
         `;
 
     });
 
-}
+    }
 
 /* =========================
    CAMBIAR IMAGEN
@@ -1268,7 +1269,7 @@ function setImage(index){
     document.getElementById(
     "mainProductImage"
     ).src = images[currentColor][currentIndex];
-
+loadThumbnails();
 }
 
 /* =========================
