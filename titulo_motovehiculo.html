@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Título del Motovehículo Editable</title>
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+        @page {
+            size: A4;
+            margin: 15mm 12mm;
+            background-color: #ffffff;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            color: #000000;
+            font-size: 9.5pt;
+            line-height: 1.3;
+        }
+        .container {
+            width: 100%;
+            max-width: 180mm;
+            margin: 0 auto;
+            position: relative;
+        }
+        .header-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        .header-table td {
+            vertical-align: top;
+            border: none;
+        }
+        .title-section {
+            text-align: center;
+            padding-top: 10px;
+        }
+        .title-main {
+            font-size: 13pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 3px;
+        }
+        .title-sub {
+            font-size: 10pt;
+            font-weight: bold;
+        }
+        .digital-sign {
+            border: 1px solid #cccccc;
+            background-color: #f9f9f9;
+            padding: 6px;
+            font-size: 7.5pt;
+            color: #555555;
+            width: 190px;
+            font-family: monospace, Arial, sans-serif;
+            line-height: 1.2;
+        }
+        .paragraph {
+            text-align: justify;
+            margin-bottom: 15px;
+            font-size: 9.5pt;
+            line-height: 1.4;
+        }
+        .bold {
+            font-weight: bold;
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 8px;
+        }
+        .data-table td {
+            padding: 2px 0;
+            vertical-align: top;
+            font-size: 9pt;
+        }
+        .w-25 { width: 25%; }
+        .w-50 { width: 50%; }
+        .w-33 { width: 33.33%; }
+        
+        .section-banner {
+            background-color: #f0f0f0;
+            text-align: center;
+            font-weight: bold;
+            font-size: 9pt;
+            padding: 3px 0;
+            margin: 12px 0 6px 0;
+            border: 1px solid #dddddd;
+            letter-spacing: 1px;
+        }
+        .footer-note {
+            font-style: italic;
+            font-size: 8.5pt;
+            margin-top: 18px;
+            text-align: justify;
+            line-height: 1.3;
+        }
+        .verification-box {
+            margin-top: 15px;
+            font-size: 8.5pt;
+            line-height: 1.4;
+        }
+        .codes-row {
+            margin-top: 15px;
+            font-size: 8.5pt;
+        }
+        .page-num {
+            text-align: right;
+            font-size: 8.5pt;
+            color: #666666;
+            margin-top: 10px;
+        }
+        
+        /* Estilos específicos para la edición en vivo en navegador */
+        [contenteditable="true"] {
+            outline: none;
+            transition: background 0.2s;
+        }
+        [contenteditable="true"]:hover {
+            background-color: #f4f8ff;
+            box-shadow: 0 0 3px rgba(0,0,0,0.1);
+        }
+        [contenteditable="true"]:focus {
+            background-color: #e6f0ff;
+            border-bottom: 1px dashed #0066cc;
+        }
+        .no-print-banner {
+            background-color: #2196F3;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-family: sans-serif;
+            font-size: 11pt;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+        @media print {
+            .no-print-banner {
+                display: none;
+            }
+            body {
+                background-color: #ffffff;
+            }
+            [contenteditable="true"]:hover, [contenteditable="true"]:focus {
+                background-color: transparent;
+                box-shadow: none;
+                border-bottom: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="no-print-banner">
+        <strong>Modo de Edición En Vivo Activado:</strong> Haz clic en cualquier texto del documento para modificarlo. Al finalizar, puedes guardarlo o imprimirlo (Ctrl+P) y los recuadros de edición desaparecerán en el papel/PDF.
+    </div>
+
+    <div class="container">
+        
+        <table class="header-table">
+            <tr>
+                <td style="width: 20px;"></td>
+                <td class="title-section">
+                    <div class="title-main" contenteditable="true">TÍTULO DEL MOTOVEHÍCULO</div>
+                    <div class="title-sub" contenteditable="true">(Decreto Ley 6582/58 - Ley Nro. 14467)</div>
+                </td>
+                <td style="width: 200px; text-align: right;">
+                    <div class="digital-sign" contenteditable="true">
+                        Digitally signed by 30546671301<br>
+                        Date: 2020.06.01 12:14:38 -03:00<br>
+                        Motivo: Título Digital
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+        <div class="paragraph" contenteditable="true">
+            El Registro Nacional de la Propiedad del Automotor con competencia en Motovehículos, Seccional <span class="bold">PUERTO RICO "A"</span> certifica que ha sido inscrito con el número de dominio <span class="bold">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CQ</span> el Motovehículo, identificado por número de Certificado de Origen <span class="bold">053-000219388/2013</span>.
+        </div>
+
+        <table class="data-table">
+            <tr>
+                <td class="w-50" contenteditable="true">Procedencia: <span class="bold">NACIONAL</span></td>
+                <td class="w-50" contenteditable="true"></td>
+            </tr>
+            <tr>
+                <td contenteditable="true">Fecha Inscripción Inicial: <span class="bold">15/01/2014</span></td>
+                <td contenteditable="true"></td>
+            </tr>
+            <tr>
+                <td contenteditable="true">Código Motovehículo: <span class="bold">053-44-05</span></td>
+                <td contenteditable="true"></td>
+            </tr>
+            <tr>
+                <td contenteditable="true">Fábrica: <span class="bold">053-YAMAHA MOTOR ARGENTINA S.A.</span></td>
+                <td contenteditable="true"></td>
+            </tr>
+            <tr>
+                <td contenteditable="true">Marca: <span class="bold">44-YAMAHA</span></td>
+                <td contenteditable="true"></td>
+            </tr>
+            <tr>
+                <td contenteditable="true">Modelo: <span class="bold">05-YBR 125ED</span></td>
+                <td contenteditable="true"></td>
+            </tr>
+            <tr>
+                <td contenteditable="true">Tipo: <span class="bold">19-MOTOCICLETA</span></td>
+                <td contenteditable="true">Nro. Motor: <span class="bold">E3H6E-067...</span></td>
+            </tr>
+            <tr>
+                <td contenteditable="true">Mca. Motor: <span class="bold">YAMAHA</span></td>
+                <td contenteditable="true">Nro. Cuadro: <span class="bold">8C6KE1692D00258</span></td>
+            </tr>
+            <tr>
+                <td contenteditable="true">Mca. Cuadro: <span class="bold">YAMAHA</span></td>
+                <td contenteditable="true"></td>
+            </tr>
+            <tr>
+                <td contenteditable="true">Fabricación Año: <span class="bold">2013</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Modelo Año: <span class="bold">2014</span></td>
+                <td contenteditable="true">Fecha de adquisición: <span class="bold">07/01/2014</span></td>
+            </tr>
+            <tr>
+                <td contenteditable="true">Condición: <span class="bold">---</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Uso: <span class="bold">Privado</span></td>
+                <td contenteditable="true"></td>
+            </tr>
+            <tr>
+                <td contenteditable="true">Cantidad de Placas: <span class="bold">ORIGINAL</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Cilindrada: <span class="bold">123 CM.3</span></td>
+                <td contenteditable="true"></td>
+            </tr>
+            <tr>
+                <td contenteditable="true">Número de Título: <span class="bold">007192819</span></td>
+                <td contenteditable="true"></td>
+            </tr>
+        </table>
+
+        <div class="section-banner" contenteditable="true">TITULAR</div>
+        <table class="data-table">
+            <tr>
+                <td class="w-50" contenteditable="true">Nombre: <span class="bold">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ISAAC</span></td>
+                <td class="w-50" contenteditable="true">Emancipación: <span class="bold">---</span></td>
+            </tr>
+            <tr>
+                <td contenteditable="true">Porcentaje de Titular: <span class="bold">100 %</span></td>
+                <td contenteditable="true"></td>
+            </tr>
+            <tr>
+                <td contenteditable="true">Cuil: <span class="bold">20395...</span></td>
+                <td contenteditable="true">Tipo Doc.: <span class="bold">D.N.I.</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Nro. Doc.: <span class="bold">39...</span></td>
+            </tr>
+            <tr>
+                <td contenteditable="true">Fecha Nacimiento: <span class="bold">25/08/1996</span></td>
+                <td contenteditable="true">Estado Civil: <span class="bold">Soltero</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Nacionalidad: <span class="bold">ARGENTINA</span></td>
+            </tr>
+        </table>
+
+        <div class="section-banner" contenteditable="true">DOMICILIO</div>
+        <table class="data-table">
+            <tr>
+                <td class="w-33" contenteditable="true">Provincia: <span class="bold">MISIONES</span></td>
+                <td class="w-33" contenteditable="true">Partido: <span class="bold">L. G. SAN MARTÍN</span></td>
+                <td class="w-33" contenteditable="true">Localidad: <span class="bold">GARUHAPE</span></td>
+            </tr>
+            <tr>
+                <td contenteditable="true">Código Postal: <span class="bold">3334</span></td>
+                <td contenteditable="true">Barrio: <span class="bold">---</span></td>
+                <td contenteditable="true"></td>
+            </tr>
+            <tr>
+                <td colspan="2" contenteditable="true">Calle: <span class="bold">CONSTITUCION Y 1º DE MAYO B° GUNTHER</span></td>
+                <td contenteditable="true">Nro.: <span class="bold">S/NRO</span> Piso: <span class="bold">---</span> Dpto.: <span class="bold">---</span></td>
+            </tr>
+            <tr>
+                <td colspan="3" contenteditable="true">Carácter del bien: <span class="bold">Propio</span></td>
+            </tr>
+            <tr>
+                <td colspan="2" contenteditable="true">Titular desde: <span class="bold">01/06/2020</span></td>
+                <td contenteditable="true">Adquisición: <span class="bold">A Título oneroso</span></td>
+            </tr>
+            <tr>
+                <td colspan="2" contenteditable="true">Estipulación terceros: <span class="bold">NO</span></td>
+                <td contenteditable="true">Titular de radicación: <span class="bold">SI</span></td>
+            </tr>
+        </table>
+
+        <div class="section-banner" contenteditable="true">CEDULA</div>
+        <table class="data-table">
+            <tr>
+                <td class="w-33" contenteditable="true">Número de cédula: <span class="bold">AN***251</span></td>
+                <td class="w-33" contenteditable="true">Fecha de emisión: <span class="bold">01/06/2020</span></td>
+                <td class="w-33" contenteditable="true">Fecha de vencimiento: <span class="bold">01/06/2023</span></td>
+            </tr>
+        </table>
+
+        <div class="section-banner" contenteditable="true">RADICACION ANTERIOR</div>
+        <table class="data-table">
+            <tr>
+                <td class="w-33" contenteditable="true">Provincia: <span class="bold">MISIONES</span></td>
+                <td class="w-33" contenteditable="true">Partido: <span class="bold">L.G.SAN MARTIN</span></td>
+                <td class="w-33" contenteditable="true">Localidad: <span class="bold">GARUHAPE</span></td>
+            </tr>
+            <tr>
+                <td contenteditable="true">Código Postal: <span class="bold">3334</span></td>
+                <td contenteditable="true">Barrio: <span class="bold">GUNTHER</span></td>
+                <td contenteditable="true"></td>
+            </tr>
+            <tr>
+                <td colspan="2" contenteditable="true">Calle: <span class="bold">SIN CALLE</span></td>
+                <td contenteditable="true">Nro.: <span class="bold">S/NRO</span> Piso: <span class="bold">---</span> Dpto.: <span class="bold">---</span></td>
+            </tr>
+        </table>
+
+        <div class="footer-note" contenteditable="true" style="margin-top: 25px;">
+            INFORMACION SUMINISTRADA POR EL REGISTRO SECCIONAL EMISOR Nro.<span class="bold">38006 - PUERTO RICO "A"</span> situado en la calle <span class="bold">SAN MARTIN</span> Nro. <span class="bold">1480</span> Piso <span class="bold">---</span> Depto. <span class="bold">---</span>, con fecha <span class="bold">01/06/2020</span>.
+        </div>
+
+        <div class="footer-note" contenteditable="true">
+            <span class="bold">EL TÍTULO DIGITAL (TD) DA CUENTA DE LA SITUACIÓN REGISTRAL DEL DOMINIO A LA FECHA DE SU ÚLTIMO ASIENTO. PARA CONOCER EL ESTADO DE DOMINIO ACTUALIZADO SE ACONSEJA LA SOLICITUD DE UN INFORME DE ESTADO DE DOMINIO, ÉSTE PODRÁ SOLICITARSE A TRAVÉS DEL SITIO WEB DEL ORGANISMO (www.dnrpa.gov.ar).</span>
+        </div>
+
+        <div class="verification-box" contenteditable="true">
+            Usted podrá verificar su veracidad, en el sitio www.dnrpa.gov.ar, Validación de Documento Recibido, ingresando los códigos que se indican a continuación:
+        </div>
+
+        <table class="codes-row" style="width: 100%; margin-top: 15px;">
+            <tr>
+                <td contenteditable="true">Registro Seccional: <span class="bold">38006</span></td>
+                <td contenteditable="true">Número de Trámite: <span class="bold">399...</span></td>
+                <td contenteditable="true">Número de Control Web: <span class="bold">225AE60...</span></td>
+            </tr>
+        </table>
+
+        <div class="page-num" contenteditable="true">Página 1 de 1</div>
+
+    </div>
+
+</body>
+</html>
+  
