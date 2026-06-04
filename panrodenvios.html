@@ -625,9 +625,8 @@ footer { text-align: center; border-radius: 0; }
 <div class="sponsor-badge">
     <span class="flag"></span> Patrocinador Oficial de la <strong>Selección Argentina</strong>
 </div>
-</header>
-
-<section class="hero">
+            </header>
+            <section class="hero">
 <div class="search-container">
 <div class="search-box">
 <input type="text" id="codigo" placeholder="Ingresá código de rastreo (Ej: ALBUM10 / ALBUM30)" autocomplete="off">
@@ -842,24 +841,6 @@ resultado.innerHTML = `
         <div class="timeline">${timelineHTML}</div>
     </div>
     <div class="right-side">
-        <div class="deliver
-        // ARMAR EL HTML DENTRO DEL CONTENEDOR GRID EN DOS COLUMNAS (CONTINUACIÓN)
-resultado.innerHTML = `
-<div class="tracking-grid">
-    <div class="left-side">
-        ${checkoutHTML}
-        <div class="datos">
-            <div class="box"><strong>Código Tracking</strong><span class="val">${codigo}</span></div>
-            <div class="box"><strong>Mercadería en Custodia</strong><span class="val">${envio.producto}</span></div>
-            <div class="box"><strong>Comprador Destinatario</strong><span class="val">${envio.receptor}</span></div>
-            <div class="box"><strong>Dirección de Destino</strong><span class="val">${envio.direccionEntrega}</span></div>
-            <div class="box"><strong>Nodo Origen</strong><span class="val">${envio.origen}</span></div>
-            <div class="box"><strong>Jurisdicción</strong><span class="val">${envio.destino}</span></div>
-        </div>
-        <h3>Historial de Movimientos Cruzados</h3>
-        <div class="timeline">${timelineHTML}</div>
-    </div>
-    <div class="right-side">
         <div class="delivery-sidebar">
             <h3 style="margin-bottom: 5px;">Seguridad Digital</h3>
             <p style="font-size: 13px; color: #64748b; margin-bottom: 15px;">Validación para el transportista en punto de entrega.</p>
@@ -903,5 +884,5 @@ window.addEventListener("click", function(e) {
 </script>
 
 </body>
-</html>
-
+            </html>
+            
