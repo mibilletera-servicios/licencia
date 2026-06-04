@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>PANROD | Seguimiento Nacional de Envíos</title>
+<title>PANROD | Distribuidor Oficial - Álbumes y Figuritas</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
@@ -62,7 +62,7 @@ vertical-align: middle;
 text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* HEADER CON IMAGEN DE FONDO, DEGRADADO DE AZULES Y CORTES CURVOS */
+/* HEADER CON IMAGEN DE FONDO */
 header{
 position: relative;
 background: linear-gradient(135deg, rgba(15, 23, 42, 0.92), rgba(14, 116, 144, 0.88)), 
@@ -98,7 +98,6 @@ margin-top: 5px;
 color: #e0f2fe;
 }
 
-/* SELLO DE PATROCINIO */
 .sponsor-badge {
 display: inline-flex;
 align-items: center;
@@ -299,7 +298,7 @@ display:grid;
 grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
 gap:18px;
 margin-top:20px;
-margin-bottom:40px;
+margin-bottom:30px;
 }
 
 .box{
@@ -322,6 +321,73 @@ margin-bottom:6px;
 color: #1e293b;
 font-weight: 500;
 font-size: 15px;
+}
+
+/* SECCIÓN FINANCIERA (PRECIOS DEL ÁLBUM) */
+.checkout-box {
+background: #f0fdf4;
+border: 2px dashed #10b981;
+border-radius: 20px;
+padding: 25px;
+margin-bottom: 35px;
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+gap: 20px;
+align-items: center;
+}
+
+.checkout-box.pending {
+background: #fff7ed;
+border-color: #f97316;
+}
+
+.price-detail p {
+font-size: 14px;
+color: #475569;
+margin-bottom: 4px;
+}
+
+.price-detail p span {
+float: right;
+font-weight: 600;
+color: #0f172a;
+}
+
+.price-detail .total {
+font-size: 18px;
+font-weight: 700;
+color: #0f172a;
+border-top: 1px solid #e2e8f0;
+padding-top: 8px;
+margin-top: 8px;
+}
+
+.price-detail .total span {
+color: #0284c7;
+font-size: 20px;
+}
+
+.payment-status {
+text-align: center;
+padding: 10px;
+}
+
+.btn-pagar {
+background: #f97316;
+color: white;
+border: none;
+padding: 12px 24px;
+border-radius: 30px;
+font-weight: 600;
+cursor: pointer;
+transition: 0.2s;
+box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+width: 100%;
+margin-top: 10px;
+}
+
+.btn-pagar:hover {
+background: #ea580c;
 }
 
 /* TIMELINE */
@@ -503,7 +569,6 @@ footer { text-align: center; border-radius: 0; }
 </head>
 <body>
 
-<!-- CINTA DE LA SELECCIÓN ARGENTINA AGRANDADA -->
 <div class="afa-ribbon">
     <div class="afa-ribbon-content">AFA SPONSOR<span>★★★</span></div>
 </div>
@@ -519,7 +584,7 @@ footer { text-align: center; border-radius: 0; }
 <section class="hero">
 <div class="search-container">
 <div class="search-box">
-<input type="text" id="codigo" placeholder="Ingresá código de rastreo (Ej: PAN123456)" autocomplete="off">
+<input type="text" id="codigo" placeholder="Ingresá código de rastreo (Ej: ALBUM10 / ALBUM30)" autocomplete="off">
 <button id="btnBuscar">Buscar Paquete</button>
 </div>
 <div id="errorInput" class="error-message">Código no encontrado. Verificá los caracteres e intentalo de nuevo.</div>
@@ -528,16 +593,16 @@ footer { text-align: center; border-radius: 0; }
 
 <section class="info">
 <div class="card">
-<h3>📦 Gestión Moderna</h3>
-<p>Procesamiento optimizado y centralización de paquetería a nivel nacional.</p>
+<h3>📦 Stock en Depósito</h3>
+<p>Tu hermano deposita los productos directamente en nuestras sucursales automatizadas.</p>
 </div>
 <div class="card">
-<h3>🚚 Red de Distribución</h3>
-<p>Flotas geolocalizadas listas para asegurar entregas en tiempos récord.</p>
+<h3>💳 Validación de Pago</h3>
+<p>El sistema verifica de forma automática el cobro del producto + envío para dar el alta física.</p>
 </div>
 <div class="card">
-<h3>🔒 Máxima Seguridad</h3>
-<p>Auditoría constante y candados de control de pago para resguardo total.</p>
+<h3>🚚 Despacho Express</h3>
+<p>Una vez acreditado el 100%, el camión inicia la ruta hacia el domicilio del comprador.</p>
 </div>
 </section>
 
@@ -545,7 +610,7 @@ footer { text-align: center; border-radius: 0; }
 <div class="modal" id="modal">
 <div class="modal-content">
 <span class="close" id="btnCerrar">×</span>
-<h2>Detalle General del Envío</h2>
+<h2>Control de Entrega & Despacho Full</h2>
 <div id="resultado"></div>
 </div>
 </div>
@@ -588,38 +653,42 @@ footer { text-align: center; border-radius: 0; }
 </footer>
 
 <script>
-// Base de datos simulada
+// Base de datos simulada con la conexión comercial de los álbumes
 const envios = {
-"PAN123456":{
-producto: "Notebook ASUS Vivobook 15 X515",
-origen:"Buenos Aires",
-destino:"Córdoba",
-direccionEntrega: "Av. Colón 1240, Piso 4, Dpto B (CP 5000)",
-receptor:"Juan Pérez",
-pagado:false,
+"ALBUM10":{
+producto: "Combo: Álbum Oficial de la Selección + 50 Paquetes de Figuritas",
+precioProducto: 15000,
+precioEnvio: 3500,
+origen:"Depósito Central PANROD (Stock Proveedor)",
+destino:"Rosario, Santa Fe",
+direccionEntrega: "Pellegrini 1420, Piso 2 (CP 2000)",
+receptor:"Leo Medina",
+pagado: false,
+modalidadPago: null,
 timeline:[
-{ id: "creada", titulo:"Gestión creada", fecha:"04/06/2026 - 09:00 hs" },
-{ id: "pago", titulo:"Pago acreditado e IVA liquidado", fecha:"04/06/2026 - 09:05 hs" },
-{ id: "deposito", titulo:"Paquete recibido y verificado en depósito central", fecha:"04/06/2026 - 10:20 hs" },
-{ id: "despachado", titulo:"Despachado en unidad troncal de distribución", fecha:"04/06/2026 - 14:30 hs" },
-{ id: "transito", titulo:"En tránsito hacia nodo destino", fecha:"Pendiente" },
-{ id: "reparto", titulo:"En reparto domiciliario", fecha:"Pendiente" },
-{ id: "entregado", titulo:"Entregado", fecha:"Pendiente" }
+{ id: "creada", titulo:"Producto depositado por el vendedor en PANROD", fecha:"04/06/2026 - 08:30 hs" },
+{ id: "pago", titulo:"Verificación de pago e información del comprador", fecha:"Pendiente - Requiere saldo total" },
+{ id: "deposito", titulo:"Acondicionamiento y etiquetado en depósito", fecha:"Pendiente" },
+{ id: "despachado", titulo:"Despachado en unidad de distribución", fecha:"Pendiente" },
+{ id: "entregado", titulo:"Entregado a destinatario", fecha:"Pendiente" }
 ]
 },
-"PAN999888":{
-producto: "Cámara Réflex Canon EOS R10 + Lente",
-origen:"Rosario",
-destino:"Mendoza",
-direccionEntrega: "Calle Las Heras 345, Godoy Cruz (CP 5501)",
-receptor:"María Gómez",
-pagado:false,
+"ALBUM30":{
+producto: "Álbum de Figuritas Tapa Dura - Edición Especial Campeones del Mundo",
+precioProducto: 22000,
+precioEnvio: 0, // Envío gratis promocional
+origen:"Depósito Central PANROD (Stock Proveedor)",
+destino:"Mar del Plata",
+direccionEntrega: "Av. Colón 2340 (CP 7600)",
+receptor:"Matías Rossi",
+pagado: true,
+modalidadPago: "Transferencia Bancaria (Mercado Pago)",
 timeline:[
-{ id: "creada", titulo:"Gestión en sistema creada", fecha:"03/06/2026 - 11:00 hs" },
-{ id: "pago", titulo:"Pago total del envío verificado", fecha:"Pendiente" },
-{ id: "deposito", titulo:"Ingreso a depósito físico", fecha:"Pendiente" },
-{ id: "despachado", titulo:"Despachado a ruta", fecha:"Pendiente" },
-{ id: "entregado", titulo:"Entregado a destinatario", fecha:"Pendiente" }
+{ id: "creada", titulo:"Producto depositado por el vendedor en PANROD", fecha:"03/06/2026 - 10:00 hs" },
+{ id: "pago", titulo:"Pago total verificado y validado en sistema", fecha:"03/06/2026 - 10:12 hs" },
+{ id: "deposito", titulo:"Paquete verificado y empaquetado con etiqueta de cliente", fecha:"03/06/2026 - 14:00 hs" },
+{ id: "despachado", titulo:"En viaje hacia el centro de distribución Mar del Plata", fecha:"04/06/2026 - 06:15 hs" },
+{ id: "entregado", titulo:"Entregado", fecha:"Pendiente" }
 ]
 }
 };
@@ -644,8 +713,10 @@ return;
 errorInput.style.display = "none";
 inputCodigo.style.borderColor = "transparent";
 
+let totalAbonar = envio.precioProducto + envio.precioEnvio;
 let timelineHTML = "";
 
+// Lógica de control de estados basada en si está pago o no
 envio.timeline.forEach((item, index) => {
 let statusClass = "is-inactive";
 let displayFecha = item.fecha;
@@ -657,9 +728,10 @@ statusClass = envio.pagado ? "is-active" : "is-inactive";
 } else {
 if (!envio.pagado) {
 statusClass = "is-blocked";
-displayFecha = "Retenido - Falta Pago Total del Producto/Envío";
+displayFecha = "Bloqueado hasta recibir confirmación de compra.";
 } else {
-if (codigo === "PAN123456" && index <= 3) {
+// Simulación para el ejemplo de lo ya avanzado
+if (codigo === "ALBUM30" && index <= 3) {
 statusClass = "is-active";
 } else {
 statusClass = "is-inactive";
@@ -676,19 +748,50 @@ timelineHTML += `
 `;
 });
 
+// CAJA FINANCIERA DINÁMICA
+let checkoutHTML = "";
+if(!envio.pagado) {
+checkoutHTML = `
+<div class="checkout-box pending">
+<div class="price-detail">
+<p>Valor del Producto: <span>$${envio.precioProducto}</span></p>
+<p>Costo de Envío PANROD: <span>$${envio.precioEnvio}</span></p>
+<p class="total">Total Pendiente: <span>$${totalAbonar}</span></p>
+</div>
+<div class="payment-status">
+<span class="nopagado" style="margin-bottom: 10px;">ESPERANDO PAGO</span>
+<button class="btn-pagar" onclick="alert('Redireccionando a la pasarela de pago de tu hermano...')">Pagar Ahora con Meli / Tarjeta</button>
+</div>
+</div>
+`;
+} else {
+checkoutHTML = `
+<div class="checkout-box">
+<div class="price-detail">
+<p>Valor del Producto: <span>$${envio.precioProducto}</span></p>
+<p>Costo de Envío PANROD: <span>${envio.precioEnvio === 0 ? '¡GRATIS!' : '$' + envio.precioEnvio}</span></p>
+<p class="total">Total Abonado: <span>$${totalAbonar}</span></p>
+</div>
+<div class="payment-status">
+<span class="pagado" style="margin-bottom: 10px;">✓ TOTALMENTE ABONADO</span>
+<p style="font-size:12px; color:#1e293b; font-weight:500; margin-top:5px;">Medio: ${envio.modalidadPago}</p>
+</div>
+</div>
+`;
+}
+
+// Render final dentro del modal
 resultado.innerHTML = `
+${checkoutHTML}
 <div class="datos">
 <div class="box"><strong>Código de Rastreo</strong><span class="val">${codigo}</span></div>
-<div class="box"><strong>Contenido del Paquete</strong><span class="val">${envio.producto}</span></div>
-<div class="box"><strong>Destinatario</strong><span class="val">${envio.receptor}</span></div>
+<div class="box"><strong>Producto en Custodia</strong><span class="val">${envio.producto}</span></div>
+<div class="box"><strong>Comprador / Destinatario</strong><span class="val">${envio.receptor}</span></div>
 <div class="box"><strong>Dirección de Entrega</strong><span class="val">${envio.direccionEntrega}</span></div>
-<div class="box"><strong>Ruta Logística</strong><span class="val">${envio.origen} ➔ ${envio.destino}</span></div>
-<div class="box">
-<strong>Estado del Pago</strong><br>
-${envio.pagado ? '<span class="pagado">ABONADO TOTAL</span>' : '<span class="nopagado">PENDIENTE DE PAGO</span>'}
+<div class="box"><strong>Ubicación Actual</strong><span class="val">${envio.origen}</span></div>
+<div class="box"><strong>Destino Localidad</strong><span class="val">${envio.destino}</span></div>
 </div>
-</div>
-<h3>Línea de Tiempo del Proceso</h3>
+<h3>Estado del Flujo Logístico</h3>
 <div class="timeline">${timelineHTML}</div>
 `;
 
@@ -715,4 +818,4 @@ if(e.target === modal) cerrarModal();
 
 </body>
             </html>
-            
+                
