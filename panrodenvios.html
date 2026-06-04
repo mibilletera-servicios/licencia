@@ -23,13 +23,13 @@ overflow-x: hidden;
 position: relative;
 }
 
-/* CINTA DE LA SELECCIÓN ARGENTINA EN LA ESQUINA SUPERIOR */
+/* CINTA DE LA SELECCIÓN ARGENTINA MAXIMIZADA */
 .afa-ribbon {
 position: absolute;
 top: 0;
 right: 0;
-width: 130px;
-height: 130px;
+width: 220px;
+height: 220px;
 overflow: hidden;
 z-index: 99;
 pointer-events: none;
@@ -37,26 +37,29 @@ pointer-events: none;
 
 .afa-ribbon-content {
 font-family: 'Montserrat', sans-serif;
-font-size: 10px;
-font-weight: 700;
-color: #1e3a8a;
+font-size: 13px;
+font-weight: 800;
+color: #0f172a;
 text-align: center;
-line-height: 20px;
+line-height: 34px;
 transform: rotate(45deg);
 position: relative;
-padding: 4px 0;
-left: -5px;
-top: 30px;
-width: 180px;
-/* Degradado Celeste y Blanco con las 3 Estrellas de fondo en texto */
-background: linear-gradient(to bottom, #7dd3fc 0%, #7dd3fc 33%, #ffffff 33%, #ffffff 66%, #7dd3fc 66%, #7dd3fc 100%);
-box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+padding: 6px 0;
+left: -10px;
+top: 50px;
+width: 320px;
+background: linear-gradient(to bottom, #7dd3fc 0%, #7dd3fc 30%, #ffffff 30%, #ffffff 70%, #7dd3fc 70%, #7dd3fc 100%);
+box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+letter-spacing: 1.5px;
+text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
 }
 
 .afa-ribbon-content span {
-color: #d97706; /* Oro para las estrellas */
-font-size: 12px;
-margin-left: 3px;
+color: #d97706;
+font-size: 18px;
+margin-left: 6px;
+vertical-align: middle;
+text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 /* HEADER CON IMAGEN DE FONDO, DEGRADADO DE AZULES Y CORTES CURVOS */
@@ -137,9 +140,9 @@ color: #ffffff;
 font-weight: 700;
 }
 
-/* HERO (CAJA DE BÚSQUEDA SUAVIZADA Y FLOTANTE) */
+/* HERO */
 .hero{
-margin-top: -50px;
+margin-top: -45px;
 position: relative;
 z-index: 10;
 padding: 0 20px;
@@ -200,7 +203,7 @@ display: none;
 font-weight: 500;
 }
 
-/* CARDS CON BORDES REDONDEADOS Y SUAVES */
+/* CARDS */
 .info{
 display:flex;
 flex-wrap:wrap;
@@ -237,7 +240,7 @@ font-size: 14px;
 line-height: 1.6;
 }
 
-/* MODAL REDONDEADO Y COMPLETO */
+/* MODAL */
 .modal{
 position:fixed;
 top:0;
@@ -321,7 +324,7 @@ font-weight: 500;
 font-size: 15px;
 }
 
-/* TIMELINE CURVA */
+/* TIMELINE */
 .modal h3 {
 color: #0f172a;
 font-size: 20px;
@@ -403,7 +406,7 @@ color: #ef4444;
 font-weight: 500;
 }
 
-/* BADGES DE PAGO CURVOS */
+/* BADGES DE PAGO */
 .pagado{
 background:#d1fae5;
 color:#065f46;
@@ -424,7 +427,7 @@ font-weight:600;
 display:inline-block;
 }
 
-/* PIE DE PÁGINA COMPLETO */
+/* PIE DE PÁGINA */
 footer{
 background: linear-gradient(135deg, #0f172a, #1e293b);
 color:#94a3b8;
@@ -486,7 +489,7 @@ color: #64748b;
 }
 
 @media(max-width:700px){
-.afa-ribbon { display: none; } /* Ocultamos la cinta en celulares para que no tape contenido */
+.afa-ribbon { display: none; }
 header { padding: 60px 20px 100px 20px; }
 .logo{ font-size:40px; }
 .sub { font-size: 15px; }
@@ -500,15 +503,14 @@ footer { text-align: center; border-radius: 0; }
 </head>
 <body>
 
-<!-- CINTA DE LA SELECCIÓN ARGENTINA -->
+<!-- CINTA DE LA SELECCIÓN ARGENTINA AGRANDADA -->
 <div class="afa-ribbon">
-    <div class="afa-ribbon-content">AFA SELECCIÓN<span>★★★</span></div>
+    <div class="afa-ribbon-content">AFA SPONSOR<span>★★★</span></div>
 </div>
 
 <header>
 <div class="logo">PANROD</div>
 <div class="sub">Logística Avanzada y Trazabilidad de Envíos</div>
-<!-- MARCA DE PATROCINADOR OFICIAL -->
 <div class="sponsor-badge">
     <span class="flag"></span> Patrocinador Oficial de la <strong>Selección Argentina</strong>
 </div>
@@ -539,7 +541,7 @@ footer { text-align: center; border-radius: 0; }
 </div>
 </section>
 
-<!-- MODAL ENRIQUECIDO -->
+<!-- MODAL -->
 <div class="modal" id="modal">
 <div class="modal-content">
 <span class="close" id="btnCerrar">×</span>
@@ -548,7 +550,7 @@ footer { text-align: center; border-radius: 0; }
 </div>
 </div>
 
-<!-- FOOTER COMPLETO -->
+<!-- FOOTER -->
 <footer>
 <div class="footer-content">
 <div class="footer-section">
@@ -697,7 +699,6 @@ function cerrarModal(){
 modal.style.display = "none";
 }
 
-// Event Listeners
 btnBuscar.addEventListener("click", buscarEnvio);
 inputCodigo.addEventListener("keypress", function(e) {
 if (e.key === "Enter") buscarEnvio();
@@ -713,5 +714,5 @@ if(e.target === modal) cerrarModal();
 </script>
 
 </body>
-    </html>
-    
+            </html>
+            
