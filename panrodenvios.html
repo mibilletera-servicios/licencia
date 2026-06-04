@@ -843,3 +843,65 @@ resultado.innerHTML = `
     </div>
     <div class="right-side">
         <div class="deliver
+        // ARMAR EL HTML DENTRO DEL CONTENEDOR GRID EN DOS COLUMNAS (CONTINUACIÓN)
+resultado.innerHTML = `
+<div class="tracking-grid">
+    <div class="left-side">
+        ${checkoutHTML}
+        <div class="datos">
+            <div class="box"><strong>Código Tracking</strong><span class="val">${codigo}</span></div>
+            <div class="box"><strong>Mercadería en Custodia</strong><span class="val">${envio.producto}</span></div>
+            <div class="box"><strong>Comprador Destinatario</strong><span class="val">${envio.receptor}</span></div>
+            <div class="box"><strong>Dirección de Destino</strong><span class="val">${envio.direccionEntrega}</span></div>
+            <div class="box"><strong>Nodo Origen</strong><span class="val">${envio.origen}</span></div>
+            <div class="box"><strong>Jurisdicción</strong><span class="val">${envio.destino}</span></div>
+        </div>
+        <h3>Historial de Movimientos Cruzados</h3>
+        <div class="timeline">${timelineHTML}</div>
+    </div>
+    <div class="right-side">
+        <div class="delivery-sidebar">
+            <h3 style="margin-bottom: 5px;">Seguridad Digital</h3>
+            <p style="font-size: 13px; color: #64748b; margin-bottom: 15px;">Validación para el transportista en punto de entrega.</p>
+            <div class="qr-box"></div>
+            <p style="font-size: 11px; color: #94a3b8; line-height: 1.4; margin-top: 10px;">
+                Este código QR se regenera dinámicamente y certifica que los montos se encuentran validados por la empresa proveedora.
+            </p>
+            <hr style="width: 100%; border: 0; border-top: 1px dashed #e2e8f0; margin: 20px 0;">
+            <div style="text-align: left; width: 100%;">
+                <span class="${envio.pagado ? 'pagado' : 'nopagado'}">${envio.pagado ? '✓ PAGO CONSOLIDADO' : '⚠ PENDIENTE DE PAGO'}</span>
+                <p style="font-size: 12px; color: #475569; margin-top: 10px;">
+                    <strong>Estado del Envío:</strong> ${envio.pagado ? (entregado ? 'Entregado' : 'En Distribución') : 'Retenido en Depósito'}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+`;
+
+modal.style.display = "flex";
+}
+
+// Event Listeners para controlar el ciclo de vida del modal
+btnBuscar.addEventListener("click", buscarEnvio);
+
+inputCodigo.addEventListener("keypress", function(e) {
+    if (e.key === "Enter") {
+        buscarEnvio();
+    }
+});
+
+btnCerrar.addEventListener("click", function() {
+    modal.style.display = "none";
+});
+
+window.addEventListener("click", function(e) {
+    if (e.target === modal) {
+        modal.style.display = "none";
+    }
+});
+</script>
+
+</body>
+</html>
+
