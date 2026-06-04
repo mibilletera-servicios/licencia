@@ -9,7 +9,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-
 *{
 margin:0;
 padding:0;
@@ -18,112 +17,161 @@ font-family:'Poppins',sans-serif;
 }
 
 body{
-background:#f5f7fb;
-color:#222;
+background:#f4f6f9;
+color:#2c3e50;
 }
 
-/* HEADER */
-
+/* HEADER ELEGANTE */
 header{
-background:linear-gradient(135deg,#ff6b00,#ff9900);
-padding:25px;
+background: linear-gradient(135deg, #1e293b, #0f172a); /* Azul medianoche / Slate profundo muy elegante */
+padding:30px 25px;
 text-align:center;
 color:white;
-box-shadow:0 5px 20px rgba(0,0,0,.15);
+box-shadow:0 4px 20px rgba(0,0,0,.08);
+border-bottom: 3px solid #d97706; /* Detalle sutil en ámbar dorado */
 }
 
 .logo{
-font-size:42px;
+font-size:38px;
 font-weight:700;
-letter-spacing:2px;
+letter-spacing:3px;
+color: #ffffff;
+text-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
 .sub{
-opacity:.9;
+opacity:.85;
+font-size: 14px;
+font-weight: 300;
+letter-spacing: 1px;
+margin-top: 5px;
 }
 
 /* HERO */
-
 .hero{
-padding:60px 20px;
+padding:70px 20px 40px 20px;
 text-align:center;
 }
 
 .hero h1{
-font-size:42px;
-margin-bottom:10px;
+font-size:38px;
+font-weight: 600;
+color: #1e293b;
+margin-bottom:12px;
 }
 
 .hero p{
-color:#666;
-margin-bottom:30px;
+color:#64748b;
+margin-bottom:35px;
+font-size: 16px;
+}
+
+.search-container{
+max-width:650px;
+margin:auto;
 }
 
 .search-box{
-max-width:700px;
-margin:auto;
 display:flex;
-gap:10px;
+gap:12px;
+background: white;
+padding: 6px;
+border-radius: 16px;
+box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+border: 1px solid #e2e8f0;
 }
 
 .search-box input{
 flex:1;
-padding:18px;
-border:none;
+padding:16px 20px;
+border:2px solid transparent;
 border-radius:12px;
 font-size:16px;
-box-shadow:0 5px 15px rgba(0,0,0,.08);
+outline: none;
+transition: .3s;
+color: #1e293b;
+}
+
+.search-box input:focus{
+background: #f8fafc;
 }
 
 .search-box button{
-background:#ff6b00;
+background: linear-gradient(135deg, #d97706, #b45309); /* Degradado Ámbar/Dorado premium */
 color:white;
 border:none;
-padding:18px 30px;
+padding:16px 32px;
 border-radius:12px;
 cursor:pointer;
 font-weight:600;
+font-size: 15px;
 transition:.3s;
+box-shadow: 0 4px 12px rgba(217, 119, 6, 0.2);
 }
 
 .search-box button:hover{
-background:#e55f00;
-transform:translateY(-2px);
+background: linear-gradient(135deg, #b45309, #92400e);
+transform:translateY(-1px);
+box-shadow: 0 6px 15px rgba(217, 119, 6, 0.3);
+}
+
+/* Mensaje de error integrado */
+.error-message {
+color: #dc2626;
+font-size: 14px;
+text-align: left;
+margin-top: 10px;
+padding-left: 15px;
+display: none;
+font-weight: 500;
 }
 
 /* CARDS */
-
 .info{
 display:flex;
 flex-wrap:wrap;
 justify-content:center;
-gap:20px;
-padding:40px 20px;
+gap:25px;
+padding:40px 20px 80px 20px;
 }
 
 .card{
 background:white;
-padding:25px;
-border-radius:15px;
+padding:30px 25px;
+border-radius:16px;
 width:280px;
-box-shadow:0 10px 25px rgba(0,0,0,.08);
+box-shadow:0 10px 25px rgba(15, 23, 42, 0.04);
 text-align:center;
+border: 1px solid #f1f5f9;
+transition: .3s;
 }
 
-.card h3{
-color:#ff6b00;
-margin-bottom:10px;
+.card:hover {
+transform: translateY(-3px);
+box-shadow:0 15px 30px rgba(15, 23, 42, 0.08);
 }
 
-/* MODAL */
+.card h3 {
+color: #d97706;
+margin-bottom:12px;
+font-size: 20px;
+}
 
+.card p {
+color: #64748b;
+font-size: 14px;
+line-height: 1.5;
+}
+
+/* MODAL ELEGANTE */
 .modal{
 position:fixed;
 top:0;
 left:0;
 width:100%;
 height:100%;
-background:rgba(0,0,0,.65);
+background:rgba(15, 23, 42, 0.6);
+backdrop-filter: blur(4px); /* Efecto desenfoque de fondo premium */
 display:none;
 justify-content:center;
 align-items:center;
@@ -133,148 +181,215 @@ z-index:999;
 .modal-content{
 background:white;
 width:95%;
-max-width:900px;
-border-radius:20px;
-padding:30px;
-max-height:90vh;
+max-width:850px;
+border-radius:24px;
+padding:35px;
+max-height:85vh;
 overflow:auto;
-animation:fade .4s;
+box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+animation:fade .3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @keyframes fade{
-from{
-opacity:0;
-transform:translateY(20px);
-}
-to{
-opacity:1;
-transform:translateY(0);
-}
+from{ opacity:0; transform:translateY(15px); }
+to{ opacity:1; transform:translateY(0); }
 }
 
 .close{
 float:right;
-font-size:30px;
+font-size:28px;
 cursor:pointer;
+color: #94a3b8;
+transition: .2s;
+line-height: 1;
+}
+
+.close:hover {
+color: #1e293b;
+}
+
+.modal h2 {
+color: #1e293b;
+font-size: 24px;
+font-weight: 600;
+margin-bottom: 20px;
 }
 
 .datos{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:15px;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:16px;
 margin-top:20px;
-margin-bottom:30px;
+margin-bottom:35px;
 }
 
 .box{
-background:#f6f6f6;
-padding:15px;
-border-radius:12px;
+background:#f8fafc;
+padding:16px 20px;
+border-radius:14px;
+border: 1px solid #f1f5f9;
 }
 
 .box strong{
 display:block;
-color:#ff6b00;
-margin-bottom:5px;
+color:#64748b;
+font-size: 12px;
+text-transform: uppercase;
+letter-spacing: 0.5px;
+margin-bottom:6px;
+}
+
+.box span.val {
+color: #1e293b;
+font-weight: 500;
+font-size: 15px;
 }
 
 /* TIMELINE */
+.modal h3 {
+color: #1e293b;
+font-size: 18px;
+font-weight: 600;
+margin-bottom: 20px;
+}
 
 .timeline{
 position:relative;
-margin-top:30px;
+margin-top:25px;
+padding-left: 10px;
 }
 
 .timeline::before{
 content:'';
 position:absolute;
-left:20px;
-top:0;
-width:4px;
-height:100%;
-background:#ddd;
+left:22px;
+top:5px;
+width:3px;
+height:calc(100% - 30px);
+background:#e2e8f0;
 }
 
 .step{
 position:relative;
-padding-left:60px;
-margin-bottom:35px;
+padding-left:55px;
+margin-bottom:30px;
+}
+
+.step:last-child {
+margin-bottom: 10px;
 }
 
 .circle{
-width:20px;
-height:20px;
+width:16px;
+height:16px;
 border-radius:50%;
 position:absolute;
-left:12px;
-top:5px;
+left:16px;
+top:4px;
+background: #cbd5e1;
+border: 3px solid white;
+box-shadow: 0 0 0 3px #e2e8f0;
+transition: .3s;
 }
 
-.active{
-background:#00c853;
-box-shadow:0 0 15px #00c853;
+.step.is-active .circle {
+background:#10b981; /* Verde esmeralda elegante */
+box-shadow: 0 0 0 3px #d1fae5;
 }
 
-.inactive{
-background:#cfcfcf;
+.step.is-blocked .circle {
+background:#ef4444; /* Rojo suave para indicar bloqueo por falta de pago */
+box-shadow: 0 0 0 3px #fee2e2;
 }
 
 .step h4{
-margin-bottom:5px;
+font-size: 15px;
+font-weight: 500;
+color: #475569;
+transition: .3s;
+}
+
+.step.is-active h4 {
+color: #0f172a;
+font-weight: 600;
+}
+
+.step.is-blocked h4 {
+color: #94a3b8;
+text-decoration: line-through;
 }
 
 .step small{
-color:#777;
+color:#94a3b8;
+font-size: 13px;
+display: block;
+margin-top: 2px;
 }
 
-/* PAGO */
+.step.is-blocked small {
+color: #ef4444;
+font-weight: 500;
+}
 
+/* BADGES DE PAGO */
 .pagado{
-background:#00c853;
-color:white;
-padding:8px 12px;
+background:#d1fae5;
+color:#065f46;
+padding:6px 12px;
 border-radius:8px;
+font-size: 13px;
 font-weight:600;
 display:inline-block;
+letter-spacing: 0.5px;
 }
 
 .nopagado{
-background:#999;
-color:white;
-padding:8px 12px;
+background:#fee2e2;
+color:#991b1b;
+padding:6px 12px;
 border-radius:8px;
+font-size: 13px;
 font-weight:600;
 display:inline-block;
+letter-spacing: 0.5px;
 }
 
 /* FOOTER */
-
 footer{
-background:#111;
-color:white;
-padding:30px;
+background:#0f172a;
+color:#94a3b8;
+padding:40px 20px;
 text-align:center;
 margin-top:60px;
+border-top: 1px solid #1e293b;
+font-size: 14px;
+}
+
+footer h3 {
+color: white;
+margin-bottom: 10px;
+letter-spacing: 1px;
 }
 
 footer a{
-color:#ff9900;
+color:#d97706;
 text-decoration:none;
-margin:0 10px;
+margin:0 12px;
+transition: .2s;
+}
+
+footer a:hover {
+color: #f59e0b;
+text-decoration: underline;
 }
 
 @media(max-width:700px){
-
-.hero h1{
-font-size:30px;
+.hero h1{ font-size:30px; }
+.search-box{ flex-direction:column; padding: 10px; background: transparent; box-shadow: none; border: none;}
+.search-box input { background: white; border: 1px solid #e2e8f0; border-radius: 12px; margin-bottom: 8px;}
+.search-box button { width: 100%; border-radius: 12px;}
+.error-message { text-align: center; }
 }
-
-.search-box{
-flex-direction:column;
-}
-
-}
-
 </style>
 </head>
 <body>
@@ -285,294 +400,188 @@ flex-direction:column;
 </header>
 
 <section class="hero">
-
 <h1>Seguí tu envío en tiempo real</h1>
-
 <p>Ingresá tu código de seguimiento para consultar el estado actualizado.</p>
 
+<div class="search-container">
 <div class="search-box">
-<input type="text" id="codigo" placeholder="Ej: PAN123456">
-<button onclick="buscarEnvio()">Consultar Estado</button>
+<input type="text" id="codigo" placeholder="Ej: PAN123456" autocomplete="off">
+<button id="btnBuscar">Consultar Estado</button>
 </div>
-
+<div id="errorInput" class="error-message">Código no encontrado. Por favor, revisá los datos.</div>
+</div>
 </section>
 
 <section class="info">
-
 <div class="card">
 <h3>📦 Gestión</h3>
-<p>Control completo de envíos nacionales.</p>
+<p>Control completo y transparente de envíos nacionales en un solo lugar.</p>
 </div>
-
 <div class="card">
 <h3>🚚 Distribución</h3>
-<p>Seguimiento detallado en tiempo real.</p>
+<p>Seguimiento detallado paso a paso con actualizaciones en tiempo real.</p>
 </div>
-
 <div class="card">
 <h3>🔒 Seguridad</h3>
-<p>Trazabilidad total de cada paquete.</p>
+<p>Trazabilidad total garantizada para resguardar el valor de cada paquete.</p>
 </div>
-
 </section>
 
-<!-- MODAL -->
-
 <div class="modal" id="modal">
-
 <div class="modal-content">
-
-<span class="close" onclick="cerrarModal()">×</span>
-
+<span class="close" id="btnCerrar">×</span>
 <h2>Información del Envío</h2>
-
 <div id="resultado"></div>
-
 </div>
-
 </div>
 
 <footer>
-
 <h3>PANROD</h3>
-
-<p>
-Seguimiento y logística nacional.
-</p>
-
+<p>Seguimiento y logística nacional corporativa.</p>
 <br>
-
 <a href="#">Facebook</a>
 <a href="#">Instagram</a>
 <a href="#">WhatsApp</a>
 <a href="#">TikTok</a>
-
 <br><br>
-
 correo@panrod.com
-
 </footer>
 
 <script>
-
-/*
-====================================================
-EDITAR AQUÍ LOS ENVÍOS
-====================================================
-*/
-
+// Base de datos simulada
 const envios = {
-
 "PAN123456":{
-
 origen:"Buenos Aires",
 destino:"Córdoba",
-
 receptor:"Juan Pérez",
-
 pagado:true,
-
 timeline:[
-
-{
-activo:true,
-titulo:"Gestión creada",
-fecha:"04/06/2026 - 09:00"
-},
-
-{
-activo:true,
-titulo:"Pago acreditado",
-fecha:"04/06/2026 - 09:05"
-},
-
-{
-activo:true,
-titulo:"Paquete recibido en depósito",
-fecha:"04/06/2026 - 10:20"
-},
-
-{
-activo:true,
-titulo:"Despachado a distribución",
-fecha:"04/06/2026 - 14:30"
-},
-
-{
-activo:false,
-titulo:"En tránsito",
-fecha:"Pendiente"
-},
-
-{
-activo:false,
-titulo:"En reparto",
-fecha:"Pendiente"
-},
-
-{
-activo:false,
-titulo:"Entregado",
-fecha:"Pendiente"
-}
-
+{ id: "creada", titulo:"Gestión creada", fecha:"04/06/2026 - 09:00" },
+{ id: "pago", titulo:"Pago acreditado", fecha:"04/06/2026 - 09:05" },
+{ id: "deposito", titulo:"Paquete recibido en depósito", fecha:"04/06/2026 - 10:20" },
+{ id: "despachado", titulo:"Despachado a distribución", fecha:"04/06/2026 - 14:30" },
+{ id: "transito", titulo:"En tránsito", fecha:"Pendiente" },
+{ id: "reparto", titulo:"En reparto", fecha:"Pendiente" },
+{ id: "entregado", titulo:"Entregado", fecha:"Pendiente" }
 ]
-
 },
-
-"123456789":{
-
+"PAN999888":{
 origen:"Rosario",
 destino:"Mendoza",
-
 receptor:"María Gómez",
-
 pagado:false,
-
 timeline:[
-
-{
-activo:true,
-titulo:"Gestión creada",
-fecha:"03/06/2026 - 11:00"
-},
-
-{
-activo:false,
-titulo:"Pago acreditado",
-fecha:"Pendiente"
-},
-
-{
-activo:false,
-titulo:"Ingreso a depósito",
-fecha:"Pendiente"
-},
-
-{
-activo:false,
-titulo:"Despachado",
-fecha:"Pendiente"
-},
-
-{
-activo:false,
-titulo:"Entregado",
-fecha:"Pendiente"
-}
-
+{ id: "creada", titulo:"Gestión creada", fecha:"03/06/2026 - 11:00" },
+{ id: "pago", titulo:"Pago acreditado", fecha:"Pendiente" },
+{ id: "deposito", titulo:"Ingreso a depósito", fecha:"Pendiente" },
+{ id: "despachado", titulo:"Despachado", fecha:"Pendiente" },
+{ id: "entregado", titulo:"Entregado", fecha:"Pendiente" }
 ]
-
 }
-
 };
 
+// Elementos del DOM
+const inputCodigo = document.getElementById("codigo");
+const btnBuscar = document.getElementById("btnBuscar");
+const errorInput = document.getElementById("errorInput");
+const modal = document.getElementById("modal");
+const btnCerrar = document.getElementById("btnCerrar");
+const resultado = document.getElementById("resultado");
+
+// Función de búsqueda e inyección de datos con validación de pago obligatorio
 function buscarEnvio(){
-
-const codigo =
-document.getElementById("codigo").value.trim();
-
+const codigo = inputCodigo.value.trim().toUpperCase();
 const envio = envios[codigo];
 
 if(!envio){
-
-alert("Código no encontrado");
+errorInput.style.display = "block";
+inputCodigo.style.borderColor = "#dc2626";
 return;
-
 }
 
-let timelineHTML="";
+errorInput.style.display = "none";
+inputCodigo.style.borderColor = "transparent";
 
-envio.timeline.forEach(item=>{
+let timelineHTML = "";
+
+// NUEVA LÓGICA DE CONTROL DE FLUJO REQUERIDA POR EL USUARIO
+envio.timeline.forEach((item, index) => {
+let statusClass = "is-inactive";
+let displayFecha = item.fecha;
+
+if (item.id === "creada") {
+statusClass = "is-active";
+} else if (item.id === "pago") {
+statusClass = envio.pagado ? "is-active" : "is-inactive";
+} else {
+// Para todos los pasos posteriores (depósito, despacho, etc.)
+if (!envio.pagado) {
+statusClass = "is-blocked"; // Clase CSS que tachará y pondrá en rojo el paso bloqueado
+displayFecha = "Bloqueado - Requiere pago total";
+} else {
+// Si está abonado, habilitamos los pasos completados según los datos simulados
+if (codigo === "PAN123456" && index <= 3) {
+statusClass = "is-active";
+} else {
+statusClass = "is-inactive";
+}
+}
+}
 
 timelineHTML += `
-
-<div class="step">
-
-<div class="circle ${
-item.activo ? 'active' : 'inactive'
-}"></div>
-
+<div class="step ${statusClass}">
+<div class="circle"></div>
 <h4>${item.titulo}</h4>
-
-<small>${item.fecha}</small>
-
+<small>${displayFecha}</small>
 </div>
-
 `;
-
 });
 
-document.getElementById("resultado").innerHTML=`
-
+resultado.innerHTML = `
 <div class="datos">
-
+<div class="box"><strong>Código</strong><span class="val">${codigo}</span></div>
+<div class="box"><strong>Origen</strong><span class="val">${envio.origen}</span></div>
+<div class="box"><strong>Destino</strong><span class="val">${envio.destino}</span></div>
+<div class="box"><strong>Destinatario</strong><span class="val">${envio.receptor}</span></div>
 <div class="box">
-<strong>Código</strong>
-${codigo}
+<strong>Estado de Pago</strong><br>
+${envio.pagado ? '<span class="pagado">ABONADO</span>' : '<span class="nopagado">PENDIENTE</span>'}
 </div>
-
-<div class="box">
-<strong>Origen</strong>
-${envio.origen}
 </div>
-
-<div class="box">
-<strong>Destino</strong>
-${envio.destino}
-</div>
-
-<div class="box">
-<strong>Destinatario</strong>
-${envio.receptor}
-</div>
-
-<div class="box">
-<strong>Estado de Pago</strong>
-
-${
-envio.pagado
-?
-'<span class="pagado">ABONADO</span>'
-:
-'<span class="nopagado">PENDIENTE</span>'
-}
-
-</div>
-
-</div>
-
-<h3>Línea de Tiempo</h3>
-
-<div class="timeline">
-
-${timelineHTML}
-
-</div>
-
+<h3>Línea de Tiempo del Envío</h3>
+<div class="timeline">${timelineHTML}</div>
 `;
 
-document.getElementById("modal").style.display="flex";
-
+modal.style.display = "flex";
 }
 
 function cerrarModal(){
-
-document.getElementById("modal").style.display="none";
-
+modal.style.display = "none";
 }
 
-window.onclick=function(e){
+// Event Listeners
+btnBuscar.addEventListener("click", buscarEnvio);
 
-if(e.target==document.getElementById("modal")){
+inputCodigo.addEventListener("keypress", function(e) {
+if (e.key === "Enter") {
+buscarEnvio();
+}
+});
 
+inputCodigo.addEventListener("input", function() {
+errorInput.style.display = "none";
+this.style.borderColor = "transparent";
+});
+
+btnCerrar.addEventListener("click", cerrarModal);
+
+window.addEventListener("click", function(e) {
+if(e.target === modal){
 cerrarModal();
-
 }
-
-}
-
+});
 </script>
 
 </body>
     </html>
+    
