@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PANROD - Seguimiento de Envíos</title>
+    <style>
+        :root {
+            --brand-primary: #1E3A8A;   /* Azul corporativo profundo */
+            --brand-accent: #F59E0B;    /* Ámbar/Dorado para botones y destaques */
+            --brand-light: #F3F4F6;     /* Gris claro para fondos secundarios */
+            --text-main: #1F2937;       /* Gris oscuro para lectura principal */
+            --text-muted: #4B5563;      /* Gris intermedio para aclaraciones */
+            --white: #FFFFFF;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #F0F2F5;
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Contenedor principal adaptable */
+        .app-container {
+            width: 100%;
+            max-width: 480px;
+            background-color: var(--white);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            box-shadow: 0 0 15px rgba(0,0,0,0.05);
+        }
+
+        /* Header Corporativo */
+        header {
+            background-color: var(--brand-primary);
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--white);
+        }
+
+        .brand-logo {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-name {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            color: var(--white);
+            line-height: 1;
+        }
+
+        .brand-slogan {
+            font-size: 10px;
+            font-weight: 400;
+            color: var(--brand-accent);
+            letter-spacing: 0.5px;
+            margin-top: 4px;
+            text-transform: uppercase;
+        }
+
+        .menu-icon {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            cursor: pointer;
+        }
+
+        .menu-icon span {
+            display: block;
+            width: 24px;
+            height: 3px;
+            background-color: var(--white);
+            border-radius: 2px;
+        }
+
+        /* Contenido Central */
+        .content {
+            padding: 24px 20px;
+            flex: 1; /* Empuja al footer hacia abajo */
+        }
+
+        h1 {
+            color: var(--brand-primary);
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .subtitle {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+        }
+
+        /* Tarjeta del Formulario de Tracking */
+        .tracking-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 24px 20px;
+            border: 1px solid #E5E7EB;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .instruction-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            color: var(--text-main);
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .instruction-box span {
+            font-size: 18px;
+            color: var(--brand-primary);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .form-group label {
+            position: absolute;
+            top: -8px;
+            left: 12px;
+            background: var(--white);
+            padding: 0 4px;
+            font-size: 11px;
+            color: var(--brand-primary);
+            font-weight: 600;
+        }
+
+        select, .input-wrapper {
+            width: 100%;
+            height: 46px;
+            border: 1px solid #D1D5DB;
+            border-radius: 8px;
+            padding: 0 12px;
+            font-size: 14px;
+            color: var(--text-main);
+            background-color: var(--white);
+            outline: none;
+        }
+
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path d='M0 0l5 5 5-5z' fill='%231E3A8A'/></svg>");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+        }
+
+        .input-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text-main);
+        }
+
+        /* Bloque estructurado del código */
+        .tracking-group {
+            display: flex;
+            border: 1px solid #D1D5DB;
+            border-radius: 8px;
+            overflow: hidden;
+            height: 46px;
+        }
+
+        .prefix-dropdown {
+            width: 25%;
+            border: none;
+            border-right: 1px solid #D1D5DB;
+            border-radius: 0;
+            text-align: center;
+            font-weight: 600;
+            color: var(--brand-primary);
+        }
+
+        .num-indicator {
+            width: 15%;
+            background: #F3F4F6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            color: var(--text-muted);
+            border-right: 1px solid #D1D5DB;
+            font-weight: bold;
+        }
+
+        .main-number-input {
+            width: 45%;
+            border: none;
+            padding: 0 10px;
+            font-size: 15px;
+            outline: none;
+            color: var(--text-main);
+            letter-spacing: 1px;
+        }
+
+        .suffix-indicator {
+            width: 15%;
+            background: #F3F4F6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        /* Botón de Consulta */
+        .btn-search {
+            width: 100%;
+            height: 46px;
+            background-color: var(--brand-accent);
+            border: none;
+            border-radius: 23px;
+            font-size: 15px;
+            font-weight: 700;
+            color: #000000;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin: 20px 0;
+            transition: background 0.2s;
+        }
+
+        .btn-search:active {
+            background-color: #D97706;
+        }
+
+        /* Mensajes Informativos */
+        .disclaimer-text {
+            font-size: 11px;
+            color: var(--text-muted);
+            line-height: 1.5;
+            text-align: justify;
+            background-color: var(--brand-light);
+            padding: 12px;
+            border-radius: 6px;
+        }
+
+        /* Contenedor de Resultados Dinámicos */
+        .result-display {
+            margin-bottom: 20px;
+            padding: 14px;
+            border-radius: 8px;
+            display: none;
+            text-align: left;
+        }
+
+        .status-valid {
+            background-color: #ECFDF5;
+            color: #065F46;
+            border: 1px solid #A7F3D0;
+        }
+
+        .status-invalid {
+            background-color: #FEF2F2;
+            color: #991B1B;
+            border: 1px solid #FCA5A5;
+        }
+
+        .status-title {
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .status-body {
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 1.4;
+        }
+
+        /* FOOTER COMPLETO Y PROFESIONAL */
+        footer {
+            background-color: #111827; /* Gris oscuro/negro corporativo */
+            color: #9CA3AF;
+            padding: 30px 20px 15px 20px;
+            font-size: 12px;
+            border-top: 4px solid var(--brand-accent);
+        }
+
+        .footer-links {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .footer-section-title {
+            color: var(--white);
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .footer-list {
+            list-style: none;
+        }
+
+        .footer-list li {
+            margin-bottom: 6px;
+        }
+
+        .footer-list a {
+            color: #9CA3AF;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-list a:hover {
+            color: var(--brand-accent);
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .social-icon {
+            background: #374151;
+            color: var(--white);
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 11px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #374151;
+            padding-top: 15px;
+            text-align: center;
+            font-size: 11px;
+            line-height: 1.4;
+        }
+
+        .legal-notice {
+            margin-top: 5px;
+            font-size: 10px;
+            color: #6B7280;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        <header>
+            <div class="brand-logo">
+                <span class="brand-name">PANROD</span>
+                <span class="brand-slogan">Logística Inteligente, Envíos Seguros</span>
+            </div>
+            <div class="menu-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </header>
+
+        <div class="content">
+            <h1>Seguimiento de Envíos</h1>
+            <div class="subtitle">Consulta de Paquetería Nacional y Regional</div>
+
+            <div class="tracking-card">
+                <div class="instruction-box">
+                    <span>📦</span>
+                    <div>Ingrese los datos de su pieza postal</div>
+                </div>
+
+                <div class="form-group">
+                    <label>Tipo de Servicio</label>
+                    <select>
+                        <option>Servicio Estándar Nacional (Puerta a Puerta)</option>
+                        <option>Servicio Expreso Regional</option>
+                    </select>
+                </div>
+
+                <div class="input-title">Código de Seguimiento</div>
+
+                <div class="tracking-group">
+                    <select class="prefix-dropdown" id="track-prefix">
+                        <option value="PR">PR</option>
+                        <option value="CC">CC</option>
+                        <option value="EX">EX</option>
+                    </select>
+                    <div class="num-indicator">N°</div>
+                    <input type="number" class="main-number-input" id="track-number" placeholder="000000000" oninput="if(this.value.length > 9) this.value = this.value.slice(0,9);">
+                    <div class="suffix-indicator">AR</div>
+                </div>
+
+                <button class="btn-search" onclick="procesarConsulta()">
+                    Buscar Envío
+                </button>
+
+                <div id="alert-box" class="result-display">
+                    <div id="alert-title" class="status-title"></div>
+                    <div id="alert-desc" class="status-body"></div>
+                </div>
+
+                <div class="disclaimer-text">
+                    <strong>Importante:</strong> Debe ingresar de forma obligatoria los 9 dígitos numéricos correlativos que se encuentran impresos en su comprobante o etiqueta autoadhesiva. Complete con ceros (0) a la izquierda si su número posee menos caracteres. De lo contrario, la terminal de consulta arrojará el error <em>"PIEZA MAL INGRESADA"</em>.
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <div class="footer-links">
+                <div>
+                    <div class="footer-section-title">Empresa</div>
+                    <ul class="footer-list">
+                        <li><a href="#">Quiénes Somos</a></li>
+                        <li><a href="#">Sucursales</a></li>
+                        <li><a href="#">Centros Logísticos</a></li>
+                        <li><a href="#">Contacto</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="footer-section-title">Soporte</div>
+                    <ul class="footer-list">
+                        <li><a href="#">Atención al Cliente</a></li>
+                        <li><a href="#">Preguntas Frecuentes</a></li>
+                        <li><a href="#">Defensa del Consumidor</a></li>
+                    </ul>
+                    <div class="footer-socials">
+                        <a href="#" class="social-icon">F</a>
+                        <a href="#" class="social-icon">X</a>
+                        <a href="#" class="social-icon">I</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div>&copy; 2026 PANROD S.A. Todos los derechos reservados.</div>
+                <div class="legal-notice">
+                    CUIT: 30-71458963-9. Inscripción Inspección General de Justicia N° 1854. El uso de esta plataforma está sujeto a los Términos y Condiciones de Servicio de PANROD Logística.
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // =========================================================================
+        // PANEL DE CONTROL DE ENVÍOS (Añadí o modificá las numeraciones acá)
+        // =========================================================================
+        const baseDatosPANROD = [
+            {
+                prefijo: "PR",
+                numero: "38638394", 
+                estado: "En proceso de distribución",
+                detalle: "La pieza se encuentra clasificada en el centro logístico regional listo para el ruteo domiciliario."
+            },
+            {
+                prefijo: "PR",
+                numero: "000999888",
+                estado: "Entregado con Éxito",
+                detalle: "El paquete fue entregado en destino. Firma conforme en remito digital."
+            },
+            {
+                prefijo: "CC",
+                numero: "444555666",
+                estado: "En Espera en Sucursal",
+                detalle: "Disponible para retiro presencial en sucursal central. Recordá asistir con DNI."
+            }
+        ];
+        // =========================================================================
+
+        function procesarConsulta() {
+            const prefix = document.getElementById('track-prefix').value;
+            const numberValue = document.getElementById('track-number').value;
+            const alertBox = document.getElementById('alert-box');
+            const alertTitle = document.getElementById('alert-title');
+            const alertDesc = document.getElementById('alert-desc');
+
+            // Reinicio visual de la caja de estados
+            alertBox.className = "result-display";
+            alertBox.style.display = "none";
+
+            // Validación estricta del largo numérico (9 dígitos)
+            if (numberValue.length !== 9) {
+                alertBox.classList.add('status-invalid');
+                alertTitle.innerText = '⚠️ PIEZA MAL INGRESADA';
+                alertDesc.innerText = 'El código ingresado no cumple con la extensión reglamentaria de 9 dígitos.';
+                alertBox.style.display = "block";
+                return;
+            }
+
+            // Mapeo e inspección de coincidencia dentro de la base de datos
+            const envio = baseDatosPANROD.find(item => 
+                item.prefijo === prefix && item.numero === numberValue
+            );
+
+            if (envio) {
+                // Caso exitoso
+                alertBox.classList.add('status-valid');
+                alertTitle.innerText = `📍 Estado: ${envio.estado}`;
+                alertDesc.innerText = envio.detalle;
+            } else {
+                // Caso de formato correcto pero inexistente en sistema
+                alertBox.classList.add('status-invalid');
+                alertTitle.innerText = '❌ PIEZA NO ENCONTRADA';
+                alertDesc.innerText = 'No se registran movimientos ni hojas de ruta asignadas para el código especificado.';
+            }
+
+            alertBox.style.display = "block";
+        }
+    </script>
+</body>
+  </html>
+  
