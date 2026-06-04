@@ -323,7 +323,7 @@ font-weight: 500;
 font-size: 15px;
 }
 
-/* SECCIÓN FINANCIERA (PRECIOS DEL ÁLBUM) */
+/* SECCIÓN FINANCIERA */
 .checkout-box {
 background: #f0fdf4;
 border: 2px dashed #10b981;
@@ -390,7 +390,7 @@ margin-top: 10px;
 background: #ea580c;
 }
 
-/* TIMELINE */
+/* TIMELINE LIMPIDA (SIN ROJOS NI TACHADOS) */
 .modal h3 {
 color: #0f172a;
 font-size: 20px;
@@ -434,20 +434,16 @@ box-shadow: 0 0 0 3px #e2e8f0;
 transition: .3s;
 }
 
+/* Estado activo: verde elegante de completado */
 .step.is-active .circle {
 background:#10b981;
 box-shadow: 0 0 0 4px #d1fae5;
 }
 
-.step.is-blocked .circle {
-background:#ef4444;
-box-shadow: 0 0 0 4px #fee2e2;
-}
-
 .step h4{
 font-size: 16px;
 font-weight: 500;
-color: #475569;
+color: #94a3b8; /* Gris suave para pasos futuros pendientes sin ser agresivo */
 }
 
 .step.is-active h4 {
@@ -455,21 +451,15 @@ color: #0f172a;
 font-weight: 600;
 }
 
-.step.is-blocked h4 {
-color: #94a3b8;
-text-decoration: line-through;
-}
-
 .step small{
-color:#94a3b8;
+color:#cbd5e1;
 font-size: 13px;
 display: block;
 margin-top: 4px;
 }
 
-.step.is-blocked small {
-color: #ef4444;
-font-weight: 500;
+.step.is-active small {
+color: #64748b;
 }
 
 /* BADGES DE PAGO */
@@ -606,7 +596,6 @@ footer { text-align: center; border-radius: 0; }
 </div>
 </section>
 
-<!-- MODAL -->
 <div class="modal" id="modal">
 <div class="modal-content">
 <span class="close" id="btnCerrar">×</span>
@@ -615,7 +604,6 @@ footer { text-align: center; border-radius: 0; }
 </div>
 </div>
 
-<!-- FOOTER -->
 <footer>
 <div class="footer-content">
 <div class="footer-section">
@@ -653,7 +641,7 @@ footer { text-align: center; border-radius: 0; }
 </footer>
 
 <script>
-// Base de datos simulada con la conexión comercial de los álbumes
+// Base de datos simulada
 const envios = {
 "ALBUM10":{
 producto: "Combo: Álbum Oficial de la Selección + 50 Paquetes de Figuritas",
@@ -665,31 +653,26 @@ direccionEntrega: "Pellegrini 1420, Piso 2 (CP 2000)",
 receptor:"Leo Medina",
 pagado: false,
 modalidadPago: null,
-timeline:[
-{ id: "creada", titulo:"Producto depositado por el vendedor en PANROD", fecha:"04/06/2026 - 08:30 hs" },
-{ id: "pago", titulo:"Verificación de pago e información del comprador", fecha:"Pendiente - Requiere saldo total" },
-{ id: "deposito", titulo:"Acondicionamiento y etiquetado en depósito", fecha:"Pendiente" },
-{ id: "despachado", titulo:"Despachado en unidad de distribución", fecha:"Pendiente" },
-{ id: "entregado", titulo:"Entregado a destinatario", fecha:"Pendiente" }
-]
+fechasLog: { creada: "04/06/2026 - 08:30 hs", pago: "", verificado: "", viaje: "", camino: "", entrega: "" }
 },
 "ALBUM30":{
 producto: "Álbum de Figuritas Tapa Dura - Edición Especial Campeones del Mundo",
 precioProducto: 22000,
-precioEnvio: 0, // Envío gratis promocional
+precioEnvio: 0, 
 origen:"Depósito Central PANROD (Stock Proveedor)",
-destino:"Mar del Plata",
+destino:"Mar del Plata, Buenos Aires",
 direccionEntrega: "Av. Colón 2340 (CP 7600)",
 receptor:"Matías Rossi",
 pagado: true,
 modalidadPago: "Transferencia Bancaria (Mercado Pago)",
-timeline:[
-{ id: "creada", titulo:"Producto depositado por el vendedor en PANROD", fecha:"03/06/2026 - 10:00 hs" },
-{ id: "pago", titulo:"Pago total verificado y validado en sistema", fecha:"03/06/2026 - 10:12 hs" },
-{ id: "deposito", titulo:"Paquete verificado y empaquetado con etiqueta de cliente", fecha:"03/06/2026 - 14:00 hs" },
-{ id: "despachado", titulo:"En viaje hacia el centro de distribución Mar del Plata", fecha:"04/06/2026 - 06:15 hs" },
-{ id: "entregado", titulo:"Entregado", fecha:"Pendiente" }
-]
+fechasLog: { 
+    creada: "03/06/2026 - 10:00 hs", 
+    pago: "03/06/2026 - 10:12 hs", 
+    verificado: "03/06/2026 - 14:00 hs",
+    viaje: "04/06/2026 - 06:15 hs",
+    camino: "04/06/2026 - 11:30 hs",
+    entrega: "Pendiente"
+}
 }
 };
 
@@ -714,82 +697,88 @@ errorInput.style.display = "none";
 inputCodigo.style.borderColor = "transparent";
 
 let totalAbonar = envio.precioProducto + envio.precioEnvio;
+
+// =========================================================================
+//  🎛️ PANEL DE CONTROL MANUAL (Modificá acá para encender/apagar estados avanzados)
+// =========================================================================
+let enViaje = true;             // true = activa "En viaje hacia centro de distribución..."
+let enCaminoDomicilio = true;   // true = activa "En camino al domicilio"
+let entregado = false;          // true = activa "Entregado"
+// =========================================================================
+
+// Construcción de la estructura de pasos según el flujo solicitado
+let stepsConfig = [
+    { id: "creada", titulo: "Producto depositado por el vendedor en PANROD", fecha: envio.fechasLog.creada, autoActivo: true },
+    { id: "pago", titulo: "Pago total verificado en sistema", fecha: envio.fechasLog.pago, autoActivo: envio.pagado },
+    { id: "verificado", titulo: "Paquete verificado y empaquetado con datos del cliente (Listo para despacho)", fecha: envio.fechasLog.verificado, autoActivo: envio.pagado }
+];
+
+// Si está abonado, le sumamos los pasos avanzados controlados por vos
+if(envio.pagado) {
+    stepsConfig.push(
+        { id: "viaje", titulo: `En viaje hacia centro de distribución de ${envio.destino}`, fecha: enViaje ? envio.fechasLog.viaje : "Pendiente", activoManual: enViaje },
+        { id: "camino", titulo: "En camino al domicilio del comprador", fecha: enCaminoDomicilio ? envio.fechasLog.camino : "Pendiente", activoManual: enCaminoDomicilio },
+        { id: "entrega", titulo: "Entregado exitosamente", fecha: entregado ? envio.fechasLog.entrega : "Pendiente", activoManual: entregado }
+    );
+}
+
 let timelineHTML = "";
 
-// Lógica de control de estados basada en si está pago o no
-envio.timeline.forEach((item, index) => {
-let statusClass = "is-inactive";
-let displayFecha = item.fecha;
+stepsConfig.forEach((step) => {
+    // Determinar si el paso actual debe brillar en verde (.is-active)
+    let esActivo = step.autoActivo || (step.activoManual === true);
+    let classStatus = esActivo ? "is-active" : "";
 
-if (item.id === "creada") {
-statusClass = "is-active";
-} else if (item.id === "pago") {
-statusClass = envio.pagado ? "is-active" : "is-inactive";
-} else {
-if (!envio.pagado) {
-statusClass = "is-blocked";
-displayFecha = "Bloqueado hasta recibir confirmación de compra.";
-} else {
-// Simulación para el ejemplo de lo ya avanzado
-if (codigo === "ALBUM30" && index <= 3) {
-statusClass = "is-active";
-} else {
-statusClass = "is-inactive";
-}
-}
-}
-
-timelineHTML += `
-<div class="step ${statusClass}">
-<div class="circle"></div>
-<h4>${item.titulo}</h4>
-<small>${displayFecha}</small>
-</div>
-`;
+    timelineHTML += `
+    <div class="step ${classStatus}">
+        <div class="circle"></div>
+        <h4>${step.titulo}</h4>
+        <small>${step.fecha}</small>
+    </div>
+    `;
 });
 
 // CAJA FINANCIERA DINÁMICA
 let checkoutHTML = "";
 if(!envio.pagado) {
-checkoutHTML = `
-<div class="checkout-box pending">
-<div class="price-detail">
-<p>Valor del Producto: <span>$${envio.precioProducto}</span></p>
-<p>Costo de Envío PANROD: <span>$${envio.precioEnvio}</span></p>
-<p class="total">Total Pendiente: <span>$${totalAbonar}</span></p>
-</div>
-<div class="payment-status">
-<span class="nopagado" style="margin-bottom: 10px;">ESPERANDO PAGO</span>
-<button class="btn-pagar" onclick="alert('Redireccionando a la pasarela de pago de tu hermano...')">Pagar Ahora con Meli / Tarjeta</button>
-</div>
-</div>
-`;
+    checkoutHTML = `
+    <div class="checkout-box pending">
+        <div class="price-detail">
+            <p>Valor del Álbum / Figuritas: <span>$${envio.precioProducto}</span></p>
+            <p>Costo de Envío PANROD: <span>$${envio.precioEnvio}</span></p>
+            <p class="total">Total Pendiente: <span>$${totalAbonar}</span></p>
+        </div>
+        <div class="payment-status">
+            <span class="nopagado" style="margin-bottom: 10px;">ESPERANDO PAGO</span>
+            <button class="btn-pagar" onclick="alert('Abriendo pasarela de cobro unificada...')">Abonar Producto y Envío</button>
+        </div>
+    </div>
+    `;
 } else {
-checkoutHTML = `
-<div class="checkout-box">
-<div class="price-detail">
-<p>Valor del Producto: <span>$${envio.precioProducto}</span></p>
-<p>Costo de Envío PANROD: <span>${envio.precioEnvio === 0 ? '¡GRATIS!' : '$' + envio.precioEnvio}</span></p>
-<p class="total">Total Abonado: <span>$${totalAbonar}</span></p>
-</div>
-<div class="payment-status">
-<span class="pagado" style="margin-bottom: 10px;">✓ TOTALMENTE ABONADO</span>
-<p style="font-size:12px; color:#1e293b; font-weight:500; margin-top:5px;">Medio: ${envio.modalidadPago}</p>
-</div>
-</div>
-`;
+    checkoutHTML = `
+    <div class="checkout-box">
+        <div class="price-detail">
+            <p>Valor del Álbum / Figuritas: <span>$${envio.precioProducto}</span></p>
+            <p>Costo de Envío PANROD: <span>${envio.precioEnvio === 0 ? '¡GRATIS!' : '$' + envio.precioEnvio}</span></p>
+            <p class="total">Total Cobrado: <span>$${totalAbonar}</span></p>
+        </div>
+        <div class="payment-status">
+            <span class="pagado" style="margin-bottom: 10px;">✓ TOTALMENTE ABONADO</span>
+            <p style="font-size:12px; color:#1e293b; font-weight:500; margin-top:5px;">Medio: ${envio.modalidadPago}</p>
+        </div>
+    </div>
+    `;
 }
 
-// Render final dentro del modal
 resultado.innerHTML = `
 ${checkoutHTML}
 <div class="datos">
-<div class="box"><strong>Código de Rastreo</strong><span class="val">${codigo}</span></div>
-<div class="box"><strong>Producto en Custodia</strong><span class="val">${envio.producto}</span></div>
-<div class="box"><strong>Comprador / Destinatario</strong><span class="val">${envio.receptor}</span></div>
-<div class="box"><strong>Dirección de Entrega</strong><span class="val">${envio.direccionEntrega}</span></div>
-<div class="box"><strong>Ubicación Actual</strong><span class="val">${envio.origen}</span></div>
-<div class="box"><strong>Destino Localidad</strong><span class="val">${envio.destino}</span></div>
+    <div class="box"><strong>Código de Rastreo</strong><span class="val">${codigo}</span></div>
+    <div class="box"><strong>Producto en Custodia</strong><span class="val">${envio.producto}</span></div>
+    <div class="box"><strong>Comprador / Destinatario</strong><span class="val">${envio.receptor}</span></div>
+    <div class="box"><strong>Dirección de Entrega</strong><span class="val">${envio.direccionEntrega}</span></div>
+    <div class="box"><strong>Ubicación Actual</strong><span class="val">${envio.origen}</span></div>
+    <div class="box"><strong>Destino Localidad</strong><span class="val">${envio.destino}</span></div>
 </div>
 <h3>Estado del Flujo Logístico</h3>
 <div class="timeline">${timelineHTML}</div>
@@ -818,4 +807,4 @@ if(e.target === modal) cerrarModal();
 
 </body>
             </html>
-                
+            
