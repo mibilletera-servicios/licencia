@@ -680,7 +680,7 @@ color: #64748b;
 <div class="modal" id="modal">
     <div class="modal-content">
         <span class="close" id="btnCerrar">×</span>
-        <h2>Control de Entrega & Despacho Full</h2>
+        <h2>Control de Seguimiento</h2>
         <div id="resultado"></div>
     </div>
 </div>
@@ -801,7 +801,7 @@ function buscarEnvio(){
     let entregado = false;          
 
     let stepsConfig = [
-        { id: "creada", titulo: "Producto depositado por el vendedor en casa central PANROD", fecha: envio.fechasLog.creada, autoActivo: true },
+        { id: "creada", titulo: "Producto depositado por el vendedor en casa central", fecha: envio.fechasLog.creada, autoActivo: true },
         { id: "pago", titulo: "Pago total verificado y acreditado en sistema", fecha: envio.fechasLog.pago, autoActivo: envio.pagado },
         { id: "verificado", titulo: "Paquete verificado y empaquetado con datos de entrega del cliente", fecha: envio.fechasLog.verificado, autoActivo: envio.pagado }
     ];
@@ -834,7 +834,7 @@ function buscarEnvio(){
         <div class="checkout-box pending">
             <div class="price-detail">
                 <p>Valor del Álbum / Figuritas: <span>$${envio.precioProducto}</span></p>
-                <p>Costo de Envío PANROD: <span>$${envio.precioEnvio}</span></p>
+                <p>Costo de Envío EXPRESS: <span>$${envio.precioEnvio}</span></p>
                 <p class="total">Total Neto a Pagar: <span>$${totalAbonar}</span></p>
             </div>
             <div class="action-area">
@@ -849,7 +849,7 @@ function buscarEnvio(){
         <div class="checkout-box">
             <div class="price-detail">
                 <p>Valor del Álbum / Figuritas: <span>$${envio.precioProducto}</span></p>
-                <p>Costo de Envío PANROD: <span>${envio.precioEnvio === 0 ? '¡Bonificado!' : '$' + envio.precioEnvio}</span></p>
+                <p>Costo de Envío EXPRESS: <span>${envio.precioEnvio === 0 ? '¡Bonificado!' : '$' + envio.precioEnvio}</span></p>
                 <p class="total">Total Facturado: <span>$${totalAbonar}</span></p>
             </div>
             <div class="action-area">
@@ -891,7 +891,7 @@ function buscarEnvio(){
                 <div class="box"><strong>Mercadería en Custodia</strong><span class="val">${envio.producto}</span></div>
                 <div class="box"><strong>Comprador Destinatario</strong><span class="val">${envio.receptor}</span></div>
                 <div class="box"><strong>Dirección de Destino</strong><span class="val">${envio.direccionEntrega}</span></div>
-                <div class="box"><strong>Nodo Origen</strong><span class="val">${envio.origen}</span></div>
+                <div class="box"><strong>Origen</strong><span class="val">${envio.origen}</span></div>
                 <div class="box"><strong>Jurisdicción</strong><span class="val">${envio.destino}</span></div>
             </div>
             <h3>Historial de Movimientos Cruzados</h3>
