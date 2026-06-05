@@ -23,7 +23,7 @@ overflow-x: hidden;
 position: relative;
 }
 
-/* CINTA DE LA SELECCIÓN ARGENTINA - ESCRITORIO */
+/* CINTA DE LA SELECCIÓN ARGENTINA ORIGINAL */
 .afa-ribbon {
 position: absolute;
 top: 0;
@@ -61,6 +61,527 @@ margin-left: 6px;
 vertical-align: middle;
 text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
+
+/* HEADER CON IMAGEN DE FONDO */
+header{
+position: relative;
+background: linear-gradient(135deg, rgba(15, 23, 42, 0.92), rgba(14, 116, 144, 0.88)), 
+            url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1950&q=80');
+background-size: cover;
+background-position: center;
+padding: 80px 20px 120px 20px;
+text-align:center;
+color:white;
+box-shadow:0 10px 30px rgba(15, 23, 42, 0.15);
+border-bottom-left-radius: 50% 20px;
+border-bottom-right-radius: 50% 20px;
+}
+
+/* CONTENEDOR PARA TU LOGO EN IMAGEN */
+.brand-logo-img {
+width: 65px;
+height: auto;
+margin: 0 auto 15px auto;
+display: block;
+filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.2));
+}
+
+/* LOGO ORIGINAL CON ESTILO Y FUENTE CORREGIDA */
+.logo{
+font-family: 'Montserrat', sans-serif;
+font-size:56px;
+font-weight:800;
+letter-spacing:4px;
+background: linear-gradient(to right, #38bdf8, #bae6fd);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+text-shadow: 0 4px 12px rgba(0,0,0,0.1);
+line-height: 1.1;
+}
+
+.sponsor-badge {
+display: inline-flex;
+align-items: center;
+gap: 8px;
+margin-top: 20px;
+background: rgba(255, 255, 255, 0.1);
+padding: 6px 16px;
+border-radius: 20px;
+border: 1px solid rgba(56, 189, 248, 0.4);
+font-size: 12px;
+font-weight: 500;
+letter-spacing: 1px;
+color: #bae6fd;
+font-family: 'Montserrat', sans-serif;
+}
+
+.sponsor-badge .flag {
+display: inline-block;
+width: 16px;
+height: 11px;
+background: linear-gradient(to bottom, #7dd3fc 33%, #ffffff 33%, #ffffff 66%, #7dd3fc 66%);
+border-radius: 1px;
+position: relative;
+}
+
+.sponsor-badge .flag::after {
+content: '';
+position: absolute;
+top: 4px;
+left: 6px;
+width: 3px;
+height: 3px;
+background: #d97706;
+border-radius: 50%;
+}
+
+.sponsor-badge strong {
+color: #ffffff;
+font-weight: 700;
+}
+
+/* HERO */
+.hero{
+margin-top: -45px;
+position: relative;
+z-index: 10;
+padding: 0 20px;
+text-align:center;
+}
+
+.search-container{
+max-width:700px;
+margin:auto;
+}
+
+.search-box{
+display:flex;
+gap:12px;
+background: white;
+padding: 10px;
+border-radius: 50px;
+box-shadow: 0 15px 35px rgba(15, 23, 42, 0.1);
+border: 1px solid #e2e8f0;
+}
+
+.search-box input{
+flex:1;
+padding:16px 25px;
+border:none;
+border-radius: 50px;
+font-size:16px;
+outline: none;
+color: #0f172a;
+background: #f8fafc;
+}
+
+.search-box button{
+background: linear-gradient(135deg, #0284c7, #0369a1);
+color:white;
+border:none;
+padding:16px 35px;
+border-radius: 50px;
+cursor:pointer;
+font-weight:600;
+font-size: 15px;
+transition:.3s cubic-bezier(0.4, 0, 0.2, 1);
+box-shadow: 0 4px 15px rgba(2, 132, 199, 0.3);
+}
+
+.search-box button:hover{
+background: linear-gradient(135deg, #0369a1, #075985);
+transform: translateY(-2px) scale(1.02);
+box-shadow: 0 6px 20px rgba(2, 132, 199, 0.4);
+}
+
+.error-message {
+color: #ef4444;
+font-size: 14px;
+text-align: center;
+margin-top: 12px;
+display: none;
+font-weight: 500;
+}
+
+/* CARDS */
+.info{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:30px;
+padding: 80px 20px;
+}
+
+.card{
+background:white;
+padding:35px 30px;
+border-radius: 24px;
+width:300px;
+box-shadow:0 10px 30px rgba(15, 23, 42, 0.03);
+text-align:center;
+border: 1px solid #eaf2f9;
+transition: .3s ease;
+}
+
+.card:hover {
+transform: translateY(-5px);
+box-shadow:0 20px 40px rgba(14, 116, 144, 0.08);
+}
+
+.card h3 {
+color: #0284c7;
+margin-bottom:12px;
+font-size: 22px;
+}
+
+.card p {
+color: #64748b;
+font-size: 14px;
+line-height: 1.6;
+}
+
+/* MODAL INTERACTIVO */
+.modal{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(15, 23, 42, 0.6);
+backdrop-filter: blur(8px);
+display:none;
+justify-content:center;
+align-items:center;
+z-index:999;
+}
+
+.modal-content{
+background:white;
+width:95%;
+max-width:950px;
+border-radius: 32px;
+padding:40px;
+max-height:85vh;
+overflow:auto;
+box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.2);
+animation:fade .4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes fade{
+from{ opacity:0; transform:scale(0.95) translateY(10px); }
+to{ opacity:1; transform:scale(1) translateY(0); }
+}
+
+.close{
+float:right;
+font-size:32px;
+cursor:pointer;
+color: #94a3b8;
+transition: .2s;
+line-height: 1;
+}
+
+.close:hover {
+color: #0f172a;
+}
+
+.modal h2 {
+color: #0f172a;
+font-size: 26px;
+font-weight: 700;
+margin-bottom: 25px;
+border-left: 5px solid #0284c7;
+padding-left: 12px;
+}
+
+.tracking-grid {
+display: grid;
+grid-template-columns: 1.8fr 1.2fr;
+gap: 30px;
+}
+
+.datos{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:14px;
+margin-top:20px;
+margin-bottom:30px;
+}
+
+.box{
+background:#f8fafc;
+padding:14px 18px;
+border-radius: 14px;
+border: 1px solid #f1f5f9;
+}
+
+.box strong{
+display:block;
+color:#0284c7;
+font-size: 11px;
+text-transform: uppercase;
+letter-spacing: 0.8px;
+margin-bottom:4px;
+}
+
+.box span.val {
+color: #1e293b;
+font-weight: 500;
+font-size: 14px;
+}
+
+.checkout-box {
+background: #f0fdf4;
+border: 1px solid #bbf7d0;
+border-radius: 20px;
+padding: 22px;
+margin-bottom: 25px;
+}
+
+.checkout-box.pending {
+background: #fff7ed;
+border-color: #fed7aa;
+}
+
+.price-detail p {
+font-size: 14px;
+color: #475569;
+margin-bottom: 6px;
+}
+
+.price-detail p span {
+float: right;
+font-weight: 600;
+color: #0f172a;
+}
+
+.price-detail .total {
+font-size: 17px;
+font-weight: 700;
+color: #0f172a;
+border-top: 1px dashed #cbd5e1;
+padding-top: 10px;
+margin-top: 10px;
+}
+
+.price-detail .total span {
+color: #10b981;
+font-size: 19px;
+}
+
+.checkout-box.pending .price-detail .total span {
+color: #f97316;
+}
+
+.action-area {
+margin-top: 15px;
+display: flex;
+flex-direction: column;
+gap: 10px;
+}
+
+.btn-action {
+width: 100%;
+padding: 12px;
+border-radius: 12px;
+font-weight: 600;
+font-size: 14px;
+cursor: pointer;
+transition: 0.2s;
+border: none;
+text-align: center;
+}
+
+.btn-pay { background: #f97316; color: white; box-shadow: 0 4px 12px rgba(249, 115, 22, 0.2); }
+.btn-pay:hover { background: #ea580c; }
+.btn-download { background: #e2e8f0; color: #334155; }
+.btn-download:hover { background: #cbd5e1; }
+.btn-support { background: #0284c7; color: white; }
+.btn-support:hover { background: #0369a1; }
+
+.legal-notice {
+font-size: 11px;
+color: #94a3b8;
+margin-top: 10px;
+text-align: center;
+line-height: 1.4;
+}
+
+.delivery-sidebar {
+background: #f8fafc;
+border-radius: 24px;
+padding: 25px;
+border: 1px solid #e2e8f0;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+text-align: center;
+}
+
+.modal h3 {
+color: #0f172a;
+font-size: 18px;
+font-weight: 600;
+margin-bottom: 20px;
+}
+
+.timeline{
+position:relative;
+margin-top:15px;
+padding-left: 10px;
+}
+
+.timeline::before{
+content:'';
+position:absolute;
+left:22px;
+top:5px;
+width:4px;
+height:calc(100% - 30px);
+background:#e2e8f0;
+border-radius: 10px;
+}
+
+.step{
+position:relative;
+padding-left:55px;
+margin-bottom:30px;
+}
+
+.circle{
+width:18px;
+height:18px;
+border-radius:50%;
+position:absolute;
+left:15px;
+top:4px;
+background: #cbd5e1;
+border: 3px solid white;
+box-shadow: 0 0 0 3px #e2e8f0;
+transition: .3s;
+}
+
+.step.is-active .circle {
+background:#10b981;
+box-shadow: 0 0 0 4px #d1fae5;
+}
+
+.step h4{
+font-size: 15px;
+font-weight: 500;
+color: #94a3b8;
+}
+
+.step.is-active h4 {
+color: #0f172a;
+font-weight: 600;
+}
+
+.step small{
+color:#cbd5e1;
+font-size: 12px;
+display: block;
+margin-top: 2px;
+}
+
+.step.is-active small {
+color: #64748b;
+}
+
+.pagado{
+background:#d1fae5;
+color:#065f46;
+padding:4px 12px;
+border-radius: 20px;
+font-size: 11px;
+font-weight:600;
+display:inline-block;
+}
+
+.nopagado{
+background:#fee2e2;
+color:#991b1b;
+padding:4px 12px;
+border-radius: 20px;
+font-size: 11px;
+font-weight:600;
+display:inline-block;
+}
+
+footer{
+background: linear-gradient(135deg, #0f172a, #1e293b);
+color:#94a3b8;
+padding: 60px 20px 30px 20px;
+margin-top:100px;
+border-top-left-radius: 50% 20px;
+border-top-right-radius: 50% 20px;
+}
+
+.footer-content {
+max-width: 1100px;
+margin: 0 auto;
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+gap: 40px;
+text-align: left;
+}
+
+.footer-section h3 {
+color: white;
+font-family: 'Montserrat', sans-serif;
+font-size: 20px;
+margin-bottom: 20px;
+}
+
+.footer-section p {
+font-size: 14px;
+line-height: 1.6;
+}
+
+.footer-section ul {
+list-style: none;
+}
+
+.footer-section ul li {
+margin-bottom: 10px;
+}
+
+.footer-section a {
+color: #38bdf8;
+text-decoration: none;
+transition: .2s;
+font-size: 14px;
+}
+
+.footer-section a:hover {
+color: #bae6fd;
+padding-left: 5px;
+}
+
+.footer-bottom {
+max-width: 1100px;
+margin: 40px auto 0 auto;
+padding-top: 20px;
+border-top: 1px solid #334155;
+text-align: center;
+font-size: 12px;
+color: #64748b;
+}
+
+/* RESPONSIVE OPTIMIZADO */
+@media(max-width:700px){
+.afa-ribbon { display: none !important; } /* Oculta la cinta de manera forzada en móviles */
+header { padding: 60px 20px 100px 20px; }
+.logo{ font-size:40px; }
+.search-box{ flex-direction:column; padding: 12px; border-radius: 24px; background: transparent; box-shadow: none; border: none;}
+.search-box input { background: white; border: 1px solid #e2e8f0; border-radius: 30px; margin-bottom: 8px; padding: 16px 20px;}
+.search-box button { width: 100%; border-radius: 30px;}
+.tracking-grid { grid-template-columns: 1fr; }
+footer { text-align: center; border-radius: 0; }
+.footer-content { text-align: center; }
+}
+
 
 /* HEADER RESPONSIVE CON IMAGEN DE FONDO */
 header {
@@ -632,14 +1153,16 @@ color: #64748b;
             
 </style>
 <header>
+    <!-- ESPACIO PARA LOGO: Poné acá la URL de tu imagen de logotipo real -->
     <img src="https://cdn-icons-png.flaticon.com/512/7541/7541900.png" alt="Logo Panrod" class="brand-logo-img">
     
     <div class="logo">PANROD</div>
-    <div class="sub">Logística Avanzada y Trazabilidad de Envíos</div>
+    
     <div class="sponsor-badge">
         <span class="flag"></span> Patrocinador Oficial de la <strong>Selección Argentina</strong>
     </div>
 </header>
+
 
 <div class="logo">PANROD</div>
 <div class="sub">Logística Avanzada y Trazabilidad de Envíos</div>
