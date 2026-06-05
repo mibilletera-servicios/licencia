@@ -756,7 +756,7 @@ const envios = {
         direccionEntrega: "Av. Colón 2340 (CP 7600)",
         receptor:"Matías Rossi",
         pagado: true,
-        modalidadPago: "Transferencia Bancaria (Mercado Pago)",
+        modalidadPago: "Transferencia Bancaria",
         fechasLog: { 
             creada: "03/06/2026 - 10:00 hs", 
             pago: "03/06/2026 - 10:12 hs", 
@@ -868,7 +868,7 @@ function buscarEnvio(){
                 ${tokenDinamico}
             </div>
             <p style="font-size: 11px; color: #64748b; line-height: 1.4; font-weight: 500; margin-top: 5px;">
-                <strong>Código de Recepción Asegurada:</strong> Este código dinámico será solicitado por el distribuidor antes de realizar la entrega para constatar la dirección de envío y validar la identidad del cliente.
+                <strong>Código de Recepción Asegurada:</strong> Este código dinámico será solicitado por el distribuidor cuando se encuentre a menos de 2 KM de distancia del domicilio.
             </p>
         `;
     } else {
