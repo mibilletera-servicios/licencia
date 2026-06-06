@@ -850,7 +850,10 @@ function buscarEnvio(){
             </div>
             <div class="action-area">
                 <button class="btn-action btn-pay" onclick="alert('Abriendo pasarela unificada de Mercado Pago...')">Abonar Producto y Envío</button>
-                <button class="btn-action btn-support" onclick="alert('Abriendo chat de soporte de ventas...')">💬 Contactar Soporte Técnico</button>
+                <button class="btn-action btn-support"
+onclick="window.open('https://wa.me/541136514766?text=' + encodeURIComponent('Hola PANROD. Necesito ayuda con mi envío. Código de seguimiento: ' + document.getElementById('codigo').value + '. Tengo una consulta o inconveniente y quisiera recibir asistencia.'),'_blank')">
+    💬 Contactar Soporte Técnico
+</button>
             </div>
             <p class="legal-notice">⚠️ Los despachos físicos se bloquean de forma automatizada hasta la validación online del cobro de la mercadería por seguridad del proveedor.</p>
         </div>
