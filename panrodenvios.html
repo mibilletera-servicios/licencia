@@ -752,69 +752,46 @@ color: #64748b;
 
         <h2>Métodos de Pago Disponibles</h2>
 
-        <select id="metodoPago" onchange="cambiarMetodo()"
-        style="width:100%;padding:12px;border-radius:10px;margin-bottom:20px;">
-            <option value="transferencia">🏦 Transferencia Bancaria</option>
-            <option value="pagofacil">💵 Pago Fácil</option>
-            <option value="tarjeta">💳 Tarjeta Crédito / Débito</option>
-        </select>
-
         <div id="transferencia" class="payment-method active">
-            <h3>🏦 Transferencia Bancaria</h3>
+        <div id="transferencia">
 
-            <div class="box">
-                <strong>Alias</strong>
-                <span class="val">PANROD.LOGISTICA</span>
-            </div>
+    <h3>🏦 Transferencia Bancaria</h3>
 
-            <div class="box">
-                <strong>CVU</strong>
-                <span class="val">0000003100000000000000</span>
-            </div>
+    <div class="box">
+        <strong>Alias</strong>
+        <span class="val">PANROD.LOGISTICA</span>
+    </div>
 
-            <div class="box">
-                <strong>Titular</strong>
-                <span class="val">PANROD S.A.</span>
-            </div>
+    <div class="box">
+        <strong>CVU</strong>
+        <span class="val">0000003100000000000000</span>
+    </div>
 
-            <button class="btn-action btn-support"
-            onclick="window.open('https://wa.me/541136514766?text=Hola%20PANROD.%20Deseo%20abonar%20mediante%20transferencia%20bancaria.','_blank')">
-                Informar Transferencia
-            </button>
-        </div>
+    <div class="box">
+        <strong>CBU</strong>
+        <span class="val">0000000000000000000000</span>
+    </div>
 
-        <div id="pagofacil" class="payment-method">
-            <h3>💵 Depósito en Pago Fácil</h3>
+    <div class="box">
+        <strong>Titular</strong>
+        <span class="val">PANROD S.A.</span>
+    </div>
 
-            <p>Solicite los datos para realizar el depósito.</p>
+    <div class="box">
+        <strong>Banco</strong>
+        <span class="val">Banco Nación Argentina</span>
+    </div>
 
-            <button class="btn-action btn-support"
-            onclick="window.open('https://wa.me/541136514766?text=Hola%20PANROD.%20Deseo%20abonar%20mediante%20Pago%20Fácil.%20Solicito%20los%20datos.','_blank')">
-                Solicitar Datos
-            </button>
-        </div>
-
-        <div id="tarjeta" class="payment-method">
-            <h3>💳 Tarjeta de Crédito / Débito</h3>
-
-            <input type="text" placeholder="Nombre y Apellido"
-            style="width:100%;padding:12px;margin-bottom:10px;border-radius:10px;border:1px solid #ddd;">
-
-            <input type="text" placeholder="0000 0000 0000 0000"
-            style="width:100%;padding:12px;margin-bottom:10px;border-radius:10px;border:1px solid #ddd;">
-
-            <div style="display:flex;gap:10px;">
-                <input type="text" placeholder="MM/AA"
-                style="flex:1;padding:12px;border-radius:10px;border:1px solid #ddd;">
-
-                <input type="text" placeholder="CVV"
-                style="flex:1;padding:12px;border-radius:10px;border:1px solid #ddd;">
-            </div>
-
-            <button class="btn-action btn-pay" style="margin-top:15px;"
-            onclick="window.open('https://wa.me/541136514766?text=Hola%20PANROD.%20Deseo%20abonar%20mediante%20tarjeta%20de%20crédito/débito.','_blank')">
-                PAGAR
-            </button>
+    <button class="btn-action btn-support"
+    onclick="window.open(
+    'https://wa.me/541136514766?text=' +
+    encodeURIComponent(
+    'Hola PANROD. Ya visualicé los datos bancarios y deseo informar una transferencia.'
+    ),
+    '_blank'
+    )">
+        Informar Transferencia
+    </button>
         </div>
     </div>
                         </div>
@@ -1063,6 +1040,14 @@ function cambiarMetodo(){
 
     document.querySelectorAll(".payment-method")
         .forEach(el => el.classList.remove("active"));
+
+    const metodo =
+        document.getElementById("metodoPago").value;
+
+    document
+        .getElementById(metodo)
+        .classList.add("active");
+};
 
     const metodo =
         document.getElementById("metodoPago").value;
