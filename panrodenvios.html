@@ -735,6 +735,20 @@ letter-spacing:2px;
 text-transform:uppercase;
 color:#0284c7;
 }
+            .loader{
+width:60px;
+height:60px;
+margin:auto;
+border:6px solid #e2e8f0;
+border-top:6px solid #0284c7;
+border-radius:50%;
+animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+0%{transform:rotate(0deg);}
+100%{transform:rotate(360deg);}
+            }
 </style>
             </head>
             <body>
@@ -923,8 +937,15 @@ color:#0284c7;
         Informar Transferencia
     </button>
         </div>
+<div class="modal" id="loadingModal">
+    <div class="modal-content" style="max-width:300px;text-align:center;">
+        <div class="loader"></div>
+        <h3 style="margin-top:15px;">Buscando información...</h3>
+        <p style="font-size:13px;color:#64748b;">
+            Consultando base de datos logística.
+        </p>
     </div>
-
+</div>
 <script>
 // Base de datos simulada
 // 1. BASE DE DATOS CONFIGURABLE
@@ -985,10 +1006,21 @@ function generarCodigoVerificacion() {
 
 // 2. LÓGICA DE PROCESAMIENTO DINÁMICO
 function buscarEnvio(){
-    const codigo = inputCodigo.value.trim().toUpperCase();
-    const envio = envios[codigo];
 
+    document.getElementById("loadingModal").style.display = "flex";
+
+    setTimeout(() => {
+
+        function buscarEnvio(){
+
+    document.getElementById("loadingModal").style.display = "flex";
+
+    setTimeout(() => {
+
+        const codigo = inputCodigo.value.trim().toUpperCase();
+        const envio = envios[codigo];
     if (!envio) {
+    document.getElementById("loadingModal").style.display = "none";
     errorInput.style.display = "block";
     inputCodigo.style.borderColor = "#ef4444";
     return;
