@@ -627,6 +627,30 @@ color: #64748b;
         text-align: center; 
         gap: 25px;
     }
+            .process{
+padding:70px 20px;
+text-align:center;
+}
+
+.process h2{
+margin-bottom:35px;
+font-size:32px;
+color:#0f172a;
+}
+
+.process-steps{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:20px;
+}
+
+.process-steps div{
+background:#fff;
+padding:20px;
+border-radius:15px;
+min-width:220px;
+box-shadow:0 10px 25px rgba(0,0,0,.04);
 }
             .payment-method{
     opacity:.4;
@@ -642,6 +666,83 @@ color: #64748b;
 
 #modalPago .box{
     margin-bottom:10px;
+            }
+            .stats{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:20px;
+padding:40px 20px;
+}
+
+.stat-card{
+background:#fff;
+padding:25px;
+min-width:220px;
+border-radius:18px;
+text-align:center;
+box-shadow:0 8px 25px rgba(0,0,0,.05);
+}
+
+.stat-card h3{
+font-size:32px;
+color:#0284c7;
+margin-bottom:8px;
+}
+
+.stat-card p{
+font-size:14px;
+color:#64748b;
+                }
+            .stats{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:20px;
+padding:40px 20px;
+}
+
+.stat-card{
+background:white;
+padding:25px;
+border-radius:18px;
+min-width:220px;
+text-align:center;
+box-shadow:0 10px 25px rgba(0,0,0,.04);
+}
+
+.stat-card h3{
+font-size:30px;
+color:#0284c7;
+}
+
+.stat-card p{
+color:#64748b;
+font-size:14px;
+            }
+            .process{
+padding:70px 20px;
+text-align:center;
+}
+
+.process h2{
+font-size:32px;
+margin-bottom:30px;
+}
+
+.process-steps{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:20px;
+}
+
+.process-steps div{
+background:white;
+padding:20px;
+border-radius:15px;
+box-shadow:0 10px 25px rgba(0,0,0,.04);
+min-width:220px;
             }
 </style>
             </head>
@@ -676,7 +777,48 @@ color: #64748b;
         <div id="errorInput" class="error-message">Código no encontrado. Verificá los caracteres e intentalo de nuevo.</div>
     </div>
 </section>
+<section class="stats">
+    <div class="stat-card">
+        <h3>15.000+</h3>
+        <p>Operaciones Gestionadas</p>
+    </div>
 
+    <div class="stat-card">
+        <h3>300+</h3>
+        <p>Empresas Adheridas</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>24</h3>
+        <p>Provincias Cubiertas</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>99,8%</h3>
+        <p>Entregas Exitosas</p>
+    </div>
+</section>
+                        <section class="stats">
+    <div class="stat-card">
+        <h3>15.000+</h3>
+        <p>Operaciones Gestionadas</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>300+</h3>
+        <p>Empresas Adheridas</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>24</h3>
+        <p>Provincias Cubiertas</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>99,8%</h3>
+        <p>Entregas Exitosas</p>
+    </div>
+            </section>
 <section class="info">
     <div class="card">
     <h3>📦 Recepción y Custodia</h3>
@@ -697,7 +839,28 @@ color: #64748b;
         <div id="resultado"></div>
     </div>
 </div>
+<section class="process">
+    <h2>¿Cómo Funciona?</h2>
 
+    <div class="process-steps">
+        <div>📦 Recepción de Mercadería</div>
+        <div>🧾 Facturación y Validación</div>
+        <div>🔐 Acreditación del Pago</div>
+        <div>🚚 Distribución</div>
+        <div>🏠 Entrega al Destinatario</div>
+    </div>
+</section>
+                        <section class="process">
+    <h2>¿Cómo Funciona?</h2>
+
+    <div class="process-steps">
+        <div>📦 Recepción de Mercadería</div>
+        <div>🧾 Facturación</div>
+        <div>🔐 Validación de Pago</div>
+        <div>🚚 Distribución</div>
+        <div>🏠 Entrega Final</div>
+    </div>
+                        </section>
 <footer>
     <div class="footer-content">
         <div class="footer-section">
@@ -931,7 +1094,7 @@ onclick="window.open('https://wa.me/541136514766?text=' + encodeURIComponent('Ho
                 <p class="total">Total Facturado: <span>$${totalAbonar}</span></p>
             </div>
             <div class="action-area">
-                <button class="btn-action btn-download" onclick="alert('Descargando comprobante fiscal electrónico PDF...')">📥 Descargar Comprobante Acreditado</button>
+                <button class="btn-action btn-download" onclick="alert('Descargando comprobante en PDF...')">📥 Descargar Comprobante Acreditado</button>
             </div>
             <p class="legal-notice" style="color: #059669;">Acreditado vía ${envio.modalidadPago}.</p>
         </div>
@@ -969,6 +1132,7 @@ onclick="window.open('https://wa.me/541136514766?text=' + encodeURIComponent('Ho
             estadoEnvioTexto = "En Distribución";
         } else {
             estadoEnvioTexto = "Procesando en Planta Central";
+         let fechaEstimada = "08/06/2026";
         }
     }
 
@@ -984,6 +1148,7 @@ onclick="window.open('https://wa.me/541136514766?text=' + encodeURIComponent('Ho
                 <div class="box"><strong>Origen</strong><span class="val">${envio.origen}</span></div>
                 <div class="box"><strong>Jurisdicción</strong><span class="val">${envio.destino}</span></div>
             </div>
+            
             <h3>Historial de Movimientos Cruzados</h3>
             <div class="timeline">${timelineHTML}</div>
         </div>
