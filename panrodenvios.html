@@ -894,7 +894,6 @@ animation:spin 1s linear infinite;
 <div class="modal" id="modalPago">
     <div class="modal-content" style="max-width:750px;">
         <span class="close" onclick="cerrarPago()">×</span>
-
         <h2>Métodos de Pago Disponibles</h2>
 
         <div id="transferencia" class="payment-method active">
@@ -937,6 +936,8 @@ animation:spin 1s linear infinite;
         Informar Transferencia
     </button>
         </div>
+                </div>
+</div>
 <div class="modal" id="loadingModal">
     <div class="modal-content" style="max-width:300px;text-align:center;">
         <div class="loader"></div>
@@ -1169,9 +1170,13 @@ onclick="window.open('https://wa.me/541136514766?text=' + encodeURIComponent('Ho
         </div>
     </div>
     `;
-
+document.getElementById("loadingModal").style.display = "none";
     modal.style.display = "flex";
        }
+               document.getElementById("loadingModal").style.display = "none";
+
+    }, 1000);
+            }
 btnBuscar.addEventListener("click", buscarEnvio);
 
 inputCodigo.addEventListener("keydown", function(e) {
