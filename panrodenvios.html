@@ -628,6 +628,21 @@ color: #64748b;
         gap: 25px;
     }
 }
+            .payment-method{
+    opacity:.4;
+    pointer-events:none;
+    transition:.3s;
+    margin-top:20px;
+}
+
+.payment-method.active{
+    opacity:1;
+    pointer-events:auto;
+}
+
+#modalPago .box{
+    margin-bottom:10px;
+            }
 </style>
             </head>
             <body>
@@ -731,7 +746,78 @@ color: #64748b;
         &copy; 2026 PANROD Logística Nacional. Todos los derechos reservados. Patrocinador oficial de la Selección de Fútbol de Argentina.
     </div>
 </footer>
+<div class="modal" id="modalPago">
+    <div class="modal-content" style="max-width:750px;">
+        <span class="close" onclick="cerrarPago()">×</span>
 
+        <h2>Métodos de Pago Disponibles</h2>
+
+        <select id="metodoPago" onchange="cambiarMetodo()"
+        style="width:100%;padding:12px;border-radius:10px;margin-bottom:20px;">
+            <option value="transferencia">🏦 Transferencia Bancaria</option>
+            <option value="pagofacil">💵 Pago Fácil</option>
+            <option value="tarjeta">💳 Tarjeta Crédito / Débito</option>
+        </select>
+
+        <div id="transferencia" class="payment-method active">
+            <h3>🏦 Transferencia Bancaria</h3>
+
+            <div class="box">
+                <strong>Alias</strong>
+                <span class="val">PANROD.LOGISTICA</span>
+            </div>
+
+            <div class="box">
+                <strong>CVU</strong>
+                <span class="val">0000003100000000000000</span>
+            </div>
+
+            <div class="box">
+                <strong>Titular</strong>
+                <span class="val">PANROD S.A.</span>
+            </div>
+
+            <button class="btn-action btn-support"
+            onclick="window.open('https://wa.me/541136514766?text=Hola%20PANROD.%20Deseo%20abonar%20mediante%20transferencia%20bancaria.','_blank')">
+                Informar Transferencia
+            </button>
+        </div>
+
+        <div id="pagofacil" class="payment-method">
+            <h3>💵 Depósito en Pago Fácil</h3>
+
+            <p>Solicite los datos para realizar el depósito.</p>
+
+            <button class="btn-action btn-support"
+            onclick="window.open('https://wa.me/541136514766?text=Hola%20PANROD.%20Deseo%20abonar%20mediante%20Pago%20Fácil.%20Solicito%20los%20datos.','_blank')">
+                Solicitar Datos
+            </button>
+        </div>
+
+        <div id="tarjeta" class="payment-method">
+            <h3>💳 Tarjeta de Crédito / Débito</h3>
+
+            <input type="text" placeholder="Nombre y Apellido"
+            style="width:100%;padding:12px;margin-bottom:10px;border-radius:10px;border:1px solid #ddd;">
+
+            <input type="text" placeholder="0000 0000 0000 0000"
+            style="width:100%;padding:12px;margin-bottom:10px;border-radius:10px;border:1px solid #ddd;">
+
+            <div style="display:flex;gap:10px;">
+                <input type="text" placeholder="MM/AA"
+                style="flex:1;padding:12px;border-radius:10px;border:1px solid #ddd;">
+
+                <input type="text" placeholder="CVV"
+                style="flex:1;padding:12px;border-radius:10px;border:1px solid #ddd;">
+            </div>
+
+            <button class="btn-action btn-pay" style="margin-top:15px;"
+            onclick="window.open('https://wa.me/541136514766?text=Hola%20PANROD.%20Deseo%20abonar%20mediante%20tarjeta%20de%20crédito/débito.','_blank')">
+                PAGAR
+            </button>
+        </div>
+    </div>
+                        </div>
 <script>
 // Base de datos simulada
 // 1. BASE DE DATOS CONFIGURABLE
@@ -849,7 +935,9 @@ function buscarEnvio(){
                 <p class="total">Total Neto a Pagar: <span>$${totalAbonar}</span></p>
             </div>
             <div class="action-area">
-                <button class="btn-action btn-pay" onclick="alert('Abriendo pasarela unificada de Mercado Pago...')">Abonar Producto y Envío</button>
+                <button class="btn-action btn-pay" onclick="abrirPago()">
+    Abonar Producto y Envío
+</button>
                 <button class="btn-action btn-support"
 onclick="window.open('https://wa.me/541136514766?text=' + encodeURIComponent('Hola PANROD. Necesito ayuda con mi envío. Código de seguimiento: ' + document.getElementById('codigo').value + '. Tengo una consulta o inconveniente y quisiera recibir asistencia.'),'_blank')">
     💬 Contactar Soporte Técnico
@@ -963,6 +1051,26 @@ window.addEventListener("click", function(e) {
         modal.style.display = "none";
     }
 });
+            function abrirPago(){
+    document.getElementById("modalPago").style.display = "flex";
+}
+
+function cerrarPago(){
+    document.getElementById("modalPago").style.display = "none";
+}
+
+function cambiarMetodo(){
+
+    document.querySelectorAll(".payment-method")
+        .forEach(el => el.classList.remove("active"));
+
+    const metodo =
+        document.getElementById("metodoPago").value;
+
+    document
+        .getElementById(metodo)
+        .classList.add("active");
+            }
 </script>
 </body>
             </html>
