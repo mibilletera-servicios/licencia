@@ -1,0 +1,104 @@
+<!DOCTYPE html><html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>PANROD | Registro de Distribución</title><style>
+body{
+    font-family:Arial, sans-serif;
+    background:#f8fafc;
+    margin:0;
+    padding:30px;
+}
+
+.container{
+    max-width:800px;
+    margin:auto;
+    background:#fff;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+}
+
+h1{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+input, select, textarea{
+    width:100%;
+    padding:12px;
+    margin:8px 0 15px;
+    border:1px solid #d1d5db;
+    border-radius:8px;
+    box-sizing:border-box;
+}
+
+textarea{
+    min-height:100px;
+}
+
+button{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:bold;
+}
+
+.btn{
+    background:#0f172a;
+    color:white;
+}
+</style></head><body><div class="container"><h1>📦 Registro de Distribución PANROD</h1><input type="text" id="codigo" placeholder="Código de seguimiento"><input type="text" id="nombre" placeholder="Nombre y Apellido"><input type="text" id="dni" placeholder="DNI"><input type="text" id="telefono" placeholder="Teléfono"><input type="email" id="email" placeholder="Correo Electrónico"><input type="text" id="provincia" placeholder="Provincia"><input type="text" id="ciudad" placeholder="Ciudad"><input type="text" id="cp" placeholder="Código Postal"><textarea id="direccion" placeholder="Dirección completa"></textarea><select id="envio">
+    <option>🚚 Normal (72 hs)</option>
+    <option>⚡ Express (24 hs)</option>
+    <option>🔥 Prioritario</option>
+</select><select id="pago">
+    <option>🏦 Transferencia Bancaria</option>
+    <option>💳 Mercado Pago</option>
+    <option>💵 Efectivo</option>
+</select><textarea id="observaciones" placeholder="Observaciones para la entrega"></textarea><button class="btn" onclick="enviarFormulario()">
+🚚 Enviar Formulario para Distribución
+</button></div><script>
+function enviarFormulario(){
+
+const mensaje =
+`📦 NUEVO FORMULARIO DE DISTRIBUCIÓN PANROD
+
+Código: ${document.getElementById('codigo').value}
+
+Nombre: ${document.getElementById('nombre').value}
+
+DNI: ${document.getElementById('dni').value}
+
+Teléfono: ${document.getElementById('telefono').value}
+
+Email: ${document.getElementById('email').value}
+
+Provincia: ${document.getElementById('provincia').value}
+
+Ciudad: ${document.getElementById('ciudad').value}
+
+CP: ${document.getElementById('cp').value}
+
+Dirección:
+${document.getElementById('direccion').value}
+
+Modalidad:
+${document.getElementById('envio').value}
+
+Método de Pago:
+${document.getElementById('pago').value}
+
+Observaciones:
+${document.getElementById('observaciones').value}`;
+
+window.open(
+'https://wa.me/541136594766?text=' + encodeURIComponent(mensaje),
+'_blank'
+);
+
+}
+</script></body>
+                                                                                                                                                                                                                                                                                                                                                                                                </html>
