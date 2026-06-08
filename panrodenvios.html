@@ -1136,76 +1136,53 @@ onclick="window.open('https://wa.me/541136514766?text=' + encodeURIComponent('Ho
     }
 
     resultado.innerHTML = `
-    <div class="tracking-grid">
-        <div class="left-side">
-            ${checkoutHTML}
-            <div class="datos">
-                <div class="box"><strong>Código Tracking</strong><span class="val">${codigo}</span></div>
-                <div class="box"><strong>Mercadería en Custodia</strong><span class="val">${envio.producto}</span></div>
-                <div class="box"><strong>Comprador Destinatario</strong><span class="val">${envio.receptor}</span></div>
-                <div class="box"><strong>Dirección de Destino</strong><span class="val">${envio.direccionEntrega}</span></div>
-                <div class="box"><strong>Origen</strong><span class="val">${envio.origen}</span></div>
-                <div class="box"><strong>Jurisdicción</strong><span class="val">${envio.destino}</span></div>
-            </div>
-            
-            <h3>Historial de Movimientos Cruzados</h3>
-            <div class="timeline">${timelineHTML}</div>
+<div class="tracking-grid">
+    <div class="left-side">
+        ${checkoutHTML}
 
-        <div class="right-side">
-            <div class="delivery-sidebar">
-                <h3 style="margin-bottom: 5px;">Verificación de Identidad</h3>
-                <p style="font-size: 13px; color: #64748b; margin-bottom: 10px;">Validación para el transportista en punto de entrega.</p>
-                
-                ${codigoVerificacionHTML}
-                
-                <hr style="width: 100%; border: 0; border-top: 1px dashed #e2e8f0; margin: 20px 0;">
-                <div style="text-align: left; width: 100%;">
-                    <span class="${envio.pagado ? 'pagado' : 'nopagado'}">${envio.pagado ? '✓ PAGO CONSOLIDADO' : '⚠ PENDIENTE DE PAGO'}</span>
+        <div class="datos">
+            <div class="box"><strong>Código Tracking</strong><span class="val">${codigo}</span></div>
+            <div class="box"><strong>Mercadería en Custodia</strong><span class="val">${envio.producto}</span></div>
+            <div class="box"><strong>Comprador Destinatario</strong><span class="val">${envio.receptor}</span></div>
+            <div class="box"><strong>Dirección de Destino</strong><span class="val">${envio.direccionEntrega}</span></div>
+            <div class="box"><strong>Origen</strong><span class="val">${envio.origen}</span></div>
+            <div class="box"><strong>Jurisdicción</strong><span class="val">${envio.destino}</span></div>
+        </div>
 
+        <h3>Historial de Movimientos Cruzados</h3>
+        <div class="timeline">
+            ${timelineHTML}
+        </div>
+    </div>
 
+    <div class="right-side">
+        <div class="delivery-sidebar">
+            <h3>Verificación de Identidad</h3>
+            <p>Validación para el transportista en punto de entrega.</p>
 
+            ${codigoVerificacionHTML}
 
-    `
-    `;
+            <hr>
 
-    modal.style.display = "flex";
+            <span class="${envio.pagado ? 'pagado' : 'nopagado'}">
+                ${envio.pagado ? '✓ PAGO CONSOLIDADO' : '⚠ PENDIENTE DE PAGO'}
+            </span>
+        </div>
+    </div>
+</div>
+`;
 
-
-
-
-
-
-
-
-
-    if (e.key === "Enter") {
-        buscarEnvio();
-    }
-} 
-
-}
-    modal.style.display = "none";
-} 
-
-
-    if (e.target === modal) {
-        modal.style.display = "none";
-    }
-} 
-            function abrirPago(){
-    document.getElementById ( " modalPago " ) . style.display = " flex " ;
+modal.style.display = "flex";
+document.getElementById("loadingModal").style.display = "none"; 
+            function abrirPago() {
+    document.getElementById("modalPago").style.display = "flex";
 }
 
-función  cerrarPago ( ) {
-    document.getElementById ( " modalPago " ) . style.display = " none " ;
+function cerrarPago() {
+    document.getElementById("modalPago").style.display = "none";
+}
 
-
-
-    document.getElementById ( "btnBuscar" ) . addEventListener ( " click" , ( ) = > {
-       // alert("Botón funcionando");
-    } ) ;
-            } ) ;
-            function copiarTexto(id) {
+function copiarTexto(id) {
     const texto = document.getElementById(id).innerText;
 
     navigator.clipboard.writeText(texto).then(() => {
@@ -1218,8 +1195,23 @@ función  cerrarPago ( ) {
             btn.innerHTML = original;
         }, 1500);
     });
-}
-</script>​​
+            }
+            btnBuscar.addEventListener("click", buscarEnvio);
+
+inputCodigo.addEventListener("keypress", function(e){
+    if(e.key === "Enter"){
+        buscarEnvio();
+    }
+});
+                btnCerrar.addEventListener("click", () => {
+    modal.style.display = "none";
+});
+
+window.addEventListener("click", (e) => {
+    if (e.target === modal) {
+        modal.style.display = "none";
+    }
+});
 </script>​​
 </body>​​
             </html>​​
