@@ -901,29 +901,34 @@ animation:spin 1s linear infinite;
             <h3>🏦 Transferencia Bancaria</h3>
 
             <div class="box">
-                <strong>Alias</strong>
-                <span class="val">PANROD.LOGISTICA</span>
-            </div>
+    <strong>Alias</strong>
+    <span class="val" id="alias">PANROD.LOGISTICA</span>
+    <button onclick="copiarTexto('alias')">📋 Copiar</button>
+</div>
 
             <div class="box">
-                <strong>CVU</strong>
-                <span class="val">0000003100000000000000</span>
-            </div>
+    <strong>CVU</strong>
+    <span class="val" id="cvu">0000003100000000000000</span>
+    <button onclick="copiarTexto('cvu')">📋 Copiar</button>
+</div>
 
-            <div class="box">
-                <strong>CBU</strong>
-                <span class="val">0000000000000000000000</span>
-            </div>
+<div class="box">
+    <strong>CBU</strong>
+    <span class="val" id="cbu">0000000000000000000000</span>
+    <button onclick="copiarTexto('cbu')">📋 Copiar</button>
+</div>
 
-            <div class="box">
-                <strong>Titular</strong>
-                <span class="val">PANROD</span>
-            </div>
+<div class="box">
+    <strong>Titular</strong>
+    <span class="val" id="titular">PANROD</span>
+    <button onclick="copiarTexto('titular')">📋 Copiar</button>
+</div>
 
-            <div class="box">
-                <strong>Banco</strong>
-                <span class="val">Banco Nación Argentina</span>
-            </div>
+<div class="box">
+    <strong>Banco</strong>
+    <span class="val" id="banco">Banco Nación Argentina</span>
+    <button onclick="copiarTexto('banco')">📋 Copiar</button>
+</div>
 
             <button class="btn-action btn-support"
                 onclick="window.open(
@@ -1145,7 +1150,7 @@ onclick="window.open('https://wa.me/541136514766?text=' + encodeURIComponent('Ho
             
             <h3>Historial de Movimientos Cruzados</h3>
             <div class="timeline">${timelineHTML}</div>
-        </div>
+
         <div class="right-side">
             <div class="delivery-sidebar">
                 <h3 style="margin-bottom: 5px;">Verificación de Identidad</h3>
@@ -1156,51 +1161,65 @@ onclick="window.open('https://wa.me/541136514766?text=' + encodeURIComponent('Ho
                 <hr style="width: 100%; border: 0; border-top: 1px dashed #e2e8f0; margin: 20px 0;">
                 <div style="text-align: left; width: 100%;">
                     <span class="${envio.pagado ? 'pagado' : 'nopagado'}">${envio.pagado ? '✓ PAGO CONSOLIDADO' : '⚠ PENDIENTE DE PAGO'}</span>
-                    <p style="font-size: 12px; color: #475569; margin-top: 10px;">
-                        <strong>Estado del Envío:</strong> ${estadoEnvioTexto}
-                    </p>
-                </div>
-    </div>
+
+
+
+
+    `
     `;
-document.getElementById("loadingModal").style.display = "none";
+
     modal.style.display = "flex";
 
-document.getElementById("loadingModal").style.display = "none";
 
-}, 1000);
 
-}
-btnBuscar.addEventListener("click", buscarEnvio);
 
-inputCodigo.addEventListener("keydown", function(e) {
+
+
+
+
+
     if (e.key === "Enter") {
         buscarEnvio();
     }
-});
+} 
 
-btnCerrar.addEventListener("click", function() {
+}
     modal.style.display = "none";
-});
+} 
 
-window.addEventListener("click", function(e) {
+
     if (e.target === modal) {
         modal.style.display = "none";
     }
-});
+} 
             function abrirPago(){
-    document.getElementById("modalPago").style.display = "flex";
+    document.getElementById ( " modalPago " ) . style.display = " flex " ;
 }
 
-function cerrarPago(){
-    document.getElementById("modalPago").style.display = "none";
-}
-document.addEventListener("DOMContentLoaded", () => {
+función  cerrarPago ( ) {
+    document.getElementById ( " modalPago " ) . style.display = " none " ;
 
-    document.getElementById("btnBuscar").addEventListener("click", () => {
+
+
+    document.getElementById ( "btnBuscar" ) . addEventListener ( " click" , ( ) = > {
        // alert("Botón funcionando");
+    } ) ;
+            } ) ;
+            function copiarTexto(id) {
+    const texto = document.getElementById(id).innerText;
+
+    navigator.clipboard.writeText(texto).then(() => {
+        const btn = event.target;
+        const original = btn.innerHTML;
+
+        btn.innerHTML = "✅ Copiado";
+
+        setTimeout(() => {
+            btn.innerHTML = original;
+        }, 1500);
     });
-            });
-</script>
-</script>
-</body>
-            </html>
+}
+</script>​​
+</script>​​
+</body>​​
+            </html>​​
