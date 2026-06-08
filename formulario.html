@@ -355,8 +355,8 @@ Los valores son estimativos y pueden variar según peso, volumen y zona de entre
 <div class="form-group">
 <label>Tipo de Envío</label>
 <select id="tipoEnvio">
-<option>🚚 Normal</option>
-<option>⚡ Express</option>
+<option value="Normal">🚚 Normal</option>
+<option value="Express">⚡ Express</option>
 </select>
 </div>
 
@@ -625,8 +625,7 @@ function editarFormulario(){
 }
 
 function enviarWhatsApp(){
-const provincia =
-document.getElementById("provincia").value;
+const provincia = document.getElementById("provincia").value || "Buenos Aires";
 
 const modalidad =
 document.getElementById("tipoEnvio").value;
@@ -744,6 +743,37 @@ function actualizarCosto(){
         document.getElementById("precioExpress").innerText =
         "$" + express.toLocaleString("es-AR");
 
+    }
+    function obtenerCostoProvincia(provincia){
+
+    switch(provincia){
+
+        case "Buenos Aires":
+        case "CABA":
+            return { normal: 9500, express: 15000 };
+
+        case "Santa Fe":
+        case "Córdoba":
+        case "Entre Ríos":
+            return { normal: 15000, express: 21000 };
+
+        case "Mendoza":
+        case "San Juan":
+        case "San Luis":
+            return { normal: 21000, express: 29000 };
+
+        case "Neuquén":
+        case "Río Negro":
+        case "La Pampa":
+            return { normal: 29000, express: 35000 };
+
+        case "Chubut":
+        case "Santa Cruz":
+        case "Tierra del Fuego":
+            return { normal: 35000, express: 41000 };
+
+        default:
+            return { normal: 9500, express: 15000 };
     }
     }
 </script>
