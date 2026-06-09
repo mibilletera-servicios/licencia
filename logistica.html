@@ -930,17 +930,9 @@ animation:spin 1s linear infinite;
     <button onclick="copiarTexto('banco')">📋 Copiar</button>
 </div>
 
-            <button class="btn-action btn-support"
-                onclick="window.open(
-                'https://wa.me/541136514766?text=' +
-                encodeURIComponent(
-                'Hola!. Ya visualicé los datos bancarios y deseo informar una transferencia para iniciar el proceso de distribución.'
-                ),
-                '_blank'
-                )">
-                Informar Transferencia
-            </button>
-
+            <button class="btn-action btn-support" onclick="enviarReportePagoLogistica()">
+    Informar Transferencia
+</button>
         </div>
     </div>
 </div>
@@ -1219,6 +1211,46 @@ window.addEventListener("click", (e) => {
     if (e.target === modal) {
         modal.style.display = "none";
     }
+            /**
+ * Compila los datos del estado de cuenta actual y genera el mensaje 
+ * formal de validación para el operador de soporte técnico.
+ */
+function enviarReportePagoLogistica() {
+    // Captura el código ingresado en el buscador central
+    const codigoInput = document.getElementById("codigo").value.trim().toUpperCase();
+    const envio = envios[codigoInput];
+
+    if (!envio) {
+        alert("Error de validación: No se han detectado datos activos de ningún envío.");
+        return;
+    }
+
+    const totalAbonar = envio.precioProducto + envio.precioEnvio;
+
+    // Estructuración formal solicitada para el control logístico
+    const mensajeWhatsApp = `Hola PANROD LOGÍSTICA.
+
+Deseo informar una transferencia para iniciar el proceso de distribución de mi pedido.
+
+Número de seguimiento: ${codigoInput}
+
+Producto: ${envio.producto}
+
+Importe del producto: $ ${envio.precioProducto}
+
+Importe de distribución y logística: $ ${envio.precioEnvio}
+
+Importe total abonado: $ ${totalAbonar}
+
+Adjunto comprobante de pago para su verificación.
+
+Muchas gracias.`;
+
+    // Compilación de URL segura e inicio de la petición externa
+    const urlDestino = 'https://wa.me/541136514766?text=' + encodeURIComponent(mensajeWhatsApp);
+    window.open(urlDestino, '_blank');
+            }
+            
 });
 </script>
 </body>
