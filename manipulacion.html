@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carnet de Manipulador de Alimentos - Editable</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&display=swap');
+
+        body {
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: "Arimo", sans-serif;
+        }
+
+        /* Contenedor de la credencial */
+        .credencial {
+            width: 780px;
+            height: 500px;
+            background-color: #ffffff;
+            border-radius: 28px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            position: relative;
+            box-sizing: border-box;
+            padding: 25px;
+            overflow: hidden;
+            border: 1px solid #dcdcdc;
+            user-select: none;
+        }
+
+        /* Borde interno azul grueso */
+        .credencial::before {
+            content: "";
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
+            border: 5px solid #2383c4;
+            border-radius: 18px;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        /* Fondo sutil de la bandera argentina (ondas celestes y sol) */
+        .fondo-patrio {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
+            border-radius: 18px;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .onda-celeste {
+            position: absolute;
+            width: 120%;
+            height: 160px;
+            background: linear-gradient(180deg, rgba(135, 206, 250, 0.2) 0%, rgba(255,255,255,0) 100%);
+            transform: rotate(-10deg);
+            top: 180px;
+            left: -40px;
+        }
+
+        .sol-mayo {
+            position: absolute;
+            right: 120px;
+            bottom: 60px;
+            width: 140px;
+            height: 140px;
+            opacity: 0.15;
+            background: radial-gradient(circle, #f4b41a 20%, transparent 60%);
+        }
+
+        /* Contenido Principal */
+        .contenido {
+            position: relative;
+            z-index: 5;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* Encabezado */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-top: 10px;
+            padding: 0 15px;
+        }
+
+        .logos-izq {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* Icono abstracto simulando el logo de BA */
+        .logo-ba-grafico {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #2fa4db, #7fd1f7);
+            clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+            opacity: 0.8;
+        }
+
+        .texto-gobierno {
+            font-size: 11px;
+            color: #777777;
+            font-weight: bold;
+            line-height: 1.1;
+            letter-spacing: 0.5px;
+        }
+
+        .texto-gobierno span {
+            display: block;
+            font-size: 18px;
+            color: #1994d1;
+            font-weight: 800;
+            letter-spacing: 0px;
+        }
+
+        .ministerio {
+            text-align: left;
+            font-size: 24px;
+            font-weight: 800;
+            color: #1a1a1a;
+            line-height: 1.1;
+            max-width: 360px;
+            text-transform: uppercase;
+            outline: none;
+        }
+
+        /* Título Central */
+        .titulo-principal {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .titulo-principal h1 {
+            font-size: 30px;
+            font-weight: 800;
+            color: #0c0c0c;
+            margin: 0;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            outline: none;
+        }
+
+        .titulo-principal p {
+            font-size: 19px;
+            color: #444444;
+            margin: 4px 0 0 0;
+            font-weight: 500;
+            outline: none;
+        }
+
+        /* Bloque de datos (Foto, Detalles y QR) */
+        .bloque-datos {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding: 0 15px;
+        }
+
+        /* Foto de perfil */
+        .foto-contenedor {
+            width: 155px;
+            height: 200px;
+            border: 1px solid #cccccc;
+            background-color: #eaeaea;
+            overflow: hidden;
+            box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        .foto-contenedor:hover {
+            opacity: 0.8;
+        }
+
+        .foto-contenedor img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Textos de datos */
+        .datos-personales {
+            flex-grow: 1;
+            margin-left: 35px;
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .linea-dato {
+            font-size: 25px;
+            color: #222222;
+            font-weight: 500;
+        }
+
+        .linea-dato span {
+            font-weight: bold;
+            color: #000000;
+            outline: none;
+            display: inline-block;
+            min-width: 50px;
+        }
+        
+        .linea-dato .editable-num {
+            font-family: monospace;
+            font-size: 27px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Código QR */
+        .qr-contenedor {
+            width: 105px;
+            height: 105px;
+            margin-bottom: 15px;
+        }
+
+        .qr-contenedor img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* Indicador de edición en vivo (sutil ayuda visual al pasar el mouse) */
+        [contenteditable="true"]:hover {
+            background-color: rgba(35, 131, 196, 0.08);
+            border-radius: 4px;
+            cursor: text;
+        }
+        [contenteditable="true"]:focus {
+            background-color: rgba(35, 131, 196, 0.15);
+            outline: 2px dashed #2383c4;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="credencial">
+        <div class="fondo-patrio">
+            <div class="onda-celeste"></div>
+            <div class="sol-mayo"></div>
+        </div>
+
+        <div class="contenido">
+            <div class="header">
+                <div class="logos-izq">
+                    <div class="logo-ba-grafico"></div>
+                    <div class="texto-gobierno">
+                        GOBIERNO DE LA PROVINCIA DE
+                        <span contenteditable="true">BUENOS AIRES</span>
+                    </div>
+                </div>
+                <div class="ministerio" contenteditable="true">
+                    Ministerio de<br>Desarrollo Agrario
+                </div>
+            </div>
+
+            <div class="titulo-principal">
+                <h1 contenteditable="true">Carnet de Manipulador de Alimentos</h1>
+                <p contenteditable="true">Válido en todo el territorio de la República Argentina</p>
+            </div>
+
+            <div class="bloque-datos">
+                <div class="foto-contenedor" title="Haz clic para cambiar la imagen por URL" onclick="cambiarImagen()">
+                    <img id="fotoPerfil" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=400&auto=format&fit=crop" alt="Foto de perfil">
+                </div>
+
+                <div class="datos-personales">
+                    <div class="linea-dato">Carnet Nº <span class="editable-num" contenteditable="true">02-102-0000167</span></div>
+                    <div class="linea-dato">Vence <span contenteditable="true">28/06/2029</span></div>
+                </div>
+
+                <div class="qr-contenedor">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.gba.gob.index" alt="Código QR">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Función interactiva para cambiar la foto de perfil en vivo
+        function cambiarImagen() {
+            const urlActual = document.getElementById('fotoPerfil').src;
+            const nuevaUrl = prompt("Introduce la URL de la nueva foto de perfil:", urlActual);
+            if (nuevaUrl && nuevaUrl.trim() !== "") {
+                document.getElementById('fotoPerfil').src = nuevaUrl;
+            }
+        }
+    </script>
+
+</body>
+                  </html>
+              
