@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Credencial - Dorso</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        /* Estilos base extraídos del código original */
+        .fondo-patrio {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+        .onda-celeste {
+            position: absolute;
+            width: 120%;
+            height: 160px;
+            background: linear-gradient(180deg, rgba(135, 206, 250, 0.18) 0%, rgba(255,255,255,0) 100%);
+            transform: rotate(-10deg);
+            top: 180px;
+            left: -40px;
+        }
+        .sol-mayo {
+            position: absolute;
+            right: 120px;
+            bottom: 60px;
+            width: 140px;
+            height: 140px;
+            opacity: 0.12;
+            background: radial-gradient(circle, #f4b41a 20%, transparent 60%);
+        }
+        .contenido {
+            position: relative;
+            z-index: 5;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        /* --- ESTILOS DEL DORSO --- */
+        .dorso-bloque-superior {
+            padding: 25px 35px 0 35px;
+        }
+        .dorso-leyenda {
+            font-size: 15px;
+            color: #333;
+            line-height: 1.4;
+            font-weight: bold;
+            outline: none;
+            margin: 0;
+            text-transform: uppercase;
+        }
+        .dorso-instrucciones {
+            padding: 0 35px;
+            margin-top: 15px;
+        }
+        .dorso-instrucciones ul {
+            margin: 0;
+            padding-left: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .dorso-instrucciones li {
+            font-size: 14px;
+            color: #444;
+            line-height: 1.4;
+            outline: none;
+        }
+        .dorso-bloque-inferior {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding: 0 35px 25px 35px;
+        }
+        .bloque-firmas {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+        .firma-contenedor {
+            width: 180px;
+            height: 65px;
+            border: 1px dashed #b3b3b3;
+            background-color: #f7f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            overflow: hidden;
+        }
+        .firma-contenedor img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: none;
+        }
+        .firma-contenedor span {
+            font-size: 11px;
+            color: #777;
+            text-align: center;
+        }
+        .linea-firma {
+            width: 200px;
+            border-top: 1px solid #333;
+            margin-top: 2px;
+        }
+        .texto-firma {
+            font-size: 12px;
+            color: #555;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-align: center;
+            outline: none;
+        }
+        /* Elementos Técnicos y Comunes */
+        .credencial {
+            position: relative;
+            width: 780px;
+            height: 500px;
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+            margin-bottom: 20px;
+        }
+        .input-oculto {
+            display: none;
+        }
+        [contenteditable="true"]:hover {
+            background-color: rgba(35, 131, 196, 0.08);
+            border-radius: 4px;
+        }
+        [contenteditable="true"]:focus {
+            background-color: rgba(35, 131, 196, 0.15);
+            outline: 2px dashed #2383c4;
+            border-radius: 4px;
+        }
+        .panel-control {
+            margin-bottom: 15px;
+        }
+        .btn-descargar {
+            padding: 10px 20px;
+            background-color: #1994d1;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="panel-control">
+        <button class="btn-descargar" onclick="descargarPDF()">Descargar Dorso (PDF)</button>
+    </div>
+
+    <div class="contenedor-impresion" id="documento-completo">
+        
+        <div class="credencial">
+            <div class="fondo-patrio">
+                <div class="onda-celeste"></div>
+                <div class="sol-mayo"></div>
+            </div>
+
+            <div class="contenido">
+                <div class="dorso-bloque-superior">
+                    <p class="dorso-leyenda" contenteditable="true">
+                        REPÚBLICA ARGENTINA<br>
+                        CONFORME ARTÍCULO 21 DEL CÓDIGO ALIMENTARIO ARGENTINO - LEY 18.284
+                    </p>
+                </div>
+
+                <div class="dorso-instrucciones">
+                    <ul>
+                        <li contenteditable="true">Este carnet es personal e intransferible y debe ser presentado ante cada requerimiento de la autoridad sanitaria competente.</li>
+                        <li contenteditable="true">El titular está obligado a cumplir con las Buenas Prácticas de Manufactura e Higiene en la manipulación de alimentos.</li>
+                        <li contenteditable="true">La validez de este documento está sujeta a los registros oficiales de la Jurisdicción emisora.</li>
+                    </ul>
+                </div>
+
+                <div class="dorso-bloque-inferior">
+                    <div class="bloque-firmas">
+                        <div class="firma-contenedor" onclick="document.getElementById('input-firma-aut').click()">
+                            <span id="txt-firma-aut">Clic para subir<br>Firma Autoridad</span>
+                            <img id="img-firma-aut" alt="Firma Autoridad">
+                        </div>
+                        <div class="linea-firma"></div>
+                        <div class="texto-firma" contenteditable="true">Autoridad Sanitaria<br>Emisora</div>
+                    </div>
+
+                    <div class="bloque-firmas">
+                        <div class="firma-contenedor" onclick="document.getElementById('input-firma-tit').click()">
+                            <span id="txt-firma-tit">Clic para subir<br>Firma Titular</span>
+                            <img id="img-firma-tit" alt="Firma Titular">
+                        </div>
+                        <div class="linea-firma"></div>
+                        <div class="texto-firma" contenteditable="true">Firma del Titular</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <input type="file" id="input-firma-aut" class="input-oculto" accept="image/*" onchange="cargarImagen(event, 'img-firma-aut', 'txt-firma-aut')">
+    <input type="file" id="input-firma-tit" class="input-oculto" accept="image/*" onchange="cargarImagen(event, 'img-firma-tit', 'txt-firma-tit')">
+
+    <script>
+        function cargarImagen(event, imgId, txtId) {
+            const archivo = event.target.files[0];
+            if (archivo) {
+                const lector = new FileReader();
+                lector.onload = function(e) {
+                    const imagen = document.getElementById(imgId);
+                    const texto = document.getElementById(txtId);
+                    
+                    imagen.src = e.target.result;
+                    imagen.style.display = 'block';
+                    if(texto) texto.style.display = 'none';
+                }
+                lector.readAsDataURL(archivo);
+            }
+        }
+
+        function descargarPDF() {
+            const elemento = document.getElementById('documento-completo');
+            const opciones = {
+                margin:       0,
+                filename:     'credencial-dorso.pdf',
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2, useCORS: true },
+                jsPDF:        { unit: 'px', format: [780, 500], orientation: 'landscape' }
+            };
+
+            html2pdf().set(opciones).from(elemento).save();
+        }
+    </script>
+
+</body>
+                          </html>
+  
